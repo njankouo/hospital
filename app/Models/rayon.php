@@ -11,4 +11,5 @@ class rayon extends Model
     public function produit(){
         return $this->hasMany(produit::class);
     }
+
 }

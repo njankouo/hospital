@@ -4,7 +4,7 @@
     </span>
 @endif
 @extends('layouts.master')
-@include('client.create')
+
 @section('contenu')
     @include('client.liste')
 @endsection

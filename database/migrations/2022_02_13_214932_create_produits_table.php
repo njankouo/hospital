@@ -15,14 +15,20 @@ class CreateProduitsTable extends Migration
     {
         Schema::create('produits', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
+            $table->string('designation');
             $table->string('photo')->nullable();
-            $table->date('date_expiration');
-            $table->integer('stock_disponible');
+             $table->string('equivalence');
+            $table->integer('qtestock');
+            $table->integer('stock_seuil');
+            $table->integer('pu');
+            $table->integer('pv');
+            $table->string('status');
+            $table->string('grammage');
             $table->foreignId('rayon_id')->constrained('rayons');
-            $table->foreignId('type_article_id')->constrained('type_articles');
+            $table->foreignId('type_article_id')->constrained('type_articles')->nullable();
              $table->foreignId('categorie_id')->constrained('categories');
-            $table->string('pu');
+             $table->foreignId('fournisseur_id')->constrained('fournisseurs');
+
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();
@@ -38,7 +44,8 @@ class CreateProduitsTable extends Migration
         schema::table('produits',function(Blueprint $table){
             $table->dropForeign('rayon_id');
             $table->dropforeign('type_article_id');
-             $table->dropforeign('categorie_id');
+            $table->dropforeign('categorie_id');
+            $table->dropforeign('fournisseur_id');
         });
 
         Schema::dropIfExists('produits');

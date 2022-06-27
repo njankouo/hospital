@@ -19,6 +19,10 @@ class CreateClientsTable extends Migration
             $table->string('prenom');
             $table->string('sexe');
             $table->integer('telephone');
+             $table->string('email');
+              $table->string('numeroCNI');
+              $table->string('adresse');
+              $table->integer('status');
             $table->timestamps();
         });
     }

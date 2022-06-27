@@ -15,16 +15,14 @@ class CreateCommandesTable extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('fournisseur_id')->constrained('fournisseurs')->onDelete('cascade')->onUpdate('cascade');
             $table->string('code_commande');
             $table->date('date_commande');
-            $table->integer('pu');
-            $table->integer('qte');
-            $table->integer('prix_total')->nullable();
-            $table->foreignId('fournisseur_id')->constrained('fournisseurs');
-            $table->foreignId('pharmacie_id')->constrained('pharmacies');
+             $table->date('date_livraison');
+
             $table->timestamps();
         });
-        schema::enableForeignKeyConstraints();
+        // schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -34,10 +32,10 @@ class CreateCommandesTable extends Migration
      */
     public function down()
     {
-        Schema::table('commandes',function(Blueprint $table){
-            $table->dropForeign('fournisseur_id');
-            $table->dropForeign('pharmacie_id');
-        });
+        // Schema::table('commandes',function(Blueprint $table){
+        //     $table->dropForeign('fournisseur_id');
+
+        // });
         Schema::dropIfExists('commandes');
     }
 }

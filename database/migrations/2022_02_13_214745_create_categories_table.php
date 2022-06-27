@@ -16,7 +16,6 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('libelle');
-            $table->foreignId('type_id')->constrained('type_articles');
              $table->timestamps();
         });
         schema::enableForeignKeyConstraints();
@@ -29,10 +28,7 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        schema::table('categories',function(blueprint $table){
-            $table->dropForeign('type_id');
 
-        });
         Schema::dropIfExists('categories');
     }
 }

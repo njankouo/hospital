@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class commande extends Model
 {
     use HasFactory;
+    protected $fillable=['status','date_commande','date_livraison','fournisseur_id'];
     public function fournisseur(){
         return $this->belongsTo(fournisseur::class,'fournisseur_id','id');
     }

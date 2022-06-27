@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\fournisseur;
 use Illuminate\Http\Request;
+use DataTables;
+use PDF;
 
 class FournisseurController extends Controller
 {
     //
-    public function index(){
-        $data=[
-            'four'=>fournisseur::latest()->paginate(5)
-        ];
-        return view('fournisseur.fournisseur',$data);
+    // public function index(){
+    //     $data=[
+    //         'four'=>fournisseur::latest()->paginate(5)
+    //     ];
+    //     return view('fournisseur.fournisseur',$data);
+    // }
+    public function inde(){
+        return view('fournisseur.create');
     }
 
 public function insert(Request $request){
@@ -43,7 +48,35 @@ fournisseur::create([
 ]);
  return back()->with('success','fournisseur enregistré avec success');
 }
+ public function index(Request $request)
+    {
+       $data=[
+        'four'=>fournisseur::latest()->paginate(5)
+       ];
+        if ($request->ajax()) {
+            $data = fournisseur::select('*');
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
 
+                           $btn = '<a href="javascript:void(0) " class="edit btn btn-primary btn-sm">View</a>';
+
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+        return view('fournisseur.fournisseur',$data);
 
 }
+public function pdf(){
+    $fournisseur=fournisseur::all();
+    $pdf=PDF::LoadView('fournisseur.pdf',compact('fournisseur'));
+    $pdf->stream();
+}
+public function edit(){
+    return view('fournisseur.edit');
+}
 
+}

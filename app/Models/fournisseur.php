@@ -12,4 +12,7 @@ class fournisseur extends Model
     public function commande(){
         return $this->hasMany(commande::class);
     }
+    public function produit(){
+        return $this->hasMany(produit::class);
+    }
 }

@@ -28,7 +28,7 @@ class CategorieController extends Controller
         // );
         Categorie::create([
             'libelle'=>$request->libelle,
-            'type_id'=>$request->type_id,
+            //'type_id'=>$request->type_id,
 
         ]);
 

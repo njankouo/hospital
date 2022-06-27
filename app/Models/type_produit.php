@@ -11,4 +11,7 @@ class type_produit extends Model
     public $timestamps=false;
     protected $table="type_articles";
     use HasFactory;
+    public function produit(){
+        return $this->hasMany(produit::class);
+    }
 }

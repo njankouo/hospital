@@ -7,10 +7,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-title my-3 mx-3">
-                    <h3 style="font-family:forte">listing des categories de produits</h3>
+                    <h3 style="font-family:forte">liste des formes galeliques de produits</h3>
                     <div style="margin-left: 80%">
                         <a href="" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-xl">
-                            <i class="fas fa-plus"></i>New categorie
+                            <i class="fa fa-plus"></i>Nouvelle forme galelique
                         </a>
                     </div>
 
@@ -20,9 +20,9 @@
                                 <tr>
 
                                     <th style="width: 30%">ID</th>
-                                    <th style="width: 20%">categorie de produit</th>
-                                    <th style="width: 20%">type de produit</th>
-                                    <th style="width: 20%">Operation</th>
+                                    <th style="width: 20%">forme galelique du produit</th>
+
+
                                 </tr>
                             </thead>
                             <tbody class="text-center">
@@ -30,19 +30,8 @@
                                     <tr>
                                         <td>{{ $categorie->id }}</td>
                                         <td>{{ $categorie->libelle }}</td>
-                                        <td>{{ $categorie->type->nom }}</td>
-                                        <td>
-                                            <div class="dropdown dropup">
-                                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                                    data-toggle="dropdown">Operation in table
-                                                    <span class="caret"></span></button>
-                                                <ul class="dropdown-menu">
-                                                    <a href="#" class="btn btn-danger">delete</a>
-                                                    <a href="#" class="btn btn-primary">update</a>
 
-                                                </ul>
-                                            </div>
-                                        </td>
+
 
                                     </tr>
                                 @endforeach
@@ -66,10 +55,10 @@
         <div class="modal-content">
 
             <div class="card">
-                <div class="card-title d-flex">
+                <div class="card-title d-flex bg-primary text-light p-2">
 
-                    <i class="fas fa-users fa-2x"></i>
-                    <h3 style="font-size:20px;font-family:forte"> New categorie produit</h3>
+                    <i class="fa fa-users fa-2x"></i>
+                    <h3 style="font-size:20px;font-family:forte"> Nouvelle forme galelique produit</h3>
                 </div>
                 <div class="card body">
                     <div class="row">
@@ -78,16 +67,17 @@
                             <div class="form-row" style="margin: 10px;">
 
 
-                                <div class="col-6">
-                                    <label for="">categorie de produit</label>
-                                    <input type="text" class="my-2 form-control @error('libelle') is-invalid @enderror"
-                                        name="libelle" placeholder="Enter ...">
+                                <div class="col-12">
+                                    <label for="">libelle</label>
+                                    <input type="text"
+                                        class="my-2 form-control @error('libelle') is-invalid @enderror" name="libelle"
+                                        placeholder="Enter ...">
                                     @error('libelle')
                                         <p>{{ $message }}</p>
                                     @enderror
 
                                 </div>
-                                <div class="col-6">
+                                {{-- <div class="col-12">
                                     <label for="">type de produit</label>
                                     <select name="type_id" id="" class="form-control my-2">
                                         <option value="" disabled>choose type produit</option>
@@ -95,7 +85,7 @@
                                             <option value="{{ $typ->id }}">{{ $typ->nom }}</option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
                                 <div class="col-8 my-4">
                                     <button type="submit" class="btn btn-primary mx-1">save</button>
                                     <a class="btn btn-danger mx-1" data-dismiss="modal">close</a>
@@ -103,6 +93,9 @@
                             </div>
                         </form>
                     </div>
+
+                </div>
+                <div class="card-footer bg-primary">
 
                 </div>
             </div>

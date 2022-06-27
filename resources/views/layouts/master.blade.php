@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="_token" content="{{ csrf_token() }}">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Pharmacie Application</title>
@@ -18,7 +18,6 @@
         body {
             cursor: pointer;
         }
-
     </style>
 
 <body>
@@ -108,58 +107,40 @@
                                         style="width:45px;height:45px;margin-left:0px" alt="" class="rounded">
 
 
-                                    <div style="font-family: forte">PHARMACIE LAGLOIRE
+                                    <div style="font-family: forte">DASHBOARD
 
                                     </div>
                                 </div>
                                 <div class="page-title-actions">
-                                    <img src="{{ asset('img/ico.jpg') }}" alt="" style="width:35px">
 
                                     <div class="d-inline-block dropdown">
                                         <button type="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
                                             <span class="btn-icon-wrapper pr-2 opacity-7">
-                                                <i class="fas fa-calendar fa-w-20"></i>
+                                                <i class="fa fa-cog fa-w-20"></i>
                                             </span>
-                                            Calendrier
+                                            parametre
                                         </button>
                                         <div tabindex="-1" role="menu" aria-hidden="true"
                                             class="dropdown-menu dropdown-menu-right">
                                             <ul class="nav flex-column">
                                                 <li class="nav-item">
-                                                    <a href="javascript:void(0);" class="nav-link">
-                                                        <i class="nav-link-icon lnr-inbox"></i>
+                                                    <a href="" class="nav-link">
+                                                        <i class="fa fa-eye"></i>
                                                         <span>
-                                                            Inbox
-                                                        </span>
-                                                        <div class="ml-auto badge badge-pill badge-secondary">86</div>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="javascript:void(0);" class="nav-link">
-                                                        <i class="nav-link-icon lnr-book"></i>
-                                                        <span>
-                                                            Book
-                                                        </span>
-                                                        <div class="ml-auto badge badge-pill badge-danger">5</div>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="javascript:void(0);" class="nav-link">
-                                                        <i class="nav-link-icon lnr-picture"></i>
-                                                        <span>
-                                                            Picture
+                                                            profile
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a disabled href="javascript:void(0);" class="nav-link disabled">
-                                                        <i class="nav-link-icon lnr-file-empty"></i>
+                                                    <a href="" class="nav-link">
+                                                        <i class="fa fa-edit"></i>
                                                         <span>
-                                                            File Disabled
+                                                            update profil
                                                         </span>
                                                     </a>
                                                 </li>
+
                                             </ul>
                                         </div>
                                     </div>
@@ -175,6 +156,7 @@
 
 
                 <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+                <script src="{{ mix('js/app.js') }}"></script>
 
 </body>
 

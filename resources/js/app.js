@@ -1,2 +1,3 @@
 require('./bootstrap');
-swal.window('sweetalert2');
+import 'sweetalert/dist/sweetalert.min.js';
+window.Swal = require('sweetalert2');

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categorie extends Model
 {
-    protected $fillable=['libelle','type_id'];
+    protected $fillable=['libelle'];
     protected $table='categories';
     use HasFactory;
-    public function type(){
-        return $this->belongsTo(type_produit::class);
+    public function produit(){
+        return $this->hasMany(produit::class);
     }
+
 }

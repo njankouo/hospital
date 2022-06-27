@@ -5,10 +5,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-title my-3 mx-3">
-                    <h3 style="font-family:forte">listing des types de produits</h3>
+                    <h3 style="font-family:forte">listing des Unités</h3>
                     <div style="margin-left: 80%">
                         <a href="" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-xl">
-                            <i class="fas fa-plus"></i>New type Produits
+                            <i class="fa fa-plus"></i>Nouvelle Unité
                         </a>
                     </div>
 
@@ -18,8 +18,8 @@
                                 <tr>
 
                                     <th style="width: 30%">ID</th>
-                                    <th style="width: 20%">type de produit</th>
-                                    <th style="width: 20%">Operation</th>
+                                    <th style="width: 20%">Libelle</th>
+
                                 </tr>
                             </thead>
                             <tbody class="text-center">
@@ -30,20 +30,6 @@
                                         <td>{{ $typ->id }}</td>
                                         <td>{{ $typ->nom }} </td>
 
-
-
-                                        <td>
-                                            <div class="dropdown dropup">
-                                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                                    data-toggle="dropdown">Operation in table
-                                                    <span class="caret"></span></button>
-                                                <ul class="dropdown-menu">
-                                                    <a href="#" class="btn btn-danger">delete</a>
-                                                    <a href="#" class="btn btn-primary">update</a>
-
-                                                </ul>
-                                            </div>
-                                        </td>
 
                                     </tr>
                                 @endforeach
@@ -65,10 +51,10 @@
         <div class="modal-content">
 
             <div class="card">
-                <div class="card-title d-flex">
+                <div class="card-title d-flex bg-primary text-light p-2">
 
-                    <i class="fas fa-users fa-2x"></i>
-                    <h3 style="font-size:20px;font-family:forte"> New type produit</h3>
+                    <i class="fa fa-users fa-2x"></i>
+                    <h3 style="font-size:20px;font-family:forte"> Nouvelle Unité</h3>
                 </div>
                 <div class="card body">
 
@@ -78,7 +64,7 @@
 
 
                             <div class="col-12">
-                                <label for="">type de produit</label>
+                                <label for="">libelle</label>
                                 <input type="text" class="my-2 form-control @error('nom') is-invalid @enderror"
                                     name="nom" placeholder="Enter ...">
                                 @error('nom')
@@ -94,7 +80,7 @@
                             </div>
                     </form>
                 </div>
-
+                <div class="card-footer bg-primary"></div>
             </div>
         </div>
     </div>

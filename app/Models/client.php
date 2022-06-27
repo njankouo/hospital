@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class client extends Model
 {
-    protected $fillable=['nom','prenom','sexe','telephone'];
+    protected $fillable=['nom','prenom','sexe','telephone','email','adresse','numeroCNI'];
     use HasFactory;
     public function vente(){
         return $this->hasMany(vente::class);
