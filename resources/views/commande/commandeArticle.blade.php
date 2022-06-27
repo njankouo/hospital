@@ -118,7 +118,7 @@
                             </div>
                             <div class="col-6">
                                 <label for=""> Mode de reglement</label>
-                                <select class="form-control">
+                                <select class="form-control" name="mode">
                                     <optgroup label="choose paiement">
                                         <option value="">.....</option>
                                         <option value="mobile">mobile(MTN/ORANGE...)</option>
@@ -130,7 +130,7 @@
                             </div>
                             <div class="col-6">
                                 <label for=""> remise (en pourcentage)</label>
-                                <input type="number" name="" id="" class="form-control">
+                                <input type="number" name="remise" id="" class="form-control">
 
                             </div>
 

@@ -60,6 +60,10 @@
                                 </th>
                                 <th class="th-sm">Date Livraison
                                 </th>
+                                <th class="th-sm">Remise
+                                </th>
+                                <th class="th-sm">Reglement
+                                </th>
                                 <th class="th-sm">Status
                                 </th>
                                 <th class="th-sm">fournisseur
@@ -83,15 +87,15 @@
                                         <td>{{ $commandes->pu }}</td>
                                         <td>{{ $commandes->date_commande }}</td>
                                         <td>{{ $commandes->date_livraison }}</td>
+                                        <td>{{ $commandes->remise }}%</td>
+                                        <td>{{ $commandes->reglement }}</td>
                                         <td>{{ $commandes->status }}</td>
                                         <td>{{ $commandes->fournisseur }}</td>
 
                                         <td>
-                                            <a class="btn btn"
-                                                href="{{ route('bon.commande', $commandes->id) }}"><i
+                                            <a class="btn btn" href="{{ route('bon.commande', $commandes->id) }}"><i
                                                     class="fa fa-eye fa-2x text-info"></i></a>
-                                            <a href="{{ route('edit.commande', $commandes->id) }}"
-                                                class="btn btn">
+                                            <a href="{{ route('edit.commande', $commandes->id) }}" class="btn btn">
                                                 <i class="fa fa-pencil fa-2x"></i>
                                             </a>
                                         </td>

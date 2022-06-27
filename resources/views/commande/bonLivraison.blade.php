@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>FACTURE VENTE</title>
+    <title>Bon De livraison</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
@@ -17,9 +17,6 @@
             padding: 5px;
         }
 
-        td {
-            font-size: 11px;
-        }
 
 
         .container {
@@ -105,7 +102,7 @@
             margin: 0;
             font-weight: 300;
             color: #3989c6;
-            font-size: 2px;
+            font-size: 5px;
         }
 
         .invoice table tfoot td {
@@ -164,30 +161,19 @@
 
     <div class="container">
         <div class="row text-center">
-            <div style="float: right;margin-top:25px;margin-right:35px;">
 
-                <h6><strong>Date: {{ $vente->created_at }}</strong></h6>
-                <h6>Client: {{ $vente->client }}</h6>
-                <h6>Adresse: Douala </h6>
-                <h6>Vendeur: {{ $vente->user }}</h6>
+            <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>" style="float: right;" class="logo">
 
-            </div>
-            <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>" style="float: left;" class="logo">
-            <div style="margin-top:33%">
+            <h6><strong>CENTRE MEDICO-CHIRURGICAL D'UROLOGIE</strong></h6>
+            <h6>VALLEE MANGA BELL DOUALA-BALI</h6>
+            <h6>TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945</h6>
+            <h6>
 
-
-                <h6><strong>CENTRE MEDICO-CHIRURGICAL D'UROLOGIE</strong></h6>
-                <h6>VALLEE MANGA BELL DOUALA-BALI</h6>
-                <h6>TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945</h6>
-            </div>
+            </h6>
         </div>
-
-
-        <h6 class="text-center text-primary"
-            style="font-size: 25px;font-style:italic;font-weight: bold;text-align:center;margin-top:10px ">
-            FACTURE N° {{ $vente->vente_id }}
-        </h6>
-        {{-- <table class="table table-bordered border-primary">
+        <h6 class="my-4 text-center text-primary" style="font-size: 25px;font-style:italic;font-weight: bold ">
+            Bon de livraison
+            {{-- <table class="table table-bordered border-primary">
                   <thead class="text-dark">
                       <tr>
 
@@ -198,65 +184,53 @@
               </table> --}}
 
 
-        <div id="inventory-invoice" style="margin-top:10px">
+            <div id="inventory-invoice">
 
-            <div class="invoice overflow-auto">
-                <div>
-                    <main>
+                <div class="invoice overflow-auto">
+                    <div>
+                        <main>
 
-                        <table class="table text-center">
-                            <thead class="text-dark">
-                                <tr>
-                                    <th>DESIGNATION</th>
-
-
-                                    <th>QTE </th>
-                                    <th>UV</th>
-                                    <th>PRIX ACHAT</th>
-                                    <th>REMISE</th>
-                                    <th>Montant TTC</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{ $vente->produit->designation }}</td>
-                                    <td>{{ $vente->qte_sortie }}</td>
-                                    <td>{{ $vente->unite }}</td>
-                                    <td>{{ $vente->pu }}</td>
-                                    <td>{{ $vente->remise }} </td>
-                                    <td>{{ $vente->pu * $vente->qte_sortie * (1 - $vente->remise / 100) }}
+                            <table class="table my-4 text-center">
+                                <thead class="text-dark">
+                                    <tr>
+                                        <th>PRODUIT</th>
+                                        <th>QTE</th>
+                                        <th>UNITE</th>
+                                        <th>PU</th>
+                                        <th>REMISE</th>
+                                        <th>PRIX TTC</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td>{{ $commande->produit->designation }}</td>
+                                    <td>{{ $commande->qte }}</td>
+                                       <td>{{ $commande->unite }}</td>
+                                    <td>{{ $commande->pu }}</td>
+                                    <td>{{ $commande->remise }}%</td>
+                                    <td class="text-right">
+                                           {{ $commande->pu * $commande->qte* (1 - $commande->remise / 100) }}
 
 
+                                    </td>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
 
-                                </tr>
+                                    </tr>
 
-                                <tr>
-                                    <p style="font-size: 15px">Arreté la Présente facture à la somme de: </p>
-
-
-                                   {{ $vente->pu * $vente->qte_sortie * (1 - $vente->remise / 100) }}
- 
-                                </tr>
-
-                            </tbody>
-                            <tfoot>
-                                <tr>
-
-                                </tr>
-
-                            </tfoot>
-                            </tbody>
-                        </table>
-                    </main>
-                    <footer style="font-size: 15px">
-                        Centre Medico-churirgical d'urologie situé a la Vallée Douala Manga Bell
-                        Douala-Bali.
-                        TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945.
-                        SITE WEB: http://www.cmcu-cm.com
-                    </footer>
+                                </tfoot>
+                                </tbody>
+                            </table>
+                        </main>
+                        <footer style="font-size: 15px">
+                            Centre Medico-churirgical d'urologie situé a la Vallée Douala Manga Bell
+                            Douala-Bali.
+                            TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945.
+                            SITE WEB: http://www.cmcu-cm.com
+                        </footer>
+                    </div>
                 </div>
             </div>
-        </div>
 
 
 

@@ -82,5 +82,5 @@ route::get('/role/users/{id}',[UserController::class,'vue'])->name('role.vue');
 route::put('/role/user/{user}',[UserController::class,'upgrade'])->name('user.upgrade');
 
 Route::delete('/liste/vente/{id}',[VenteController::class,'deleteVente'])->name('delete.vente');
-
+Route::get('bon/livraison/{id}',[CommandeController::class,'bonlivraison'])->name('bon.livraison');
 Route::get('search-from-db', [VenteController::class, 'searchDB']);

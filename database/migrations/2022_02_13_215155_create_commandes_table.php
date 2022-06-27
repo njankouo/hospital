@@ -19,7 +19,7 @@ class CreateCommandesTable extends Migration
             $table->string('code_commande');
             $table->date('date_commande');
              $table->date('date_livraison');
-
+            $table->string('status');
             $table->timestamps();
         });
         // schema::enableForeignKeyConstraints();

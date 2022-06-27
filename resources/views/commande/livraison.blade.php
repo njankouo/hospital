@@ -70,7 +70,7 @@
                                     <td>{{ $commandes->fournisseur }}</td>
 
                                     <td>
-                                        <a class="btn btn" href=""><i class="fa fa-eye fa-2x text-info"></i></a>
+                                        <a class="btn btn" href="{{ route('bon.livraison',$commandes->id) }}"><i class="fa fa-eye fa-2x text-info"></i></a>
                                         @if ($commandes->status == 'validé')
                                         @else
                                             <a href="{{ route('edit.commande', $commandes->id) }}"

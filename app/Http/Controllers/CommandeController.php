@@ -61,13 +61,15 @@ return view('commande.commandeArticle',compact('fournisseur','commande','produit
             'produit'=>'required',
             'unite'=>'required',
             'pu'=>'required',
-            'qte'=>'required'
+            'qte'=>'required',
+            'mode'=>'required'
         ],
         [
             'produit.required'=>'renseignez le produit',
             'unite.required'=>'renseignez l\'unite',
             'pu.required'=>'renseignez le pu',
-            'qte.required'=>'renseignz la qte'
+            'qte.required'=>'renseignz la qte',
+            'mode.required'=>'renseignez le mode de reglement'
         ]
 
     );
@@ -82,7 +84,8 @@ return view('commande.commandeArticle',compact('fournisseur','commande','produit
         'date_commande'=>$request->date,
         'unite'=>$request->unite,
         'date_livraison'=>$request->dateLivraison,
-
+        'reglement'=>$request->mode,
+        'remise'=>$request->remise,
 
     ]);
     return back()->with('success','commande bien validé');
@@ -125,5 +128,11 @@ return view('commande.commandeArticle',compact('fournisseur','commande','produit
 public function livraison(){
     $livraison=Livraison::all();
     return view('commande.livraison',compact('livraison'));
+}
+public function bonlivraison($id){
+    $commande=CommandeArticle::find($id);
+
+   $pdf= PDF::loadview('commande.bonLivraison',compact('commande'))->setOptions(['setPaper'=>'landscape']);;
+   return  $pdf->stream();
 }
 }

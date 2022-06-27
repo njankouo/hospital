@@ -25,22 +25,22 @@ class ClientController extends Controller
     public function create(Request $request){
         $request->validate([
             'nom'=>'required',
-            'prenom'=>'required',
+            //'prenom'=>'required',
             'sexe'=>'required',
-            'email'=>'required|unique:clients,email',
+           // 'email'=>'required|unique:clients,email',
             'adresse'=>'required',
-            'numeroCNI'=>'required|unique:clients,numeroCNI',
+           // 'numeroCNI'=>'required|unique:clients,numeroCNI',
             'telephone'=>'required|unique:clients,telephone'
         ],
     [
 
          'nom.required'=>'veuillez renseigner le nom svp',
-               'prenom.required'=>'veuillez renseigner le prenom svp',
+              // 'prenom.required'=>'veuillez renseigner le prenom svp',
                   'sexe.required'=>'veuillez renseigner le sexe svp',
                      'telephone.required'=>'veuillez renseigner le telephone svp',
                      'adresse.required'=>'renseignez l\'adresse',
-                     'numeroCNI.required'=>'renseignez le numero de cni',
-                     'email.required'=>'renseignez l\'email'
+                    // 'numeroCNI.required'=>'renseignez le numero de cni',
+                    // 'email.required'=>'renseignez l\'email'
     ]
     );
     client::create([

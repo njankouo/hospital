@@ -19,12 +19,14 @@ class CreateProduitCommandeTable extends Migration
             $table->integer('pu');
             $table->string('fournisseur');
             $table->string('date_commande');
-            $table->string('date_livraison');
+            $table->string('date_livraison')->nullable();
             $table->string('status');
             $table->string('reglement');
              $table->string('pourcentage');
             $table->string('unite');
-            $table->integer('tva');
+            $table->integer('tva')->nullable();
+
+            $table->integer('remise')->nullable();
             $table->foreignId('produit_id')->constrained('produits');
             $table->foreignId('commande_id')->constrained('commandes');
             $table->timestamps();

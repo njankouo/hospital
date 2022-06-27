@@ -17,12 +17,14 @@ class CreateProduitsTable extends Migration
             $table->id();
             $table->string('designation');
             $table->string('photo')->nullable();
-             $table->string('equivalence');
+             $table->string('equivalence')->nullable();
             $table->integer('qtestock');
             $table->integer('stock_seuil');
             $table->integer('pu');
             $table->integer('pv');
             $table->string('status');
+            $table->date('date_peremption')->nullable();
+             $table->date('date_fabrication')->nullable();
             $table->string('grammage');
             $table->foreignId('rayon_id')->constrained('rayons');
             $table->foreignId('type_article_id')->constrained('type_articles')->nullable();
