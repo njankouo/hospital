@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class produit extends Model
 {
-    protected $fillable=['designation','pu','pv','rayon_id','categorie_id','grammage','qtestock','stock_seuil','status','fournisseur_id','equivalence','type_article_id'];
+    protected $fillable=['designation','pu','pv','rayon_id','categorie_id','grammage','qtestock','stock_seuil','status','fournisseur_id','equivalence','type_article_id','date_fabrication','date_peremption'];
     use HasFactory;
     public function rayon(){
         return $this->belongsTo(rayon::class,'rayon_id','id');

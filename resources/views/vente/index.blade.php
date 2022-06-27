@@ -40,7 +40,7 @@
                             <div class="col-6">
 
                                 <label for="">Nom du client</label>
-                                {{-- <select id="" class="my-2 form-control @error('client') is-invalid @enderror"
+                                <select id="" class="my-2 form-control @error('client') is-invalid @enderror"
                                     name="client">
                                     <option value="">.....</option>
                                     @foreach ($client as $clients)
@@ -49,8 +49,8 @@
                                 </select>
                                 @error('client')
                                     <p>{{ $message }}</p>
-                                @enderror --}}
-                                <input type="text" id="name" name="name" class="form-control">
+                                @enderror
+
                                 {{-- <label for=""> Code Commande</label>
                                 <input type="text" class="my-2 form-control @error('code') is-invalid @enderror"
                                     id="inputSuccess" placeholder="Enter ..." name="code">

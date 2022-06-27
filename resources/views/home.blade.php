@@ -23,7 +23,7 @@
 @endsection --}}
 <script>
     window.setTimeout(function() {
-        $(".alert").fadeTo(3200, 0).slideUp(400, function() {
+        $(".alert").fadeTo(10000, 0).slideUp(400, function() {
             $(this).remove();
         });
     }, 4000);
@@ -59,6 +59,16 @@
 
                 </div>
             </div>
+        @elseif ($produits->date_peremption < $produits->date_fabrication)
+            <div class="row">
+
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <strong>alert!</strong> {{ $produits->designation }} est arrivé à expiration veuillez remplacer
+
+
+                </div>
         @endif
     @endforeach
     <div class="row">

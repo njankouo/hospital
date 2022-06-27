@@ -59,7 +59,7 @@ fournisseur::create([
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
 
-                           $btn = '<a href="javascript:void(0) " class="edit btn btn-primary btn-sm">View</a>';
+                           $btn = '<a href="javascript:void(0) " class="edit fa fa-edit"></a>';
 
                             return $btn;
                     })

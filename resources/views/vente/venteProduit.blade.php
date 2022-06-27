@@ -30,8 +30,8 @@
 
                             <div class="col-6">
                                 <label for="">Date Vente</label>
-                                <input type="date" class="my-2 form-control @error('date') is-invalid @enderror" name="date"
-                                    placeholder="Enter ..." value="{{ $vente->date_vente }}">
+                                <input type="date" class="my-2 form-control @error('date') is-invalid @enderror"
+                                    name="date" placeholder="Enter ..." value="{{ $vente->date_vente }}">
                                 @error('date')
                                     <p>{{ $message }}</p>
                                 @enderror
@@ -54,7 +54,8 @@
                                 @enderror
                             </div>
                             <label for="">Nom Du Client</label>
-                            <select name="client" id="" class="form-control @error('client') is-invalid @enderror">
+                            <select name="client" id=""
+                                class="form-control @error('client') is-invalid @enderror">
                                 @foreach ($client as $clients)
                                     @if ($clients->id == $vente->client_id)
                                         <option value="{{ $clients->nom }}" selected>{{ $clients->nom }}</option>
@@ -73,9 +74,13 @@
                                     style="border-color: indigo">
                                     <option value="">.....</option>
                                     @foreach ($produit as $produits)
-                                        <option value="{{ $produits->id }}">{{ $produits->designation }}
-                                        </option>
+                                        @if ($produits->qtestock <= 0)
+                                        @else
+                                            <option value="{{ $produits->id }}">{{ $produits->designation }}
+                                            </option>
+                                        @endif
                                     @endforeach
+
                                 </select>
                                 @error('produit')
                                     <p>{{ $message }}</p>
@@ -83,7 +88,8 @@
                             </div>
                             <div class="col-6">
                                 <label for="">****unite </label>
-                                <select name="unite" id="" class="form-control my-2 @error('unite') is-invalid @enderror"
+                                <select name="unite" id=""
+                                    class="form-control my-2 @error('unite') is-invalid @enderror"
                                     style="border-color: indigo">
                                     <option value="">.....</option>
                                     @foreach ($type as $types)

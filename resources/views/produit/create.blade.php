@@ -85,8 +85,9 @@
                             </div>
                             <div class="col-6">
                                 <label for="">PRIX D'ACHAT </label>
-                                <input type="number" class="text-right  form-control my-2 @error('pa') is-invalid @enderror"
-                                    name="pa" placeholder="...">
+                                <input type="number"
+                                    class="text-right  form-control my-2 @error('pa') is-invalid @enderror" name="pa"
+                                    placeholder="...">
                                 @error('pa')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -103,7 +104,8 @@
                             </div>
                             <div class="col-6">
                                 <label for="">RAYON DES PRODUITS</label>
-                                <select name="rayon_id" id="" class="form-control @error('rayon_id') is-invalid @enderror">
+                                <select name="rayon_id" id=""
+                                    class="form-control @error('rayon_id') is-invalid @enderror">
                                     <option value="">.............</option>
                                     <optgroup label=" selectionner le rayon">
                                         @foreach ($rayon as $rayons)
@@ -138,8 +140,21 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
+
                             <div class="col-6">
-                                <label for="">IMAGE DU PRODUIT (optionnel)</label>
+                                <label for="">date fabrication (OPTIONNEL)</label>
+                                <input type="date" name="fabrication" id="" class="form-control">
+
+                            </div>
+                            <div class="col-6">
+                                <label for="">date expiration (OPTIONNEL)</label>
+                                <input type="date" name="expiration" id="" class="form-control">
+
+                            </div>
+
+
+                            <div class="col-6">
+                                <label for="">IMAGE DU PRODUIT (OPTIONNEL)</label>
                                 <input type="file"
                                     class="form-control my-2
                         @error('image') is-invalid @enderror"

@@ -5,8 +5,8 @@
   <script src="{{ asset('js/jquery-3.5.1.js') }}"></script>
 
   <script
-    src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js
-                                                                                                                                                                                                  ">
+      src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js
+                                                                                                                                                                                                          ">
   </script>
   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css" />
@@ -22,10 +22,10 @@
                       <h3 style="font-family:forte">listing des fournisseurs</h3>
                       <div style="margin-left: 55%" class="d-flex">
                           <a href="{{ route('fournisseur.create') }}" class="btn btn-dark">
-                              <i class="fa fa-plus mx-2"></i>New fournisseurs
+                              <i class="fa fa-plus mx-2"></i>Nouveau fournisseur
                           </a>
-                          <a href="" class="btn btn-primary mx-2">Format Excel</a>
-                          <a href="{{ route('fournisseur.pdf') }}" class="btn btn-Warning">Format PDF</a>
+
+                          <a href="{{ route('fournisseur.pdf') }}" class="btn btn-Warning mx-4">Format PDF</a>
                       </div>
 
                       <div class="card-body">
@@ -45,9 +45,11 @@
                                       <tr>
                                           <td>
                                               @if ($fours->sexe == 0)
-                                                  <img src="{{ asset('img/lien.png') }}" alt="" style="width: 45px">
+                                                  <img src="{{ asset('img/lien.png') }}" alt=""
+                                                      style="width: 45px">
                                               @else
-                                                  <img src="{{ asset('img/lion.png') }}" alt="" style="width: 45px">
+                                                  <img src="{{ asset('img/lion.png') }}" alt=""
+                                                      style="width: 45px">
                                               @endif
 
 
@@ -59,7 +61,7 @@
 
 
                                           <td>
-                                              <div class="dropdown dropup">
+                                              {{-- <div class="dropdown dropup">
                                                   <button class="btn btn-primary dropdown-toggle" type="button"
                                                       data-toggle="dropdown">Operation in table
                                                       <span class="caret"></span></button>
@@ -68,7 +70,7 @@
                                                       <i class="fa fa-edit text-primary"></i> update
 
                                                   </ul>
-                                              </div>
+                                              </div> --}}
                                           </td>
 
                                       </tr>

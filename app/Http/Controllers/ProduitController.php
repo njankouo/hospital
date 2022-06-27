@@ -14,7 +14,7 @@ class ProduitController extends Controller
 {
     //
     public function index(){
-        $produit=Produit::all();
+        $produit=Produit::latest()->paginate();
         return view('produit.produit',compact('produit'));
     }
     public function create(){
@@ -69,7 +69,9 @@ class ProduitController extends Controller
                'rayon_id'=>$request->rayon_id,
                'fournisseur_id'=>$request->fournisseur_id,
                'equivalence'=>$request->equivalence,
-               'type_article_id'=>$request->unite_id
+               'type_article_id'=>$request->unite_id,
+                'date_fabrication'=>$request-> fabrication,
+               'date_peremption'=>$request->expiration
 
             ]);
             return redirect('/produit');
@@ -106,7 +108,10 @@ class ProduitController extends Controller
                'rayon_id'=>$request->rayon_id,
                'fournisseur_id'=>$request->fournisseur_id,
                'equivalence'=>$request->equivalence,
-               'type_article_id'=>$request->unite_id
+               'type_article_id'=>$request->unite_id,
+                'date_fabrication'=>$request-> fabrication,
+               'date_peremption'=>$request->expiration
+
 
         ]);
            return redirect('/produit');
