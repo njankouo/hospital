@@ -12,6 +12,16 @@
 <link rel="stylesheet" href="{{ asset('css/select.dataTables.min.css') }}">
 @extends('layouts.master')
 @section('contenu')
+    @if (session('success'))
+        <div class="col-sm-12">
+            <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -20,7 +30,7 @@
 
                 </div>
                 <div class=" card-body">
-
+                    {{ \App\Models\VenteProduit::sum('pu') }}
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
 
                         <thead>
@@ -85,9 +95,9 @@
 
                                             <a href="{{ route('facture', $details->id) }}" class="btn btn"> <i
                                                     class="fa fa-print text-info fa-2x mx-2"></i></a>
-                                            <a href="{{ route('edit.vente', $details->id) }}" class="btn btn">
+                                            {{-- <a href="{{ route('edit.vente', $details->id) }}" class="btn btn">
                                                 <i class="fa fa-edit fa-2x"></i>
-                                            </a>
+                                            </a> --}}
                                         </td>
                                     </tr>
                                 @endif

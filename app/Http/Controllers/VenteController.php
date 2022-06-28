@@ -181,7 +181,7 @@ $vent->update([
     public function deleteVente($id){
           $details=VenteProduit::find($id);
         $details->delete();
-        return back()->with('success','surpression du client reussi');
+        return back()->with('success','vente rétiré avec success!!!!!');
 
     }
      public function searchDB(Request $request)

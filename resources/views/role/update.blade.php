@@ -101,11 +101,11 @@
                             <div class="col-6">
                                 <label for="">statut utilisateur </label>
                                 <select name="status" class="form-control">
-                                    @if ($user->status == 'actif')
-                                        <option value="actif" selected>actif</option>
-                                    @else
-                                        <option value="inactif">inactif</option>
-                                    @endif
+
+                                    <option value="actif" selected>actif</option>
+
+                                    <option value="inactif">inactif</option>
+
 
 
                                 </select>
