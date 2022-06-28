@@ -19,8 +19,11 @@
                     </div>
                 @endif
                 <div class="row">
-                    <form action="{{ route('insert.fournisseur') }}" method="POST" class="form-block">
+                    <form action="{{ route('fournisseur.edition', ['fournisseur' => $fournisseur->id]) }}" method="POST"
+                        class="form-block">
+
                         @csrf
+                        <input type="hidden" name="_method" value="put">
                         <div class="form-row" style="margin: 10px;">
 
 
@@ -33,8 +36,13 @@
                                     class="form-control my-2 @error('sexe') is-invalid @enderror">
                                     <option value="" disabled>select gender</option>
                                     <option value=""></option>
-                                    <option value="1">Masculin</option>
-                                    <option value="0">feminin</option>
+                                    @if ($fournisseur->sexe == 1)
+                                        <option value="1" selected>Masculin</option>
+                                    @else
+                                        <option value="0" selected>feminin</option>
+                                    @endif
+
+
                                 </select>
                                 @error('sexe')
                                     <p>{{ $message }}</p>
@@ -75,7 +83,11 @@
                                     <option value="">.....</option>
 
                                     <option value="actif">actif</option>
+
                                     <option value="inactif">inactif</option>
+
+
+
                                 </select>
                             </div>
                             <div class="col-8 my-4">

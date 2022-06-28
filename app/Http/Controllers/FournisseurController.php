@@ -70,5 +70,17 @@ public function edit($id){
     $fournisseur=Fournisseur::find($id);
     return view('fournisseur.edit',compact('fournisseur'));
 }
+public function editer(Request $request,fournisseur $fournisseur){
+    $request->validate([],[]);
+    $fournisseur->update([
+'nom'=>$request->nom,
+'prenom'=>$request->prenom,
+'sexe'=>$request->sexe,
+'telephone1'=>$request->telephone1,
+'email'=>$request->email,
+'status'=>$request->status
 
+    ]);
+    return back()->with('success','fournisseur mise à jour avec success');
+}
 }

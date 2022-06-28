@@ -31,7 +31,10 @@
                                         class="form-control @error('fournisseur_id') is-invalid @enderror">
                                         <option value="">....</option>
                                         @foreach ($fournisseur as $fournisseurs)
-                                            <option value="{{ $fournisseurs->id }}">{{ $fournisseurs->nom }}</option>
+                                            @if ($fournisseurs->status == 'actif')
+                                                <option value="{{ $fournisseurs->id }}">{{ $fournisseurs->nom }}
+                                                </option>
+                                            @endif
                                         @endforeach
                                     </select>
                                     @error('fournisseur_id')

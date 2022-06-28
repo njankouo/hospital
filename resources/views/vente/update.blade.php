@@ -20,7 +20,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <p style="font-family: forte">mettre à jour cette vente</p>
+                    <p style="font-family: forte">annuler vente</p>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('vente.update', ['vent' => $vent->id]) }}" method="POST" class="form-block">
@@ -31,8 +31,8 @@
 
                             <div class="col-6">
                                 <label for="">Date Vente</label>
-                                <input type="date" class="my-2 form-control @error('date') is-invalid @enderror" name="date"
-                                    placeholder="Enter ..." value="{{ $vent->date_vente }}">
+                                <input type="date" class="my-2 form-control @error('date') is-invalid @enderror"
+                                    name="date" placeholder="Enter ..." value="{{ $vent->date_vente }}">
                                 @error('date')
                                     <p>{{ $message }}</p>
                                 @enderror
@@ -76,7 +76,8 @@
                             </div>
                             <div class="col-6">
                                 <label for="">****unite </label>
-                                <input type="text" class="form-control my-2" name="unite" value="{{ $vent->unite }}">
+                                <input type="text" class="form-control my-2" name="unite"
+                                    value="{{ $vent->unite }}">
                                 @error('unite')
                                     <p>{{ $message }}</p>
                                 @enderror
@@ -112,7 +113,11 @@
                                     style="border-color: indigo" value="{{ $vent->remise }}">
 
                             </div>
-
+                            <div class="col-6">
+                                <label for="">annuler cette vente</label>
+                                <input type="text" class="form-control" name="reset" style="border-color: indigo"
+                                    value="reset">
+                            </div>
                             <div class="col-8 my-4">
                                 <button type="submit" class="btn btn-primary mx-1">mise à jour vente</button>
 

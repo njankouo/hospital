@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-6">
                                 <label for="">status</label>
-                                <input type="text" class="form-control" name="status" value="actif" disabled>
+                                <input type="text" class="form-control" name="status" value="actif">
                             </div>
                             <div class="col-8 my-4">
                                 <button type="submit" class="btn btn-primary mx-1">save</button>

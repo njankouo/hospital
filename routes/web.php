@@ -86,3 +86,4 @@ Route::get('bon/livraison/{id}',[CommandeController::class,'bonlivraison'])->nam
 Route::get('search-from-db', [VenteController::class, 'searchDB']);
 Route::get('/fournisseur/edit/{id}',[FournisseurController::class,'edit'])->name('fournisseur.edit');
 Route::delete('/contrats/delete/{id}',[ContratController::class,'archiver'])->name('contrat.delete');
+Route::put('/fournisseur/edition/{fournisseur}',[FournisseurController::class,'editer'])->name('fournisseur.edition');

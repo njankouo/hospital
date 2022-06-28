@@ -57,7 +57,12 @@
                                         <td>{{ $fours->email }}</td>
 
                                         <td>
-                                            <span class="badge badge-info">{{ $fours->status }}</span>
+                                            @if ($fours->status == 'inactif')
+                                                <span class="badge badge-danger">{{ $fours->status }}</span>
+                                            @else
+                                                <span class="badge badge-info">{{ $fours->status }}</span>
+                                            @endif
+
                                         </td>
                                         <td>
                                             <a href="{{ route('fournisseur.edit', $fours->id) }}" class="btn btn">
