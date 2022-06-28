@@ -173,7 +173,7 @@
 
             </div>
             <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>" style="float: left;" class="logo">
-            <div style="margin-top:33%">
+            <div style="margin-top:33%;">
 
 
                 <h6><strong>CENTRE MEDICO-CHIRURGICAL D'UROLOGIE</strong></h6>
@@ -231,11 +231,14 @@
                                 </tr>
 
                                 <tr>
-                                    <p style="font-size: 15px">Arreté la Présente facture à la somme de: </p>
+                                    <p style="font-size: 15px">Arreté la Présente facture à la somme de:
+                                        {{ $vente->pu * $vente->qte_sortie * (1 - $vente->remise / 100) }}
+
+                                    </p>
 
 
-                                   {{ $vente->pu * $vente->qte_sortie * (1 - $vente->remise / 100) }}
- 
+
+
                                 </tr>
 
                             </tbody>

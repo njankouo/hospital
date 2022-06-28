@@ -55,7 +55,7 @@ Route::get('/pdf/inventaire',[ProduitController::class,'inventairePDF'])->name('
 Route::get('autocomplete', [VenteController::class, 'autocomplete'])->name('autocomplete');
 /**route relatives aux enregistrements */
 Route::post('/client',[ClientController::class,'create'])->name('create.client');
-Route::Post('/fournisseur',[FournisseurController::class,'insert'])->name('insert.fournisseur');
+Route::Post('/fournisseur',[FournisseurController::class,'insertion'])->name('insert.fournisseur');
 Route::post('type',[TypeController::class,'create'])->name('insert.create');
 Route::post('categorie',[CategorieController::class,'create'])->name('categorie.create');
 
@@ -84,3 +84,5 @@ route::put('/role/user/{user}',[UserController::class,'upgrade'])->name('user.up
 Route::delete('/liste/vente/{id}',[VenteController::class,'deleteVente'])->name('delete.vente');
 Route::get('bon/livraison/{id}',[CommandeController::class,'bonlivraison'])->name('bon.livraison');
 Route::get('search-from-db', [VenteController::class, 'searchDB']);
+Route::get('/fournisseur/edit/{id}',[FournisseurController::class,'edit'])->name('fournisseur.edit');
+Route::delete('/contrats/delete/{id}',[ContratController::class,'archiver'])->name('contrat.delete');

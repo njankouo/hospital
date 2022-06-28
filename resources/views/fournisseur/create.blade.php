@@ -26,13 +26,14 @@
 
                             <div class="col-6">
                                 <label for="">Nom</label>
-                                <input type="text" class="my-2 form-control @error('nom') is-invalid @enderror" name="nom"
-                                    placeholder="Enter ...">
+                                <input type="text" class="my-2 form-control @error('nom') is-invalid @enderror"
+                                    name="nom" placeholder="Enter ...">
                                 @error('nom')
                                     <p>{{ $message }}</p>
                                 @enderror
                                 <label for="">sexe</label>
-                                <select name="sexe" id="" class="form-control my-2 @error('sexe') is-invalid @enderror">
+                                <select name="sexe" id=""
+                                    class="form-control my-2 @error('sexe') is-invalid @enderror">
                                     <option value="" disabled>select gender</option>
                                     <option value=""></option>
                                     <option value="1">Masculin</option>
@@ -59,7 +60,8 @@
                             </div>
                             <div class="col-6">
                                 <label for="">telephone2</label>
-                                <input type="tel" class="form-control my-2 " name="telephone2" placeholder="..." disabled>
+                                <input type="tel" class="form-control my-2 " name="telephone2" placeholder="..."
+                                    disabled>
                             </div>
                             <div class="col-6">
                                 <label for="">email</label>
@@ -68,6 +70,10 @@
                                 @error('email')
                                     <p>{{ $message }}</p>
                                 @enderror
+                            </div>
+                            <div class="col-6">
+                                <label for="">status</label>
+                                <input type="text" class="form-control" name="status" value="actif" disabled>
                             </div>
                             <div class="col-8 my-4">
                                 <button type="submit" class="btn btn-primary mx-1">save</button>

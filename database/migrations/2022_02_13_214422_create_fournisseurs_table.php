@@ -16,12 +16,13 @@ class CreateFournisseursTable extends Migration
         Schema::create('fournisseurs', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('prenom');
+            $table->string('prenom')->nullable();
             $table->string('sexe');
             $table->string('telephone1');
             $table->string('telephone2')->nullable();
             $table->string('photo')->nullable();
             $table->string('email');
+            $table->string('status');
             $table->timestamps();
 
         });

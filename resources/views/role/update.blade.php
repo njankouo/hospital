@@ -128,7 +128,7 @@
                     <div class="card-body">
                         <div class="col-12">
                             <label for="" style="font-weight: bold;text-decoration:underline">Mot de Passe</label>
-                            <input type="password" placeholder="password....."
+                            <input type="text" placeholder="password....."
                                 class="form-control @error('password') is-invalid @enderror" name="password"
                                 value="{{ $user->password }}">
                             @error('password')

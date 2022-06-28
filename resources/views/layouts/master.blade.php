@@ -111,7 +111,7 @@
 
                                     </div>
                                 </div>
-                                <div class="page-title-actions">
+                                {{-- <div class="page-title-actions">
 
                                     <div class="d-inline-block dropdown">
                                         <button type="button" data-toggle="dropdown" aria-haspopup="true"
@@ -144,7 +144,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 

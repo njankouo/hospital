@@ -7,11 +7,27 @@
         $('#example').DataTable();
     });
 </script>
+<script>
+    window.setTimeout(function() {
+        $(".alert").fadeTo(10000, 0).slideUp(400, function() {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
 <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/select.dataTables.min.css') }}">
 @extends('layouts.master')
 @section('contenu')
+    @if (session()->has('success'))
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+
+
+            {{ session()->get('success') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -57,7 +73,12 @@
                                             alt="" style="width: 88px;height:50px;">
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-danger"> <i class="fa fa-trash"></i></a>
+                                        <form method="POST" action="{{ route('contrat.delete', $contrats->id) }}">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <i type="submit" class="fa fa-trash fa-2x text-danger btn-flat show_confirm"
+                                                data-toggle="tooltip" title='Delete'></i>
+                                        </form>
                                         <a href="{{ route('edit', $contrats->id) }}" class="btn btn-info"> <i
                                                 class="fa fa-edit"></i></a>
                                     </td>
@@ -72,4 +93,24 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                    title: `Are you sure you want to delete this record?`,
+                    text: "If you delete this, it will be gone forever.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+    </script>
 @endsection

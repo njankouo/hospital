@@ -20,63 +20,55 @@ class FournisseurController extends Controller
         return view('fournisseur.create');
     }
 
-public function insert(Request $request){
+public function insertion(Request $request){
     $request->validate([
         'nom'=>'required',
-        'prenom'=>'required',
+       // 'prenom'=>'required',
         'sexe'=>'required',
         'telephone1'=>'required|unique:fournisseurs,telephone1',
         'email'=>'required|unique:fournisseurs,email',
+        'status'=>'required'
 
     ],
     [
         'nom.required'=>'veuillez inserer le nom svp',
-        'prenom.required'=>'veuillez inserer le prenom',
+       // 'prenom.required'=>'veuillez inserer le prenom',
         'sexe.required'=>'veuillez inserer le sexe',
         'telephone1.required'=>'veuillez inserer le telephone',
-        'email.required'=>'veuillez inserer l\'email'
+        'email.required'=>'veuillez inserer l\'email',
+        'status.required'=>'renseignez le status svp'
     ]
 
 
 );
 fournisseur::create([
+    // dd($request->all())
 'nom'=>$request->nom,
 'prenom'=>$request->prenom,
 'sexe'=>$request->sexe,
 'telephone1'=>$request->telephone1,
 'email'=>$request->email,
+'status'=>$request->status
 ]);
  return back()->with('success','fournisseur enregistré avec success');
 }
- public function index(Request $request)
+ public function index()
     {
        $data=[
         'four'=>fournisseur::latest()->paginate(5)
        ];
-        if ($request->ajax()) {
-            $data = fournisseur::select('*');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-
-                           $btn = '<a href="javascript:void(0) " class="edit fa fa-edit"></a>';
-
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
 
         return view('fournisseur.fournisseur',$data);
 
 }
 public function pdf(){
     $fournisseur=fournisseur::all();
-    $pdf=PDF::LoadView('fournisseur.pdf',compact('fournisseur'));
-    $pdf->stream();
+    $pdf=PDF::LoadView('fournisseur.pdf',compact('fournisseur'))->setOptions(['setPaper'=>'A4']);
+  return  $pdf->stream();
 }
-public function edit(){
-    return view('fournisseur.edit');
+public function edit($id){
+    $fournisseur=Fournisseur::find($id);
+    return view('fournisseur.edit',compact('fournisseur'));
 }
 
 }

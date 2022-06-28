@@ -48,7 +48,7 @@
         @endif
     @endforeach
     @foreach ($produit as $produits)
-        @if ($produits->qtestosck <= $produits->stock_seuil)
+        @if ($produits->qtestock < $produits->stock_seuil)
             <div class="row">
 
                 <div class="alert alert-danger" role="alert">
@@ -59,7 +59,7 @@
 
                 </div>
             </div>
-        @elseif ($produits->date_peremption < $produits->date_fabrication)
+            {{-- @elseif ($produits->date_peremption < $produits->date_fabrication)
             <div class="row">
 
                 <div class="alert alert-danger" role="alert">
@@ -68,7 +68,7 @@
                     <strong>alert!</strong> {{ $produits->designation }} est arrivé à expiration veuillez remplacer
 
 
-                </div>
+                </div> --}}
         @endif
     @endforeach
     <div class="row">

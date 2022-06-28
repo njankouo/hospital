@@ -72,4 +72,10 @@ class ContratController extends Controller
     ]);
 return back()->with('success','contrat modifié avec success');
 }
+public function archiver($id){
+    $contrats=Contrat::find($id);
+
+    $contrats->delete();
+    return back()->with('success','contrat annulé');
+}
 }

@@ -18,7 +18,7 @@
         </div>
         <ul class="header-menu nav">
             <li class="nav-item">
-                <a href="javascript:void(0);" class="nav-link">
+                <a href="{{ route('chart') }}" class="nav-link">
                     <i class="nav-link-icon fa fa-database"> </i>
                     Statistics
                 </a>
@@ -44,13 +44,16 @@
                     <div class="widget-content-left">
                         <div class="btn-group">
                             <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                <img width="42" class="rounded" src="{{ asset('img/pharma.jpg') }}" alt="">
+                                <img width="42" class="rounded" src="{{ asset('img/pharma.jpg') }}"
+                                    alt="">
                                 <i class="fa fa-angle-down ml-2 opacity-8 text-light"></i>
                             </a>
-                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                            <div tabindex="-1" role="menu" aria-hidden="true"
+                                class="dropdown-menu dropdown-menu-right">
                                 <h6 tabindex="-1" class="dropdown-header">
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
                                         deconnexion
                                     </a>

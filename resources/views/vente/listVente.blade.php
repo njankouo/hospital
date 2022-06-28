@@ -74,12 +74,13 @@
                                         <td>{{ $details->date_vente }}</td>
                                         <td>{{ $details->client }}</td>
                                         <td>
-                                            {{-- <form method="POST" action="{{ route('delete.vente', $details->id) }}">
-                                            @csrf
-                                            <input name="_method" type="hidden" value="DELETE">
-                                            <i type="submit" class="fa fa-trash fa-2x text-danger btn-flat show_confirm"
-                                                data-toggle="tooltip" title='Delete'></i>
-                                        </form> --}}
+                                            <form method="POST" action="{{ route('delete.vente', $details->id) }}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <i type="submit"
+                                                    class="fa fa-trash fa-2x text-danger btn-flat show_confirm"
+                                                    data-toggle="tooltip" title='Delete'></i>
+                                            </form>
 
 
                                             <a href="{{ route('facture', $details->id) }}" class="btn btn"> <i

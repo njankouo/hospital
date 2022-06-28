@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class fournisseur extends Model
 {
     use HasFactory;
-    protected $fillable=['nom','prenom','sexe','telephone1','email'];
+    protected $fillable=['nom','prenom','sexe','telephone1','email','status'];
     public function commande(){
         return $this->hasMany(commande::class);
     }
