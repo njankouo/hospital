@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>FACTURE VENTE</title>
+    <title>ETATS DES VENTES JOURNALIERS</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
@@ -161,103 +161,86 @@
 </head>
 
 <body>
-    {{-- <div class="row text-center">
-        <div style="float: right;margin-top:25px;margin-right:35px;">
-
-
-            <h6></h6>
-
-
-        </div>
-        <div style="margin-top:33%;">
-
-
-
-        </div>
-    </div> --}}
-
-
-
-    <div style=" ">
-        <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>"
-            style="width:90px;height:105px;margin-top:15px;margin-left:25px;float: right;" class="logo">
-
-        <p style="font-size: 20px;font-style:italic;font-weight: bold;margin-left:5%;color:rgb(7, 6, 6)">
-            Client: {{ $vente->client }}</p>
-        <p style="font-size: 20px;font-style:italic;font-weight: bold;margin-left:5%;color:rgb(10, 8, 8)">
-            Responsable vente: {{ $vente->user }}</p>
-        <p class="text-center text-primary"
-            style="font-size: 20px;font-style:italic;font-weight: bold;margin-top:2%;margin-left:5%;color:rgb(8, 7, 7)">
-            FACTURE N° {{ $vente->vente_id }}
-        </p>
-        <p style="font-size: 20px;font-style:italic;font-weight: bold;margin-left:5%;color:rgba(10, 7, 7, 0.233)">
-            Date: {{ $vente->created_at }}</p>
-
-    </div>
-
 
     <div class="container">
-        <div id="inventory-invoice" style="margin-top:10px">
+        <div class="row text-center">
+
+            <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>"
+                style="width:90px;height:105px;margin-top:15px;margin-left:25px;float:right" class="logo">
+
             <h6><strong>CENTRE MEDICO-CHIRURGICAL D'UROLOGIE</strong></h6>
             <h6>VALLEE MANGA BELL DOUALA-BALI</h6>
             <h6>TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945</h6>
-            <div class="invoice overflow-auto">
-                <div>
-                    <main>
+            <h6>
 
-                        <table class="table text-center">
-                            <thead class="text-dark">
-                                <tr>
-                                    <th>DESIGNATION</th>
-
-
-                                    <th>QTE </th>
-                                    <th>UV</th>
-                                    <th>PRIX ACHAT</th>
-                                    <th>REMISE</th>
-                                    <th>Montant TTC</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{ $vente->produit->designation }}</td>
-                                    <td>{{ $vente->qte_sortie }}</td>
-                                    <td>{{ $vente->unite }}</td>
-                                    <td>{{ $vente->pu }}</td>
-                                    <td>{{ $vente->remise }} </td>
-                                    <td>{{ $vente->pu * $vente->qte_sortie * (1 - $vente->remise / 100) }}
+            </h6>
+        </div>
+        <h6 class="my-4 text-center text-primary"
+            style="font-size: 25px;font-style:italic;font-weight: bold;text-align:center ">
+            ETATS DES VENTES JOURNéE DU: {{ $carbon->format('Y-m-d') }}
+            {{-- <table class="table table-bordered border-primary">
+                  <thead class="text-dark">
+                      <tr>
 
 
+                      </tr>
+                  </thead>
 
-                                </tr>
-
-                                <tr>
-
-
+              </table> --}}
 
 
+            <div id="inventory-invoice">
 
-                                </tr>
+                <div class="invoice overflow-auto">
+                    <div>
+                        <main>
 
-                            </tbody>
-                            <tfoot>
-                                <tr>
+                            <table class="table my-4 text-center">
+                                <thead class="text-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>CLIENT</th>
 
-                                </tr>
+                                        <th>DATE ENTRéE</th>
+                                        <th>MONTANT</th>
 
-                            </tfoot>
-                            </tbody>
-                        </table>
-                    </main>
-                    <footer style="font-size: 15px">
-                        Centre Medico-churirgical d'urologie situé a la Vallée Douala Manga Bell
-                        Douala-Bali.
-                        TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945.
-                        SITE WEB: http://www.cmcu-cm.com
-                    </footer>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($etat as $etats)
+                                        @if ($etats->date_vente != $carbon->format('Y-m-d'))
+                                            <tr>
+                                                <td>{{ $etats->id }}</td>
+                                                <td>{{ $etats->client }}</td>
+                                                <td>{{ $etats->date_vente }}</td>
+                                                <td>
+                                                    {{ $etats->pu * $etats->qte_sortie * (1 - $etats->remise / 100) }}
+                                                    (FCFA)
+                                                </td>
+
+                                            </tr>
+                                        @endif
+                                    @endforeach
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+
+                                    </tr>
+
+                                </tfoot>
+                                </tbody>
+                            </table>
+                        </main>
+                        <footer style="font-size: 15px">
+                            Centre Medico-churirgical d'urologie situé a la Vallée Douala Manga Bell
+                            Douala-Bali.
+                            TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945.
+                            SITE WEB: http://www.cmcu-cm.com
+                        </footer>
+                    </div>
                 </div>
             </div>
-        </div>
 
 
 

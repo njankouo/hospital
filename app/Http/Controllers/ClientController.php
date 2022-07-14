@@ -53,8 +53,10 @@ class ClientController extends Controller
             'numeroCNI'=>$request->numeroCNI,
            // 'status'=>$request->status
     ]);
-    return back()->with('success','client enregistre avec success');
-    Session::flash('message','client crée avec success!!');
+
+    return redirect('/client');
+    Session::flash('flash_message', 'It has been saved!');
+
 
     }
 }

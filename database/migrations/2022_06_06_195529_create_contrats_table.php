@@ -16,10 +16,10 @@ class CreateContratsTable extends Migration
         Schema::create('contrats', function (Blueprint $table) {
             $table->id();
             $table->string('date_debut');
-             $table->string('date_fin');
+             $table->string('date_fin')->nullable();
               $table->foreignId('fournisseur_id')->constrained('fournisseurs');
-              $table->string('image');
-              $table->string('reglement');
+              $table->string('image')->nullable();
+              $table->string('reglement')->nullable();
                 $table->string('status');
             $table->timestamps();
         });

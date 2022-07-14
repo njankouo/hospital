@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CaisseController;
 use App\Models\rayon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -89,3 +90,8 @@ Route::delete('/contrats/delete/{id}',[ContratController::class,'archiver'])->na
 Route::put('/fournisseur/edition/{fournisseur}',[FournisseurController::class,'editer'])->name('fournisseur.edition');
 Route::get('/changePassword',[HomeController::class,'showChangePasswordForm']);
 Route::post('/changePassword',[HomeController::class,'changePassword'])->name('changePassword');
+// route::get('/liste/vente/',[VenteController::class,'search'])->name('search.vente');
+
+
+Route::get('caisse',[CaisseController::class,'index'])->name('caisse.index');
+Route::get('/caisse/etat',[CaisseController::class,'etat'])->name('etat');

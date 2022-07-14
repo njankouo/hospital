@@ -10,6 +10,12 @@
 <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/select.dataTables.min.css') }}">
+@if (Session::has('flash_message'))
+    <div class="alert alert-success {{ Session::has('penting') ? 'alert-important' : '' }}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {{ Session::get('flash_message') }}
+    </div>
+@endif
 <div class="row">
     <div class="col-12">
         <div class="card">

@@ -23,7 +23,8 @@
                                 <div class="card">
                                     <div class="card-title bg-primary text-light">
 
-                                        <h4><i class="fa fa-cog fa-2x p-2"></i> Changer Le Mot De Passe</h4>
+                                        <h4><i class="fa fa-cog  p-2 fa-w-16 fa-spin fa-2x"></i> Changer Le Mot De Passe
+                                        </h4>
                                     </div>
                                     <div class="card-body">
                                         <form class="form-horizontal" method="POST"

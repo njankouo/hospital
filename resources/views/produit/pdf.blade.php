@@ -165,7 +165,8 @@
     <div class="container">
         <div class="row text-center">
 
-            <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>" style="float: right;" class="logo">
+            <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>"
+                style="width:90px;height:105px;margin-top:15px;margin-left:25px;float: right;" class="logo">
 
             <h6><strong>CENTRE MEDICO-CHIRURGICAL D'UROLOGIE</strong></h6>
             <h6>VALLEE MANGA BELL DOUALA-BALI</h6>
@@ -174,7 +175,8 @@
 
             </h6>
         </div>
-        <h6 class="my-4 text-center text-primary" style="font-size: 25px;font-style:italic;font-weight: bold ">
+        <h6 class="my-4 text-center text-primary"
+            style="font-size: 25px;font-style:italic;font-weight: bold;text-align:center ">
             INVENTAIRE DES PRODUITS EN STOCK
             {{-- <table class="table table-bordered border-primary">
                   <thead class="text-dark">

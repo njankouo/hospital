@@ -69,8 +69,12 @@
                                     <td>{{ $contrats->date_fin }}</td>
                                     <td>{{ $contrats->reglement }}</td>
                                     <td>
-                                        <img class="rounded" src="{{ asset('img') }}/{{ $contrats->image }}"
-                                            alt="" style="width: 88px;height:50px;">
+                                        @if ($contrats->image == '')
+                                            <span class="badge badge-danger">aucun fichier image</span>
+                                        @else
+                                            <img class="rounded" src="{{ asset('img') }}/{{ $contrats->image }}"
+                                                alt="" style="width: 88px;height:50px;">
+                                        @endif
                                     </td>
                                     <td>
                                         <form method="POST" action="{{ route('contrat.delete', $contrats->id) }}">
@@ -100,8 +104,8 @@
             var name = $(this).data("name");
             event.preventDefault();
             swal({
-                    title: `Are you sure you want to delete this record?`,
-                    text: "If you delete this, it will be gone forever.",
+                    title: `voulez-vous retirer ce contrat?`,
+                    text: "si oui, validez OK.",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

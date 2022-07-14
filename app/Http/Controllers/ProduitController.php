@@ -78,7 +78,8 @@ class ProduitController extends Controller
     }
     public function inventairePDF(){
         $produit=Produit::all();
-        $pdf=PDF::loadView('produit.pdf',compact('produit'))->setOptions(['setPaper'=>'A4','Portrait']);
+        $pdf=PDF::loadView('produit.pdf',compact('produit'))->setOptions(['setPaper'=>'A4','landscape']);
+        $pdf->setPaper('A4', 'landscape');
        return $pdf->Stream();
 
     }

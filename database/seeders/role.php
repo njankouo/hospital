@@ -18,7 +18,7 @@ class role extends Seeder
              DB::table('roles')->insert(
 array(
     0=>array('id'=>1,'nom'=>'admin'),
-    1=>array('id'=>2,'nom'=>'superadmin'),
+    // 1=>array('id'=>2,'nom'=>'superadmin'),
     2=>array('id'=>3,'libelle'=>'utilisateur'),
 
 )

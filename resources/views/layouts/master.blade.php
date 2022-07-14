@@ -102,14 +102,15 @@
                         <div class="app-page-title">
                             <div class="page-title-wrapper">
                                 <div class="page-title-heading">
+                                    @can('admin')
+                                        <img src="{{ asset('img/pulse.jpg') }}"
+                                            style="width:45px;height:45px;margin-left:0px" alt="" class="rounded">
 
-                                    <img src="{{ asset('img/pulse.jpg') }}"
-                                        style="width:45px;height:45px;margin-left:0px" alt="" class="rounded">
 
+                                        <div style="font-family: forte">DASHBOARD
 
-                                    <div style="font-family: forte">DASHBOARD
-
-                                    </div>
+                                        </div>
+                                    @endcan
                                 </div>
                                 {{-- <div class="page-title-actions">
 

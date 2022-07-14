@@ -74,12 +74,12 @@ class UserController extends Controller
                'role_id'=>$request->role,
                  'status'=>$request->status,
                 'telephone1'=>$request->telephone1,
-                  'password' => Hash::make($request->newPassword)
+                  'password' => $request->password
         ]);
-       
+
         return redirect('/role');
 
      }
-    
+
 
 }

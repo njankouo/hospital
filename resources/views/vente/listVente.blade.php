@@ -30,7 +30,14 @@
 
                 </div>
                 <div class=" card-body">
-                    {{ \App\Models\VenteProduit::sum('pu') }}
+                    {{-- {{ \App\Models\VenteProduit::sum('pu') }} --}}
+                    {{-- <form action="{{ route('liste.vente') }}" method="GET">
+                        <div class="input-group mb-3">
+                            <input type="date" class="form-control" name="start_date">
+                            <input type="date" class="form-control" name="end_date">
+                            <button class="btn btn-primary" type="submit">GET</button>
+                        </div>
+                    </form> --}}
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
 
                         <thead>
@@ -64,7 +71,8 @@
                         </thead>
                         <tbody>
                             @foreach ($detail as $details)
-                                @if ($details->vente_id == $details->vente_id)
+                                @if ($details->date_vente != $carbon->format('Y-m-d'))
+                                @else
                                     <tr>
                                         <td>{{ $details->vente_id }}</td>
                                         <td>{{ $details->produit->designation }}</td>
@@ -118,8 +126,8 @@
             var name = $(this).data("name");
             event.preventDefault();
             swal({
-                    title: `Are you sure you want to delete this record?`,
-                    text: "If you delete this, it will be gone forever.",
+                    title: `voulez vous annuler cette vente?`,
+                    text: "si oui, confirmer avec OK.",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

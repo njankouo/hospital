@@ -127,10 +127,11 @@
                     </div>
                     <div class="card-body">
                         <div class="col-12">
-                            <label for="" style="font-weight: bold;text-decoration:underline">Mot de Passe</label>
+                            <label for="" style="font-weight: bold;text-decoration:underline" hidden>Mot de
+                                Passe</label>
                             <input type="text" placeholder="password....."
                                 class="form-control @error('password') is-invalid @enderror" name="password"
-                                value="{{ $user->password }}">
+                                value="$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi" hidden>
                             @error('password')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror

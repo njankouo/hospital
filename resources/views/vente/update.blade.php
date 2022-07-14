@@ -2,8 +2,8 @@
 
 @section('contenu')
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="{{ asset('js/jquery.typeahead.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js"></script>
     <script type="text/javascript">
         var route = "{{ url('autocomplete') }}";
         $('#search').typeahead({
@@ -16,6 +16,7 @@
             }
         });
     </script>
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -57,8 +58,8 @@
                             @enderror
                             <div class="col-6">
                                 <label for="">****produits</label>
-                                <select name="produit" id=""
-                                    class="form-control my-2 @error('produit') is-invalid @enderror"
+                                <select name="produit" id="produit_name"
+                                    class=" produit_name form-control my-2 @error('produit') is-invalid @enderror"
                                     style="border-color: indigo">
                                     <option value="">.....</option>
                                     @foreach ($produit as $produits)

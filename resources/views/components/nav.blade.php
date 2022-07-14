@@ -35,8 +35,15 @@
                     Settings
                 </a>
             </li>
+            <li class="dropdown nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-link-icon fa fa-diamond"></i>
+                    {{ auth()->user()->role->nom }}
+                </a>
+            </li>
         </ul>
     </div>
+
     <div class="app-header-right">
         <div class="header-btn-lg pr-0">
             <div class="widget-content p-0">

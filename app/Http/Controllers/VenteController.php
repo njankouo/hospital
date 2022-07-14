@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\client;
-use App\Models\commande;
-use App\Models\fournisseur;
-use App\Models\produit;
-use App\Models\type_produit;
+use PDF;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\vente;
+use App\Models\client;
+use App\Models\produit;
+use App\Models\commande;
+use App\Models\fournisseur;
+use App\Models\type_produit;
 use App\Models\VenteProduit;
-use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+
 class VenteController extends Controller
 {
     //
@@ -94,7 +96,8 @@ class VenteController extends Controller
     }
     public function listeVente(){
         $detail=VenteProduit::latest()->paginate();
-        return view('vente.listVente',compact('detail'));
+        $carbon=\Carbon\Carbon::now();
+        return view('vente.listVente',compact('detail','carbon'));
     }
     //  public function autocomplete(Request $request)
     // {
@@ -121,7 +124,7 @@ class VenteController extends Controller
     public function facture($id){
         $vente=VenteProduit::find($id);
         $pdf=PDF::loadview('vente.facture',compact('vente'))->setOptions(['setPaper'=>'A4']);
-        return $pdf->stream();
+        return $pdf->stream('facture.pdf');
     }
     public function statistique(){
         // $vente=commande::select(DB::raw("COUNT(*) as count "))
@@ -193,4 +196,5 @@ $vent->update([
           return response()->json($result);
 
     }
+
 }

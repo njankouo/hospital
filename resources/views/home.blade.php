@@ -32,34 +32,36 @@
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 @extends('layouts.master')
 @section('contenu')
-    {{-- @can('admin') --}}
-    @foreach ($contrat as $contrats)
-        @if ($contrats->date_debut >= $contrats->date_fin)
-            <div class="row">
+    @can('admin')
+        @foreach ($contrat as $contrats)
+            @if ($contrats->date_debut >= $contrats->date_fin)
+                <div class="row">
 
-                <div class="alert alert-danger" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <strong>alert!</strong> le contrat du fournisseur {{ $contrats->fournisseur->nom }}
-                    est arrivé à
-                    expriration!
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <strong>alert!</strong> le contrat du fournisseur {{ $contrats->fournisseur->nom }}
+                        est arrivé à
+                        expriration!
+                    </div>
                 </div>
-            </div>
-        @endif
-    @endforeach
-    @foreach ($produit as $produits)
-        @if ($produits->qtestock < $produits->stock_seuil)
-            <div class="row">
+            @endif
+        @endforeach
+    @endcan
+    @can('utilisateur')
+        @foreach ($produit as $produits)
+            @if ($produits->qtestock < $produits->stock_seuil)
+                <div class="row">
 
-                <div class="alert alert-danger" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <strong>alert!</strong> la quantité en stock {{ $produits->designation }} est très basse
-                    veuillez passer la commande
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <strong>alert!</strong> la quantité en stock {{ $produits->designation }} est très basse
+                        veuillez passer la commande
 
+                    </div>
                 </div>
-            </div>
-            {{-- @elseif ($produits->date_peremption < $produits->date_fabrication)
+                {{-- @elseif ($produits->date_peremption < $produits->date_fabrication)
             <div class="row">
 
                 <div class="alert alert-danger" role="alert">
@@ -69,8 +71,9 @@
 
 
                 </div> --}}
-        @endif
-    @endforeach
+            @endif
+        @endforeach
+    @endcan
     <div class="row">
         <div class="col-md-6 col-xl-4">
             <div class="card mb-3 widget-content bg-midnight-bloom">
@@ -111,19 +114,21 @@
                 </div>
             </div>
         </div> --}}
-        <div class="col-md-6 col-xl-4">
-            <div class="card mb-3 widget-content bg-primary">
-                <div class="widget-content-wrapper text-white">
-                    <div class="widget-content-left">
-                        <div class="widget-heading">nombre total utilisateurs</div>
-                        <div class="fa fa-users fa-2x">users</div>
-                    </div>
-                    <div class="widget-content-right">
-                        <div class="widget-numbers text-white"><span>{{ $user->count() }}</span></div>
+        @can('admin')
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content bg-primary">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">nombre total utilisateurs</div>
+                            <div class="fa fa-users fa-2x">users</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white"><span>{{ $user->count() }}</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endcan
         <div class="col-md-6 col-xl-4">
             <div class="card mb-3 widget-content bg-warning">
                 <div class="widget-content-wrapper text-white">

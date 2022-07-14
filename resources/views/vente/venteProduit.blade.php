@@ -16,6 +16,14 @@
             }
         });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on('Change', '.produit_name', function() {
+                console.log("je suis un prduit");
+
+            });
+        });
+    </script>
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -70,7 +78,7 @@
                             <div class="col-6">
                                 <label for="">****produits</label>
                                 <select name="produit" id=""
-                                    class="form-control my-2 @error('produit') is-invalid @enderror"
+                                    class="form-control my-2 @error('produit') is-invalid @enderror produit_name"
                                     style="border-color: indigo">
                                     <option value="">.....</option>
                                     @foreach ($produit as $produits)
