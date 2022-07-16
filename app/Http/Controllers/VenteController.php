@@ -196,5 +196,45 @@ $vent->update([
           return response()->json($result);
 
     }
+    public function addCart($id){
 
+$vente = VenteProduit::findOrFail($id);
+
+        $cart = session()->get('cart', []);
+
+        if(isset($cart[$id])) {
+            $cart[$id]['qte_sortie']++;
+        } else {
+            $cart[] = [
+                "produit_id" => $vente->produit->designation,
+                "qte_sortie" => $vente->qte_sortie,
+                    "unite" => $vente->unite,
+                "pu" => $vente->pu,
+                "unite" => $vente->unite,
+                "remise"=>$vente->remise
+
+            ];
+        }
+
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'facture crée avec success!');
+    }
+public function Ventegroup(){
+    return view('vente.cart');
+}
+public function factureGroupe(){
+
+    $pdf=PDF::loadview('vente.facture')->setOptions(['setPaper'=>'A4']);
+    return $pdf->stream();
+}
+public function remove(Request $request){
+ if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'vente rétiré avec success');
+        }
+}
 }

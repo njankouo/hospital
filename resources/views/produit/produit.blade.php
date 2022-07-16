@@ -41,8 +41,8 @@
                             </th>
                             <th class="th-sm">Quantite En Stock
                             </th>
-                            {{-- <th class="th-sm">Unité
-                            </th> --}}
+                            <th class="th-sm">Unité
+                            </th>
                             <th class="th-sm">fournisseur
                             </th>
                             <th class="th-sm">stock de securité</th>
@@ -72,7 +72,7 @@
                                 <td>{{ $produits->pv }}</td>
                                 <td>{{ $produits->pu }}</td>
                                 <td>{{ $produits->qtestock }}</td>
-                                {{-- <td>{{ $produits->type->nom }}</td> --}}
+                                <td>{{ $produits->type->nom }}</td>
                                 <td>{{ $produits->fournisseur->nom }}</td>
                                 <td>{{ $produits->stock_seuil }}</td>
                                 <td>{{ $produits->date_fabrication }}</td>

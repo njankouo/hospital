@@ -38,6 +38,9 @@
                             <button class="btn btn-primary" type="submit">GET</button>
                         </div>
                     </form> --}}
+                    <a href="{{ route('vente.group') }}" class="btn btn-primary" style="float: right;margin-bottom:15px;">
+                        <i class="	fa fa-cloud-upload fa-2x"></i>vente Groupés
+                    </a>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
 
                         <thead>
@@ -101,11 +104,15 @@
                                             </form>
 
 
-                                            <a href="{{ route('facture', $details->id) }}" class="btn btn"> <i
-                                                    class="fa fa-print text-info fa-2x mx-2"></i></a>
+                                            {{-- <a href="{{ route('facture', $details->id) }}" class="btn btn"> <i
+                                                    class="fa fa-print text-info fa-2x mx-2"></i></a> --}}
                                             {{-- <a href="{{ route('edit.vente', $details->id) }}" class="btn btn">
                                                 <i class="fa fa-edit fa-2x"></i>
                                             </a> --}}
+                                            <a href="{{ route('cart.vente', $details->id) }}" class="btn btn-primary">
+                                                <i class="fa fa-cart-plus fa-2x"></i>
+
+                                            </a>
                                         </td>
                                     </tr>
                                 @endif

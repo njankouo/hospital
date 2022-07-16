@@ -104,4 +104,8 @@ Route::get('/bon/commandeGoup',[CommandeController::class,'factureGroup'])->name
 Route::get('Livraison/group',[CommandeController::class,'LivraisonGroup'])->name('livraison.group');
 Route::get('/addTo/{id}',[CommandeController::class,'ToCart'])->name('TOCART');
 route::get('/livraison/group',[CommandeController::class,'GroupLivraison'])->name('group.livraison');
+Route::get('facture/ventes/{id}',[VenteController::class,'addCart'])->name('cart.vente');
+route::get('/vente/group',[VenteController::class,'Ventegroup'])->name('vente.group');
+route::get('facture/group',[VenteController::class,'factureGroupe'])->name('group.facture');
+route::delete('/remove',[VenteController::class,'remove'])->name('remove.vente');
 
