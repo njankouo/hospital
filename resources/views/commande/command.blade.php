@@ -1,6 +1,16 @@
+<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.css">
+<div class='notifications top-right'></div>
+
 @extends('layouts.master')
 
 @section('contenu')
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+        </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -42,12 +52,7 @@
                                 @error('fournisseur')
                                     <p>{{ $message }}</p>
                                 @enderror
-                                {{-- <label for=""> Code Commande</label>
-                                <input type="text" class="my-2 form-control @error('code') is-invalid @enderror"
-                                    id="inputSuccess" placeholder="Enter ..." name="code">
-                                @error('code')
-                                    <p>{{ $message }}</p>
-                                @enderror --}}
+
                                 <label for="">status commande</label>
                                 <input type="text" class="form-control my-2 @error('status') is-invalid @enderror"
                                     name="status" value="en cours">
@@ -56,9 +61,50 @@
                                 @enderror
                             </div>
 
-                            <div class="col-6">
-
+                            {{-- <div class="col-6">
+                                <label for="">Produit</label>
+                                <select name="produit" id=""
+                                    class="form-control @error('produit') is-invalid @enderror my-2">
+                                    <option>........</option>
+                                    @foreach ($produit as $produits)
+                                        <option value="{{ $produits->designation }}">{{ $produits->designation }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('produit')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
+
+                            <div class="col-6">
+                                <label for="">qte</label>
+                                <input type="number" class="form-control my-2 @error('qte') is-invalid @enderror"
+                                    name="qte">
+                                @error('qte')
+                                    <p>{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="col-6">
+                                <label for="">unite</label>
+                                <select name="unite" id=""
+                                    class="form-control @error('unite') is-invalid @enderror my-2">
+                                    <option value="">....</option>
+                                    @foreach ($unite as $unites)
+                                        <option value="{{ $unites->nom }}">{{ $unites->nom }}</option>
+                                    @endforeach
+                                </select>
+                                @error('unite')
+                                    <p>{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="col-6">
+                                <label for="">pu</label>
+                                <input type="number" class="form-control my-2 @error('pu') is-invalid @enderror"
+                                    name="pu">
+                                @error('pu')
+                                    <p>{{ $message }}</p>
+                                @enderror
+                            </div> --}}
                             <div class="col-8 my-4">
                                 <button type="submit" class="btn btn-primary mx-1">save</button>
 

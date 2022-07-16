@@ -13,7 +13,7 @@ class ClientController extends Controller
     public function index(){
            Carbon::setLocale('fr');
         $data=[
-            'client'=>client::latest()->paginate(5)
+            'client'=>client::latest()->paginate()
         ];
         return view('client.client',$data);
 

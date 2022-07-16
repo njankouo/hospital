@@ -2,11 +2,46 @@
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
-{{-- <script>
+<script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+<script>
+    // $(document).ready(function() {
+    //     $('#example').DataTable();
+    // });
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#example').DataTable({
+            "fnDrawCallback": function(row, data, start, end, display) {
+                var api = this.api(),
+                    data;
+
+                // Remove the formatting to get integer data for summation
+                var intVal = function(i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                        i : 0;
+                };
+
+                // Total over all pages
+                total = api
+                    .column(4)
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Update status DIV
+                $('#status').html('<b>LE MONTANT DE VENTE JOURNALIER :</b> <u>' + total +
+                    '</u>  FCFA'
+                );
+            }
+        });
     });
-</script> --}}
+</script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css">
 <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/select.dataTables.min.css') }}">
@@ -31,18 +66,22 @@
                         CAISSE
                     </i>
                 </p>
-
+                <div id="status" style="float: right;font-size:20px"></div>
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col">
+
                         <table id="example" class="table table-striped table-bordered my-4">
-                            {{ $carbon->format('Y-m-d') }}
+                            {{ Carbon\Carbon::now()->toDateString() }}
+                            <?php \Carbon\Carbon::setUTF8(true);
+                            setlocale(LC_TIME, 'French'); ?>
                             <thead>
                                 <tr>
                                     <td>ID</td>
                                     <th>Client </th>
                                     <th>Date Entée</th>
+                                    <th>Designation</th>
                                     <th>montant entré</th>
 
 
@@ -57,13 +96,15 @@
                                             <td>{{ $caisses->id }}</td>
                                             <td>{{ $caisses->client }}</td>
                                             <td>{{ $caisses->created_at->diffForHumans() }}</td>
+                                            <td>{{ $caisses->produit->designation }}</td>
                                             <td class="text-success">
                                                 {{ $caisses->pu * $caisses->qte_sortie * (1 - $caisses->remise / 100) }}
-                                                (FCFA)
+
                                             </td>
                                         </tr>
                                     @endif
                                 @endforeach
+
 
                             </tbody>
 
@@ -73,7 +114,7 @@
                 </div>
 
             </div>
-            {{-- <div class="container">
+            <div class="container">
                 <div class="row">
 
 
@@ -81,8 +122,14 @@
 
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
 
     </div>
+    {{-- <script>
+        $('#example')
+            .on('xhr.dt', function(e, settings, json, xhr) {
+                $('#total').html(json.sum);
+            })
+    </script> --}}
 @endsection

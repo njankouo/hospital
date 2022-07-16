@@ -57,7 +57,7 @@
                             <div class="col-6">
                                 <label for="">status commande</label>
                                 <input type="text" class="form-control my-2 @error('status') is-invalid @enderror"
-                                    name="status" value="en cours">
+                                    name="status" value="encours">
                                 @error('status')
                                     <p>{{ $message }}</p>
                                 @enderror
@@ -65,7 +65,7 @@
                             <div class="col-6">
                                 <label for="">****produits</label>
                                 <select name="produit" id=""
-                                    class="form-control my-2 @error('produit') is-invalid @enderror"
+                                    class="form-control my-2 @error('produit') is-invalid @enderror produit"
                                     style="border-color: indigo">
                                     <option value="">.....</option>
                                     @foreach ($produit as $produits)
@@ -80,36 +80,36 @@
                             <div class="col-6">
                                 <label for="">****unite </label>
                                 <select name="unite" id=""
-                                    class="form-control my-2 @error('unite') is-invalid @enderror"
-                                    style="border-color: indigo">
+                                    class="form-control @error('unite') is-invalid @enderror">
                                     <option value="">.....</option>
                                     @foreach ($type as $types)
                                         <option value="{{ $types->nom }}">{{ $types->nom }}</option>
                                     @endforeach
+
                                 </select>
                                 @error('unite')
                                     <p>{{ $message }}</p>
                                 @enderror
                             </div>
 
-                            <div class="col-6">
+                            {{-- <div class="col-6">
                                 <label for="">****tva</label>
-                                <input type="number" class="my-2 form-control" value="0" name="tva"
-                                    style="border-color: indigo">
+                                <input type="number" class="my-2 form-control" value="{{ $commande->id }}"
+                                    name="tva" style="border-color: indigo">
                                 @error('produit')
                                     <p>{{ $message }}</p>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="col-6">
                                 <label for="">****pu</label>
-                                <input type="number" class="form-control @error('pu')  @enderror" name="pu"
+                                <input type="number" class="form-control @error('pu')  @enderror pu" name="pu"
                                     style="border-color: indigo">
                                 @error('pu')
                                     <p>{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="col-6">
-                                <label for="">****qte</label>
+                                <label for="">qte</label>
                                 <input type="number" class="form-control @error('qte')  @enderror" name="qte"
                                     style="border-color: indigo">
                                 @error('qte')
@@ -145,4 +145,5 @@
             <div class="card-footer bg-dark"></div>
         </div>
     </div>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 @endsection

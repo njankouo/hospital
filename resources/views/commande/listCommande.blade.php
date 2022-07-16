@@ -32,6 +32,11 @@
 <script src="h{{ asset('js/dataTables.select.min.js') }}"></script>
 @extends('layouts.master')
 @section('contenu')
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -40,7 +45,11 @@
 
                 </div>
                 <div class=" card-body">
-
+                    <a href="{{ route('cart') }} " class="btn btn bg-primary text-light"
+                        style="float: right;margin-bottom:10px">
+                        <i class="fa fa-cloud-upload text-light"></i>
+                        Commandes Groupés
+                    </a>
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
@@ -93,10 +102,13 @@
                                         <td>{{ $commandes->fournisseur }}</td>
 
                                         <td>
-                                            <a class="btn btn" href="{{ route('bon.commande', $commandes->id) }}"><i
-                                                    class="fa fa-eye fa-2x text-info"></i></a>
+                                            {{-- <a class="btn btn" href="{{ route('bon.commande', $commandes->id) }}"><i
+                                                    class="fa fa-eye fa-2x text-info"></i></a> --}}
                                             <a href="{{ route('edit.commande', $commandes->id) }}" class="btn btn">
                                                 <i class="fa fa-pencil fa-2x"></i>
+                                            </a>
+                                            <a href="{{ route('add.to.cart', $commandes->id) }}" class="btn btn">
+                                                <i class="fa fa-cart-plus fa-2x text-warning"></i>
                                             </a>
                                         </td>
                                     </tr>

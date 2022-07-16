@@ -2,6 +2,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/select.dataTables.min.css') }}">
 @section('contenu')
     <div class="row">
         <div class="col-12">
@@ -98,7 +102,7 @@
                 </div>
                 <div class=" card-body">
 
-                    <table id="dtBasicExample" class="table table-striped table-bordered table-hover" cellspacing="0"
+                    <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0"
                         width="100%">
                         <thead>
                             <tr>
@@ -180,6 +184,15 @@
                 },
                 minLength: 2
             });
+        });
+    </script>
+    <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
         });
     </script>
 @endsection

@@ -80,7 +80,7 @@
                     </table>
                 </div>
                 <div class="card-footer">
-                    {{ $client->links() }}
+
                 </div>
             </div>
         </div>

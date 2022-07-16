@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use notify;
 use App\Models\Type;
 use App\Models\produit;
 use App\Models\commande;
@@ -18,19 +19,29 @@ class CommandeController extends Controller
     public function index(){
         $fournisseur=fournisseur::all();
         $commande=Commande::latest()->paginate(5);
-        return view('commande.command',compact('fournisseur','commande'));
+        $produit=produit::all();
+        $unite=type_produit::all();
+        return view('commande.command',compact('fournisseur','commande','produit','unite'));
     }
     public function save(Request $request){
         $request->validate([
             'fournisseur'=>'required',
             'date'=>'required',
             'dateLivraison'=>'required',
+            // 'pu'=>'required',
+            // 'unite'=>'required',
+            // 'produit'=>'required',
+            // 'qte'=>'required'
 
         ],
         [
             'fournisseur.required'=>'veuillez renseignetr le fournisseur',
             'date.required'=>'veuillez renseigner la date de commande',
             'dateLivraison.required'=>'veuillez renseigner la date de livraison',
+            // 'pu.required'=>'veuillez renseigner le pu',
+            // 'unite.required'=>"veuillez renseigner l\'unite",
+            // 'produit.required'=>"veuillez renseigner le produit",
+            // 'qte.required'=>"veuillez renseigner la qte"
 
         ]
 
@@ -41,8 +52,13 @@ class CommandeController extends Controller
         'date_commande'=>$request->date,
         'date_livraison'=>$request->dateLivraison,
         'status'=>$request->status,
+        // 'pu'=>$request->pu,
+        // 'qte'=>$request->qte,
+        // 'produit'=>$request->produit,
+        // 'unite'=>$request->unite
 
     ]);
+      session()->put('success','Item is successfully created.');
     return back()->with('success','commande crée avec success!');
     }
     public function commandeArticle($id){
@@ -74,7 +90,7 @@ return view('commande.commandeArticle',compact('fournisseur','commande','produit
 
     );
     CommandeArticle::create([
-        // dd($request->all())
+        //dd($request->all())
         'produit_id'=>$request->produit,
         'commande_id'=>$request->code,
         'qte'=>$request->qte,
@@ -109,6 +125,9 @@ return view('commande.commandeArticle',compact('fournisseur','commande','produit
             $commande->update([
                 'status'=>$request->status
             ]);
+             try {
+                //code...
+
             Livraison::create([
                 'produit_id'=>$request->produit,
         'commande_id'=>$request->code,
@@ -124,9 +143,13 @@ return view('commande.commandeArticle',compact('fournisseur','commande','produit
 
 
     return redirect('/livraison');
+     } catch (\Throwable $th) {
+             return back()->with('error','une erreur à s\'est dans le système veuillez contacter le concepteur');
+
+            }
 }
 public function livraison(){
-    $livraison=Livraison::all();
+    $livraison=Livraison::latest()->paginate();
     return view('commande.livraison',compact('livraison'));
 }
 public function bonlivraison($id){
@@ -135,4 +158,77 @@ public function bonlivraison($id){
    $pdf= PDF::loadview('commande.bonLivraison',compact('commande'))->setOptions(['setPaper'=>'landscape']);;
    return  $pdf->stream();
 }
+  public function addToCart($id)
+    {
+        $commandes = CommandeArticle::findOrFail($id);
+
+        $cart = session()->get('cart', []);
+
+        if(isset($cart[$id])) {
+            $cart[$id]['qte']++;
+        } else {
+            $cart[] = [
+                "produit_id" => $commandes->produit->designation,
+                "qte" => $commandes->qte,
+                    "unite" => $commandes->unite,
+                "pu" => $commandes->pu,
+                "unite" => $commandes->unite,
+                "remise"=>$commandes->remise
+
+            ];
+        }
+
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'commande placé avec success!');
+    }
+
+    public function cart(){
+        return view('commande.cart');
+    }
+      public function remove(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'commande rétiré avec success');
+        }
+}
+public function factureGroup(){
+    $pdf=PDF::loadview('commande.facture')->setOptions(['setPaper'=>'A4']);
+    return $pdf->stream();
+}
+public function livraisonGroup(){
+    $pdf=PDF::loadview('commande.LivraisonGroup')->setOptions(['setPaper'=>'A4']);
+    return $pdf->stream();
+}
+ public function ToCart($id)
+    {
+        $livraisons = Livraison::findOrFail($id);
+
+        $cart = session()->get('cart', []);
+
+        if(isset($cart[$id])) {
+            $cart[$id]['qte']++;
+        } else {
+            $cart[] = [
+                "produit_id" => $livraisons->produit->designation,
+                "qte" => $livraisons->qte,
+                    "unite" => $livraisons->unite,
+                "pu" => $livraisons->pu,
+                "unite" => $livraisons->unite,
+                "remise"=>$livraisons->remise
+
+            ];
+        }
+
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'facture crée avec success!');
+    }
+    public function GroupLivraison(){
+        return view('commande.cartLivraison');
+    }
+
 }

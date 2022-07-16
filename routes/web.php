@@ -95,3 +95,13 @@ Route::post('/changePassword',[HomeController::class,'changePassword'])->name('c
 
 Route::get('caisse',[CaisseController::class,'index'])->name('caisse.index');
 Route::get('/caisse/etat',[CaisseController::class,'etat'])->name('etat');
+Route::post('/daterange/fetch_data', [CaisseController::class, 'fetch_data'])->name('daterange.fetch_data');
+
+Route::get('/commande/produit/{id}', [CommandeController::class, 'addToCart'])->name('add.to.cart');
+Route::get('cart', [CommandeController::class, 'cart'])->name('cart');
+Route::delete('remove-from-cart', [CommandeController::class, 'remove'])->name('remove.from.cart');
+Route::get('/bon/commandeGoup',[CommandeController::class,'factureGroup'])->name('facture.group');
+Route::get('Livraison/group',[CommandeController::class,'LivraisonGroup'])->name('livraison.group');
+Route::get('/addTo/{id}',[CommandeController::class,'ToCart'])->name('TOCART');
+route::get('/livraison/group',[CommandeController::class,'GroupLivraison'])->name('group.livraison');
+

@@ -64,7 +64,8 @@
                                     <option value="">.....</option>
                                     @foreach ($produit as $produits)
                                         @if ($vent->produit_id == $produits->id)
-                                            <option value="{{ $produits->id }}" selected>{{ $produits->designation }}
+                                            <option value="{{ $produits->id }}" selected>
+                                                {{ $produits->designation }}
                                             </option>
                                         @else
                                             <option value="{{ $produits->id }}">{{ $produits->designation }}

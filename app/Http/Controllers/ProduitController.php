@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+use Throwable;
+use App\Models\Type;
+use App\Models\rayon;
+use App\Models\produit;
 use App\Models\Categorie;
 use App\Models\fournisseur;
-use App\Models\produit;
-use App\Models\rayon;
-use App\Models\Type;
 use App\Models\type_produit;
 use Illuminate\Http\Request;
-use PDF;
+
 class ProduitController extends Controller
 {
     //
@@ -28,6 +30,9 @@ class ProduitController extends Controller
         return view('produit.create',$data);
     }
     public function save(Request $request){
+        try{
+
+
         $request->validate([
             'designation'=>'required|unique:produits,designation',
             'categorie_id'=>'required',
@@ -75,6 +80,9 @@ class ProduitController extends Controller
 
             ]);
             return redirect('/produit');
+             }catch(Throwable $th){
+return back()->with('danger');
+             }
     }
     public function inventairePDF(){
         $produit=Produit::all();

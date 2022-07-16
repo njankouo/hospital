@@ -18,17 +18,17 @@ class CreateProduitCommandeTable extends Migration
             $table->integer('qte');
             $table->integer('pu');
             $table->string('fournisseur');
-            $table->string('date_commande');
+            $table->string('date_commande')->nullable();
             $table->string('date_livraison')->nullable();
             $table->string('status');
-            $table->string('reglement');
+            $table->string('reglement')->nullable();
              $table->string('pourcentage');
             $table->string('unite');
-            $table->integer('tva')->nullable();
+            $table->integer('tva');
 
             $table->integer('remise')->nullable();
-            $table->foreignId('produit_id')->constrained('produits');
-            $table->foreignId('commande_id')->constrained('commandes');
+            $table->foreignId('produit_id')->constrained('produits')->ondelete('cascade');
+            $table->foreignId('commande_id')->constrained('commandes')->onDelete('cascade');
             $table->timestamps();
         });
         schema::enableForeignKeyConstraints();
@@ -42,7 +42,7 @@ class CreateProduitCommandeTable extends Migration
     public function down()
     {
         schema::table('produit_commande',function(Blueprint $table){
-            $table->dropforeign('produit_id');
+            $table->dropForeign('produit_id');
             $table->dropforeign('commande_id');
 
         });

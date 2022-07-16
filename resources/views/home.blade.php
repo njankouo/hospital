@@ -23,7 +23,7 @@
 @endsection --}}
 <script>
     window.setTimeout(function() {
-        $(".alert").fadeTo(10000, 0).slideUp(400, function() {
+        $(".alert").fadeTo(2500000, 0).slideUp(400, function() {
             $(this).remove();
         });
     }, 4000);
@@ -48,20 +48,20 @@
             @endif
         @endforeach
     @endcan
-    @can('utilisateur')
-        @foreach ($produit as $produits)
-            @if ($produits->qtestock < $produits->stock_seuil)
-                <div class="row">
 
-                    <div class="alert alert-danger" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <strong>alert!</strong> la quantité en stock {{ $produits->designation }} est très basse
-                        veuillez passer la commande
+    @foreach ($produit as $produits)
+        @if ($produits->qtestock < $produits->stock_seuil)
+            <div class="row">
 
-                    </div>
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <strong>alert!</strong> la quantité en stock {{ $produits->designation }} est très basse
+                    veuillez passer la commande
+
                 </div>
-                {{-- @elseif ($produits->date_peremption < $produits->date_fabrication)
+            </div>
+            {{-- @elseif ($produits->date_peremption < $produits->date_fabrication)
             <div class="row">
 
                 <div class="alert alert-danger" role="alert">
@@ -71,9 +71,9 @@
 
 
                 </div> --}}
-            @endif
-        @endforeach
-    @endcan
+        @endif
+    @endforeach
+
     <div class="row">
         <div class="col-md-6 col-xl-4">
             <div class="card mb-3 widget-content bg-midnight-bloom">

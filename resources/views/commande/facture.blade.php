@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>ETATS DES VENTES JOURNALIERES</title>
+    <title>Bon De Commande</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
@@ -17,9 +17,6 @@
             padding: 5px;
         }
 
-        td {
-            font-size: 11px;
-        }
 
 
         .container {
@@ -105,7 +102,7 @@
             margin: 0;
             font-weight: 300;
             color: #3989c6;
-            font-size: 2px;
+            font-size: 5px;
         }
 
         .invoice table tfoot td {
@@ -165,19 +162,18 @@
     <div class="container">
         <div class="row text-center">
 
-            <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>"
-                style="width:90px;height:105px;margin-top:15px;margin-left:25px;float:right" class="logo">
+            <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>" style="float: right;" class="logo">
 
             <h6><strong>CENTRE MEDICO-CHIRURGICAL D'UROLOGIE</strong></h6>
             <h6>VALLEE MANGA BELL DOUALA-BALI</h6>
             <h6>TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945</h6>
             <h6>
-
+                DATE DELIVRANCE: {{ \Carbon\Carbon::now() }}
             </h6>
         </div>
         <h6 class="my-4 text-center text-primary"
-            style="font-size: 25px;font-style:italic;font-weight: bold;text-align:center ">
-            ETATS DES VENTES JOURNéE DU: {{ $carbon->format('Y-m-d') }}
+            style="font-size: 15px;font-style:italic;font-weight: bold;text-align:center ">
+            Bon de commande
             {{-- <table class="table table-bordered border-primary">
                   <thead class="text-dark">
                       <tr>
@@ -194,44 +190,59 @@
                 <div class="invoice overflow-auto">
                     <div>
                         <main>
-                            <p style="font-size: 15px">les montants sont exprimés en FRANCS CFA</p>
-                            <table class="table my-4 text-center">
-                                <thead class="text-dark">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>CLIENT</th>
 
-                                        <th>DESIGNATION</th>
-                                        <th>MONTANT</th>
+                            <table id="cart" class="table table-hover table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th style="width:50%">Produit</th>
+                                        <th style="width:10%">pu</th>
+                                        <th style="width:8%">qte</th>
+
+                                        <th style="width:8%">unite</th>
+                                        <th style="width:8%">Remise</th>
+
+                                        <th style="width:22%" class="text-center">total</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($etat as $etats)
-                                        @if ($etats->date_vente != $carbon->format('Y-m-d'))
-                                        @else
-                                            <tr>
-                                                <td>{{ $etats->id }}</td>
-                                                <td>{{ $etats->client }}</td>
-                                                <td>{{ $etats->produit->designation }}</td>
-                                                <td>
-                                                    {{ $etats->pu * $etats->qte_sortie * (1 - $etats->remise / 100) }}
-
+                                    @php $total = 0 @endphp
+                                    @if (session('cart'))
+                                        @foreach (session('cart') as $id => $details)
+                                            @php $total += $details['pu'] * $details['qte'] * (1 - $details['remise'] / 100)  @endphp
+                                            <tr data-id="{{ $id }}">
+                                                <td>{{ $details['produit_id'] }}</td>
+                                                <td>{{ $details['pu'] }}</td>
+                                                <td>{{ $details['qte'] }}</td>
+                                                <td>{{ $details['unite'] }}</td>
+                                                <td>{{ $details['remise'] }}</td>
+                                                <td data-th="Subtotal" class="text-center">
+                                                    {{ $details['pu'] * $details['qte'] * (1 - $details['remise'] / 100) }}
                                                 </td>
 
                                             </tr>
-                                        @endif
-                                    @endforeach
-
+                                        @endforeach
+                                    @endif
                                 </tbody>
                                 <tfoot>
                                     <tr>
-
+                                        <td colspan="5" class="text-right">
+                                            <h2><strong>Total {{ $total }}</strong></h2>
+                                        </td>
                                     </tr>
+                                    {{-- <tr>
+                                        <td colspan="5" class="text-right">
+                                            <a href="{{ route('liste.commande') }}" class="btn btn-warning"><i
+                                                    class="fa fa-angle-left"></i>
+                                                placer encore la
+                                                commande
+                                            </a>
 
+                                        </td>
+                                    </tr> --}}
                                 </tfoot>
-                                </tbody>
                             </table>
+                            <p style="float: left">le total est exprimé en FCFA</p>
                         </main>
                         <footer style="font-size: 15px">
                             Centre Medico-churirgical d'urologie situé a la Vallée Douala Manga Bell

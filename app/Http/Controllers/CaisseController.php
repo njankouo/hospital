@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CommandeArticle;
-use App\Models\VenteProduit;
-use Carbon\Carbon;
 use PDF;
+use Carbon\Carbon;
+use App\Models\VenteProduit;
 use Illuminate\Http\Request;
+use App\Models\CommandeArticle;
+use Illuminate\Support\Facades\DB;
 
 class CaisseController extends Controller
 {
@@ -27,5 +28,22 @@ class CaisseController extends Controller
         $carbon=\Carbon\Carbon::now();
         $pdf=PDF::loadview('caisse.etat',compact('etat','carbon'))->setOPtions(['setPaper'=>'A4']);
         return $pdf->stream();
+    }
+  public  function fetch_data(Request $request)
+    {
+     if($request->ajax())
+     {
+      if($request->from_date != '' && $request->to_date != '')
+      {
+       $data = DB::table('vente_produits')
+         ->whereBetween('date', array($request->from_date, $request->to_date))
+         ->get();
+      }
+      else
+      {
+       $data = DB::table('vente_produits')->orderBy('date', 'desc')->get();
+      }
+      echo json_encode($data);
+     }
     }
 }

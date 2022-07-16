@@ -10,7 +10,7 @@
                 </a>
             </li>
 
-            @can('utilisateur')
+            @can('admin')
                 <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
                     <i class="	fa fa-bookmark-o fa-3x"></i> COMMANDES
                 </li>

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CommandeArticle extends Model
 {
-    protected $fillable=['qte','status','pu','date_commande','date_livraison','unite','tva','produit_id','commande_id','fournisseur','remise','reglement'];
+    protected $fillable=['qte','status','pu','date_commande','date_livraison','unite','produit_id','commande_id','fournisseur','remise','reglement'];
     protected $table='produit_commande';
 
     use HasFactory;
