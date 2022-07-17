@@ -88,15 +88,15 @@
                     </a>
                 </li>
             @endcan
+
+            <li>
+                <a href="{{ route('produit.list') }}" style="text-decoration: none;color:cornflowerblue">
+                    <i class="fa fa-area-chart">
+                    </i>stocks des produits
+                </a>
+            </li>
+
             @can('utilisateur')
-                <li>
-                    <a href="{{ route('produit.list') }}" style="text-decoration: none;color:cornflowerblue">
-                        <i class="fa fa-area-chart">
-                        </i>stocks des produits
-                    </a>
-                </li>
-
-
                 <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
                     <i class="fa fa-cart-plus fa-3x"></i>Ventes
                 </li>

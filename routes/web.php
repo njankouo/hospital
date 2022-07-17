@@ -109,4 +109,5 @@ route::get('/vente/group',[VenteController::class,'Ventegroup'])->name('vente.gr
 route::get('facture/group',[VenteController::class,'factureGroupe'])->name('group.facture');
 route::delete('/remove',[VenteController::class,'remove'])->name('remove.vente');
 route::get('/information',[HomeController::class,'info'])->name('infos');
+route::post('rayon/create',[RayonController::class,'newCreate'])->name('rayon.create');
 

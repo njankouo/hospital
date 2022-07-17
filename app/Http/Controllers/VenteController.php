@@ -23,7 +23,7 @@ class VenteController extends Controller
         $client=client::all();
         $user=User::all();
         $produit=produit::all();
-        $vente=Vente::latest()->paginate(5);
+        $vente=Vente::latest()->paginate();
         return view('vente.index',compact('client','user','vente','produit'));
     }
     public function create(Request $request){
@@ -95,24 +95,11 @@ class VenteController extends Controller
         Session::flash('message','This is a flash message!');
     }
     public function listeVente(){
-        $detail=VenteProduit::latest()->paginate();
-        $carbon=\Carbon\Carbon::now();
-        return view('vente.listVente',compact('detail','carbon'));
+        $detail=VenteProduit::latest()->paginate(5);
+        // $carbon=\Carbon\Carbon::now();
+        return view('vente.listVente',compact('detail'));
     }
-    //  public function autocomplete(Request $request)
-    // {
-    //     $data = Client::select("nom")
-    //             ->where("nom","LIKE","%{$request->input('query')}%")
-    //             ->get();
 
-    //     return response()->json($data);
-    // }
-    //  public function autocompleteSearch(Request $request)
-    // {
-    //       $query = $request->get('query');
-    //       $filterResult = client::where('nom', 'LIKE', '%'. $query. '%')->get();
-    //       return response()->json($filterResult);
-    // }
      public function autocomplete(Request $request)
     {
         $data = Client::select("nom")
@@ -127,23 +114,6 @@ class VenteController extends Controller
         return $pdf->stream('facture.pdf');
     }
     public function statistique(){
-        // $vente=commande::select(DB::raw("COUNT(*) as count "))
-        // ->whereYear('created_at',date('Y'))
-        // ->groupBy(DB::raw("Month(created_at)"))
-        // ->pluck('count');
-        // $months=VenteProduit::select(DB::raw("Month(date_vente) as month"))
-        // ->whereYear('date_vente',date('Y'))
-        // ->groupBy(DB::raw("Month(date_vente)"))
-        // ->pluck('count');
-        // $datas=array(0,0,0,0,0,0,0,0,0,0,0,0);
-        //     foreach($months as $index=>$month){
-        //         $datas[$month]=$vente[$index];
-        //     }
-        //  $datas = VenteProduit::select(\DB::raw("COUNT(*) as count"))
-        //             ->whereYear('created_at', date('Y'))
-        //             ->groupBy(\DB::raw("Month(created_at)"))
-        //             ->pluck('count');
-// $categories = VenteProduit::with("produit")->get();
   $users = VenteProduit::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(date_vente) as month_name"))
                     ->whereYear('date_vente', date('Y'))
                     ->groupBy(DB::raw("Month(date_vente)"))
@@ -223,8 +193,8 @@ public function Ventegroup(){
     return view('vente.cart');
 }
 public function factureGroupe(){
-
-    $pdf=PDF::loadview('vente.facture')->setOptions(['setPaper'=>'A4']);
+    $client= venteProduit::all();
+    $pdf=PDF::loadview('vente.facture',compact('client'))->setOptions(['setPaper'=>'A4']);
     return $pdf->stream();
 }
 public function remove(Request $request){

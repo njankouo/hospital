@@ -45,6 +45,8 @@
 
                         <thead>
                             <tr>
+                                <th class="th-sm">ID
+                                </th>
                                 <th class="th-sm">code vente
                                 </th>
                                 <th class="th-sm">produit
@@ -74,52 +76,54 @@
                         </thead>
                         <tbody>
                             @foreach ($detail as $details)
-                                @if ($details->date_vente != $carbon->format('Y-m-d'))
-                                @else
-                                    <tr>
-                                        <td>{{ $details->vente_id }}</td>
-                                        <td>{{ $details->produit->designation }}</td>
-                                        <td>{{ $details->qte_sortie }}</td>
-                                        <td>{{ $details->unite }}</td>
-                                        <td>{{ $details->pu }}</td>
-                                        <td>
-                                            @if ($details->remise == null)
-                                                <span class="badge badge-info">aucune remise</span>
-                                            @else
-                                                {{ $details->remise }} %
-                                            @endif
+                                {{-- @if ($details->date_vente != $carbon->format('Y-m-d H:i:s'))
+                                @else --}}
+                                <tr>
+                                    <td>00{{ $details->id }}</td>
+                                    <td>{{ $details->vente_id }}</td>
+                                    <td>{{ $details->produit->designation }}</td>
+                                    <td>{{ $details->qte_sortie }}</td>
+                                    <td>{{ $details->unite }}</td>
+                                    <td>{{ $details->pu }}</td>
+                                    <td>
+                                        @if ($details->remise == null)
+                                            <span class="badge badge-info">aucune remise</span>
+                                        @else
+                                            {{ $details->remise }} %
+                                        @endif
 
-                                        </td>
-                                        <td>{{ $details->pu * $details->qte_sortie * (1 - $details->remise / 100) }}
-                                        </td>
-                                        <td>{{ $details->date_vente }}</td>
-                                        <td>{{ $details->client }}</td>
-                                        <td>
-                                            <form method="POST" action="{{ route('delete.vente', $details->id) }}">
-                                                @csrf
-                                                <input name="_method" type="hidden" value="DELETE">
-                                                <i type="submit"
-                                                    class="fa fa-trash fa-2x text-danger btn-flat show_confirm"
-                                                    data-toggle="tooltip" title='Delete'></i>
-                                            </form>
+                                    </td>
+                                    <td>{{ $details->pu * $details->qte_sortie * (1 - $details->remise / 100) }}
+                                    </td>
+                                    <td>{{ $details->date_vente }}</td>
+                                    <td>{{ $details->client }}</td>
+                                    <td>
+                                        <form method="POST" action="{{ route('delete.vente', $details->id) }}">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <a class="btn btn-danger"> <i type="submit"
+                                                    class="fa fa-trash fa-2x text-light btn-flat show_confirm"
+                                                    data-toggle="tooltip" title='Delete'></i></a>
+                                        </form>
 
 
-                                            {{-- <a href="{{ route('facture', $details->id) }}" class="btn btn"> <i
+                                        {{-- <a href="{{ route('facture', $details->id) }}" class="btn btn"> <i
                                                     class="fa fa-print text-info fa-2x mx-2"></i></a> --}}
-                                            {{-- <a href="{{ route('edit.vente', $details->id) }}" class="btn btn">
+                                        {{-- <a href="{{ route('edit.vente', $details->id) }}" class="btn btn">
                                                 <i class="fa fa-edit fa-2x"></i>
                                             </a> --}}
-                                            <a href="{{ route('cart.vente', $details->id) }}" class="btn btn-primary">
-                                                <i class="fa fa-cart-plus fa-2x"></i>
+                                        <a href="{{ route('cart.vente', $details->id) }}" class="btn btn-primary">
+                                            <i class="fa fa-cart-plus fa-2x"></i>
 
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endif
+                                        </a>
+                                    </td>
+                                </tr>
+                                {{-- @endif --}}
                             @endforeach
                         </tbody>
                         </tr>
-                        </tfoot>
+                        <tfoot>{{ $detail->links() }}</tfoot>
+
                     </table>
 
                 </div>

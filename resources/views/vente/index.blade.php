@@ -24,8 +24,8 @@
 
                             <div class="col-6">
                                 <label for="">Date vente</label>
-                                <input type="date" class="my-2 form-control @error('date_vente') is-invalid @enderror"
-                                    name="date" placeholder="Enter ...">
+                                <input type="text" class="my-2 form-control @error('date_vente') is-invalid @enderror"
+                                    name="date" placeholder="Enter ..." value="{{ Carbon\Carbon::now() }}">
                                 @error('date_vente')
                                     <p>{{ $message }}</p>
                                 @enderror

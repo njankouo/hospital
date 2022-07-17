@@ -53,7 +53,7 @@
                               </div>
                               <div class="col-6">
                                   <label for="">Date Vente</label>
-                                  <input type="date" class="my-2 form-control @error('date') is-invalid @enderror"
+                                  <input type="text" class="my-2 form-control @error('date') is-invalid @enderror"
                                       name="date" placeholder="Enter ..." value="{{ $vente->date_vente }}">
                                   @error('date')
                                       <p>{{ $message }}</p>

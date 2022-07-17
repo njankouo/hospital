@@ -48,7 +48,9 @@
                             <th class="th-sm">stock de securité</th>
                             <th class="th-sm">date fabrication</th>
                             <th class="th-sm">date expiration</th>
-                            <th class="th-sm">Opération</th>
+                            @can('admin')
+                                <th class="th-sm">Opération</th>
+                            @endcan
                             </th>
                         </tr>
                     </thead>
@@ -77,10 +79,14 @@
                                 <td>{{ $produits->stock_seuil }}</td>
                                 <td>{{ $produits->date_fabrication }}</td>
                                 <td>{{ $produits->date_peremption }}</td>
-                                <td>
-                                    <a href="{{ route('update.produit', $produits->id) }}" class="btn btn"> <i
-                                            class="fa fa-eye fa-2x"></i></a>
-                                </td>
+                                @can('admin')
+                                    <td>
+
+
+                                        <a href="{{ route('update.produit', $produits->id) }}" class="btn btn"> <i
+                                                class="fa fa-eye fa-2x"></i></a>
+                                    </td>
+                                @endcan
                             </tr>
                         @endforeach
                     </tbody>

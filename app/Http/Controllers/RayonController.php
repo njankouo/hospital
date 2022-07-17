@@ -10,8 +10,16 @@ class RayonController extends Controller
     //
     public function index(){
         $data=[
-            'rayon'=>rayon::all()
+            'rayon'=>rayon::latest()->paginate()
         ];
         return view('rayon.index',$data);
+    }
+    public function newCreate(Request $request){
+        $request->validate([],[]);
+        rayon::create([
+
+            'libelle'=>$request->nom
+        ]);
+        return back()->with('success','rayon cree avec success');
     }
 }

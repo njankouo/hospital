@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class rayon extends Model
 {
     use HasFactory;
+    protected $fillable=['libelle'];
     public function produit(){
         return $this->hasMany(produit::class);
     }
