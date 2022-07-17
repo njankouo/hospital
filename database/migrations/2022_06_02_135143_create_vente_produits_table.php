@@ -19,8 +19,8 @@ class CreateVenteProduitsTable extends Migration
             $table->integer('pu');
             $table->string('date_vente');
             $table->integer('tva');
-            $table->foreignId('vente_id')->constrained('ventes');
-            $table->foreignId('produit_id')->constrained('produits');
+            $table->foreignId('vente_id')->constrained('ventes')->onDelete('cascade');
+            $table->foreignId('produit_id')->constrained('produits')->onDelete('cascade');
             $table->string('client');
             $table->string('user');
             $table->string('unite');

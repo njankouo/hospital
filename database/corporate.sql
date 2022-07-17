@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `commandes` (
   PRIMARY KEY (`id`),
   KEY `commandes_fournisseur_id_foreign` (`fournisseur_id`),
   CONSTRAINT `commandes_fournisseur_id_foreign` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `livraisons_tabls` (
   KEY `livraisons_tabls_commande_id_foreign` (`commande_id`),
   CONSTRAINT `livraisons_tabls_commande_id_foreign` FOREIGN KEY (`commande_id`) REFERENCES `commandes` (`id`),
   CONSTRAINT `livraisons_tabls_produit_id_foreign` FOREIGN KEY (`produit_id`) REFERENCES `produits` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -249,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `produits` (
   CONSTRAINT `produits_fournisseur_id_foreign` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`),
   CONSTRAINT `produits_rayon_id_foreign` FOREIGN KEY (`rayon_id`) REFERENCES `rayons` (`id`),
   CONSTRAINT `produits_type_article_id_foreign` FOREIGN KEY (`type_article_id`) REFERENCES `type_articles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -259,13 +259,13 @@ CREATE TABLE IF NOT EXISTS `produit_commande` (
   `qte` int(11) NOT NULL,
   `pu` int(11) NOT NULL,
   `fournisseur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_commande` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_commande` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_livraison` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `reglement` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reglement` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pourcentage` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `unite` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tva` int(11) DEFAULT NULL,
+  `tva` int(11) NOT NULL,
   `remise` int(11) DEFAULT NULL,
   `produit_id` bigint(20) unsigned NOT NULL,
   `commande_id` bigint(20) unsigned NOT NULL,
@@ -274,9 +274,9 @@ CREATE TABLE IF NOT EXISTS `produit_commande` (
   PRIMARY KEY (`id`),
   KEY `produit_commande_produit_id_foreign` (`produit_id`),
   KEY `produit_commande_commande_id_foreign` (`commande_id`),
-  CONSTRAINT `produit_commande_commande_id_foreign` FOREIGN KEY (`commande_id`) REFERENCES `commandes` (`id`),
+  CONSTRAINT `produit_commande_commande_id_foreign` FOREIGN KEY (`commande_id`) REFERENCES `commandes` (`id`) ON DELETE CASCADE,
   CONSTRAINT `produit_commande_produit_id_foreign` FOREIGN KEY (`produit_id`) REFERENCES `produits` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -343,14 +343,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `role_id` bigint(20) unsigned DEFAULT NULL,
+  `role_id` bigint(20) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `users_role_id_foreign` (`role_id`),
   CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -374,16 +374,13 @@ CREATE TABLE IF NOT EXISTS `user_role` (
 CREATE TABLE IF NOT EXISTS `ventes` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL,
-  `client_id` bigint(20) unsigned NOT NULL,
   `date_vente` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `ventes_user_id_foreign` (`user_id`),
-  KEY `ventes_client_id_foreign` (`client_id`),
-  CONSTRAINT `ventes_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
   CONSTRAINT `ventes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -405,9 +402,9 @@ CREATE TABLE IF NOT EXISTS `vente_produits` (
   PRIMARY KEY (`id`),
   KEY `vente_produits_vente_id_foreign` (`vente_id`),
   KEY `vente_produits_produit_id_foreign` (`produit_id`),
-  CONSTRAINT `vente_produits_produit_id_foreign` FOREIGN KEY (`produit_id`) REFERENCES `produits` (`id`),
-  CONSTRAINT `vente_produits_vente_id_foreign` FOREIGN KEY (`vente_id`) REFERENCES `ventes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `vente_produits_produit_id_foreign` FOREIGN KEY (`produit_id`) REFERENCES `produits` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `vente_produits_vente_id_foreign` FOREIGN KEY (`vente_id`) REFERENCES `ventes` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -426,10 +423,10 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Listage de la structure de déclencheur pharmacie. delete_stock
+-- Listage de la structure de déclencheur pharmacie. decrement_vente
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
-CREATE TRIGGER delete_stock
+CREATE TRIGGER decrement_vente
 AFTER insert ON pharmacie.vente_produits
 FOR EACH ROW 
 BEGIN
@@ -441,10 +438,10 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Listage de la structure de déclencheur pharmacie. update_stock
+-- Listage de la structure de déclencheur pharmacie. increment_stock
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
-CREATE TRIGGER update_stock
+CREATE TRIGGER increment_stock
 AFTER insert ON pharmacie.livraisons_tabls
 FOR EACH ROW 
 BEGIN

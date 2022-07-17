@@ -16,7 +16,7 @@ class CreateVentesTable extends Migration
         Schema::create('ventes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-             $table->foreignId('client_id')->constrained('clients');
+
             $table->string('date_vente');
             $table->timestamps();
         });
@@ -34,7 +34,7 @@ class CreateVentesTable extends Migration
 
         $table->dropForeign('user_id');
 
-        $table->dropForeign('client_id');
+
 
       });
         Schema::dropIfExists('ventes');

@@ -67,4 +67,7 @@ class HomeController extends Controller
         return redirect()->back()->with("success","mot de passe changé avec success!");
 
     }
+    public function info(){
+        return view('infos.index');
+    }
 }

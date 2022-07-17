@@ -5,8 +5,7 @@
     <title>ETATS DES VENTES JOURNALIERES</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
-
+    <link type="text/css" href="bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
             font-size: 15px
@@ -161,6 +160,7 @@
 </head>
 
 <body>
+    <button class="btn btn-primary"> valider</button>
 
     <div class="container">
         <div class="row text-center">
@@ -194,8 +194,10 @@
                 <div class="invoice overflow-auto">
                     <div>
                         <main>
+                            <div id="status" style="float: right;font-size:20px"></div>
                             <p style="font-size: 15px">les montants sont exprimés en FRANCS CFA</p>
-                            <table class="table my-4 text-center">
+
+                            <table class="table my-4 text-center" id="example">
                                 <thead class="text-dark">
                                     <tr>
                                         <th>ID</th>
@@ -244,8 +246,42 @@
             </div>
 
 
+            <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 
+            <script>
+                // $(document).ready(function() {
+                //     $('#example').DataTable();
+                // });
+                $(document).ready(function() {
+                    $('#example').DataTable({
+                        "fnDrawCallback": function(row, data, start, end, display) {
+                            var api = this.api(),
+                                data;
 
+                            // Remove the formatting to get integer data for summation
+                            var intVal = function(i) {
+                                return typeof i === 'string' ?
+                                    i.replace(/[\$,]/g, '') * 1 :
+                                    typeof i === 'number' ?
+                                    i : 0;
+                            };
+
+                            // Total over all pages
+                            total = api
+                                .column(4)
+                                .data()
+                                .reduce(function(a, b) {
+                                    return intVal(a) + intVal(b);
+                                }, 0);
+
+                            // Update status DIV
+                            $('#status').html('<b>LE MONTANT DE VENTE JOURNALIER :</b> <u>' + total +
+                                '</u>  FCFA'
+                            );
+                        }
+                    });
+                });
+            </script>
 </body>
 
 </html>

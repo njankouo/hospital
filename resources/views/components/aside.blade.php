@@ -164,7 +164,7 @@
             {{-- @endcan --}}
             @can('utilisateur')
                 <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
-                    <i class="	fa fa-server fa-3x"></i>Caisses
+                    <i class="	fa fa-server fa-3x"></i>&nbsp;&nbsp;Caisses
                 </li>
                 <li>
                     <a href="{{ route('caisse.index') }}" style="text-decoration:none;color:cornflowerblue">
@@ -175,6 +175,16 @@
                 </li>
             @endcan
 
+            <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
+                <i class="	fa fa-exclamation-circle fa-3x"></i>&nbsp;&nbsp;aide
+            </li>
+            <li>
+                <a href="{{ route('infos') }}" style="text-decoration:none;color:cornflowerblue">
+                    <i class="fa fa-info-circle">
+                    </i>
+                    Info application
+                </a>
+            </li>
         </ul>
     </div>
 </div>

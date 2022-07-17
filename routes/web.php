@@ -108,4 +108,5 @@ Route::get('facture/ventes/{id}',[VenteController::class,'addCart'])->name('cart
 route::get('/vente/group',[VenteController::class,'Ventegroup'])->name('vente.group');
 route::get('facture/group',[VenteController::class,'factureGroupe'])->name('group.facture');
 route::delete('/remove',[VenteController::class,'remove'])->name('remove.vente');
+route::get('/information',[HomeController::class,'info'])->name('infos');
 

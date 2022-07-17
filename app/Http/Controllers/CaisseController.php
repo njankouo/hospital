@@ -26,8 +26,10 @@ class CaisseController extends Controller
     public function etat(){
         $etat=VenteProduit::all();
         $carbon=\Carbon\Carbon::now();
+
         $pdf=PDF::loadview('caisse.etat',compact('etat','carbon'))->setOPtions(['setPaper'=>'A4']);
         return $pdf->stream();
+
     }
   public  function fetch_data(Request $request)
     {

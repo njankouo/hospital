@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class vente extends Model
 {
     use HasFactory;
-    protected $fillable=['user_id','client_id','date_vente'];
+    protected $fillable=['user_id','date_vente'];
     public function produit(){
 
             return $this->belongsTo(produit::class,'produit_id','id');

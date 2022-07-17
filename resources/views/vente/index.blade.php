@@ -29,9 +29,12 @@
                                 @error('date_vente')
                                     <p>{{ $message }}</p>
                                 @enderror
+
+                            </div>
+                            <div class="col-6">
                                 <label for="">responsable de la vente</label>
                                 <select name="responsable" id=""
-                                    class="form-control @error('responsable') is-invalid @enderror">
+                                    class="form-control @error('responsable') is-invalid @enderror my-2">
                                     <option value="">...........</option>
                                     @foreach ($user as $users)
                                         <option value="{{ $users->id }}">{{ $users->nom }}</option>
@@ -40,10 +43,7 @@
                                 @error('responsable')
                                     <p>{{ $message }}</p>
                                 @enderror
-                            </div>
-                            <div class="col-6">
-
-                                <label for="">Nom du client</label>
+                                {{-- <label for="">Nom du client</label>
                                 <select id="" class="my-2 form-control @error('client') is-invalid @enderror"
                                     name="client">
                                     <option value="">.....</option>
@@ -53,7 +53,7 @@
                                 </select>
                                 @error('client')
                                     <p>{{ $message }}</p>
-                                @enderror
+                                @enderror --}}
 
                                 {{-- <label for=""> Code Commande</label>
                                 <input type="text" class="my-2 form-control @error('code') is-invalid @enderror"
@@ -110,8 +110,8 @@
                                 </th>
                                 <th class="th-sm">Date vente
                                 </th>
-                                <th class="th-sm">Nom du client
-                                </th>
+                                {{-- <th class="th-sm">Nom du client
+                                </th> --}}
 
                                 <th class="th-sm">Responsable de la vente
                                 </th>
@@ -125,7 +125,7 @@
                                 <tr>
                                     <td>{{ $ventes->id }}</td>
                                     <td>{{ $ventes->date_vente }}</td>
-                                    <td>{{ $ventes->client->nom }}</td>
+                                    {{-- <td>{{ $ventes->client->nom }}</td> --}}
                                     <td>{{ $ventes->user->nom }}</td>
                                     <td>
                                         <a href="{{ route('vente.produit', $ventes->id) }}}}"> <i

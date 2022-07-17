@@ -29,19 +29,19 @@ class VenteController extends Controller
     public function create(Request $request){
         $request->validate([
             'responsable'=>'required',
-            'client'=>'required',
+           // 'client'=>'required',
             //'date_vente'=>'required'
         ],
         [
             'responsable.required'=>'renseignez le responsable de la vente',
-            'client.required'=>'renseignez le nom du client',
+           // 'client.required'=>'renseignez le nom du client',
             //'date_vente.required'=>'renseignez la date de la vente'
         ]
 
     );
     vente::create([
         // dd($request->all())
-        'client_id'=>$request->client,
+       // 'client_id'=>$request->client,
         'user_id'=>$request->responsable,
         'date_vente'=>$request->date
 

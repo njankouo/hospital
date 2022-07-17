@@ -1,6 +1,11 @@
 @extends('layouts.master')
 
 @section('contenu')
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card">
