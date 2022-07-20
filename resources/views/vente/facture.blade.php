@@ -2,11 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Bon De Commande</title>
+    <title>FACTURE VENTE</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
-
     <style>
         body {
             font-size: 15px
@@ -24,9 +22,10 @@
         }
 
         .logo {
-            width: 20%;
+            width: 18%;
             margin-right: 2%;
-            height: 22%;
+            height: 33%;
+            margin-top: 10px;
         }
 
         #inventory-invoice {
@@ -170,89 +169,106 @@
             <h6>
                 DATE DELIVRANCE: {{ \Carbon\Carbon::now() }}
             </h6>
+            <h6>
+                CLIENT: {{ \Carbon\Carbon::now() }}
+            </h6>
+            <h6>
+                VENDEUR: {{ \Carbon\Carbon::now() }}
+            </h6>
+            {{-- @foreach ($details as $detail)
+                {{ $detail->client }}
+            @endforeach --}}
+
         </div>
-        <h6 class="my-4 text-center text-primary"
-            style="font-size: 15px;font-style:italic;font-weight: bold;text-align:center ">
-            facture n
-            {{-- <table class="table table-bordered border-primary">
-                  <thead class="text-dark">
-                      <tr>
 
 
-                      </tr>
-                  </thead>
+        <div id="inventory-invoice">
 
-              </table> --}}
+            <div class="invoice overflow-auto">
+                <div>
+                    <h4 style="text-align: center">FACTURE</h4>
+                    <main><br><br>
 
+                        <hr>
+                        <table id="cart" class="table table-hover table-condensed"
+                            style="margin-top: 5px;margin-left:55px">
+                            <thead>
+                                <tr>
+                                    <th style="width:50%">Produit</th>
+                                    <th style="width:10%">pu</th>
+                                    <th style="width:8%">qte</th>
 
-            <div id="inventory-invoice">
+                                    <th style="width:8%">unite</th>
+                                    <th style="width:8%">Remise</th>
 
-                <div class="invoice overflow-auto">
-                    <div>
-                        <main>
+                                    <th style="width:22%" class="text-center">total</th>
 
-                            <table id="cart" class="table table-hover table-condensed">
-                                <thead>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php $total = 0 @endphp
+                                @foreach ($cartItems as $item)
+                                    @php $total +=  $item->price * $item->quantity * (1 - $item->attributes->remise / 100)  @endphp
+
                                     <tr>
-                                        <th style="width:50%">Produit</th>
-                                        <th style="width:10%">pu</th>
-                                        <th style="width:8%">qte</th>
+                                        <td class="hidden pb-4 md:table-cell">
 
-                                        <th style="width:8%">unite</th>
-                                        <th style="width:8%">Remise</th>
+                                            <p class="mb-2 md:ml-4">{{ $item->name }}</p>
 
-                                        <th style="width:22%" class="text-center">total</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php $total = 0 @endphp
-                                    @if (session('cart'))
-                                        @foreach (session('cart') as $id => $details)
-                                            @php $total += $details['pu'] * $details['qte_sortie'] * (1 - $details['remise'] / 100)  @endphp
-                                            <tr data-id="{{ $id }}">
-                                                <td>{{ $details['produit_id'] }}</td>
-                                                <td>{{ $details['pu'] }}</td>
-                                                <td>{{ $details['qte_sortie'] }}</td>
-                                                <td>{{ $details['unite'] }}</td>
-                                                <td>{{ $details['remise'] }}</td>
-                                                <td data-th="Subtotal" class="text-center">
-                                                    {{ $details['pu'] * $details['qte_sortie'] * (1 - $details['remise'] / 100) }}
-                                                </td>
-
-                                            </tr>
-                                        @endforeach
-                                    @endif
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="5" class="text-right">
-                                            <h2><strong>Total {{ $total }}</strong></h2>
-                                        </td>
-                                    </tr>
-                                    {{-- <tr>
-                                        <td colspan="5" class="text-right">
-                                            <a href="{{ route('liste.commande') }}" class="btn btn-warning"><i
-                                                    class="fa fa-angle-left"></i>
-                                                placer encore la
-                                                commande
-                                            </a>
 
                                         </td>
-                                    </tr> --}}
-                                </tfoot>
-                            </table>
-                            <p style="float: left">le total est exprimé en FCFA</p>
-                        </main>
-                        <footer style="font-size: 15px">
-                            Centre Medico-churirgical d'urologie situé a la Vallée Douala Manga Bell
-                            Douala-Bali.
-                            TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945.
-                            SITE WEB: http://www.cmcu-cm.com
-                        </footer>
-                    </div>
+                                        <td>
+
+                                            <p class="mb-2 md:ml-4">{{ $item->price }}</p>
+
+
+                                        </td>
+                                        <td>
+
+                                            <p class="mb-2 md:ml-4">{{ $item->quantity }}</p>
+
+
+                                        </td>
+                                        <td>
+
+                                            <p class="mb-2 md:ml-4">{{ $item->attributes->unite }}</p>
+
+
+                                        </td>
+                                        <td>
+
+                                            <p class="mb-2 md:ml-4">{{ $item->attributes->remise }}</p>
+
+
+                                        </td>
+
+                                        <td class="hidden text-right md:table-cell">
+
+
+
+                                            {{ $item->price * $item->quantity * (1 - $item->attributes->remise / 100) }}
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <p>LE MONTANT TOTAL DE CETTE FACTURE EST DE {{ $total }}</p>
+
+                        </table>
+
+                    </main>
+
+
+
+                    <footer style="font-size: 8px">
+                        Centre Medico-churirgical d'urologie situé a la Vallée Douala Manga Bell
+                        Douala-Bali.
+                        TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945.
+                        SITE WEB: http://www.cmcu-cm.com
+                    </footer>
                 </div>
             </div>
+        </div>
 
 
 

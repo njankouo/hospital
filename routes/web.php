@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\CaisseController;
 use App\Models\rayon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RayonController;
 use App\Http\Controllers\VenteController;
+use App\Http\Controllers\CaisseController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContratController;
 use App\Http\Controllers\ProduitController;
@@ -107,7 +108,24 @@ route::get('/livraison/group',[CommandeController::class,'GroupLivraison'])->nam
 Route::get('facture/ventes/{id}',[VenteController::class,'addCart'])->name('cart.vente');
 route::get('/vente/group',[VenteController::class,'Ventegroup'])->name('vente.group');
 route::get('facture/group',[VenteController::class,'factureGroupe'])->name('group.facture');
-route::delete('/remove',[VenteController::class,'remove'])->name('remove.vente');
+
 route::get('/information',[HomeController::class,'info'])->name('infos');
 route::post('rayon/create',[RayonController::class,'newCreate'])->name('rayon.create');
 
+Route::patch('update-cart', [VenteController::class, 'updated'])->name('update.cart');
+Route::delete('/enlever',[VenteController::class,'remov'])->name('retirer');
+
+
+/**nouvele carte */
+Route::post('clear', [VenteController::class, 'clearAllCart'])->name('cart.clear');
+Route::post('cart', [VenteController::class, 'addToCart'])->name('cart.store');
+
+
+Route::post('cart/add',[CommandeController::class,'addCart'])->name('cart.add');
+Route::post('/cart/clean',[CommandeController::class,'clearAllCart'])->name('clear.commande');
+Route::post('Group/livrable',[CartController::class,'addLivraison'])->name('cart.livraison');
+Route::post('Group/livraison/delete',[CartController::class,'deleteL'])->name('clear.livraison');
+
+/**remove one vente */
+
+Route::post('cart/enlever',[VenteController::class,'deleteOne'])->name('cart.remove');

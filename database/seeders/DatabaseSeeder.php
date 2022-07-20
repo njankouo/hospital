@@ -21,13 +21,13 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
            $this->call(role::class);
-        fournisseur::factory(15)->create();
+       // fournisseur::factory(15)->create();
         $this->call(user::class);
-        $this->call(Rayon::class);
+       // $this->call(Rayon::class);
      // commande::factory(25)->create();
-     client::factory(125)->create();
+    // client::factory(125)->create();
      $this->call(unite::class);
-     $this->call(categorie::class);
-  
+    // $this->call(categorie::class);
+
     }
 }

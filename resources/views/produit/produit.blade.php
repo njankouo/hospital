@@ -48,6 +48,7 @@
                             <th class="th-sm">stock de securité</th>
                             <th class="th-sm">date fabrication</th>
                             <th class="th-sm">date expiration</th>
+                            <th class="th-sm">Grammage</th>
                             @can('admin')
                                 <th class="th-sm">Opération</th>
                             @endcan
@@ -79,6 +80,7 @@
                                 <td>{{ $produits->stock_seuil }}</td>
                                 <td>{{ $produits->date_fabrication }}</td>
                                 <td>{{ $produits->date_peremption }}</td>
+                                <td>{{ $produits->grammage }}</td>
                                 @can('admin')
                                     <td>
 

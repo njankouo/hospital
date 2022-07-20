@@ -10,6 +10,8 @@ use App\Models\client;
 use App\Models\produit;
 use App\Models\commande;
 use App\Models\fournisseur;
+//use Darryldecode\Cart\Cart;
+use Cart;
 use App\Models\type_produit;
 use App\Models\VenteProduit;
 use Illuminate\Http\Request;
@@ -24,7 +26,8 @@ class VenteController extends Controller
         $user=User::all();
         $produit=produit::all();
         $vente=Vente::latest()->paginate();
-        return view('vente.index',compact('client','user','vente','produit'));
+        $carbon=\Carbon\Carbon::now();
+        return view('vente.index',compact('client','user','vente','produit','carbon'));
     }
     public function create(Request $request){
         $request->validate([
@@ -95,9 +98,16 @@ class VenteController extends Controller
         Session::flash('message','This is a flash message!');
     }
     public function listeVente(){
-        $detail=VenteProduit::latest()->paginate(5);
-        // $carbon=\Carbon\Carbon::now();
-        return view('vente.listVente',compact('detail'));
+        $detail=VenteProduit::all();
+         $carbon=\Carbon\Carbon::now();
+        if (request()->start_date || request()->end_date) {
+        $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
+        $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
+        $detail = VenteProduit::whereBetween('date_vente',[$start_date,$end_date])->get();
+    } else {
+        $detail = VenteProduit::latest()->get();
+    }
+        return view('vente.listVente',compact('detail','carbon'));
     }
 
      public function autocomplete(Request $request)
@@ -173,7 +183,7 @@ $vente = VenteProduit::findOrFail($id);
         $cart = session()->get('cart', []);
 
         if(isset($cart[$id])) {
-            $cart[$id]['qte_sortie']++;
+            // $cart[$id]['qte_sortie']++;
         } else {
             $cart[] = [
                 "produit_id" => $vente->produit->designation,
@@ -190,21 +200,86 @@ $vente = VenteProduit::findOrFail($id);
         return redirect()->back()->with('success', 'facture crée avec success!');
     }
 public function Ventegroup(){
-    return view('vente.cart');
+    $cartItems = \Cart::getContent();
+    return view('vente.cart',compact('cartItems'));
 }
 public function factureGroupe(){
-    $client= venteProduit::all();
-    $pdf=PDF::loadview('vente.facture',compact('client'))->setOptions(['setPaper'=>'A4']);
+    $details= venteProduit::all();
+    $cartItems = \Cart::getContent();
+    $pdf=PDF::loadview('vente.facture',compact('details','cartItems'))->setOptions(['setPaper'=>'A4']);
+    $pdf->setPaper('A4','landscape');
     return $pdf->stream();
 }
-public function remove(Request $request){
- if($request->id) {
+
+
+
+
+/**cette partie du code est non utilisable dans ce projet neamoins sa surppression peut engendrer des bugs dans l'application */
+public function updated(Request $request){
+          if($request->id && $request->qte_sortie){
+            $cart = session()->get('cart');
+            $cart[$request->id]["qte_sortie"] = $request->qte_sortie;
+            session()->put('cart', $cart);
+            return back()->flash('success', 'Cart updated successfully');
+        }
+    }
+
+ public function remov(Request $request)
+    {
+        if($request->id) {
             $cart = session()->get('cart');
             if(isset($cart[$request->id])) {
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'vente rétiré avec success');
+            session()->flash('success', 'Product removed successfully');
         }
-}
+    }
+
+/**cette partie du code est non utilisable dans ce projet neamoins sa surppression peut engendrer des bugs dans l'application */
+
+
+
+
+
+
+
+
+//cette partie regroupe l'ajout au panier et la surppression au panier//
+
+
+public function clearAllCart()
+    {
+        Cart::clear();
+
+        session()->flash('success', 'toutes les ventes retiré avec success!');
+
+        return redirect()->route('vente.group');
+    }
+     public function addToCart(Request $request)
+    {
+        \Cart::add([
+            'id' => $request->id,
+            'name' => $request->name,
+            'price' => $request->pu,
+            'quantity' => $request->qte_sortie,
+            'attributes' => array(
+                'remise' => $request->remise,
+                'unite'=>$request->unite,
+            )
+        ]);
+        session()->flash('success', 'ventes ajouté avec success !');
+
+        return redirect()->route('vente.group');
+    }
+//utilisation de la bibliotheque cart et adaptation au projet de vente//
+
+ public function deleteOne(Request $request)
+    {
+        \Cart::remove($request->id);
+        session()->flash('success', 'Item Cart Remove Successfully !');
+
+        return redirect()->route('vente.group');
+    }
+
 }

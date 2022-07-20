@@ -23,10 +23,10 @@ class CreateUsersTable extends Migration
             $table->string('pieceIdentite')->nullable();
             $table->string('numeroPieceIdentite')->nullable();
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('status');
           $table->string('photo')->nullable();
-          $table->foreignId('role_id')->constrained('roles')->nullable();
+          $table->foreignId('role_id')->nullable()->constrained('roles')->onDelete('cascade');
             $table->timestamps();
         });
         schema::enableForeignKeyConstraints();

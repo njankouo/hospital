@@ -24,8 +24,8 @@
 
                             <div class="col-6">
                                 <label for="">Date vente</label>
-                                <input type="text" class="my-2 form-control @error('date_vente') is-invalid @enderror"
-                                    name="date" placeholder="Enter ..." value="{{ Carbon\Carbon::now() }}">
+                                <input type="date" class="my-2 form-control @error('date_vente') is-invalid @enderror"
+                                    name="date" placeholder="Enter ...">
                                 @error('date_vente')
                                     <p>{{ $message }}</p>
                                 @enderror
@@ -122,16 +122,19 @@
                         </thead>
                         <tbody>
                             @foreach ($vente as $ventes)
-                                <tr>
-                                    <td>{{ $ventes->id }}</td>
-                                    <td>{{ $ventes->date_vente }}</td>
-                                    {{-- <td>{{ $ventes->client->nom }}</td> --}}
-                                    <td>{{ $ventes->user->nom }}</td>
-                                    <td>
-                                        <a href="{{ route('vente.produit', $ventes->id) }}}}"> <i
-                                                class="fa fa-eye fa-2x text-info"></i></a>
-                                    </td>
-                                </tr>
+                                @if ($ventes->date_vente != $carbon->format('Y-m-d'))
+                                @else
+                                    <tr>
+                                        <td>{{ $ventes->id }}</td>
+                                        <td>{{ $ventes->date_vente }}</td>
+                                        {{-- <td>{{ $ventes->client->nom }}</td> --}}
+                                        <td>{{ $ventes->user->nom }}</td>
+                                        <td>
+                                            <a href="{{ route('vente.produit', $ventes->id) }}}}"> <i
+                                                    class="fa fa-eye fa-2x text-info"></i></a>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                         </tr>

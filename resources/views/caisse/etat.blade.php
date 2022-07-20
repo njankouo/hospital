@@ -5,7 +5,6 @@
     <title>ETATS DES VENTES JOURNALIERES</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" href="bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
             font-size: 15px
@@ -16,9 +15,6 @@
             padding: 5px;
         }
 
-        td {
-            font-size: 11px;
-        }
 
 
         .container {
@@ -26,9 +22,10 @@
         }
 
         .logo {
-            width: 20%;
+            width: 18%;
             margin-right: 2%;
-            height: 22%;
+            height: 33%;
+            margin-top: 10px;
         }
 
         #inventory-invoice {
@@ -104,7 +101,7 @@
             margin: 0;
             font-weight: 300;
             color: #3989c6;
-            font-size: 2px;
+            font-size: 5px;
         }
 
         .invoice table tfoot td {
@@ -160,128 +157,89 @@
 </head>
 
 <body>
-    <button class="btn btn-primary"> valider</button>
 
     <div class="container">
         <div class="row text-center">
 
-            <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>"
-                style="width:90px;height:105px;margin-top:15px;margin-left:25px;float:right" class="logo">
+            <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>" style="float: right;" class="logo">
 
             <h6><strong>CENTRE MEDICO-CHIRURGICAL D'UROLOGIE</strong></h6>
             <h6>VALLEE MANGA BELL DOUALA-BALI</h6>
             <h6>TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945</h6>
             <h6>
-
+                DATE DELIVRANCE: {{ \Carbon\Carbon::now() }}
             </h6>
         </div>
-        <h6 class="my-4 text-center text-primary"
-            style="font-size: 25px;font-style:italic;font-weight: bold;text-align:center ">
-            ETATS DES VENTES JOURNéE DU: {{ $carbon->format('Y-m-d') }}
-            {{-- <table class="table table-bordered border-primary">
-                  <thead class="text-dark">
-                      <tr>
 
 
-                      </tr>
-                  </thead>
+        <div id="inventory-invoice">
 
-              </table> --}}
+            <div class="invoice overflow-auto">
+                <div>
+                    <h4 style="text-align: center" style="margin-top:50px;text-decoration:underline"> ETATS DES VENTES:
+                        {{ $carbon->format('Y-m-d') }}</h4>
+                    <main><br><br>
+
+                        <hr>
+                        <table class="table my-4 text-center" id="example" style="margin-left: 35px">
+                            <thead class="text-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>CLIENT</th>
+
+                                    <th>DESIGNATION</th>
+                                    <th>MONTANT</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php $total=0 @endphp
+                                @foreach ($etat as $etats)
+                                    @if ($etats->date_vente != $carbon->format('Y-m-d'))
+                                    @else
+                                        @php $total+= $etats->pu * $etats->qte_sortie * (1 - $etats->remise / 100) @endphp
+                                        <tr>
+                                            <td>{{ $etats->id }}</td>
+                                            <td>{{ $etats->client }}</td>
+                                            <td>{{ $etats->produit->designation }}</td>
+                                            <td>
+                                                {{ $etats->pu * $etats->qte_sortie * (1 - $etats->remise / 100) }}
+
+                                            </td>
+
+                                        </tr>
+                                    @endif
+                                @endforeach
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <p style="text-color:black;float: right;font-style:italic">LE MONTANT TOTAL DE CETTE
+                                        FACTURE ETAT
+                                        S'ELEVE à: {{ $total }}</p>
+                                </tr>
+
+                            </tfoot>
+                            </tbody>
+                        </table>
+
+                    </main>
 
 
-            <div id="inventory-invoice">
 
-                <div class="invoice overflow-auto">
-                    <div>
-                        <main>
-                            <div id="status" style="float: right;font-size:20px"></div>
-                            <p style="font-size: 15px">les montants sont exprimés en FRANCS CFA</p>
-
-                            <table class="table my-4 text-center" id="example">
-                                <thead class="text-dark">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>CLIENT</th>
-
-                                        <th>DESIGNATION</th>
-                                        <th>MONTANT</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($etat as $etats)
-                                        @if ($etats->date_vente != $carbon->format('Y-m-d'))
-                                        @else
-                                            <tr>
-                                                <td>{{ $etats->id }}</td>
-                                                <td>{{ $etats->client }}</td>
-                                                <td>{{ $etats->produit->designation }}</td>
-                                                <td>
-                                                    {{ $etats->pu * $etats->qte_sortie * (1 - $etats->remise / 100) }}
-
-                                                </td>
-
-                                            </tr>
-                                        @endif
-                                    @endforeach
-
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-
-                                    </tr>
-
-                                </tfoot>
-                                </tbody>
-                            </table>
-                        </main>
-                        <footer style="font-size: 15px">
-                            Centre Medico-churirgical d'urologie situé a la Vallée Douala Manga Bell
-                            Douala-Bali.
-                            TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945.
-                            SITE WEB: http://www.cmcu-cm.com
-                        </footer>
-                    </div>
+                    <footer style="font-size: 8px">
+                        Centre Medico-churirgical d'urologie situé a la Vallée Douala Manga Bell
+                        Douala-Bali.
+                        TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945.
+                        SITE WEB: http://www.cmcu-cm.com
+                    </footer>
                 </div>
             </div>
+        </div>
 
 
-            <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 
-            <script>
-                // $(document).ready(function() {
-                //     $('#example').DataTable();
-                // });
-                $(document).ready(function() {
-                    $('#example').DataTable({
-                        "fnDrawCallback": function(row, data, start, end, display) {
-                            var api = this.api(),
-                                data;
 
-                            // Remove the formatting to get integer data for summation
-                            var intVal = function(i) {
-                                return typeof i === 'string' ?
-                                    i.replace(/[\$,]/g, '') * 1 :
-                                    typeof i === 'number' ?
-                                    i : 0;
-                            };
-
-                            // Total over all pages
-                            total = api
-                                .column(4)
-                                .data()
-                                .reduce(function(a, b) {
-                                    return intVal(a) + intVal(b);
-                                }, 0);
-
-                            // Update status DIV
-                            $('#status').html('<b>LE MONTANT DE VENTE JOURNALIER :</b> <u>' + total +
-                                '</u>  FCFA'
-                            );
-                        }
-                    });
-                });
-            </script>
 </body>
 
 </html>

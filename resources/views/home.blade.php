@@ -61,7 +61,10 @@
 
                 </div>
             </div>
-            {{-- @elseif ($produits->date_peremption < $produits->date_fabrication)
+        @endif
+    @endforeach
+    @foreach ($produit as $produits)
+        @if ($produits->date_peremption < $produits->date_fabrication)
             <div class="row">
 
                 <div class="alert alert-danger" role="alert">
@@ -70,7 +73,7 @@
                     <strong>alert!</strong> {{ $produits->designation }} est arrivé à expiration veuillez remplacer
 
 
-                </div> --}}
+                </div>
         @endif
     @endforeach
 

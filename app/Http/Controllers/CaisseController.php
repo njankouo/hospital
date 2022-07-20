@@ -28,9 +28,13 @@ class CaisseController extends Controller
         $carbon=\Carbon\Carbon::now();
 
         $pdf=PDF::loadview('caisse.etat',compact('etat','carbon'))->setOPtions(['setPaper'=>'A4']);
+        $pdf->SetPaper('A4','landscape');
         return $pdf->stream();
 
     }
+
+
+    /**CE BOUT DE CODE EST UNITILISABLE */
   public  function fetch_data(Request $request)
     {
      if($request->ajax())

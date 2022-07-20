@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use Cart;
 use notify;
 use App\Models\Type;
 use App\Models\produit;
@@ -12,6 +13,7 @@ use App\Models\fournisseur;
 use App\Models\type_produit;
 use Illuminate\Http\Request;
 use App\Models\CommandeArticle;
+use PhpOffice\PhpSpreadsheet\Reader\Xls\RC4;
 
 class CommandeController extends Controller
 {
@@ -182,28 +184,42 @@ public function bonlivraison($id){
         return redirect()->back()->with('success', 'commande placé avec success!');
     }
 
+
+
+
     public function cart(){
-        return view('commande.cart');
+         $cartItems = \Cart::getContent();
+        return view('commande.cart',compact('cartItems'));
     }
-      public function remove(Request $request)
-    {
-        if($request->id) {
-            $cart = session()->get('cart');
-            if(isset($cart[$request->id])) {
-                unset($cart[$request->id]);
-                session()->put('cart', $cart);
-            }
-            session()->flash('success', 'commande rétiré avec success');
-        }
-}
+
+
+
+
+
+
+
+
+
+
 public function factureGroup(){
-    $pdf=PDF::loadview('commande.facture')->setOptions(['setPaper'=>'A4']);
+      $cartItems = \Cart::getContent();
+    $pdf=PDF::loadview('commande.facture',compact('cartItems'))->setOptions(['setPaper'=>'A4']);
+  $pdf->setPaper('A4','landscape');
+
     return $pdf->stream();
 }
 public function livraisonGroup(){
-    $pdf=PDF::loadview('commande.LivraisonGroup')->setOptions(['setPaper'=>'A4']);
+    $cartItems = \Cart::getContent();
+    $pdf=PDF::loadview('commande.LivraisonGroup',compact('cartItems'))->setOptions(['setPaper'=>'A4']);
+    $pdf->setPaper('A4','landscape');
     return $pdf->stream();
 }
+
+
+
+
+
+
  public function ToCart($id)
     {
         $livraisons = Livraison::findOrFail($id);
@@ -223,12 +239,63 @@ public function livraisonGroup(){
 
             ];
         }
-
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'facture crée avec success!');
     }
+
+      public function remove(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'commande rétiré avec success');
+        }
+}
+
+
+
+
+
+
+
     public function GroupLivraison(){
-        return view('commande.cartLivraison');
+         $cartItems = \Cart::getContent();
+        return view('commande.cartLivraison',compact('cartItems'));
     }
+public function clearAllCart()
+    {
+        Cart::clear();
+
+        session()->flash('success', 'toutes les commandes retiré avec success!');
+
+        return redirect()->route('cart');
+    }
+     public function addCart(Request $request)
+    {
+        Cart::add([
+            'id' => $request->id,
+            'name' => $request->name,
+            'price' => $request->pu,
+            'quantity' => $request->qte,
+
+            'attributes' => array(
+                'remise' => $request->remise,
+                'unite'=>$request->unite,
+                 //'produit' => $request->produit,
+                  //'pu' => $request->pu,
+                  //'qte' => $request->qte,
+                  'reglement' => $request->reglement,
+            )
+        ]);
+        session()->flash('success', 'commande ajouté avec success !');
+
+        return redirect()->route('cart');
+    }
+//utilisation de la bibliotheque cart et adaptation au projet de vente//
+
 
 }
+

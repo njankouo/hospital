@@ -88,9 +88,21 @@
                                             </a>
                                         @endif
 
-                                        <a href="{{ route('TOCART', $commandes->id) }}" class="btn  btn">
-                                            <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
-                                        </a>
+                                        <form action="{{ route('cart.livraison') }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="hidden" value="{{ $commandes->id }}" name="id">
+                                            <input type="hidden" value="{{ $commandes->produit->designation }}"
+                                                name="name">
+                                            <input type="hidden" value="{{ $commandes->pu }}" name="pu">
+                                            <input type="hidden" value="{{ $commandes->remise }}" name="remise">
+                                            <input type="hidden" value="{{ $commandes->qte }}" name="qte">
+                                            <input type="hidden" value="{{ $commandes->unite }}" name="unite">
+                                            <input type="hidden" value="{{ $commandes->reglement }}" name="reglement">
+                                            <button class="px-4 py-2 text-light bg-blue-800 rounded btn btn-primary">ajouter
+                                                facture
+                                            </button>
+                                        </form>
                                     </td>
 
                                 </tr>

@@ -18,8 +18,8 @@ class unite extends Seeder
         DB::table('type_articles')->insert([
             ['nom'=>'carton'],
             ['nom'=>'boite'],
-            ['nom'=>'ampoule'],
-            ['nom'=>'bonbone'],
+           // ['nom'=>'ampoule'],
+           // ['nom'=>'bonbone'],
 
         ]);
     }

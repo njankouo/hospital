@@ -25,7 +25,7 @@ class CreateProduitsTable extends Migration
             $table->string('status');
             $table->date('date_peremption')->nullable();
              $table->date('date_fabrication')->nullable();
-            $table->string('grammage');
+            $table->string('grammage')->nullable();
             $table->foreignId('rayon_id')->constrained('rayons');
             $table->foreignId('type_article_id')->constrained('type_articles')->nullable();
              $table->foreignId('categorie_id')->constrained('categories');
