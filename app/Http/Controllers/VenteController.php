@@ -266,6 +266,8 @@ public function clearAllCart()
             'attributes' => array(
                 'remise' => $request->remise,
                 'unite'=>$request->unite,
+                'client'=>$request->client,
+                'user'=>$request->user,
             )
         ]);
         session()->flash('success', 'ventes ajouté avec success !');

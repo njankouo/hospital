@@ -1,56 +1,30 @@
-{{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css"> --}}
-
 <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
-{{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
-{{-- <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-<script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script> --}}
+<script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('js/buttons.colVis.min.js') }}"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                'colvis'
+            ],
+            columnDefs: [{
+                targets: 1,
+                visible: false
+            }]
+        });
     });
-    // var minDate, maxDate;
-
-    // Custom filtering function which will search data in column four between two values
-    // $.fn.dataTable.ext.search.push(
-    //     function(settings, data, dataIndex) {
-    //         var min = minDate.val();
-    //         var max = maxDate.val();
-    //         var date = new Date(data[4]);
-
-    //         if (
-    //             (min === null && max === null) ||
-    //             (min === null && date <= max) ||
-    //             (min <= date && max === null) ||
-    //             (min <= date && date <= max)
-    //         ) {
-    //             return true;
-    //         }
-    //         return false;
-    //     }
-    // );
-
-    // $(document).ready(function() {
-    //     // Create date inputs
-    //     minDate = new DateTime($('#min'), {
-    //         format: 'MMMM Do YYYY'
-    //     });
-    //     maxDate = new DateTime($('#max'), {
-    //         format: 'MMMM Do YYYY'
-    //     });
-
-    //     // DataTables initialisation
-    //     var table = $('#example').DataTable();
-
-    //     // Refilter the table
-    //     $('#min, #max').on('change', function() {
-    //         table.draw();
-    //     });
 </script>
+<link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/select.dataTables.min.css') }}">
@@ -94,10 +68,11 @@
                 </div>
                 <hr>
                 <div class=" card-body">
-                    <a href="" class="btn btn-primary" style="float: left;margin-bottom:25px;">
+                    {{-- <a href="" class="btn btn-primary" style="float: left;margin-bottom:25px;">
                         <i class="	fa fa-print fa-2x"></i>Impression en fonction des dates
-                    </a>
-                    <a href="{{ route('vente.group') }}" class="btn btn-primary" style="float: right;margin-bottom:15px;">
+                    </a> --}}
+                    <a href="{{ route('vente.group') }}" class="btn btn-primary"
+                        style="float: right;margin-bottom:15px;">
                         <i class="	fa fa-cloud-upload fa-2x"></i>vente Groupés
                     </a>
 
@@ -129,14 +104,19 @@
                                 <th class="th-sm">client
                                 </th>
 
-
+                                <th class="th-sm">vendeur
+                                </th>
 
                                 <th class="th-sm">Opération</th>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php $total=0 @endphp
                             @foreach ($detail as $details)
+                                @php $total +=  $details->pu * $details->qte_sortie * (1 - $details->remise / 100) @endphp
+
+
                                 {{-- @if ($details->date_vente != $carbon->format('Y-m-d H:i:s'))
                                 @else --}}
                                 <tr>
@@ -158,6 +138,7 @@
                                     </td>
                                     <td>{{ $details->date_vente }}</td>
                                     <td>{{ $details->client }}</td>
+                                    <td>{{ $details->user }}</td>
                                     <td>
                                         @if ($details->date_vente != $carbon->format('Y-m-d'))
                                         @else
@@ -186,6 +167,8 @@
                                             <input type="hidden" value="{{ $details->remise }}" name="remise">
                                             <input type="hidden" value="{{ $details->qte_sortie }}" name="qte_sortie">
                                             <input type="hidden" value="{{ $details->unite }}" name="unite">
+                                            <input type="hidden" value="{{ $details->user }}" name="user">
+                                            <input type="hidden" value="{{ $details->client }}" name="client">
                                             <button class="px-4 py-2 text-light bg-blue-800 rounded btn btn-primary">ajouter
                                                 facture
                                             </button>
@@ -194,9 +177,12 @@
                                 </tr>
                                 {{-- @endif --}}
                             @endforeach
+                            {{ $total }}
                         </tbody>
                         </tr>
-                        <tfoot></tfoot>
+                        <tfoot>
+
+                        </tfoot>
 
                     </table>
 

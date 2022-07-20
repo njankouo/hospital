@@ -170,10 +170,14 @@
                 DATE DELIVRANCE: {{ \Carbon\Carbon::now() }}
             </h6>
             <h6>
-                CLIENT: {{ \Carbon\Carbon::now() }}
+                CLIENT: @foreach ($cartItems as $item)
+                    {{ $item->attributes->client }}
+                @endforeach
             </h6>
             <h6>
-                VENDEUR: {{ \Carbon\Carbon::now() }}
+                VENDEUR: @foreach ($cartItems as $item)
+                    {{ $item->attributes->user }}
+                @endforeach
             </h6>
             {{-- @foreach ($details as $detail)
                 {{ $detail->client }}
@@ -186,7 +190,11 @@
 
             <div class="invoice overflow-auto">
                 <div>
-                    <h4 style="text-align: center">FACTURE</h4>
+                    <h4 style="text-align: center">FACTURE N°:
+                        @foreach ($cartItems as $item)
+                            {{ $item->id }}
+                        @endforeach
+                    </h4>
                     <main><br><br>
 
                         <hr>

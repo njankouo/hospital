@@ -38,4 +38,10 @@ public function deleteL(){
         return redirect()->route('group.livraison');
 
 }
+public function supprimeOne(Request $request){
+\Cart::remove($request->id);
+        session()->flash('success', 'Item Cart Remove Successfully !');
+
+        return redirect()->route('group.livraison');
+}
 }

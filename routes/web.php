@@ -129,3 +129,4 @@ Route::post('Group/livraison/delete',[CartController::class,'deleteL'])->name('c
 /**remove one vente */
 
 Route::post('cart/enlever',[VenteController::class,'deleteOne'])->name('cart.remove');
+Route::post('/Group/livraison/Delete',[CartController::class,'SupprimeOne'])->name('supprimer.one');

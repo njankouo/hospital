@@ -39,6 +39,7 @@
                                 <th style="width:8%">remise</th>
 
                                 <th style="width:22%" class="text-center">total</th>
+                                <th>Operation</th>
                                 <th style="width:10%"></th>
                             </tr>
                         </thead>
@@ -88,7 +89,14 @@
                                             {{ $item->price * $item->quantity * (1 - $item->attributes->remise / 100) }}
                                         </span>
                                     </td>
+                                    <td class="hidden text-right md:table-cell">
+                                        <form action="{{ route('supprimer.one') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" value="{{ $item->id }}" name="id">
+                                            <button class="px-4 py-2 text-white bg-red-600 btn btn-danger">x</button>
+                                        </form>
 
+                                    </td>
                                 </tr>
                             @endforeach
 
