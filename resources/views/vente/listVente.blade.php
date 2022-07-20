@@ -140,23 +140,25 @@
                                     <td>{{ $details->client }}</td>
                                     <td>{{ $details->user }}</td>
                                     <td>
-                                        @if ($details->date_vente != $carbon->format('Y-m-d'))
-                                        @else
-                                            <form method="POST" action="{{ route('delete.vente', $details->id) }}">
-                                                @csrf
-                                                <input name="_method" type="hidden" value="DELETE">
-                                                <a class="btn btn-danger"> <i type="submit"
-                                                        class="fa fa-trash fa-2x text-light btn-flat show_confirm"
-                                                        data-toggle="tooltip" title='Delete'></i></a>
-                                            </form>
+                                        @can('admin')
+                                            @if ($details->date_vente != $carbon->format('Y-m-d'))
+                                            @else
+                                                <form method="POST" action="{{ route('delete.vente', $details->id) }}">
+                                                    @csrf
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <a class="btn btn-danger"> <i type="submit"
+                                                            class="fa fa-trash fa-2x text-light btn-flat show_confirm"
+                                                            data-toggle="tooltip" title='Delete'></i></a>
+                                                </form>
 
 
-                                            {{-- <a href="{{ route('facture', $details->id) }}" class="btn btn"> <i
+                                                {{-- <a href="{{ route('facture', $details->id) }}" class="btn btn"> <i
                                                     class="fa fa-print text-info fa-2x mx-2"></i></a> --}}
-                                            {{-- <a href="{{ route('edit.vente', $details->id) }}" class="btn btn">
+                                                {{-- <a href="{{ route('edit.vente', $details->id) }}" class="btn btn">
                                                 <i class="fa fa-edit fa-2x"></i>
                                             </a> --}}
-                                        @endif
+                                            @endif
+                                        @endcan
                                         <form action="{{ route('cart.store') }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
@@ -177,7 +179,8 @@
                                 </tr>
                                 {{-- @endif --}}
                             @endforeach
-                            {{ $total }}
+                            <p style="font-style: italic">LE MONTANT TOTAL DES VENTES EST DE:
+                                {{ $total }}</p>
                         </tbody>
                         </tr>
                         <tfoot>

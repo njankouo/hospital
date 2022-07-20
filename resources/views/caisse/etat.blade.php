@@ -36,12 +36,7 @@
             text-decoration: none ! important;
         }
 
-        .invoice {
-            position: relative;
-            background-color: #FFF;
-            min-height: 480px;
-            padding: 12px
-        }
+
 
         .invoice header {
             padding: 10px 0;
@@ -104,15 +99,6 @@
             font-size: 5px;
         }
 
-        .invoice table tfoot td {
-            background: 0 0;
-            border-bottom: none;
-            white-space: nowrap;
-            text-align: right;
-            padding: 5px 10px;
-            font-size: 8px;
-            border-top: 1px solid #aaa
-        }
 
         .invoice table tfoot tr:first-child td {
             border-top: none
@@ -135,23 +121,6 @@
             font-size: 6px;
             border-top: 1px solid #aaa;
             padding: 8px 0
-        }
-
-        @media print {
-            .invoice {
-                font-size: 11px !important;
-                overflow: hidden !important
-            }
-
-            .invoice footer {
-                position: absolute;
-                bottom: 8px;
-                page-break-after: always
-            }
-
-            .invoice>div:last-child {
-                page-break-before: always
-            }
         }
     </style>
 </head>
@@ -176,19 +145,25 @@
 
             <div class="invoice overflow-auto">
                 <div>
-                    <h4 style="text-align: center" style="margin-top:50px;text-decoration:underline"> ETATS DES VENTES:
+                    <h4 style="text-align: center;margin-top:0px;"> ETATS DES VENTES:
                         {{ $carbon->format('Y-m-d') }}</h4>
-                    <main><br><br>
+
+                    <main>
 
                         <hr>
-                        <table class="table my-4 text-center" id="example" style="margin-left: 35px">
+                        <table class="table my-4 text-center" id="example"
+                            style="margin-left: 35px;text-align:center">
                             <thead class="text-dark">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>CLIENT</th>
+
+
 
                                     <th>DESIGNATION</th>
+                                    <th>QTE</th>
+                                    <th>UNITE</th>
                                     <th>MONTANT</th>
+                                    <th>REMISE</th>
+                                    <th>CLIENT</th>
 
                                 </tr>
                             </thead>
@@ -199,13 +174,18 @@
                                     @else
                                         @php $total+= $etats->pu * $etats->qte_sortie * (1 - $etats->remise / 100) @endphp
                                         <tr>
-                                            <td>{{ $etats->id }}</td>
-                                            <td>{{ $etats->client }}</td>
+
+
                                             <td>{{ $etats->produit->designation }}</td>
+                                            <td>{{ $etats->qte_sortie }}</td>
+                                            <td>{{ $etats->unite }}</td>
                                             <td>
                                                 {{ $etats->pu * $etats->qte_sortie * (1 - $etats->remise / 100) }}
 
                                             </td>
+                                            <td>{{ $etats->remise }}</td>
+                                            <td>{{ $etats->client }}</td>
+
 
                                         </tr>
                                     @endif
@@ -214,9 +194,14 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <p style="text-color:black;float: right;font-style:italic">LE MONTANT TOTAL DE CETTE
-                                        FACTURE ETAT
-                                        S'ELEVE à: {{ $total }}</p>
+                                    <p style="text-color:black;float: right;font-style:italic">LE MONTANT TOTAL EST
+
+                                        : {{ $total }}</p>
+                                </tr><br><br>
+                                <tr>
+                                    <p style="float: left;font-style:italic"> LE MONTANT EST
+                                        EXPRIMé EN FCFA
+                                    </p>
                                 </tr>
 
                             </tfoot>

@@ -36,12 +36,7 @@
             text-decoration: none ! important;
         }
 
-        .invoice {
-            position: relative;
-            background-color: #FFF;
-            min-height: 480px;
-            padding: 12px
-        }
+
 
         .invoice header {
             padding: 10px 0;
@@ -97,22 +92,7 @@
             border: 1px solid #fff;
         }
 
-        .invoice table td h3 {
-            margin: 0;
-            font-weight: 300;
-            color: #3989c6;
-            font-size: 5px;
-        }
 
-        .invoice table tfoot td {
-            background: 0 0;
-            border-bottom: none;
-            white-space: nowrap;
-            text-align: right;
-            padding: 5px 10px;
-            font-size: 8px;
-            border-top: 1px solid #aaa
-        }
 
         .invoice table tfoot tr:first-child td {
             border-top: none
@@ -136,30 +116,13 @@
             border-top: 1px solid #aaa;
             padding: 8px 0
         }
-
-        @media print {
-            .invoice {
-                font-size: 11px !important;
-                overflow: hidden !important
-            }
-
-            .invoice footer {
-                position: absolute;
-                bottom: 8px;
-                page-break-after: always
-            }
-
-            .invoice>div:last-child {
-                page-break-before: always
-            }
-        }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="row text-center">
+    <div class="container" style="margin-right: 20px">
+        <div>
 
             <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>" style="float: right;" class="logo">
 
@@ -190,19 +153,19 @@
 
             <div class="invoice overflow-auto">
                 <div>
-                    <h4 style="text-align: center">FACTURE N°:
+                    <h4 style="text-align: center;margin-top:0px">FACTURE N°:
                         @foreach ($cartItems as $item)
                             {{ $item->id }}
                         @endforeach
                     </h4>
-                    <main><br><br>
+                    <main>
 
                         <hr>
                         <table id="cart" class="table table-hover table-condensed"
-                            style="margin-top: 5px;margin-left:55px">
+                            style="margin-left:55px;text-align:center">
                             <thead>
                                 <tr>
-                                    <th style="width:50%">Produit</th>
+                                    <th style="width:50%">Designation</th>
                                     <th style="width:10%">pu</th>
                                     <th style="width:8%">qte</th>
 
@@ -260,8 +223,9 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                            <p>LE MONTANT TOTAL DE CETTE FACTURE EST DE {{ $total }}</p>
-
+                            <p>LE MONTANT TOTAL EST DE: {{ $total }}</p>
+                            <p style="font-size: 10px;font-style:italic">LES MONTANTS SONT EXPRIME EN FCFA
+                            </p>
                         </table>
 
                     </main>

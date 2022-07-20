@@ -40,12 +40,7 @@
             text-decoration: none ! important;
         }
 
-        .invoice {
-            position: relative;
-            background-color: #FFF;
-            min-height: 480px;
-            padding: 12px
-        }
+
 
         .invoice header {
             padding: 10px 0;
@@ -195,13 +190,14 @@
                     <div>
                         <main>
 
-                            <table class="table my-4 text-center">
+                            <table class="table my-4 text-center" style="margin-left: 40px;text-align:center">
                                 <thead class="text-dark">
                                     <tr>
                                         <th>DESIGNATION</th>
                                         <th>EQUIVALENCE</th>
                                         <th>QUANTITE STOCK</th>
                                         <th>QUANTITE SEUIL</th>
+                                        <th>UNITE</th>
                                         <th>PRIX ACHAT</th>
                                         <th>PRIX VENTE</th>
                                         <th>GRAMMAGE</th>
@@ -214,6 +210,7 @@
                                             <td>{{ $produits->equivalence }}</td>
                                             <td>{{ $produits->qtestock }}</td>
                                             <td>{{ $produits->stock_seuil }}</td>
+                                            <td>{{ $produits->type->nom }}</td>
                                             <td>{{ $produits->pu }}</td>
                                             <td>{{ $produits->pv }}</td>
                                             <td>{{ $produits->grammage }}</td>

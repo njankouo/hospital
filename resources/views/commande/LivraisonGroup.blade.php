@@ -36,13 +36,6 @@
             text-decoration: none ! important;
         }
 
-        .invoice {
-            position: relative;
-            background-color: #FFF;
-            min-height: 480px;
-            padding: 12px
-        }
-
         .invoice header {
             padding: 10px 0;
             margin-bottom: 8px;
@@ -136,23 +129,6 @@
             border-top: 1px solid #aaa;
             padding: 8px 0
         }
-
-        @media print {
-            .invoice {
-                font-size: 11px !important;
-                overflow: hidden !important
-            }
-
-            .invoice footer {
-                position: absolute;
-                bottom: 8px;
-                page-break-after: always
-            }
-
-            .invoice>div:last-child {
-                page-break-before: always
-            }
-        }
     </style>
 </head>
 
@@ -187,9 +163,9 @@
             <div class="invoice overflow-auto">
                 <div>
                     <h4 style="text-align: center">BON DE LiVRAISON</h4>
-                    <main><br><br>
+                    <main>
 
-                        LE MONTANT TOTAL EST EXPRIME EN FCFA
+                        <p style="font-size:10px;font-style:italic ">LES MONTANTS SONT EXPRIMES EN FCFA</p>
                         <hr>
                         <table id="cart" class="table table-hover table-condensed"
                             style="margin-top: 5px;margin-left:55px">
@@ -254,7 +230,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                            <p>LE MONTANT TOTAL DE CETTE FACTURE EST DE: {{ $total }}</p>
+                            <p>LE MONTANT TOTAL EST DE: {{ $total }}</p>
 
                         </table>
 
