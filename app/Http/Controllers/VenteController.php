@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use Cart;
 use Carbon\Carbon;
 use App\Models\User;
+use NumberFormatter;
 use App\Models\vente;
 use App\Models\client;
 use App\Models\produit;
+//use Darryldecode\Cart\Cart;
 use App\Models\commande;
 use App\Models\fournisseur;
-//use Darryldecode\Cart\Cart;
-use Cart;
 use App\Models\type_produit;
 use App\Models\VenteProduit;
 use Illuminate\Http\Request;
@@ -206,6 +207,7 @@ public function Ventegroup(){
 public function factureGroupe(){
     $details= venteProduit::all();
     $cartItems = \Cart::getContent();
+  //  $digit = new NumberFormatter("en", NumberFormatter::SPELLOUT);
     $pdf=PDF::loadview('vente.facture',compact('details','cartItems'))->setOptions(['setPaper'=>'A4']);
     $pdf->setPaper('A4','landscape');
     return $pdf->stream();

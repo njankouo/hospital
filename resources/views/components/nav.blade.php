@@ -7,6 +7,7 @@
     </div>
 </div>
 
+
 <div class="app-header__content">
     <div class="app-header-left">
         <div class="search-wrapper">
@@ -17,28 +18,40 @@
             <button class="close"></button>
         </div>
         <ul class="header-menu nav">
-            <li class="nav-item">
-                <a href="{{ route('chart') }}" class="nav-link">
-                    <i class="nav-link-icon fa fa-database"> </i>
-                    Statistics
-                </a>
-            </li>
+            @can('admin')
+                <li class="nav-item">
+                    <a href="{{ route('chart') }}" class="nav-link">
+                        <i class="nav-link-icon fa fa-database"> </i>
+                        Statistics
+                    </a>
+                </li>
+            @endcan
             {{-- <li class="btn-group nav-item">
                 <a href="javascript:void(0);" class="nav-link">
                     <i class="nav-link-icon fa fa-edit"></i>
                     Projects
                 </a>
             </li> --}}
-            <li class="dropdown nav-item">
-                <a href="/changePassword" class="nav-link">
-                    <i class="nav-link-icon fa fa-cog"></i>
-                    Settings
-                </a>
-            </li>
+            @can('admin')
+                <li class="dropdown nav-item">
+                    <a href="/changePassword" class="nav-link">
+                        <i class="nav-link-icon fa fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+            @endcan
+            @can('utilisateur')
+                <li class="dropdown nav-item">
+                    <a href="/changePassword" class="nav-link">
+                        <i class="nav-link-icon fa fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+            @endcan
             <li class="dropdown nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-link-icon fa fa-diamond"></i>
-                    {{ auth()->user()->role->nom }}
+                    {{ optional(auth()->user()->role)->nom }}
                 </a>
             </li>
         </ul>

@@ -88,58 +88,109 @@
                     </a>
                 </li>
             @endcan
+            @can('utilisateur')
+                <li>
+                    <a href="{{ route('produit.list') }}" style="text-decoration: none;color:cornflowerblue">
+                        <i class="fa fa-area-chart">
+                        </i>stocks des produits
+                    </a>
+                </li>
+            @endcan
+            @can('admin')
+                <li>
+                    <a href="{{ route('produit.list') }}" style="text-decoration: none;color:cornflowerblue">
+                        <i class="fa fa-area-chart">
+                        </i>stocks des produits
+                    </a>
+                </li>
+            @endcan
 
-            <li>
-                <a href="{{ route('produit.list') }}" style="text-decoration: none;color:cornflowerblue">
-                    <i class="fa fa-area-chart">
-                    </i>stocks des produits
-                </a>
-            </li>
-
-            {{-- @can('utilisateur') --}}
-            <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
-                <i class="fa fa-cart-plus fa-3x"></i>Ventes
-            </li>
-            <li>
-                <a style="color:cornflowerblue;text-decoration: none" href="{{ route('vente') }}">
-                    <i class="fa fa-handshake-o">
-                    </i>Ventes Des produits
-                </a>
-            </li>
-            <li>
-                <a style="color:cornflowerblue;text-decoration:none" href="{{ route('liste.vente') }}">
-                    <i class="fa fa-ellipsis-h">
-                    </i>Details des Ventes
-                </a>
-            </li>
+            @can('utilisateur')
+                <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
+                    <i class="fa fa-cart-plus fa-3x"></i>Ventes
+                </li>
+            @endcan
+            @can('admin')
+                <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
+                    <i class="fa fa-cart-plus fa-3x"></i>Ventes
+                </li>
+            @endcan
+            @can('utilisateur')
+                <li>
+                    <a style="color:cornflowerblue;text-decoration: none" href="{{ route('vente') }}">
+                        <i class="fa fa-handshake-o">
+                        </i>Ventes Des produits
+                    </a>
+                </li>
+            @endcan
+            @can('utilisateur')
+                <li>
+                    <a style="color:cornflowerblue;text-decoration:none" href="{{ route('liste.vente') }}">
+                        <i class="fa fa-ellipsis-h">
+                        </i>Details des Ventes
+                    </a>
+                </li>
+            @endcan
+            @can('admin')
+                <li>
+                    <a style="color:cornflowerblue;text-decoration:none" href="{{ route('liste.vente') }}">
+                        <i class="fa fa-ellipsis-h">
+                        </i>Details des Ventes
+                    </a>
+                </li>
+            @endcan
             {{-- <li>
                 <a style="color:cornflowerblue;text-decoration:none" href="">
                     <i class="fa fa-user-md">
                     </i>Ventes Suspendues
                 </a>
             </li> --}}
-            <li>
-                <a style="color:cornflowerblue;text-decoration:none" href="{{ route('chart') }}"> <i
-                        class="fa fa-line-chart">
-                    </i>Statistique des Ventes
-                </a>
-            </li>
+            @can('admin')
+                <li>
+                    <a style="color:cornflowerblue;text-decoration:none" href="{{ route('chart') }}"> <i
+                            class="fa fa-line-chart">
+                        </i>Statistique des Ventes
+                    </a>
+                </li>
+            @endcan
+            @can('utilisateur')
+                <li>
+                    <a style="color:cornflowerblue;text-decoration:none" href="{{ route('chart') }}"> <i
+                            class="fa fa-line-chart">
+                        </i>Statistique des Ventes
+                    </a>
+                </li>
+            @endcan
             {{-- <li>
                 <a style="color:cornflowerblue">
                     <i class="fa fa-user-md">
                     </i>Facture
                 </a>
             </li> --}}
-            <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
-                <i class="	fa fa-child fa-3x"></i>CLIENTS
-            </li>
-            <li>
-                <a href="{{ route('client.liste') }}" style="text-decoration:none;color:cornflowerblue">
-                    <i class="fa fa-users">
-                    </i>
-                    nos Clients
-                </a>
-            </li>
+            @can('admin')
+                <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
+                    <i class="	fa fa-child fa-3x"></i>CLIENTS
+                </li>
+                <li>
+                    <a href="{{ route('client.liste') }}" style="text-decoration:none;color:cornflowerblue">
+                        <i class="fa fa-users">
+                        </i>
+                        nos Clients
+                    </a>
+                </li>
+            @endcan
+            @can('utilisateur')
+                <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
+                    <i class="	fa fa-child fa-3x"></i>CLIENTS
+                </li>
+                <li>
+                    <a href="{{ route('client.liste') }}" style="text-decoration:none;color:cornflowerblue">
+                        <i class="fa fa-users">
+                        </i>
+                        nos Clients
+                    </a>
+                </li>
+            @endcan
             {{-- @endcan --}}
             {{-- @can('utilisateur') --}}
 
@@ -174,17 +225,30 @@
                     </a>
                 </li>
             @endcan
-
-            <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
-                <i class="	fa fa-exclamation-circle fa-3x"></i>&nbsp;&nbsp;aide
-            </li>
-            <li>
-                <a href="{{ route('infos') }}" style="text-decoration:none;color:cornflowerblue">
-                    <i class="fa fa-info-circle">
-                    </i>
-                    Info application
-                </a>
-            </li>
+            @can('admin')
+                <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
+                    <i class="	fa fa-exclamation-circle fa-3x"></i>&nbsp;&nbsp;aide
+                </li>
+                <li>
+                    <a href="{{ route('infos') }}" style="text-decoration:none;color:cornflowerblue">
+                        <i class="fa fa-info-circle">
+                        </i>
+                        Info application
+                    </a>
+                </li>
+            @endcan
+            @can('utilisateur')
+                <li class="app-sidebar__heading" style="color: whitesmoke;font-style:italic">
+                    <i class="	fa fa-exclamation-circle fa-3x"></i>&nbsp;&nbsp;aide
+                </li>
+                <li>
+                    <a href="{{ route('infos') }}" style="text-decoration:none;color:cornflowerblue">
+                        <i class="fa fa-info-circle">
+                        </i>
+                        Info application
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </div>

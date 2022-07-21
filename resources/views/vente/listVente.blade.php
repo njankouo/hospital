@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/select.dataTables.min.css') }}">
 @extends('layouts.master')
+@section('title', 'PHARMACIE |ETATS DES VENTES ')
 @section('contenu')
     @if (session('success'))
         <div class="col-sm-12">
@@ -213,4 +214,4 @@
                 });
         });
     </script>
-@endsection
+@stop

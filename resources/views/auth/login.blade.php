@@ -58,12 +58,12 @@
                                                 mb-4">
                                             <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                                         </div>
-                                        @if (Route::has('password.request'))
+                                        {{-- @if (Route::has('password.request'))
                                             <a class="btn btn-link" href="{{ route('password.request') }}"
                                                 style="font-size: 15px">
                                                 Forgot your password
                                             </a>
-                                        @endif
+                                        @endif --}}
                                         <p class="mb-5 pb-lg-2" style="color: #393f81;">Identifiant oubliez? <a
                                                 href="#!" style="color: #393f81;">Register here</a></p>
                                         <a href="#!" class="small text-muted">Application gestion.</a>

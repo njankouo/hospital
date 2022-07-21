@@ -64,6 +64,7 @@ fournisseur::create([
 public function pdf(){
     $fournisseur=fournisseur::all();
     $pdf=PDF::LoadView('fournisseur.pdf',compact('fournisseur'))->setOptions(['setPaper'=>'A4']);
+    $pdf->setpaper('A4','landscape');
   return  $pdf->stream();
 }
 public function edit($id){

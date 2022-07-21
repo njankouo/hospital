@@ -2,11 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>fournisseur</title>
+    <title>LISTE DES FOURNISSEURS</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
-
     <style>
         body {
             font-size: 15px
@@ -24,9 +22,10 @@
         }
 
         .logo {
-            width: 20%;
+            width: 18%;
             margin-right: 2%;
-            height: 22%;
+            height: 33%;
+            margin-top: 10px;
         }
 
         #inventory-invoice {
@@ -37,12 +36,7 @@
             text-decoration: none ! important;
         }
 
-        .invoice {
-            position: relative;
-            background-color: #FFF;
-            min-height: 480px;
-            padding: 12px
-        }
+
 
         .invoice header {
             padding: 10px 0;
@@ -98,22 +92,7 @@
             border: 1px solid #fff;
         }
 
-        .invoice table td h3 {
-            margin: 0;
-            font-weight: 300;
-            color: #3989c6;
-            font-size: 5px;
-        }
 
-        .invoice table tfoot td {
-            background: 0 0;
-            border-bottom: none;
-            white-space: nowrap;
-            text-align: right;
-            padding: 5px 10px;
-            font-size: 8px;
-            border-top: 1px solid #aaa
-        }
 
         .invoice table tfoot tr:first-child td {
             border-top: none
@@ -137,30 +116,13 @@
             border-top: 1px solid #aaa;
             padding: 8px 0
         }
-
-        @media print {
-            .invoice {
-                font-size: 11px !important;
-                overflow: hidden !important
-            }
-
-            .invoice footer {
-                position: absolute;
-                bottom: 8px;
-                page-break-after: always
-            }
-
-            .invoice>div:last-child {
-                page-break-before: always
-            }
-        }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="row text-center">
+    <div class="container" style="margin-right: 20px">
+        <div>
 
             <img src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents('img/logo.jpg')); ?>" style="float: right;" class="logo">
 
@@ -168,8 +130,9 @@
             <h6>VALLEE MANGA BELL DOUALA-BALI</h6>
             <h6>TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945</h6>
             <h6>
-
+                DATE DELIVRANCE: {{ \Carbon\Carbon::now() }}
             </h6>
+
         </div>
 
 
@@ -177,9 +140,16 @@
 
             <div class="invoice overflow-auto">
                 <div>
+                    <h4 style="text-align: center;margin-top:0px">Liste Des Fournisseurs
+
+                    </h4>
                     <main>
 
-                        <table class="table my-4 text-center mx-4">
+                        <hr>
+
+
+
+                        <table class="table my-4 text-center mx-4" style="margin-left: 45px;text-align: center">
                             <thead class="text-dark">
                                 <tr>
                                     <th>fournisseur</th>
@@ -207,8 +177,12 @@
                             </tfoot>
                             </tbody>
                         </table>
+
                     </main>
-                    <footer style="font-size: 15px">
+
+
+
+                    <footer style="font-size: 8px">
                         Centre Medico-churirgical d'urologie situé a la Vallée Douala Manga Bell
                         Douala-Bali.
                         TEL: (+ 237) 233 423 389 / 674 068 988 / 698 873 945.
