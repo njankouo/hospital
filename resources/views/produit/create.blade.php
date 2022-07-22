@@ -26,8 +26,7 @@
 
 
                                 <label for="">FORME GALLELIQUE</label>
-                                <select class="@error('categorie_id') is-invalid @enderror form-control my-2"
-                                    data-live-search="true" name="categorie_id">
+                                <select class="form-control my-2" data-live-search="true" name="categorie_id">
                                     <optgroup label="selectionner la categorie">
                                         <option value="">.......</option>
                                         @foreach ($categorie as $cat)
@@ -35,10 +34,9 @@
                                         @endforeach
                                     </optgroup>
                                 </select>
-
-                                @error('categorie_id')
+                                {{-- @error('categorie_id')
                                     <p class="text-danger">{{ $message }}</p>
-                                @enderror
+                                @enderror --}}
                             </div>
 
 
@@ -51,11 +49,11 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                                 <label for="">GRAMMAGE/TAILLE</label>
-                                <input type="text" class="my-2 form-control @error('grammage') is-invalid @enderror"
-                                    id="inputSuccess" placeholder="Enter ..." name="grammage">
-                                @error('grammage')
+                                <input type="text" class="my-2 form-control" id="inputSuccess" placeholder="Enter ..."
+                                    name="grammage">
+                                {{-- @error('grammage')
                                     <p class="text-danger">{{ $message }}</p>
-                                @enderror
+                                @enderror --}}
                             </div>
 
                             <div class="col-6">

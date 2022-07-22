@@ -14,6 +14,20 @@
     <link rel="icon" href="{{ asset('img/icon.png') }}">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+    <style>
+        .loader {
+            position: fixed;
+
+            height: 100%;
+            width: 100%;
+            padding-left: 10%;
+            margin: 0 auto;
+            z-index: 99999;
+            padding-top: 60%;
+        }
+    </style>
+
     <style>
         body {
             cursor: pointer;
@@ -21,6 +35,7 @@
     </style>
 
 <body>
+
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
@@ -112,6 +127,11 @@
                                         </div>
                                     @endcan
                                 </div>
+                                {{-- <div class="loader">
+
+
+                                    <img src="{{ asset('img/bureau.gif') }}" alt="">
+                                </div> --}}
                                 {{-- <div class="page-title-actions">
 
                                     <div class="d-inline-block dropdown">
@@ -159,6 +179,14 @@
                 <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
                 <script src="{{ mix('js/app.js') }}"></script>
 
+                {{-- <script>
+                    $(function() {
+
+                        setTimeout(() => {
+                            $(".loader").fadeOut(500);
+                        }, 300);
+                    })
+                </script> --}}
 </body>
 
 </html>

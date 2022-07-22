@@ -25,7 +25,7 @@ public function addLivraison(Request $request){
                   'reglement' => $request->reglement,
             )
         ]);
-        session()->flash('success', 'commande ajouté avec success !');
+        session()->flash('success', 'livraison ajouté avec success !');
 
         return redirect()->route('group.livraison');
 

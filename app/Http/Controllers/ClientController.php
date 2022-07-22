@@ -26,7 +26,7 @@ class ClientController extends Controller
         $request->validate([
             'nom'=>'required',
             //'prenom'=>'required',
-            'sexe'=>'required',
+            //'sexe'=>'required',
            // 'email'=>'required|unique:clients,email',
             'adresse'=>'required',
            // 'numeroCNI'=>'required|unique:clients,numeroCNI',
@@ -36,7 +36,7 @@ class ClientController extends Controller
 
          'nom.required'=>'veuillez renseigner le nom svp',
               // 'prenom.required'=>'veuillez renseigner le prenom svp',
-                  'sexe.required'=>'veuillez renseigner le sexe svp',
+                  //'sexe.required'=>'veuillez renseigner le sexe svp',
                      'telephone.required'=>'veuillez renseigner le telephone svp',
                      'adresse.required'=>'renseignez l\'adresse',
                     // 'numeroCNI.required'=>'renseignez le numero de cni',

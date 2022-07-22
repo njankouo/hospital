@@ -69,6 +69,7 @@
                                       <p>{{ $message }}</p>
                                   @enderror
                               </div>
+
                               <label for="">Nom Du Client</label>
                               <select name="client" id=""
                                   class="form-control @error('client') is-invalid @enderror">
@@ -142,6 +143,22 @@
                                   <input type="number" class="form-control @error('remise')  @enderror" name="remise"
                                       style="border-color: indigo">
 
+                              </div>
+                              <div class="col-6">
+                                  <label for=""> Mode De Reglement</label>
+                                  <select name="reglement" class="form-control @error('reglement') is-invalid @enderror"
+                                      id="">
+                                      <optgroup label="selectionnez le mode de reglement">
+                                          <option value="">.....</option>
+                                          <option value="espèce">espèce</option>
+                                          <option value="mobile">Mobile</option>
+                                          <option value="autre">Autre</option>
+                                      </optgroup>
+                                  </select>
+
+                                  @error('reglement')
+                                      <p>{{ $message }}</p>
+                                  @enderror
                               </div>
 
                               <div class="col-8 my-4">

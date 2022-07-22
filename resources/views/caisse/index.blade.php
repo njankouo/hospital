@@ -83,15 +83,19 @@
                                     <th>Date Entée</th>
                                     <th>Designation</th>
                                     <th>montant entré</th>
+                                    <th>reglement</th>
 
 
                                 </tr>
 
                             </thead>
                             <tbody>
+                                @php $total=0 @endphp
                                 @foreach ($caisse as $caisses)
                                     @if ($caisses->date_vente != $carbon->format('Y-m-d'))
                                     @else
+                                        @php $total+= $caisses->pu * $caisses->qte_sortie * (1 - $caisses->remise / 100) @endphp
+
                                         <tr>
                                             <td>{{ $caisses->id }}</td>
                                             <td>{{ $caisses->client }}</td>
@@ -101,6 +105,7 @@
                                                 {{ $caisses->pu * $caisses->qte_sortie * (1 - $caisses->remise / 100) }}
 
                                             </td>
+                                            <td>{{ $caisses->reglement }}</td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -124,7 +129,10 @@
                 </div>
             </div>
         </div>
-
+        <div class="card-footer bg-primary">
+            <p class="text-light" style="font-size: 25px;font-style:italic;float:right;text-decoration:underline">Le montant
+                total des ventes est de:{{ $total }}</p>
+        </div>
     </div>
     {{-- <script>
         $('#example')

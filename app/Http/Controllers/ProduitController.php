@@ -30,14 +30,14 @@ class ProduitController extends Controller
         return view('produit.create',$data);
     }
     public function save(Request $request){
-        try{
+      //  try{
 
 
         $request->validate([
             'designation'=>'required|unique:produits,designation',
-            'categorie_id'=>'required',
+           // 'categorie_id'=>'required',
             'qte'=>'required',
-            'grammage'=>'required',
+           // 'grammage'=>'required',
             'qteseuil'=>'required',
            // 'unite_id'=>'required',
             'pa'=>'required',
@@ -49,11 +49,11 @@ class ProduitController extends Controller
         ],
         [
             'designation.required'=>'renseignez le produit',
-            'categorie_id.required'=>'renseignez la categorie',
+           // 'categorie_id.required'=>'renseignez la categorie',
             'qte.required'=>'renseignez la qte en stock',
-            'grammage.required'=>'renseignez le grammage',
+           // 'grammage.required'=>'renseignez le grammage',
             'qteseuil.required'=>'renseignez la qte seuil',
-            'unite_id.required'=>'renseignez le conditionnement',
+           // 'unite_id.required'=>'renseignez le conditionnement',
             'pa.required'=>'renseignez le prix d\'achat',
             'pv.required'=>'renseignez le prix de vente',
             'rayon_id.required'=>'renseignez le rayon',
@@ -80,10 +80,11 @@ class ProduitController extends Controller
 
             ]);
             return redirect('/produit');
-             }catch(Throwable $th){
-return back()->with('danger');
              }
-    }
+            //  catch(Throwable $th){
+// return back()->with('danger');
+//              }
+   // }
     public function inventairePDF(){
         $produit=Produit::all();
         $pdf=PDF::loadView('produit.pdf',compact('produit'))->setOptions(['setPaper'=>'A4','landscape']);

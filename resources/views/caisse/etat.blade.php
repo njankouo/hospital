@@ -161,10 +161,11 @@
                                     <th>DESIGNATION</th>
                                     <th>QTE</th>
                                     <th>UNITE</th>
-                                    <th>MONTANT</th>
+                                    <th>PU</th>
                                     <th>REMISE</th>
                                     <th>CLIENT</th>
-
+                                    <th>REGLEMENT</th>
+                                    <th>MONTANT TOTAL</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -179,12 +180,14 @@
                                             <td>{{ $etats->produit->designation }}</td>
                                             <td>{{ $etats->qte_sortie }}</td>
                                             <td>{{ $etats->unite }}</td>
+                                            <td>{{ $etats->pu }}</td>
+                                            <td>{{ $etats->remise }}</td>
+                                            <td>{{ $etats->client }}</td>
+                                            <td>{{ $etats->reglement }}</td>
                                             <td>
                                                 {{ $etats->pu * $etats->qte_sortie * (1 - $etats->remise / 100) }}
 
                                             </td>
-                                            <td>{{ $etats->remise }}</td>
-                                            <td>{{ $etats->client }}</td>
 
 
                                         </tr>
@@ -194,7 +197,9 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <p style="text-color:black;float: right;font-style:italic">LE MONTANT TOTAL EST
+                                    <p
+                                        style="text-color:black;float: right;font-style:italic;text-decoration:underline">
+                                        LE MONTANT TOTAL EST
 
                                         : {{ $total }}</p>
                                 </tr><br><br>

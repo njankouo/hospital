@@ -72,8 +72,7 @@
                     {{-- <a href="" class="btn btn-primary" style="float: left;margin-bottom:25px;">
                         <i class="	fa fa-print fa-2x"></i>Impression en fonction des dates
                     </a> --}}
-                    <a href="{{ route('vente.group') }}" class="btn btn-primary"
-                        style="float: right;margin-bottom:15px;">
+                    <a href="{{ route('vente.group') }}" class="btn btn-primary" style="float: right;margin-bottom:15px;">
                         <i class="	fa fa-cloud-upload fa-2x"></i>vente Groupés
                     </a>
 
@@ -99,6 +98,8 @@
                                 <th class="th-sm">Remise</th>
                                 <th class="th-sm">PTTC</th>
                                 <th class="th-sm">Date vente
+                                </th>
+                                <th class="th-sm">Reglement
                                 </th>
 
 
@@ -138,6 +139,7 @@
                                     <td>{{ $details->pu * $details->qte_sortie * (1 - $details->remise / 100) }}
                                     </td>
                                     <td>{{ $details->date_vente }}</td>
+                                    <td>{{ $details->reglement }}</td>
                                     <td>{{ $details->client }}</td>
                                     <td>{{ $details->user }}</td>
                                     <td>

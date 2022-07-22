@@ -75,7 +75,7 @@
                                 <td>{{ $produits->pv }}</td>
                                 <td>{{ $produits->pu }}</td>
                                 <td>{{ $produits->qtestock }}</td>
-                                <td>{{ $produits->type->nom }}</td>
+                                <td>{{ optional($produits->type)->nom }}</td>
                                 <td>{{ $produits->fournisseur->nom }}</td>
                                 <td>{{ $produits->stock_seuil }}</td>
                                 <td>{{ $produits->date_fabrication }}</td>

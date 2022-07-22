@@ -19,16 +19,16 @@ class CreateProduitsTable extends Migration
             $table->string('photo')->nullable();
              $table->string('equivalence')->nullable();
             $table->integer('qtestock');
-            $table->integer('stock_seuil');
+            $table->integer('stock_seuil')->nullable();
             $table->integer('pu');
             $table->integer('pv');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->date('date_peremption')->nullable();
              $table->date('date_fabrication')->nullable();
             $table->string('grammage')->nullable();
             $table->foreignId('rayon_id')->constrained('rayons');
             $table->foreignId('type_article_id')->constrained('type_articles')->nullable();
-             $table->foreignId('categorie_id')->constrained('categories');
+             $table->foreignId('categorie_id')->constrained('categories')->nullable();
              $table->foreignId('fournisseur_id')->constrained('fournisseurs');
 
             $table->timestamps();

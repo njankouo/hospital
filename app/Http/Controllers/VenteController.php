@@ -62,14 +62,16 @@ class VenteController extends Controller
         return view('vente.venteProduit',compact('vente','type','produit','client','user'));
     }
     public function venteProduit(Request $request){
-        $request->validate([
+        try {
+             $request->validate([
             'client'=>'required',
             'produit'=>'required',
             'qte'=>'required',
             'pu'=>'required',
             'code'=>'required',
             'date'=>'required',
-            'unite'=>'required'
+            'unite'=>'required',
+            'reglement'=>'required'
 
         ],[
            'client.required'=>'renseignez le client',
@@ -78,7 +80,8 @@ class VenteController extends Controller
             'pu.required'=>'renseignez le pu',
             'code.required'=>'renseignez le code',
             'date.required'=>'renseignez la date',
-            'unite.required'=>'renseignez l\'unite'
+            'unite.required'=>'renseignez l\'unite',
+            'reglement.required'=>'renseignez le mode de reglement'
         ]);
 
         VenteProduit::create([
@@ -91,15 +94,21 @@ class VenteController extends Controller
             'client'=>$request->client,
             'user'=>$request->user,
             'date_vente'=>$request->date,
-            'remise'=>$request->remise
+            'remise'=>$request->remise,
+            'reglement'=>$request->reglement
         ]);
 
 
         return back()->with('success','vente effectuée avec success!');
         Session::flash('message','This is a flash message!');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return back()->with('error','vente non effectue');
+        }
+
     }
     public function listeVente(){
-        $detail=VenteProduit::all();
+       // $detail=VenteProduit::all();
          $carbon=\Carbon\Carbon::now();
         if (request()->start_date || request()->end_date) {
         $start_date = Carbon::parse(request()->start_date)->toDateTimeString();

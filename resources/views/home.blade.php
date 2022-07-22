@@ -77,6 +77,7 @@
             @endif
         @endforeach
     @endcan
+
     @can('utilisateur')
         @foreach ($produit as $produits)
             @if ($produits->qtestock < $produits->stock_seuil)

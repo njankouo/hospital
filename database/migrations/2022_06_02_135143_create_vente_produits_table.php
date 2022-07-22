@@ -23,6 +23,7 @@ class CreateVenteProduitsTable extends Migration
             $table->foreignId('produit_id')->constrained('produits')->onDelete('cascade');
             $table->string('client');
             $table->string('user');
+            $table->string('reglement');
             $table->string('unite');
             $table->integer('remise')->nullable();
             $table->timestamps();
