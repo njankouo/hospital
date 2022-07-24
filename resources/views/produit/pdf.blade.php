@@ -210,7 +210,7 @@
                                             <td>{{ $produits->equivalence }}</td>
                                             <td>{{ $produits->qtestock }}</td>
                                             <td>{{ $produits->stock_seuil }}</td>
-                                            <td>{{ $produits->type->nom }}</td>
+                                            <td>{{ optional($produits->type)->nom }}</td>
                                             <td>{{ $produits->pu }}</td>
                                             <td>{{ $produits->pv }}</td>
                                             <td>{{ $produits->grammage }}</td>

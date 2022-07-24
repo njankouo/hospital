@@ -1,26 +1,8 @@
   <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
   <script src="{{ asset('js/jquery.typeahead.min.js') }}"></script>
-  <script type="text/javascript">
-      var route = "{{ url('autocomplete') }}";
-      $('#search').typeahead({
-          source: function(query, process) {
-              return $.get(route, {
-                  query: query
-              }, function(data) {
-                  return process(data);
-              });
-          }
-      });
-  </script>
-  <script type="text/javascript">
-      $(document).ready(function() {
-          $(document).on('Change', '.produit_name', function() {
-              console.log("je suis un prduit");
 
-          });
-      });
-  </script>
+
   @extends('layouts.master')
 
   @section('contenu')
@@ -82,7 +64,7 @@
                               @enderror
                               <div class="col-6">
                                   <label for="">****produits</label>
-                                  <select name="produit" id=""
+                                  <select name="produit" id="getSize"
                                       class="form-control my-2 @error('produit') is-invalid @enderror produit_name"
                                       style="border-color: indigo">
                                       <option value="">.....</option>
@@ -102,7 +84,7 @@
                               <div class="col-6">
                                   <label for="">****unite </label>
                                   <select name="unite" id=""
-                                      class="form-control my-2 @error('unite') is-invalid @enderror"
+                                      class="form-control my-2 @error('unite') is-invalid @enderror productcategory"
                                       style="border-color: indigo">
                                       <option value="">.....</option>
                                       @foreach ($type as $types)
@@ -124,8 +106,7 @@
                               </div> --}}
                               <div class="col-6">
                                   <label for="">****pu</label>
-                                  <input type="number" class="form-control @error('pu')  @enderror" name="pu"
-                                      style="border-color: indigo">
+                                  <input type="text" class="form-control pu" name="pu" style="border-color: indigo">
                                   @error('pu')
                                       <p>{{ $message }}</p>
                                   @enderror
@@ -160,7 +141,7 @@
                                       <p>{{ $message }}</p>
                                   @enderror
                               </div>
-
+                              <p class="pu text-dark" id="pu"></p>
                               <div class="col-8 my-4">
                                   <button type="submit" class="btn btn-primary mx-1">valider la vente</button>
 
@@ -172,4 +153,32 @@
               <div class="card-footer bg-dark"></div>
           </div>
       </div>
+      <script>
+          $(document).ready(function() {
+              $(document).on('change', '.produit_name', function() {
+                  var prod_id = $(this).val();
+                  var a = $(this).parent();
+                  $.ajax({
+                      type: 'get',
+                      url: '/get-product-price',
+                      data: {
+                          'id': prod_id
+                      },
+                      dataType: 'json',
+
+                      success: function(data) {
+                          // console.log("pv");
+                          // console.log(data);
+                          //  a.find('.pu').val(data.pv)
+                          //jquery('.pu').html(data);
+                          $(".pu").val(data.pv);
+                      },
+                      error: function() {
+
+
+                      }
+                  });
+              });
+          });
+      </script>
   @endsection

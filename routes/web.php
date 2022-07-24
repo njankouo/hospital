@@ -154,3 +154,6 @@ Route::post('Group/livraison/delete',[CartController::class,'deleteL'])->name('c
 
 Route::post('cart/enlever',[VenteController::class,'deleteOne'])->name('cart.remove');
 Route::post('/Group/livraison/Delete',[CartController::class,'SupprimeOne'])->name('supprimer.one');
+/**route generation */
+
+Route::get('/get-product-price',[VenteController::class,'getprice']);

@@ -51,7 +51,7 @@
             <li class="dropdown nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-link-icon fa fa-diamond"></i>
-                    {{ optional(auth()->user()->role)->nom }}
+                    {{ auth()->user()->role->nom ?? 'vous n\'avez aucun role affecté' }}
                 </a>
             </li>
         </ul>
@@ -64,8 +64,7 @@
                     <div class="widget-content-left">
                         <div class="btn-group">
                             <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                <img width="42" class="rounded" src="{{ asset('img/pharma.jpg') }}"
-                                    alt="">
+                                <img width="42" class="rounded" src="{{ asset('img/pharma.jpg') }}" alt="">
                                 <i class="fa fa-angle-down ml-2 opacity-8 text-light"></i>
                             </a>
                             <div tabindex="-1" role="menu" aria-hidden="true"
@@ -78,8 +77,7 @@
                                         deconnexion
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </h6>

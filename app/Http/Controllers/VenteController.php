@@ -294,5 +294,10 @@ public function clearAllCart()
 
         return redirect()->route('vente.group');
     }
+public function getprice(Request $request){
 
+
+$p=Produit::select('pv')->where('id',$request->id)->first();
+return response()->json($p);
+}
 }
