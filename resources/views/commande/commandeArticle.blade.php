@@ -151,4 +151,32 @@
         </div>
     </div>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('change', '.produit', function() {
+                var prod_id = $(this).val();
+                var a = $(this).parent();
+                $.ajax({
+                    type: 'get',
+                    url: '/charger/price',
+                    data: {
+                        'id': prod_id
+                    },
+                    dataType: 'json',
+
+                    success: function(data) {
+                        // console.log("pv");
+                        // console.log(data);
+                        //  a.find('.pu').val(data.pv)
+                        //jquery('.pu').html(data);
+                        $(".pu").val(data.pu);
+                    },
+                    error: function() {
+
+
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -40,14 +40,15 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table pharmacie.categories : ~2 rows (environ)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT INTO `categories` (`id`, `libelle`, `created_at`, `updated_at`) VALUES
 	(1, 'pillule', '2022-07-22 08:10:44', '2022-07-22 08:10:44'),
 	(2, 'injectable', '2022-07-22 08:10:57', '2022-07-22 08:10:57'),
-	(3, 'epiderme', '2022-07-22 08:11:12', '2022-07-22 08:11:12');
+	(3, 'epiderme', '2022-07-22 08:11:12', '2022-07-22 08:11:12'),
+	(4, 'liquide', '2022-07-24 20:40:35', '2022-07-24 20:40:35');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
 -- Listage de la structure de la table pharmacie. clients
@@ -86,12 +87,17 @@ CREATE TABLE IF NOT EXISTS `commandes` (
   PRIMARY KEY (`id`),
   KEY `commandes_fournisseur_id_foreign` (`fournisseur_id`),
   CONSTRAINT `commandes_fournisseur_id_foreign` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table pharmacie.commandes : ~0 rows (environ)
+-- Listage des données de la table pharmacie.commandes : ~5 rows (environ)
 /*!40000 ALTER TABLE `commandes` DISABLE KEYS */;
 INSERT INTO `commandes` (`id`, `fournisseur_id`, `code_commande`, `date_commande`, `date_livraison`, `status`, `created_at`, `updated_at`) VALUES
-	(1, 2, '', '2022-07-22', '2022-07-31', 'en cours', '2022-07-22 08:51:07', '2022-07-22 08:51:07');
+	(1, 2, '', '2022-07-22', '2022-07-31', 'en cours', '2022-07-22 08:51:07', '2022-07-22 08:51:07'),
+	(2, 1, '', '2022-07-22', '2022-07-24', 'en cours', '2022-07-22 11:07:35', '2022-07-22 11:07:35'),
+	(3, 1, '', '2022-07-24', '2022-07-31', 'en cours', '2022-07-24 15:03:19', '2022-07-24 15:03:19'),
+	(4, 1, '', '2022-07-24', '2022-07-30', 'en cours', '2022-07-24 20:34:04', '2022-07-24 20:34:04'),
+	(5, 2, '', '2022-07-24', '2022-07-24', 'en cours', '2022-07-24 21:50:04', '2022-07-24 21:50:04'),
+	(6, 2, '', '2022-07-24', '2022-07-24', 'en cours', '2022-07-24 21:52:41', '2022-07-24 21:52:41');
 /*!40000 ALTER TABLE `commandes` ENABLE KEYS */;
 
 -- Listage de la structure de la table pharmacie. conditionnements
@@ -185,15 +191,25 @@ CREATE TABLE IF NOT EXISTS `livraisons_tabls` (
   KEY `livraisons_tabls_commande_id_foreign` (`commande_id`),
   CONSTRAINT `livraisons_tabls_commande_id_foreign` FOREIGN KEY (`commande_id`) REFERENCES `commandes` (`id`),
   CONSTRAINT `livraisons_tabls_produit_id_foreign` FOREIGN KEY (`produit_id`) REFERENCES `produits` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table pharmacie.livraisons_tabls : ~4 rows (environ)
+-- Listage des données de la table pharmacie.livraisons_tabls : ~12 rows (environ)
 /*!40000 ALTER TABLE `livraisons_tabls` DISABLE KEYS */;
 INSERT INTO `livraisons_tabls` (`id`, `qte`, `pu`, `produit_id`, `unite`, `fournisseur`, `date_commande`, `date_livraison`, `status`, `commande_id`, `created_at`, `updated_at`) VALUES
 	(1, 50, 1500, 2, 'boite', 'bano', '2022-07-22', '2022-07-31', 'validé', 1, '2022-07-22 08:52:53', '2022-07-22 08:52:53'),
 	(2, 90, 1500, 1, 'boite', 'bano', '2022-07-22', '2022-07-31', 'validé', 1, '2022-07-22 08:53:04', '2022-07-22 08:53:04'),
 	(3, 50, 1500, 3, 'carton', 'bano', '2022-07-22', '2022-07-31', 'validé', 1, '2022-07-22 10:37:47', '2022-07-22 10:37:47'),
-	(4, 50, 1900, 4, 'carton', 'bano', '2022-07-22', '2022-07-31', 'validé', 1, '2022-07-22 10:38:01', '2022-07-22 10:38:01');
+	(4, 50, 1900, 4, 'carton', 'bano', '2022-07-22', '2022-07-31', 'validé', 1, '2022-07-22 10:38:01', '2022-07-22 10:38:01'),
+	(5, 10, 1500, 5, 'carton', 'kalil', '2022-07-22', '2022-07-24', 'validé', 2, '2022-07-22 11:08:48', '2022-07-22 11:08:48'),
+	(6, 20, 1500, 6, 'carton', 'kalil', '2022-07-22', '2022-07-24', 'validé', 2, '2022-07-22 11:09:13', '2022-07-22 11:09:13'),
+	(7, 50, 3500, 7, 'boite', 'kalil', '2022-07-24', '2022-07-31', 'validé', 3, '2022-07-24 15:04:09', '2022-07-24 15:04:09'),
+	(8, 50, 1500, 2, 'boite', 'kalil', '2022-07-24', '2022-07-31', 'validé', 3, '2022-07-24 20:32:14', '2022-07-24 20:32:14'),
+	(9, 50, 1700, 7, 'boite', 'kalil', '2022-07-24', '2022-07-31', 'validé', 3, '2022-07-24 20:32:53', '2022-07-24 20:32:53'),
+	(10, 40, 1500, 5, 'boite', 'kalil', '2022-07-24', '2022-07-31', 'validé', 3, '2022-07-24 20:33:29', '2022-07-24 20:33:29'),
+	(11, 50, 1560, 6, 'boite', 'kalil', '2022-07-24', '2022-07-31', 'validé', 3, '2022-07-24 20:33:45', '2022-07-24 20:33:45'),
+	(12, 50, 1500, 8, 'boite', 'kalil', '2022-07-24', '2022-07-30', 'validé', 4, '2022-07-24 20:34:37', '2022-07-24 20:34:37'),
+	(13, 10, 1500, 8, 'boite', 'kalil', '2022-07-24', '2022-07-30', 'validé', 4, '2022-07-24 21:49:11', '2022-07-24 21:49:11'),
+	(14, 40, 2000, 8, 'plastique', 'bano', '2022-07-24', '2022-07-24', 'validé', 5, '2022-07-24 21:51:07', '2022-07-24 21:51:07');
 /*!40000 ALTER TABLE `livraisons_tabls` ENABLE KEYS */;
 
 -- Listage de la structure de la table pharmacie. migrations
@@ -318,17 +334,19 @@ CREATE TABLE IF NOT EXISTS `produits` (
   CONSTRAINT `produits_fournisseur_id_foreign` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`),
   CONSTRAINT `produits_rayon_id_foreign` FOREIGN KEY (`rayon_id`) REFERENCES `rayons` (`id`),
   CONSTRAINT `produits_type_article_id_foreign` FOREIGN KEY (`type_article_id`) REFERENCES `type_articles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table pharmacie.produits : ~6 rows (environ)
+-- Listage des données de la table pharmacie.produits : ~5 rows (environ)
 /*!40000 ALTER TABLE `produits` DISABLE KEYS */;
 INSERT INTO `produits` (`id`, `designation`, `photo`, `equivalence`, `qtestock`, `stock_seuil`, `pu`, `pv`, `status`, `date_peremption`, `date_fabrication`, `grammage`, `rayon_id`, `type_article_id`, `categorie_id`, `fournisseur_id`, `created_at`, `updated_at`) VALUES
-	(1, 'doliprane', NULL, NULL, 80, 45, 1200, 1500, '', NULL, NULL, '25g', 1, 2, 1, 2, '2022-07-22 08:43:43', '2022-07-22 08:43:43'),
-	(2, 'paracetamol', NULL, NULL, 40, 32, 1500, 2500, '', NULL, NULL, '65g', 1, 2, 1, 2, '2022-07-22 08:44:25', '2022-07-22 08:44:25'),
+	(1, 'doliprane', NULL, NULL, 90, 45, 1200, 1500, '', NULL, NULL, '25g', 1, 2, 1, 2, '2022-07-22 08:43:43', '2022-07-22 08:43:43'),
+	(2, 'paracetamol', NULL, NULL, 90, 32, 1500, 2500, '', NULL, NULL, '65g', 1, 2, 1, 2, '2022-07-22 08:44:25', '2022-07-22 08:44:25'),
 	(3, 'ziagen', NULL, NULL, 50, 30, 1500, 2500, '', NULL, NULL, '10', 1, 2, 1, 2, '2022-07-22 10:25:40', '2022-07-22 10:25:40'),
 	(4, 'zovirax', NULL, NULL, 50, 10, 13200, 12500, '', NULL, NULL, '2g', 1, 1, 1, 1, '2022-07-22 10:28:05', '2022-07-22 10:28:05'),
-	(5, 'reopro', NULL, NULL, 0, 10, 1500, 1500, '', NULL, NULL, NULL, 2, 2, NULL, 2, '2022-07-22 10:52:31', '2022-07-22 10:52:31'),
-	(6, 'diamox', NULL, NULL, 0, 1250, 1580, 2500, '', NULL, NULL, NULL, 1, NULL, NULL, 1, '2022-07-22 10:54:36', '2022-07-22 10:54:36');
+	(5, 'reopro', NULL, NULL, 48, 10, 1500, 1500, '', NULL, NULL, NULL, 2, 2, NULL, 2, '2022-07-22 10:52:31', '2022-07-22 10:52:31'),
+	(6, 'diamox', NULL, NULL, 70, 10, 1580, 2500, '', NULL, NULL, NULL, 1, NULL, NULL, 1, '2022-07-22 10:54:36', '2022-07-22 11:09:36'),
+	(7, 'kardegic', NULL, NULL, 100, 45, 3500, 3600, '', NULL, NULL, '12mg', 1, 2, 1, 1, '2022-07-24 15:02:35', '2022-07-24 15:02:35'),
+	(8, 'signal', NULL, NULL, 99, 80, 2000, 2500, '', NULL, NULL, '50mg', 2, 1, 3, 1, '2022-07-24 20:28:14', '2022-07-24 21:49:48');
 /*!40000 ALTER TABLE `produits` ENABLE KEYS */;
 
 -- Listage de la structure de la table pharmacie. produit_commande
@@ -354,15 +372,26 @@ CREATE TABLE IF NOT EXISTS `produit_commande` (
   KEY `produit_commande_commande_id_foreign` (`commande_id`),
   CONSTRAINT `produit_commande_commande_id_foreign` FOREIGN KEY (`commande_id`) REFERENCES `commandes` (`id`) ON DELETE CASCADE,
   CONSTRAINT `produit_commande_produit_id_foreign` FOREIGN KEY (`produit_id`) REFERENCES `produits` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table pharmacie.produit_commande : ~4 rows (environ)
+-- Listage des données de la table pharmacie.produit_commande : ~15 rows (environ)
 /*!40000 ALTER TABLE `produit_commande` DISABLE KEYS */;
 INSERT INTO `produit_commande` (`id`, `qte`, `pu`, `fournisseur`, `date_commande`, `date_livraison`, `status`, `reglement`, `pourcentage`, `unite`, `tva`, `remise`, `produit_id`, `commande_id`, `created_at`, `updated_at`) VALUES
 	(1, 50, 1500, 'bano', '2022-07-22', '2022-07-31', 'validé', 'espece', '', 'boite', 0, NULL, 2, 1, '2022-07-22 08:51:28', '2022-07-22 08:52:53'),
 	(2, 90, 1500, 'bano', '2022-07-22', '2022-07-31', 'validé', 'espece', '', 'boite', 0, NULL, 1, 1, '2022-07-22 08:51:50', '2022-07-22 08:53:03'),
 	(3, 50, 1500, 'bano', '2022-07-22', '2022-07-31', 'validé', 'espece', '', 'carton', 0, NULL, 3, 1, '2022-07-22 10:33:22', '2022-07-22 10:37:47'),
-	(4, 50, 1900, 'bano', '2022-07-22', '2022-07-31', 'validé', 'mobile', '', 'carton', 0, NULL, 4, 1, '2022-07-22 10:33:38', '2022-07-22 10:38:01');
+	(4, 50, 1900, 'bano', '2022-07-22', '2022-07-31', 'validé', 'mobile', '', 'carton', 0, NULL, 4, 1, '2022-07-22 10:33:38', '2022-07-22 10:38:01'),
+	(5, 10, 1500, 'kalil', '2022-07-22', '2022-07-24', 'validé', 'espece', '', 'carton', 0, NULL, 5, 2, '2022-07-22 11:07:58', '2022-07-22 11:08:48'),
+	(6, 20, 1500, 'kalil', '2022-07-22', '2022-07-24', 'validé', 'mobile', '', 'carton', 0, NULL, 6, 2, '2022-07-22 11:08:19', '2022-07-22 11:09:13'),
+	(7, 50, 3500, 'kalil', '2022-07-24', '2022-07-31', 'validé', 'espece', '', 'boite', 0, NULL, 7, 3, '2022-07-24 15:03:39', '2022-07-24 15:04:09'),
+	(8, 50, 1500, 'kalil', '2022-07-24', '2022-07-31', 'validé', 'mobile', '', 'boite', 0, NULL, 2, 3, '2022-07-24 20:29:34', '2022-07-24 20:32:14'),
+	(9, 40, 1500, 'kalil', '2022-07-24', '2022-07-31', 'validé', 'espece', '', 'boite', 0, NULL, 5, 3, '2022-07-24 20:29:51', '2022-07-24 20:33:29'),
+	(10, 50, 1700, 'kalil', '2022-07-24', '2022-07-31', 'validé', 'mobile', '', 'boite', 0, NULL, 7, 3, '2022-07-24 20:30:14', '2022-07-24 20:32:53'),
+	(11, 50, 1560, 'kalil', '2022-07-24', '2022-07-31', 'validé', 'mobile', '', 'boite', 0, NULL, 6, 3, '2022-07-24 20:30:35', '2022-07-24 20:33:45'),
+	(12, 50, 1500, 'kalil', '2022-07-24', '2022-07-30', 'validé', 'mobile', '', 'boite', 0, NULL, 8, 4, '2022-07-24 20:34:26', '2022-07-24 20:34:37'),
+	(13, 10, 1500, 'kalil', '2022-07-24', '2022-07-30', 'validé', 'espece', '', 'boite', 0, NULL, 8, 4, '2022-07-24 21:48:57', '2022-07-24 21:49:11'),
+	(14, 40, 2000, 'bano', '2022-07-24', '2022-07-24', 'validé', 'mobile', '', 'plastique', 0, NULL, 8, 5, '2022-07-24 21:50:29', '2022-07-24 21:51:07'),
+	(15, 10, 1500, 'bano', NULL, NULL, 'encours', 'espece', '', 'boite', 0, NULL, 3, 6, '2022-07-24 21:53:05', '2022-07-24 21:53:05');
 /*!40000 ALTER TABLE `produit_commande` ENABLE KEYS */;
 
 -- Listage de la structure de la table pharmacie. produit_pharmacie
@@ -422,13 +451,15 @@ CREATE TABLE IF NOT EXISTS `type_articles` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table pharmacie.type_articles : ~2 rows (environ)
+-- Listage des données de la table pharmacie.type_articles : ~4 rows (environ)
 /*!40000 ALTER TABLE `type_articles` DISABLE KEYS */;
 INSERT INTO `type_articles` (`id`, `nom`) VALUES
 	(1, 'carton'),
-	(2, 'boite');
+	(2, 'boite'),
+	(3, 'plastique'),
+	(4, 'sac');
 /*!40000 ALTER TABLE `type_articles` ENABLE KEYS */;
 
 -- Listage de la structure de la table pharmacie. users
@@ -452,13 +483,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `users_role_id_foreign` (`role_id`),
   CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table pharmacie.users : ~2 rows (environ)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `nom`, `prenom`, `sexe`, `telephone1`, `telephone2`, `pieceIdentite`, `numeroPieceIdentite`, `email`, `password`, `status`, `photo`, `role_id`, `created_at`, `updated_at`) VALUES
 	(1, 'njankouo', 'dairou', 'masculin', '699072561', '658464951', '1', '100095998', 'dairounjankouo2019@gmail.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'actif', 'https://via.placeholder.com/640x480.png/00dd77?text=laudantium', 1, NULL, NULL),
-	(2, 'dairou', 'ndam', 'masculin', '658748965', NULL, 'cni', NULL, 'dairounjankouo@gmaul.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'actif', NULL, 3, '2022-07-22 07:55:37', '2022-07-22 07:55:49');
+	(2, 'dairou', 'ndam', 'masculin', '658748965', NULL, 'cni', NULL, 'dairounjankouo@gmaul.com', '$2y$10$hu8HyXEGVi5n6Cb746u6Fe7j9OJjtW0tOEJViPBdHx5Nw5az8uikq', 'actif', NULL, 3, '2022-07-22 07:55:37', '2022-07-24 20:41:50'),
+	(3, 'awa', NULL, 'feminin', '680259415', NULL, 'permis', '100859640', 'awa@gmail.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'actif', NULL, NULL, '2022-07-24 14:07:46', '2022-07-24 14:08:23');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Listage de la structure de la table pharmacie. user_role
@@ -489,12 +521,12 @@ CREATE TABLE IF NOT EXISTS `ventes` (
   PRIMARY KEY (`id`),
   KEY `ventes_user_id_foreign` (`user_id`),
   CONSTRAINT `ventes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table pharmacie.ventes : ~0 rows (environ)
 /*!40000 ALTER TABLE `ventes` DISABLE KEYS */;
 INSERT INTO `ventes` (`id`, `user_id`, `date_vente`, `created_at`, `updated_at`) VALUES
-	(1, 1, '2022-07-22', '2022-07-22 08:05:46', '2022-07-22 08:05:46');
+	(11, 2, '2022-07-25', '2022-07-25 06:44:07', '2022-07-25 06:44:07');
 /*!40000 ALTER TABLE `ventes` ENABLE KEYS */;
 
 -- Listage de la structure de la table pharmacie. vente_produits
@@ -518,13 +550,14 @@ CREATE TABLE IF NOT EXISTS `vente_produits` (
   KEY `vente_produits_produit_id_foreign` (`produit_id`),
   CONSTRAINT `vente_produits_produit_id_foreign` FOREIGN KEY (`produit_id`) REFERENCES `produits` (`id`) ON DELETE CASCADE,
   CONSTRAINT `vente_produits_vente_id_foreign` FOREIGN KEY (`vente_id`) REFERENCES `ventes` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table pharmacie.vente_produits : ~2 rows (environ)
 /*!40000 ALTER TABLE `vente_produits` DISABLE KEYS */;
 INSERT INTO `vente_produits` (`id`, `qte_sortie`, `pu`, `date_vente`, `tva`, `vente_id`, `produit_id`, `client`, `user`, `reglement`, `unite`, `remise`, `created_at`, `updated_at`) VALUES
-	(1, 10, 1600, '2022-07-22', 0, 1, 2, 'salomon', 'njankouo', 'espèce', 'boite', NULL, '2022-07-22 08:56:35', '2022-07-22 08:56:35'),
-	(2, 10, 1600, '2022-07-22', 0, 1, 1, 'salomon', 'njankouo', 'espèce', 'boite', NULL, '2022-07-22 08:57:43', '2022-07-22 08:57:43');
+	(19, 10, 2500, '2022-07-25', 0, 11, 2, 'salomon', 'dairou', 'mobile', 'boite', NULL, '2022-07-25 06:44:22', '2022-07-25 06:44:22'),
+	(20, 1, 2500, '2022-07-25', 0, 11, 8, 'salomon', 'dairou', 'espèce', 'boite', NULL, '2022-07-25 06:44:47', '2022-07-25 06:44:47'),
+	(21, 2, 1500, '2022-07-25', 0, 11, 5, 'salomon', 'dairou', 'espèce', 'boite', NULL, '2022-07-25 06:45:02', '2022-07-25 06:45:02');
 /*!40000 ALTER TABLE `vente_produits` ENABLE KEYS */;
 
 -- Listage de la structure de déclencheur pharmacie. annule_vente

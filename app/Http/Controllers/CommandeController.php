@@ -296,6 +296,9 @@ public function clearAllCart()
     }
 //utilisation de la bibliotheque cart et adaptation au projet de vente//
 
-
-}
+public function generatePrice(Request $request)
+{
+   $req=Produit::select('pu')->where('id',$request->id)->first();
+    return response()->json($req);
+}}
 

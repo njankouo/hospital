@@ -92,7 +92,7 @@
                             <tbody>
                                 @php $total=0 @endphp
                                 @foreach ($caisse as $caisses)
-                                    @if ($caisses->date_vente != $carbon->format('Y-m-d'))
+                                  @if ($caisses->date_vente != $carbon->format('Y-m-d'))
                                     @else
                                         @php $total+= $caisses->pu * $caisses->qte_sortie * (1 - $caisses->remise / 100) @endphp
 

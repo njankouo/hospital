@@ -157,3 +157,5 @@ Route::post('/Group/livraison/Delete',[CartController::class,'SupprimeOne'])->na
 /**route generation */
 
 Route::get('/get-product-price',[VenteController::class,'getprice']);
+
+Route::get('/charger/price',[CommandeController::class,'generatePrice']);
