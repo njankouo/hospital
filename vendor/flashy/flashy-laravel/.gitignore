@@ -1,0 +1,11 @@
+build
+composer.lock
+docs
+vendor
+coverage
+/.idea/*
+.phpunit.result.cache
+.rnd
+artisan
+_ide_helper.php
+.env
