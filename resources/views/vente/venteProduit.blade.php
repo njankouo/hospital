@@ -1,8 +1,8 @@
   <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+  <script src="{{ asset('js/toastr.min.js') }}"></script>
   <script src="{{ asset('js/jquery.typeahead.min.js') }}"></script>
 
-
+  <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
   @extends('layouts.master')
 
   @section('contenu')
@@ -12,6 +12,22 @@
               <strong>{{ $message }}</strong>
           </div>
       @endif
+      <script>
+          @if (Session::has('error'))
+              toastr.error("{{ Session::get('error') }}");
+          @endif
+      </script>
+      <script>
+          @if (Session::has('info'))
+              toastr.options = {
+                  "closeButton": true,
+                  "progressBar": true,
+                  positionClass: 'toast-top-center'
+              }
+              toastr.success("{{ session('info') }}");
+          @endif
+      </script>
+
       <div class="row">
           <div class="col-12">
               <div class="card">
@@ -54,10 +70,13 @@
 
                               <label for="">Nom Du Client</label>
                               <select name="client" id=""
-                                  class="form-control @error('client') is-invalid @enderror">
-                                  @foreach ($client as $clients)
-                                      <option value="{{ $clients->nom }}">{{ $clients->nom }}</option>
-                                  @endforeach
+                                  class="form-control @error('client') is-invalid @enderror" readonly>
+                                  <optgroup label="selectionnez le client ">
+                                      <option value="">......</option>
+                                      @foreach ($client as $clients)
+                                          <option value="{{ $clients->nom }}">{{ $clients->nom }}</option>
+                                      @endforeach
+                                  </optgroup>
                               </select>
                               @error('client')
                                   <p class="text-danger">{{ $message }}</p>
@@ -66,14 +85,16 @@
                                   <label for="">****produits</label>
                                   <select name="produit" id="getSize"
                                       class="form-control my-2 @error('produit') is-invalid @enderror produit_name"
-                                      style="border-color: indigo">
-                                      <option value="">.....</option>
-                                      @foreach ($produit as $produits)
-                                          @if ($produits->qtestock <= 0)
-                                          @else
-                                              <option value="{{ $produits->id }}">{{ $produits->designation }}
-                                              </option>
-                                          @endif
+                                      style="border-color: indigo" readonly>
+                                      <optgroup label="selectionnez votre produit à vendre">
+                                          <option value="">.....</option>
+                                          @foreach ($produit as $produits)
+                                              @if ($produits->qtestock <= 0)
+                                              @else
+                                                  <option value="{{ $produits->id }}">{{ $produits->designation }}
+                                                  </option>
+                                              @endif
+                                      </optgroup>
                                       @endforeach
 
                                   </select>
@@ -82,14 +103,16 @@
                                   @enderror
                               </div>
                               <div class="col-6">
-                                  <label for="">****unite </label>
+                                  <label for="">unite </label>
                                   <select name="unite" id=""
                                       class="form-control my-2 @error('unite') is-invalid @enderror productcategory"
-                                      style="border-color: indigo">
-                                      <option value="">.....</option>
-                                      @foreach ($type as $types)
-                                          <option value="{{ $types->nom }}">{{ $types->nom }}</option>
-                                      @endforeach
+                                      style="border-color: indigo" readonly>
+                                      <optgroup label="selectionnez l'unite">
+                                          <option value="">.....</option>
+                                          @foreach ($type as $types)
+                                              <option value="{{ $types->nom }}">{{ $types->nom }}</option>
+                                          @endforeach
+                                      </optgroup>
                                   </select>
                                   @error('unite')
                                       <p>{{ $message }}</p>
@@ -105,14 +128,15 @@
                                   @enderror
                               </div> --}}
                               <div class="col-6">
-                                  <label for="">****pu</label>
-                                  <input type="text" class="form-control pu" name="pu" style="border-color: indigo">
+                                  <label for="">prix unitaire de vente</label>
+                                  <input type="text" class="form-control pu"readonly name="pu"
+                                      style="border-color: indigo">
                                   @error('pu')
                                       <p>{{ $message }}</p>
                                   @enderror
                               </div>
                               <div class="col-6">
-                                  <label for="">****qte</label>
+                                  <label for="">quantite</label>
                                   <input type="number" class="form-control @error('qte')  @enderror" name="qte"
                                       style="border-color: indigo">
                                   @error('qte')
@@ -120,7 +144,7 @@
                                   @enderror
                               </div>
                               <div class="col-6">
-                                  <label for="">****remise (en pourcentage)</label>
+                                  <label for="">remise (EN POURCENTAGE) (OPTIONNEL)</label>
                                   <input type="number" class="form-control @error('remise')  @enderror" name="remise"
                                       style="border-color: indigo">
 
@@ -128,7 +152,7 @@
                               <div class="col-6">
                                   <label for=""> Mode De Reglement</label>
                                   <select name="reglement" class="form-control @error('reglement') is-invalid @enderror"
-                                      id="">
+                                      id="" readonly>
                                       <optgroup label="selectionnez le mode de reglement">
                                           <option value="">.....</option>
                                           <option value="espèce">espèce</option>
@@ -150,7 +174,7 @@
                       </form>
                   </div>
               </div>
-              <div class="card-footer bg-dark"></div>
+              <div class="card-footer bg-primary"></div>
           </div>
       </div>
       <script>

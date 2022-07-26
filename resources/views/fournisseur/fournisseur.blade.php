@@ -34,6 +34,7 @@
                                     <th style="width: 20%">Prenom</th>
                                     <th style="width: 15%">Telephone</th>
                                     <th style="width: 20%">email</th>
+                                    <th style="width: 20%">status contrat</th>
                                     <th style="width: 20%">status</th>
                                     <th style="width: 20%">Operation</th>
                                 </tr>
@@ -45,8 +46,7 @@
                                             @if ($fours->sexe == 0)
                                                 <img src="{{ asset('img/lien.png') }}" alt="" style="width: 45px">
                                             @else
-                                                <img src="{{ asset('img/lion.png') }}" alt=""
-                                                    style="width: 45px">
+                                                <img src="{{ asset('img/lion.png') }}" alt="" style="width: 45px">
                                             @endif
 
 
@@ -55,6 +55,13 @@
                                         <td>{{ $fours->prenom }}</td>
                                         <td> {{ $fours->telephone1 }}</td>
                                         <td>{{ $fours->email }}</td>
+                                        <td>
+                                            @if (count($fours->contrat))
+                                                <span class="badge badge-info">contrat en cour</span>
+                                            @else
+                                                <span class="badge badge-danger">aucun contrat</span>
+                                            @endif
+                                        </td>
 
                                         <td>
                                             @if ($fours->status == 'inactif')

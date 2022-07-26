@@ -26,7 +26,7 @@ class VenteController extends Controller
         $client=client::all();
         $user=User::all();
         $produit=produit::all();
-        $vente=Vente::latest()->paginate();
+        $vente=Vente::orderBy('id','desc')->get();
         $carbon=\Carbon\Carbon::now();
         return view('vente.index',compact('client','user','vente','produit','carbon'));
     }
@@ -99,7 +99,7 @@ class VenteController extends Controller
         ]);
 
 
-        return back()->with('success','vente effectuée avec success!');
+        return back()->with('info','vente effectuée avec success!');
         Session::flash('message','This is a flash message!');
         } catch (\Throwable $th) {
             //throw $th;
@@ -115,7 +115,7 @@ class VenteController extends Controller
         $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
         $detail = VenteProduit::whereBetween('date_vente',[$start_date,$end_date])->get();
     } else {
-        $detail = VenteProduit::latest()->get();
+        $detail = VenteProduit::orderBy('id','DESC')->get();
     }
         return view('vente.listVente',compact('detail','carbon'));
     }

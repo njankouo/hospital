@@ -19,7 +19,7 @@
                             <div class="col-6">
                                 <label for="">DESIGNATION DU PRODUIT</label>
                                 <input type="text" class="my-2 form-control @error('designation') is-invalid @enderror"
-                                    placeholder="Enter ..." name="designation">
+                                    placeholder="Enter ..." name="designation" value="{{ old('designation') }}">
                                 @error('designation')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -44,13 +44,13 @@
                                 <label for="">QUANTITE EN STOCK</label>
                                 <input type="number"
                                     class=" text-right   my-2 form-control @error('qte') is-invalid @enderror"
-                                    placeholder="Enter ..." name="qte">
+                                    placeholder="Enter ..." name="qte" value="{{ old('qte') }}">
                                 @error('qte')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                                 <label for="">GRAMMAGE/TAILLE</label>
                                 <input type="text" class="my-2 form-control" id="inputSuccess" placeholder="Enter ..."
-                                    name="grammage">
+                                    name="grammage" value="{{ old('grammage') }}">
                                 {{-- @error('grammage')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror --}}
@@ -60,7 +60,7 @@
                                 <label for="">QUANTITE SEUIL</label>
                                 <input type="number"
                                     class=" text-right  form-control my-2 @error('qteseuil') is-invalid @enderror"
-                                    name="qteseuil" placeholder="...">
+                                    name="qteseuil" placeholder="..." value="{{ old('qteseuil') }}">
                                 @error('qteseuil')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -85,7 +85,7 @@
                                 <label for="">PRIX D'ACHAT </label>
                                 <input type="number"
                                     class="text-right  form-control my-2 @error('pa') is-invalid @enderror" name="pa"
-                                    placeholder="...">
+                                    placeholder="..." value="{{ old('pa') }}">
                                 @error('pa')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -95,7 +95,7 @@
                                 <label for="">PRIX DE VENTE </label>
                                 <input type="number"
                                     class=" text-right  form-control my-2 @error('pv') is-invalid @enderror" name="pv"
-                                    placeholder="...">
+                                    placeholder="..." value="{{ old('pv') }}">
                                 @error('pv')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -133,7 +133,7 @@
                             <div class="col-6">
                                 <label for="">EQUIVALENCE DU PRODUIT</label>
                                 <input type="text" class="my-2 form-control @error('equivalence') is-invalid @enderror"
-                                    name="equivalence" placeholder="Enter ...">
+                                    name="equivalence" placeholder="Enter ..." value="{{ old('equivalence') }}">
                                 @error('equivalence')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -141,12 +141,14 @@
 
                             <div class="col-6">
                                 <label for="">date fabrication (OPTIONNEL)</label>
-                                <input type="date" name="fabrication" id="" class="form-control">
+                                <input type="date" name="fabrication" id="" class="form-control"
+                                    value="{{ old('fabrication') }}">
 
                             </div>
                             <div class="col-6">
                                 <label for="">date expiration (OPTIONNEL)</label>
-                                <input type="date" name="expiration" id="" class="form-control">
+                                <input type="date" name="expiration" id="" class="form-control"
+                                    value="{{ old('expiration') }}">
 
                             </div>
 

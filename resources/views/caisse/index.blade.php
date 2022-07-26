@@ -74,8 +74,7 @@
 
                         <table id="example" class="table table-striped table-bordered my-4">
                             {{ Carbon\Carbon::now()->toDateString() }}
-                            <?php \Carbon\Carbon::setUTF8(true);
-                            setlocale(LC_TIME, 'French'); ?>
+
                             <thead>
                                 <tr>
                                     <td>ID</td>
@@ -92,7 +91,7 @@
                             <tbody>
                                 @php $total=0 @endphp
                                 @foreach ($caisse as $caisses)
-                                  @if ($caisses->date_vente != $carbon->format('Y-m-d'))
+                                    @if ($caisses->date_vente != $carbon->format('Y-m-d'))
                                     @else
                                         @php $total+= $caisses->pu * $caisses->qte_sortie * (1 - $caisses->remise / 100) @endphp
 

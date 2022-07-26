@@ -16,9 +16,9 @@ class CaisseController extends Controller
     {
         Carbon::setLocale('fr');
         $carbon=\Carbon\Carbon::now();
-        $caisse=VenteProduit::paginate();
+        $caisse=VenteProduit::all();
         $commande=CommandeArticle::paginate();
-        $caisses=VenteProduit::paginate();
+        $caisses=VenteProduit::all();
 
         return view('caisse.index',compact('caisse','commande','carbon'));
     }

@@ -68,6 +68,7 @@
                                     <td>{{ $contrats->date_debut }}</td>
                                     <td>{{ $contrats->date_fin }}</td>
                                     <td>{{ $contrats->reglement }}</td>
+
                                     <td>
                                         @if ($contrats->image == '')
                                             <span class="badge badge-danger">aucun fichier image</span>

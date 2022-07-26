@@ -130,7 +130,7 @@
                           </tr>
                           <tfoot>
 
-                              {{ $vente->links() }}
+
                           </tfoot>
                       </table>
 

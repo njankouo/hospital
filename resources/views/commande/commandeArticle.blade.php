@@ -21,13 +21,13 @@
                             <div class="col-6">
                                 <label for="">Date Commande</label>
                                 <input type="date" class="my-2 form-control @error('date') is-invalid @enderror"
-                                    name="date" placeholder="Enter ..." value="{{ $commande->date_commande }}">
+                                    name="date" placeholder="Enter ..." value="{{ $commande->date_commande }}" readonly>
                                 @error('date')
                                     <p>{{ $message }}</p>
                                 @enderror
                                 <label for="">Date Livraison</label>
                                 <input type="date" class="my-2 form-control @error('dateLivraison') is-invalid @enderror"
-                                    name="dateLivraison" value="{{ $commande->date_livraison }}">
+                                    name="dateLivraison" value="{{ $commande->date_livraison }}" readonly>
                                 @error('dateLivraison')
                                     <p>{{ $message }}</p>
                                 @enderror
@@ -36,7 +36,7 @@
 
                                 <label for="">Fournisseur</label>
                                 <select id="" class="my-2 form-control @error('fournisseur') is-invalid @enderror"
-                                    name="fournisseur" value="{{ $commande->fournisseur_id }}">
+                                    name="fournisseur" value="{{ $commande->fournisseur_id }}" readonly>
                                     <option value="">.....</option>
                                     @foreach ($fournisseur as $fournisseurs)
                                         @if ($commande->fournisseur_id == $fournisseurs->id)
@@ -53,7 +53,8 @@
 
                                 <label for=""> Code Commande</label>
                                 <input type="text" class="my-2 form-control @error('code') is-invalid @enderror"
-                                    id="inputSuccess" placeholder="Enter ..." name="code" value="{{ $commande->id }}">
+                                    id="inputSuccess" placeholder="Enter ..." name="code"
+                                    value="{{ $commande->id }}"readonly>
                                 @error('code')
                                     <p>{{ $message }}</p>
                                 @enderror
@@ -62,13 +63,13 @@
                             <div class="col-6">
                                 <label for="">status commande</label>
                                 <input type="text" class="form-control my-2 @error('status') is-invalid @enderror"
-                                    name="status" value="encours">
+                                    name="status" value="encours" readonly>
                                 @error('status')
                                     <p>{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="col-6">
-                                <label for="">****produits</label>
+                                <label for="">produits</label>
                                 <select name="produit" id=""
                                     class="form-control my-2 @error('produit') is-invalid @enderror produit"
                                     style="border-color: indigo">
@@ -83,7 +84,7 @@
                                 @enderror
                             </div>
                             <div class="col-6">
-                                <label for="">****unite </label>
+                                <label for="">unite </label>
                                 <select name="unite" id=""
                                     class="form-control @error('unite') is-invalid @enderror">
                                     <option value="">.....</option>
@@ -106,7 +107,7 @@
                                 @enderror
                             </div> --}}
                             <div class="col-6">
-                                <label for="">****pu</label>
+                                <label for="">prix unitaire </label>
                                 <input type="number" class="form-control @error('pu')  @enderror pu" name="pu"
                                     style="border-color: indigo">
                                 @error('pu')
@@ -114,7 +115,7 @@
                                 @enderror
                             </div>
                             <div class="col-6">
-                                <label for="">qte</label>
+                                <label for="">quantite</label>
                                 <input type="number" class="form-control @error('qte')  @enderror" name="qte"
                                     style="border-color: indigo">
                                 @error('qte')

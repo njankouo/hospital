@@ -7,6 +7,10 @@
         $('#example').DataTable();
     });
 </script>
+
+<script src="{{ asset('js/toastr.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/toastr.min.css') }}">
+
 <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/select.dataTables.min.css') }}">
@@ -90,4 +94,13 @@
     $(document).ready(function() {
         $('#example').DataTable();
     });
+</script>
+<script>
+    @if (Session::has('message'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.success("{{ session('message') }}");
+    @endif
 </script>

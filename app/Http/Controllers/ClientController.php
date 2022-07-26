@@ -54,8 +54,8 @@ class ClientController extends Controller
            // 'status'=>$request->status
     ]);
 
-    return redirect('/client');
-    Session::flash('flash_message', 'It has been saved!');
+    return redirect('/client')->with('message','client enregistré');
+
 
 
     }

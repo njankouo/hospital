@@ -22,20 +22,22 @@
                                 <div class="col-6">
                                     <label for="">Nom</label>
                                     <input type="text" class="my-2 form-control @error('nom') is-invalid @enderror"
-                                        name="nom" placeholder="Enter ...">
+                                        name="nom" placeholder="Enter ..." value="{{ old('nom') }}">
                                     @error('nom')
                                         <p>{{ $message }}</p>
                                     @enderror
-                                    <label for="">Prenom</label>
+                                    <label for="">Prenom (OPTIONNEL)</label>
                                     <input type="text" class="my-2 form-control @error('prenom') is-invalid @enderror"
-                                        placeholder="Enter ..." name="prenom">
+                                        placeholder="Enter ..." name="prenom" value="{{ old('prenom') }}">
                                     @error('prenom')
                                         <p>{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="col-6">
                                     <label for="">sexe</label>
-                                    <select name="sexe" id="" class="form-control my-2 @error('sexe') is-invalid @enderror">
+                                    <select name="sexe" id=""
+                                        class="form-control my-2 @error('sexe') is-invalid @enderror"
+                                        value="{{ old('sexe') }}">
                                         <option value="" disabled>select gender</option>
                                         <option value=""></option>
                                         <option value="1">Masculin</option>
@@ -44,9 +46,10 @@
                                     @error('sexe')
                                         <p>{{ $message }}</p>
                                     @enderror
-                                    <label for="">telephone</label>
+                                    <label for="">telephone </label>
                                     <input type="text" class="my-2 form-control @error('telephone') is-invalid @enderror"
-                                        id="inputSuccess" placeholder="Enter ..." name="telephone">
+                                        id="inputSuccess" placeholder="Enter ..." name="telephone"
+                                        value="{{ old('telephone') }}">
                                     @error('telephone')
                                         <p>{{ $message }}</p>
                                     @enderror
@@ -54,13 +57,13 @@
 
 
                                 <div class="col-6">
-                                    <label for="">E-mail</label>
+                                    <label for="">E-mail (OPTIONNEL)</label>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                        placeholder="email...." name="email">
+                                        placeholder="email...." name="email" value="{{ old('email') }}">
                                     @error('email')
                                         <p>{{ $message }}</p>
                                     @enderror
-                                    <label for="">numero cni</label>
+                                    <label for="">numero cni(OPTIONNEL)</label>
                                     <input type="text" class="my-2 form-control @error('numeroCNI') is-invalid @enderror"
                                         id="inputSuccess" placeholder="Enter ..." name="numeroCNI">
                                     @error('numeroCNI')
@@ -71,7 +74,7 @@
                                 <div class="col-6">
                                     <label for="">adresse</label>
                                     <input type="text" class="form-control @error('adresse') is-invalid @enderror"
-                                        placeholder="adresse...." name="adresse">
+                                        placeholder="adresse...." name="adresse" value="{{ old('adresse') }}">
                                     @error('adresse')
                                         <p>{{ $message }}</p>
                                     @enderror

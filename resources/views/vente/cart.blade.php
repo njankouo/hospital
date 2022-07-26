@@ -103,6 +103,9 @@
 
                                     </tbody>
                                 </table>
+                                <a href="/liste/vente" class="btn btn-warning">
+                                    ajouter encore la vente
+                                </a>
                             </div>
                         </div>
 
@@ -112,7 +115,8 @@
                             </div> --}}
 
                             <div>
-                                <p class="text-light">LE MONTANT TOTAL DE CETTE FACTURE EST DE: {{ $total }} FRANC
+                                <p class="text-light">LE MONTANT TOTAL DE CETTE FACTURE EST DE:
+                                    {{ $total }} FRANC
                                     CFA</p>
                             </div>
 
