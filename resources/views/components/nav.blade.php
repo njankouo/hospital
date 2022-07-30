@@ -34,7 +34,7 @@
             </li> --}}
             @can('admin')
                 <li class="dropdown nav-item">
-                    <a href="/changePassword" class="nav-link">
+                    <a href="{{ route('changePassword') }}" class="nav-link">
                         <i class="nav-link-icon fa fa-cog"></i>
                         Settings
                     </a>
@@ -42,7 +42,7 @@
             @endcan
             @can('utilisateur')
                 <li class="dropdown nav-item">
-                    <a href="/changePassword" class="nav-link">
+                    <a href="{{ route('changePassword') }}" class="nav-link">
                         <i class="nav-link-icon fa fa-cog"></i>
                         Settings
                     </a>

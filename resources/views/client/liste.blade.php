@@ -24,10 +24,10 @@
     <div class="col-12">
         <div class="card">
             <div class="card-title my-3 mx-3">
-                <h3 style="font-family:forte">listing des Clients</h3>
-                <div style="margin-left: 85%">
-                    <a href="{{ route('client.create') }}" class="btn btn-dark">
-                        <i class="fa fa-plus fa-x"></i>Nouveaux Client
+                <h3 style="font-family:forte">liste des Clients</h3>
+                <div style="margin-right: 85%">
+                    <a href="{{ route('client.create') }}" class="btn btn-primary">
+                        <i class="fa fa-plus fa-x"></i>Nouveaux
                     </a>
                 </div>
 
@@ -83,7 +83,7 @@
 
                     </table>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer bg-primary">
 
                 </div>
             </div>

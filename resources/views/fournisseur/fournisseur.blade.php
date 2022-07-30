@@ -16,13 +16,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-title my-3 mx-3">
-                    <h3 style="font-family:forte">listing des fournisseurs</h3>
-                    <div style="margin-left: 55%" class="d-flex">
-                        <a href="{{ route('fournisseur.create') }}" class="btn btn-dark">
-                            <i class="fa fa-plus mx-2"></i>Nouveau fournisseur
+                    <h3 style="font-family:forte">liste des fournisseurs</h3>
+                    <div style="margin-right: 65%" class="d-flex">
+                        <a href="{{ route('fournisseur.create') }}" class="btn btn-primary">
+                            <i class="fa fa-plus mx-2"></i>Nouveau
                         </a>
 
-                        <a href="{{ route('fournisseur.pdf') }}" class="btn btn-Warning mx-4">Format PDF</a>
+                        <a href="{{ route('fournisseur.pdf') }}" class="btn btn-secondary mx-4">Format PDF</a>
                     </div>
 
                     <div class="card-body">

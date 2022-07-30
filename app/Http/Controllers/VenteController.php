@@ -102,7 +102,7 @@ class VenteController extends Controller
             'date_vente'=>$request->date,
             'remise'=>$request->remise,
             'reglement'=>$request->reglement,
-            'beneficiaire'=>$request->beneficiare,
+            'beneficiaire'=>$request->beneficiaire,
             'service'=>$request->service,
             'poste'=>$request->poste,
             'stat'=>$request->stat,
@@ -310,4 +310,16 @@ public function getprice(Request $request){
 $p=Produit::select('pv')->where('id',$request->id)->first();
 return response()->json($p);
 }
+public function ShowService(){
+      $carbon=\Carbon\Carbon::now();
+        if (request()->start_date || request()->end_date) {
+        $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
+        $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
+        $detail = VenteProduit::whereBetween('date_vente',[$start_date,$end_date])->get();
+    } else {
+        $detail = VenteProduit::orderBy('id','DESC')->get();
+    }
+return view('vente.ListeService',compact('detail','carbon'));
+}
+
 }

@@ -161,7 +161,7 @@ Route::post('cart/enlever',[VenteController::class,'deleteOne'])->name('cart.rem
 Route::post('/Group/livraison/Delete',[CartController::class,'SupprimeOne'])->name('supprimer.one');
 /**route generation */
 
-Route::get('/get-product-price',[VenteController::class,'getprice']);
+Route::get('/get-product-price',[VenteController::class,'getprice'])->name('get.price');
 
 Route::get('/charger/price',[CommandeController::class,'generatePrice'])->name('charger.price');
 
@@ -170,3 +170,5 @@ Route::get('/service',[ServiceController::class,'index'])->name('service.index')
 route::delete('service/{id}',[ServiceController::class,'supprimer'])->name('service.delete');
 Route::post('/service',[ServiceController::class,'creation'])->name('service.create');
 Route::get('changeStatus', [CommandeController::class,'changeStatus'])->name('toggle.find');
+
+Route::get('sortie/service',[VenteController::class,'ShowService'])->name('show.service')->middleware('auth.admin');

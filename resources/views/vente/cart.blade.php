@@ -103,9 +103,7 @@
 
                                     </tbody>
                                 </table>
-                                <a href="/liste/vente" class="btn btn-warning">
-                                    ajouter encore la vente
-                                </a>
+
                             </div>
                         </div>
 

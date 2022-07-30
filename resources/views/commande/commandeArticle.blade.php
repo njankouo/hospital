@@ -166,8 +166,8 @@
                 var a = $(this).parent();
                 $.ajax({
                     type: 'get',
-                    url: 'route('
-                    charger.price ')',
+                    url: "{{ route('charger.price') }}",
+
                     data: {
                         'id': prod_id
                     },

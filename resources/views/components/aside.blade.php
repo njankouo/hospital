@@ -131,7 +131,7 @@
             @endcan
             @can('admin')
                 <li>
-                    <a style="color:cornflowerblue;text-decoration:none" href="">
+                    <a style="color:cornflowerblue;text-decoration:none" href="{{ route('show.service') }}">
                         <i class="fa fa-ellipsis-h">
                         </i>Sorties Des Services
                     </a>

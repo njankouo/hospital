@@ -10,7 +10,7 @@
                         <h5 class="alert alert-success">{{ Session::get('message') }}</h5>
                     @endif
                     <i class="fa fa-users fa-2x mx-2 my-2"></i>
-                    <h3 style="font-size:20px;font-family:forte" class="my-2"> New Client</h3>
+                    <h3 style="font-size:20px;font-family:forte" class="my-2"> Nouveau Client</h3>
                 </div>
                 <div class="card body">
                     <div class="row">
@@ -86,8 +86,8 @@
                                     </select>
                                 </div>
                                 <div class="col-8 my-4">
-                                    <a class="btn btn-danger mx-1" href="{{ route('client.liste') }}">retour aux
-                                        données</a>
+                                    <a class="btn btn-danger mx-1" href="{{ route('client.liste') }}">retour
+                                    </a>
                                     <button type="submit" class="btn btn-primary mx-1">save</button>
                                 </div>
                             </div>
