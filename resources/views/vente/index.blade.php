@@ -2,6 +2,7 @@
   <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('js/toastr.min.js') }}"></script>
   <script>
       $(document).ready(function() {
 
@@ -9,16 +10,16 @@
       });
   </script>
   @extends('layouts.master')
-
+  <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/select.dataTables.min.css') }}">
   @section('contenu')
       <div class="row">
-          <div class="col-12">
+          <div class="col-6">
               <div class="card">
                   <div class="card-header">
-                      <p style="font-family: forte">créer une nouvelle vente</p>
+                      <p style="font-family: forte">créer une nouvelle sortie</p>
 
                   </div>
 
@@ -31,7 +32,7 @@
                               <div class="form-row">
 
                                   <div class="col-6">
-                                      <label for="">Date vente</label>
+                                      <label for="">Date sortie</label>
                                       <input type="date"
                                           class="my-2 form-control @error('date_vente') is-invalid @enderror" name="date"
                                           placeholder="Enter ...">
@@ -41,7 +42,7 @@
 
                                   </div>
                                   <div class="col-6">
-                                      <label for="">responsable de la vente</label>
+                                      <label for="">responsable de la sortie</label>
                                       <select name="responsable" id=""
                                           class="form-control @error('responsable') is-invalid @enderror my-2">
                                           <option value="">...........</option>
@@ -54,25 +55,63 @@
                                       @enderror
 
                                   </div>
+
+                                  <div class="col-8 my-4">
+                                      <button type="submit" class="btn btn-primary mx-1">enregistrer</button>
+
+                                  </div>
                               </div>
 
-                              <div class="col-8 my-4">
-                                  <button type="submit" class="btn btn-primary mx-1">save</button>
-
-                              </div>
                           </div>
-                      </form>
-                  </div>
-                  <div class="card-footer bg-primary"></div>
-              </div>
 
+                  </div>
+
+              </div>
+              <div class="card-footer bg-primary p-3"></div>
+          </div>
+          <div class="col-6">
+              <div class="card">
+                  <div class="card-header">
+                      <p style="font-family: forte">Reservé aux Sorties Internes</p>
+                  </div>
+                  <div class="card-body">
+                      <div class="col-12">
+                          <label for="">Beneficiaire</label>
+                          <input type="text" class="form-control" name="beneficiaire">
+                      </div>
+
+                      <div class="col-12">
+                          <label for="">Service</label>
+                          <select name="service" id="" class="form-control">
+                              <optgroup label="selectionnez leservice concerné">
+                                  <option value="">....</option>
+                                  @foreach ($service as $services)
+                                      <option value="{{ $services->nom }}">{{ $services->nom }}</option>
+                                  @endforeach
+
+                              </optgroup>
+                          </select>
+                      </div>
+                      <div class="col-12">
+                          <label for="">poste du beneficier(e)</label>
+                          <input type="text" name="poste" class="form-control">
+                      </div>
+                  </div>
+                  </form>
+                  <div class="card-footer bg-primary">
+
+                  </div>
+
+              </div>
           </div>
       </div>
+
+
       <div class="row">
           <div class="col-12">
               <div class="card">
                   <div class="card-title my-4 mx-3 p-2">
-                      <h3 style="font-family: forte">liste des ventes</h3>
+                      <h3 style="font-family: forte">liste des sorties crées</h3>
                       @foreach ($produit as $produits)
                           @if ($produits->qtestock <= 0)
                               <div class="alert alert-danger alert-dismissible">
@@ -96,14 +135,21 @@
                           width="100%">
                           <thead>
                               <tr>
-                                  <th class="th-sm">code vente
+                                  <th class="th-sm">code sortie
                                   </th>
-                                  <th class="th-sm">Date vente
+                                  <th class="th-sm">Date sortie
                                   </th>
                                   {{-- <th class="th-sm">Nom du client
                                 </th> --}}
 
-                                  <th class="th-sm">Responsable de la vente
+                                  <th class="th-sm">Responsable de la sortie
+                                  </th>
+                                  <th class="th-sm">Beneficier(e)
+                                  </th>
+                                  <th class="th-sm">Service
+                                  </th>
+
+                                  <th class="th-sm">poste beneifier(e)
                                   </th>
 
                                   <th class="th-sm">Opération</th>
@@ -119,6 +165,9 @@
                                           <td>{{ $ventes->date_vente }}</td>
                                           {{-- <td>{{ $ventes->client->nom }}</td> --}}
                                           <td>{{ $ventes->user->nom }}</td>
+                                          <td>{{ $ventes->beneficiaire }}</td>
+                                          <td>{{ $ventes->service }}</td>
+                                          <td>{{ $ventes->poste }}</td>
                                           <td>
                                               <a href="{{ route('vente.produit', $ventes->id) }}}}"> <i
                                                       class="fa fa-eye fa-2x text-info"></i></a>
@@ -138,4 +187,14 @@
               </div>
           </div>
       </div>
+      <script>
+          @if (Session::has('info'))
+              toastr.options = {
+                  "closeButton": true,
+                  "progressBar": true,
+                  positionClass: 'toast-top-center'
+              }
+              toastr.success("{{ session('info') }}");
+          @endif
+      </script>
   @endsection

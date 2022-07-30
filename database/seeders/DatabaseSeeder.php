@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
            $this->call(role::class);
        // fournisseur::factory(15)->create();
         $this->call(user::class);
-       // $this->call(Rayon::class);
+     $this->call(Fammille::class);
+     $this->call(Service::class);
      // commande::factory(25)->create();
     // client::factory(125)->create();
      $this->call(unite::class);

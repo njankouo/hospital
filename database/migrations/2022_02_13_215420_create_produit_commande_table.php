@@ -21,10 +21,11 @@ class CreateProduitCommandeTable extends Migration
             $table->string('date_commande')->nullable();
             $table->string('date_livraison')->nullable();
             $table->string('status');
+            $table->string('status_paiement');
             $table->string('reglement')->nullable();
              $table->string('pourcentage');
             $table->string('unite');
-            $table->integer('tva');
+
 
             $table->integer('remise')->nullable();
             $table->foreignId('produit_id')->constrained('produits')->ondelete('cascade');

@@ -31,13 +31,13 @@
                                 @error('nom')
                                     <p>{{ $message }}</p>
                                 @enderror
-                                <label for="">sexe</label>
+                                <label for="">sexe (Optionnel)</label>
                                 <select name="sexe" id=""
                                     class="form-control my-2 @error('sexe') is-invalid @enderror">
                                     <option value="" disabled>select gender</option>
                                     <option value=""></option>
-                                    <option value="1">Masculin</option>
-                                    <option value="0">feminin</option>
+                                    <option value="M">Masculin</option>
+                                    <option value="F">feminin</option>
                                 </select>
                                 @error('sexe')
                                     <p>{{ $message }}</p>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-6">
 
-                                <label for="">Prenom</label>
+                                <label for="">Prenom (Optionnel)</label>
                                 <input type="text" class="my-2 form-control @error('prenom') is-invalid @enderror"
                                     placeholder="Enter ..." name="prenom">
                                 @error('prenom')

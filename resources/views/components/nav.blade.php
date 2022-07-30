@@ -86,7 +86,7 @@
                     </div>
                     <div class="widget-content-left  ml-3 header-user-info">
                         <div class="widget-heading nav-link">
-                            {{ auth()->user()->nom }}
+                            {{ auth()->user()->nom ?? 'qui ete vous?' }}
 
                         </div>
 

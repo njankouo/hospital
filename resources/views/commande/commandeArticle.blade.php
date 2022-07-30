@@ -138,7 +138,14 @@
                                 <label for=""> remise (en pourcentage)</label>
                                 <input type="number" name="remise" id="" class="form-control">
 
+
+
                             </div>
+                            {{-- <div class="col-6">
+                                <label for=""> status de paiement</label>
+                                <input type="text" name="paiement_status" id="" class="form-control"
+                                    value="non reglé" readonly>
+                            </div> --}}
 
                             <div class="col-8 my-4">
                                 <button type="submit" class="btn btn-primary mx-1">valider la commande</button>
@@ -159,7 +166,8 @@
                 var a = $(this).parent();
                 $.ajax({
                     type: 'get',
-                    url: '/charger/price',
+                    url: 'route('
+                    charger.price ')',
                     data: {
                         'id': prod_id
                     },

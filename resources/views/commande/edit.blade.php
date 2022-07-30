@@ -80,6 +80,11 @@
                                           <p>{{ $message }}</p>
                                       @enderror
                                   </div>
+                                  {{-- <div class="col-6">
+                                      <label for=""> status de paiement</label>
+                                      <input type="text" name="paiement_status" id="" class="form-control my-2"
+                                          value="1" readonly>
+                                  </div> --}}
                                   <div class="col-6">
                                       <label for="">produits</label>
                                       <input type="text" class="form-control my-2" value="{{ $commande->produit_id }}"
@@ -97,6 +102,7 @@
                                           <p>{{ $message }}</p>
                                       @enderror
                                   </div>
+
                                   <div class="col-6">
                                       <label for="">unites </label>
                                       <input type="text" class="form-control my-2" value="{{ $commande->unite }}"

@@ -171,7 +171,7 @@
                             style="margin-top: 5px;margin-left:55px">
                             <thead>
                                 <tr>
-                                    <th style="width:50%">Produit</th>
+                                    <th style="width:50%">Designation</th>
                                     <th style="width:10%">pu</th>
                                     <th style="width:8%">qte</th>
 

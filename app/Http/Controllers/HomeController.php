@@ -9,6 +9,7 @@ use App\Models\produit;
 use App\Models\VenteProduit;
 use Illuminate\Http\Request;
 use App\Models\CommandeArticle;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -34,10 +35,10 @@ class HomeController extends Controller
         $contrat=Contrat::all();
         $produit=produit::all();
         $vente=VenteProduit::all();
-        $commande=CommandeArticle::all();
+        $service=Service::all();
         $client=client::all();
         $user=User::all();
-        return view('home',compact('user','client','contrat','produit','vente','commande'));
+        return view('home',compact('user','client','contrat','produit','vente','service'));
     }
   public function showChangePasswordForm(){
         return view('auth.changepassword');

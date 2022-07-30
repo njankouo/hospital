@@ -1,15 +1,17 @@
 <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
+
 <script>
     $(document).ready(function() {
         $('#example').DataTable();
     });
 </script>
+
 <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/select.dataTables.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/bootstrap-toggle.css') }}">
 @extends('layouts.master')
 @section('contenu')
     @if (session()->has('success'))
@@ -52,6 +54,8 @@
                                 </th>
                                 <th class="th-sm">Status
                                 </th>
+                                <th class="th-sm">Status de paiement
+                                </th>
                                 <th class="th-sm">fournisseur
                                 </th>
 
@@ -76,9 +80,29 @@
                                         {{ $commandes->status }}
 
                                     </td>
+                                    <td>
+                                        {{-- @if ($commandes->status_paiement == 'paiement reglé') --}}
+                                        <!-- Default switch -->
+                                        <input data-id="{{ $commandes->id }}" class="toggle-class" type="checkbox"
+                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                            data-on="payé" data-off="en attente"
+                                            {{ $commandes->status_paiement ? 'checked' : '' }}>
+                                        {{-- </span>
+                                        @else
+                                            <span class="badge badge-danger"> {{ $commandes->status_paiement }}</span>
+                                        @endif --}}
+
+
+                                    </td>
                                     <td>{{ $commandes->fournisseur }}</td>
 
                                     <td>
+                                        {{-- <div class="form-check form-switch">
+                                            <a href="{{ route('bon.livraison', $commandes->id) }}">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    id="flexSwitchCheckDefault"
+                                                    value="{{ $commandes->status_paiement }}"></a>
+                                        </div> --}}
                                         {{-- <a class="btn btn" href="{{ route('bon.livraison', $commandes->id) }}"><i
                                                 class="fa fa-eye fa-2x text-info"></i></a> --}}
                                         @if ($commandes->status == 'validé')
@@ -99,7 +123,7 @@
                                             <input type="hidden" value="{{ $commandes->qte }}" name="qte">
                                             <input type="hidden" value="{{ $commandes->unite }}" name="unite">
                                             <input type="hidden" value="{{ $commandes->reglement }}" name="reglement">
-                                            <button class="px-4 py-2 text-light bg-blue-800 rounded btn btn-primary">ajouter
+                                            <button class=" text-light btn btn-primary">creer
                                                 facture
                                             </button>
                                         </form>
@@ -116,4 +140,25 @@
             </div>
         </div>
     </div>
+    <script>
+        $(function() {
+            $('.toggle-class').change(function() {
+                var status = $(this).prop('checked') == true ? 1 : 0;
+                var commande_id = $(this).data('id');
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '{{ route('toggle.find') }}',
+                    data: {
+                        'status': status,
+                        'commande_id': commande_id
+                    },
+                    success: function(data) {
+                        onsole.log(data.success)
+                    }
+                });
+            })
+        })
+    </script>
 @endsection

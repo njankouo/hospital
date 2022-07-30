@@ -151,18 +151,28 @@
                                 <label for="">EQUIVALENCE DU PRODUIT</label>
                                 <input type="text" class="my-2 form-control" name="equivalence"
                                     placeholder="Enter ..." value="{{ $produits->equivalence }}">
+                                <label for="">Famille Produit</label>
+                                <select name="famille_id" id="" class="form-control my-2">
+                                    @foreach ($famille as $familles)
+                                        @if ($familles->id == $produits->famille_id)
+                                            <option value="{{ $familles->id }}" selected>{{ $familles->libelle }}
+                                            </option>
+                                        @else
+                                            <option value="{{ $familles->id }}">{{ $familles->libelle }}
+                                            </option>
+                                        @endif
+                                    @endforeach
 
+                                </select>
                             </div>
 
                             <div class="col-6">
                                 <label for="">date fabrication (OPTIONNEL)</label>
-                                <input type="date" name="fabrication" id="" class="form-control"
+                                <input type="date" name="fabrication" id="" class="form-control my-2"
                                     value="{{ $produits->date_fabrication }}">
 
-                            </div>
-                            <div class="col-6">
                                 <label for="">date expiration (OPTIONNEL)</label>
-                                <input type="date" name="expiration" id="" class="form-control"
+                                <input type="date" name="expiration" id="" class="form-control my-2"
                                     value="{{ $produits->date_peremption }}">
 
                             </div>
@@ -185,7 +195,6 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">fermer</button>
                     <button type="submit" class="btn btn-primary">modification</button>
                     </form>
                 </div>

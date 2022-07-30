@@ -17,11 +17,11 @@ class CreateFournisseursTable extends Migration
             $table->id();
             $table->string('nom');
             $table->string('prenom')->nullable();
-            $table->string('sexe');
+            $table->string('sexe')->nullable();
             $table->string('telephone1');
             $table->string('telephone2')->nullable();
             $table->string('photo')->nullable();
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('status');
             $table->timestamps();
 

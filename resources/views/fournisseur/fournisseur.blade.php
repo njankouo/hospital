@@ -43,10 +43,13 @@
                                 @foreach ($four as $fours)
                                     <tr>
                                         <td>
-                                            @if ($fours->sexe == 0)
+                                            @if ($fours->sexe == 'F')
                                                 <img src="{{ asset('img/lien.png') }}" alt="" style="width: 45px">
-                                            @else
+                                            @elseif($fours->sexe == 'M')
                                                 <img src="{{ asset('img/lion.png') }}" alt="" style="width: 45px">
+                                            @else
+                                                <span class="badge badge-info"
+                                                    style="font-style: italic;font-size:15px">entreprise</span>
                                             @endif
 
 

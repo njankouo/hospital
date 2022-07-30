@@ -92,7 +92,7 @@
                                 @php $total=0 @endphp
                                 @foreach ($caisse as $caisses)
                                     @if ($caisses->date_vente != $carbon->format('Y-m-d'))
-                                    @else
+                                    @elseif($caisses->stat == 'non')
                                         @php $total+= $caisses->pu * $caisses->qte_sortie * (1 - $caisses->remise / 100) @endphp
 
                                         <tr>

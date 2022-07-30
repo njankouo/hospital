@@ -104,7 +104,7 @@ return view('commande.commandeArticle',compact('fournisseur','commande','produit
         'date_livraison'=>$request->dateLivraison,
         'reglement'=>$request->mode,
         'remise'=>$request->remise,
-
+        'status_paiement'=>$request->paiement_status,
     ]);
     return back()->with('success','commande bien validé');
     }
@@ -125,7 +125,8 @@ return view('commande.commandeArticle',compact('fournisseur','commande','produit
         $request->validate([],[]);
 
             $commande->update([
-                'status'=>$request->status
+                'status'=>$request->status,
+                  'status_paiement'=>$request->paiement_status,
             ]);
              try {
                 //code...
@@ -140,7 +141,7 @@ return view('commande.commandeArticle',compact('fournisseur','commande','produit
         'date_commande'=>$request->date,
         'unite'=>$request->unite,
         'date_livraison'=>$request->dateLivraison,
-
+        'status_paiement'=>$request->paiement_status,
             ]);
 
 
@@ -300,5 +301,15 @@ public function generatePrice(Request $request)
 {
    $req=Produit::select('pu')->where('id',$request->id)->first();
     return response()->json($req);
-}}
+}
+
+  public function changeStatus(Request $request)
+    {
+        $commande = Livraison::find($request->commande_id);
+        $commande->status_paiement = $request->status;
+        $commande->save();
+
+        return response()->json(['success'=>'Status change successfully.']);
+    }
+}
 

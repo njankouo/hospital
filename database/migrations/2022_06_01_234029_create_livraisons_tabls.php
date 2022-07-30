@@ -23,6 +23,7 @@ class CreateLivraisonsTabls extends Migration
             $table->string('date_commande');
             $table->string('date_livraison');
             $table->string('status');
+              $table->string('status_paiement');
             $table->foreignId('commande_id')->constrained('commandes');
 
 

@@ -11,6 +11,7 @@ use App\Models\vente;
 use App\Models\client;
 use App\Models\produit;
 //use Darryldecode\Cart\Cart;
+use App\Models\Service;
 use App\Models\commande;
 use App\Models\fournisseur;
 use App\Models\type_produit;
@@ -28,7 +29,8 @@ class VenteController extends Controller
         $produit=produit::all();
         $vente=Vente::orderBy('id','desc')->get();
         $carbon=\Carbon\Carbon::now();
-        return view('vente.index',compact('client','user','vente','produit','carbon'));
+        $service=Service::all();
+        return view('vente.index',compact('service','client','user','vente','produit','carbon'));
     }
     public function create(Request $request){
         $request->validate([
@@ -47,11 +49,14 @@ class VenteController extends Controller
         // dd($request->all())
        // 'client_id'=>$request->client,
         'user_id'=>$request->responsable,
-        'date_vente'=>$request->date
+        'date_vente'=>$request->date,
+        'service'=>$request->service,
+        'beneficiaire'=>$request->beneficiaire,
+        'poste'=>$request->poste
 
     ]);
 
-    return back()->with('success','vente initialisé avec success');
+    return back()->with('info','sortie initialisé avec success');
     }
     public function edit($id){
         $vente=vente::find($id);
@@ -59,33 +64,34 @@ class VenteController extends Controller
         $produit=produit::all();
         $client=client::all();
         $user=User::all();
+
         return view('vente.venteProduit',compact('vente','type','produit','client','user'));
     }
     public function venteProduit(Request $request){
-        try {
+
              $request->validate([
-            'client'=>'required',
+           // 'client'=>'required',
             'produit'=>'required',
-            'qte'=>'required',
-            'pu'=>'required',
+            //'qte'=>'required',
+           // 'pu'=>'required',
             'code'=>'required',
             'date'=>'required',
             'unite'=>'required',
-            'reglement'=>'required'
+           // 'reglement'=>'required'
 
         ],[
-           'client.required'=>'renseignez le client',
+           //'client.required'=>'renseignez le client',
             'produit.required'=>'renseignez le produit',
-            'qte.required'=>'renseignez la qte',
-            'pu.required'=>'renseignez le pu',
+            //'qte.required'=>'renseignez la qte',
+           // 'pu.required'=>'renseignez le pu',
             'code.required'=>'renseignez le code',
             'date.required'=>'renseignez la date',
             'unite.required'=>'renseignez l\'unite',
-            'reglement.required'=>'renseignez le mode de reglement'
+          //  'reglement.required'=>'renseignez le mode de reglement'
         ]);
-
+  try {
         VenteProduit::create([
-            // dd($request->all())
+             //dd($request->all())
             'produit_id'=>$request->produit,
             'vente_id'=>$request->code,
             'pu'=>$request->pu,
@@ -95,12 +101,16 @@ class VenteController extends Controller
             'user'=>$request->user,
             'date_vente'=>$request->date,
             'remise'=>$request->remise,
-            'reglement'=>$request->reglement
+            'reglement'=>$request->reglement,
+            'beneficiaire'=>$request->beneficiare,
+            'service'=>$request->service,
+            'poste'=>$request->poste,
+            'stat'=>$request->stat,
         ]);
 
 
-        return back()->with('info','vente effectuée avec success!');
-        Session::flash('message','This is a flash message!');
+        return back()->with('success','sortie effectuée avec success!');
+
         } catch (\Throwable $th) {
             //throw $th;
             return back()->with('error','vente non effectue');

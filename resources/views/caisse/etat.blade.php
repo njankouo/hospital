@@ -172,7 +172,7 @@
                                 @php $total=0 @endphp
                                 @foreach ($etat as $etats)
                                     @if ($etats->date_vente != $carbon->format('Y-m-d'))
-                                    @else
+                                    @elseif($etats->stat == 'non')
                                         @php $total+= $etats->pu * $etats->qte_sortie * (1 - $etats->remise / 100) @endphp
                                         <tr>
 

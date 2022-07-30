@@ -24,7 +24,7 @@ public function insertion(Request $request){
     $request->validate([
         'nom'=>'required',
        // 'prenom'=>'required',
-        'sexe'=>'required',
+        //'sexe'=>'required',
         'telephone1'=>'required|unique:fournisseurs,telephone1',
         'email'=>'required|unique:fournisseurs,email',
         'status'=>'required'
@@ -33,7 +33,7 @@ public function insertion(Request $request){
     [
         'nom.required'=>'veuillez inserer le nom svp',
        // 'prenom.required'=>'veuillez inserer le prenom',
-        'sexe.required'=>'veuillez inserer le sexe',
+       // 'sexe.required'=>'veuillez inserer le sexe',
         'telephone1.required'=>'veuillez inserer le telephone',
         'email.required'=>'veuillez inserer l\'email',
         'status.required'=>'renseignez le status svp'

@@ -71,10 +71,12 @@
                                 </th>
                                 <th class="th-sm">Remise
                                 </th>
-                                <th class="th-sm">Reglement
-                                </th>
+                                {{-- <th class="th-sm">Reglement
+                                </th> --}}
                                 <th class="th-sm">Status
                                 </th>
+                                {{-- <th class="th-sm">Status de paiement
+                                </th> --}}
                                 <th class="th-sm">fournisseur
                                 </th>
 
@@ -96,9 +98,12 @@
                                         <td>{{ $commandes->pu }}</td>
                                         <td>{{ $commandes->date_commande }}</td>
                                         <td>{{ $commandes->date_livraison }}</td>
-                                        <td>{{ $commandes->remise }}%</td>
-                                        <td>{{ $commandes->reglement }}</td>
+                                        <td>{{ $commandes->remise }}</td>
+                                        {{-- <td>{{ $commandes->reglement }}</td> --}}
                                         <td>{{ $commandes->status }}</td>
+                                        {{-- <td>
+                                            <span class="badge badge-danger">{{ $commandes->status_paiement }}</span>
+                                        </td> --}}
                                         <td>{{ $commandes->fournisseur }}</td>
 
                                         <td>
@@ -120,8 +125,7 @@
                                                 <input type="hidden" value="{{ $commandes->remise }}" name="remise">
                                                 <input type="hidden" value="{{ $commandes->qte }}" name="qte">
                                                 <input type="hidden" value="{{ $commandes->unite }}" name="unite">
-                                                <input type="hidden" value="{{ $commandes->reglement }}"
-                                                    name="reglement">
+                                                <input type="hidden" value="{{ $commandes->reglement }}" name="reglement">
                                                 <button
                                                     class="px-4 py-2 text-light bg-blue-800 rounded btn btn-primary">ajouter
                                                     facture

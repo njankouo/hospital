@@ -16,16 +16,21 @@ class CreateVenteProduitsTable extends Migration
         Schema::create('vente_produits', function (Blueprint $table) {
             $table->id();
             $table->integer('qte_sortie');
-            $table->integer('pu');
+            $table->integer('pu')->nullable();
             $table->string('date_vente');
-            $table->integer('tva');
+            $table->integer('tva')->nullable();
             $table->foreignId('vente_id')->constrained('ventes')->onDelete('cascade');
             $table->foreignId('produit_id')->constrained('produits')->onDelete('cascade');
-            $table->string('client');
+            $table->string('client')->nullable();
             $table->string('user');
-            $table->string('reglement');
-            $table->string('unite');
+            $table->string('reglement')->nullable();
+            $table->string('unite')->nullable();
             $table->integer('remise')->nullable();
+            $table->string('beneficiare')->nullable();
+
+            $table->string('service')->nullable();
+
+            $table->string('poste')->nullable();
             $table->timestamps();
         });
         schema::enableForeignKeyConstraints();

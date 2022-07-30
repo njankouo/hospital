@@ -7,10 +7,12 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-title my-3 mx-3">
-                    <h3 style="font-family:forte">liste des formes galeliques de produits</h3>
-                    <div style="margin-left: 80%">
-                        <a href="" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-xl">
-                            <i class="fa fa-plus"></i>Nouvelle forme galelique
+                    <h3 style="font-family:forte">galeniques des produits</h3>
+                    <div style="margin-left: 75%">
+                        <a href="" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">
+                            <i class="fa fa-plus" style="text-overflow: ellipsis; white-space: nowrap;">
+                                Nouvelle forme galenique
+                            </i>
                         </a>
                     </div>
 
@@ -20,7 +22,7 @@
                                 <tr>
 
                                     <th style="width: 30%">ID</th>
-                                    <th style="width: 20%">forme galelique du produit</th>
+                                    <th style="width: 20%">forme galenique du produit</th>
 
 
                                 </tr>
@@ -58,7 +60,7 @@
                 <div class="card-title d-flex bg-primary text-light p-2">
 
                     <i class="fa fa-users fa-2x"></i>
-                    <h3 style="font-size:20px;font-family:forte"> Nouvelle forme galelique produit</h3>
+                    <h3 style="font-size:20px;font-family:forte"> Nouvelle forme galenique produit</h3>
                 </div>
                 <div class="card body">
                     <div class="row">

@@ -78,7 +78,7 @@
         @endforeach
     @endcan
 
-    @can('utilisateur')
+    @can('admin')
         @foreach ($produit as $produits)
             @if ($produits->qtestock < $produits->stock_seuil)
                 <div class="row">
@@ -107,7 +107,7 @@
             @endif
         @endforeach
     @endcan
-    @can('utilisateur')
+    @can('admin')
         <div class="row">
             <div class="col-md-6 col-xl-4">
                 <div class="card mb-3 widget-content bg-midnight-bloom">
@@ -169,28 +169,16 @@
                 <div class="card mb-3 widget-content bg-warning">
                     <div class="widget-content-wrapper text-white">
                         <div class="widget-content-left">
-                            <div class="widget-heading">Produit commandés</div>
+                            <div class="widget-heading">Services</div>
                             <div class="fa fa-list fa-2x"></div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span>{{ $commande->count() }}</span></div>
+                            <div class="widget-numbers text-white"><span>{{ $service->count() }}</span></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="d-xl-none d-lg-block col-md-6 col-xl-4">
-                <div class="card mb-3 widget-content bg-premium-dark">
-                    <div class="widget-content-wrapper text-white">
-                        <div class="widget-content-left">
-                            <div class="widget-heading">Products Sold</div>
-                            <div class="widget-subheading">Revenue streams</div>
-                        </div>
-                        <div class="widget-content-right">
-                            <div class="widget-numbers text-warning"><span>$14M</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     @endcan
 @endsection

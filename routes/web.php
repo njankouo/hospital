@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\rayon;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
@@ -13,11 +14,12 @@ use App\Http\Controllers\VenteController;
 use App\Http\Controllers\CaisseController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContratController;
+use App\Http\Controllers\FamilleController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\FournisseurController;
-use GuzzleHttp\Middleware;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +38,8 @@ Route::get('/client',[ClientController::class,'index'])->name('client.liste');
 
 Route::get('/fournisseur',[FournisseurController::class,'index'])->name('fournisseur.liste')->middleware('auth.admin');
 Route::get('/role',[UserController::class,'liste'])->name('role.liste')->middleware('auth.admin');
-Route::get('/categorie',[CategorieController::class,'index'])->name('categorie.liste')->middleware('auth.utilisateur');
-Route::get('/type',[TypeController::class,'index'])->name('type.liste')->middleware('auth.utilisateur');
+Route::get('/categorie',[CategorieController::class,'index'])->name('categorie.liste')->middleware('auth.admin');
+Route::get('/type',[TypeController::class,'index'])->name('type.liste')->middleware('auth.admin');
 Route::get('/produits',[ProduitController::class,'create'])->name('product.create');
 Route::get('/users',[UserController::class,'index'])->name('user.create')->middleware('auth.admin');
 Route::get("client/create",[ClientController::class,'indes'])->name('client.create');
@@ -46,7 +48,7 @@ Route::get('/contrats',[ContratController::class,'index'])->name('contrat')->mid
 Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/rayon',[RayonController::class,'index'])->name('rayon.index')->middleware('auth.utilisateur');
+Route::get('/rayon',[RayonController::class,'index'])->name('rayon.index')->middleware('auth.admin');
 Route::get('commade',[CommandeController::class,'index'])->name('commande')->middleware('auth.admin');
 
 
@@ -66,8 +68,11 @@ Route::get('livraison',[CommandeController::class,'livraison'])->name('livraison
 ->middleware('auth.admin');
 
 
-Route::get('/ventes',[VenteController::class,'index'])->name('vente')->middleware('auth.utilisateur');
+Route::get('/ventes',[VenteController::class,'index'])->name('vente')->middleware('auth.admin');
 
+Route::get('/famille',[FamilleController::class,'index'])->name('famille.home')->middleware('auth.admin');
+Route::post('famille/create',[FamilleController::class,'creation'])->name('famille.create')->middleware('auth.admin');
+Route::delete('famille/{id}',[FamilleController::class,'supprimer'])->name('famille.delete');
 
 Route::get('/vente/produit/{id}',[VenteController::class,'edit'])->name('vente.produit');
 Route::post('/vente/',[VenteController::class,'venteProduit'])->name('vent');
@@ -117,10 +122,10 @@ Route::post('/changePassword',[HomeController::class,'changePassword'])->name('c
 
 
 Route::get('caisse',[CaisseController::class,'index'])->name('caisse.index')
-->Middleware('auth.utilisateur');
+->Middleware('auth.admin');
 
 Route::get('/caisse/etat',[CaisseController::class,'etat'])->name('etat')
-->middleware('auth.utilisateur');
+->middleware('auth.admin');
 
 Route::post('/daterange/fetch_data', [CaisseController::class, 'fetch_data'])->name('daterange.fetch_data');
 
@@ -158,4 +163,10 @@ Route::post('/Group/livraison/Delete',[CartController::class,'SupprimeOne'])->na
 
 Route::get('/get-product-price',[VenteController::class,'getprice']);
 
-Route::get('/charger/price',[CommandeController::class,'generatePrice']);
+Route::get('/charger/price',[CommandeController::class,'generatePrice'])->name('charger.price');
+
+
+Route::get('/service',[ServiceController::class,'index'])->name('service.index');
+route::delete('service/{id}',[ServiceController::class,'supprimer'])->name('service.delete');
+Route::post('/service',[ServiceController::class,'creation'])->name('service.create');
+Route::get('changeStatus', [CommandeController::class,'changeStatus'])->name('toggle.find');

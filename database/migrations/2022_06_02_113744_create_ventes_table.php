@@ -18,6 +18,9 @@ class CreateVentesTable extends Migration
             $table->foreignId('user_id')->constrained('users');
 
             $table->string('date_vente');
+            $table->string('beneficiaire')->nullable();
+            $table->string('service')->nullable();
+            $table->string('poste')->nullable();
             $table->timestamps();
         });
         schema::enableForeignKeyConstraints();
