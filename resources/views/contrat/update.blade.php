@@ -21,7 +21,7 @@
                       <i class="fa fa-list fa-2x my-2 mx-1"></i>
                       <h3 style="font-size:20px;font-family:forte" class="p-3"> Modification du contrat</h3>
                   </div>
-                  <div class="card body">
+                  <div class="card-content">
                       @if (session('success'))
                           <div class="col-sm-12">
                               <div class="alert  alert-success alert-dismissible fade show" role="alert">
@@ -43,7 +43,7 @@
                                   <div class="col-6">
                                       <label for="">fournisseur</label>
                                       <select name="fournisseur_id" id=""
-                                          class="form-control @error('fournisseur_id') is-invalid @enderror"
+                                          class="@error('fournisseur_id') is-invalid @enderror"
                                           value="{{ $contrat->fournisseur_id }}">
                                           <option value="">....</option>
                                           @foreach ($fournisseur as $fournisseurs)
@@ -60,14 +60,17 @@
                                       @error('fournisseur_id')
                                           <p>{{ $message }}</p>
                                       @enderror
+
+                                  </div>
+                                  <div class="col s6">
                                       <label for="">Mode Reglement</label>
-                                      <input type="text" class="form-control @error('reglement') is-invalid @enderror"
+                                      <input type="text" class="@error('reglement') is-invalid @enderror"
                                           value="{{ $contrat->reglement }}" name="reglement">
                                       @error('reglement')
                                           <p>{{ $message }}</p>
                                       @enderror
                                   </div>
-                                  <div class="col-6">
+                                  <div class="col-12">
 
                                       <label for="">date debut contrat</label>
                                       <input type="date" class="form-control @error('date_debut') is-invalid @enderror"
@@ -82,17 +85,24 @@
                                           <p>{{ $message }}</p>
                                       @enderror
                                   </div>
-                                  <div class="col-6">
-                                      <label for="">fichier image (optionel)</label>
-                                      <input onchange="previewFile(this)" type="file" class="form-control my-2 "
-                                          name="image" value="{{ $contrat->image }}">
+                                  <div class="col-12">
+                                      <div class="file-field input-field">
+                                          <div class="btn">
+                                              <span>fichier</span>
+                                              <input onchange="previewFile(this)" type="file" class="form-control my-2 "
+                                                  name="image" value="{{ $contrat->image }}">
+                                          </div>
+                                          <div class="file-path-wrapper">
+                                              <input class="file-path validate" type="text">
+                                          </div>
+                                      </div>
                                   </div>
                                   <div class="col-6">
 
                                   </div>
                                   <div class="col-8 my-4">
-                                      <button type="submit" class="btn btn-primary mx-1">modification</button>
-                                      <a class="btn btn-danger mx-1" href="{{ route('contrat') }}">retour au liste
+                                      <button type="submit" class="btn waves-effect blue mx-1">modification</button>
+                                      <a class="btn waves-effect red mx-1" href="{{ route('contrat') }}">retour au liste
                                           du contrat</a>
                                   </div>
                               </div>

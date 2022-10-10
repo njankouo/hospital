@@ -12,7 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <link href="{{ asset('css/materialize.min.css') }}">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -21,10 +21,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 </head>
+<script src="{{ asset('js/materialize.min.js') }}"></script>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light  shadow-sm" style="background-color: rgb(5, 21, 77) 10%">
+        <nav class="navbar navbar-expand-md navbar-light  shadow-sm blue">
             <div class="container">
                 <a class="navbar-brand text-light" href="{{ url('/') }}" style="font-family: forte">
                     {{ config('app.name', 'Laravel') }}
@@ -45,12 +46,12 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
+                            {{-- @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" style="font-family:forte"
                                         href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
-                            @endif
+                            @endif --}}
 
                             {{-- @if (Route::has('register'))
                                 <li class="nav-item">
@@ -70,8 +71,7 @@
                                                                                                                                              document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -85,6 +85,7 @@
             @yield('content')
         </main>
     </div>
+
 </body>
 
 </html>

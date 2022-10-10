@@ -18,7 +18,7 @@ class CreateCommandesTable extends Migration
             $table->foreignId('fournisseur_id')->constrained('fournisseurs')->onDelete('cascade')->onUpdate('cascade');
             $table->string('code_commande');
             $table->date('date_commande');
-             $table->date('date_livraison');
+             $table->date('date_livraison')->nullable();
             $table->string('status');
             $table->timestamps();
         });

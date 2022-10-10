@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<link href="{{ asset('css/materialize.min.css') }}" rel="stylesheet">
 @section('content')
     <section class="vh-100" style="background-color: #1d96e7;">
         <div class="container py-5 h-100">
@@ -12,7 +12,8 @@
                                     style="border-radius: 1rem 0 0 1rem; margin-top:45px" />
                             </div>
                             <div class="col-md-12 col-lg-7 d-flex align-items-center">
-                                <div class="card-body p-4 p-lg-5 text-black">
+
+                                <div class="card-content p-4 p-lg-5 text-black">
 
 
                                     <form method="POST" action="{{ route('login') }}" style="width: 29rem;">
@@ -22,18 +23,17 @@
                                         <div class="d-flex align-items-center mb-3 pb-1">
 
                                             <i class="fa fa-heartbeat fa-2x me-3" aria-hidden="true"></i>
-                                            <span class="h1 fw-bold mb-0">Pharmacie</span>
+                                            <span class="h1 fw-bold mb-0">Stock Pharmacie</span>
                                         </div>
 
-                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Connectez vous avec vos
-                                            identifiants
+                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">
+                                            Authentification
                                         </h5>
 
-                                        <div class="form-outline mb-4">
-                                            <input type="text" id="form2Example17"
-                                                class="form-control form-control-lg 2 @error('nom') is-invalid @enderror"
+                                        <div class="form-outline mb-4 input-field ">
+                                            <input type="text" id="" class=" @error('nom') is-invalid @enderror"
                                                 name="nom" value="{{ old('nom') }}" />
-                                            <label class="form-label" for="form2Example17">Nom </label>
+                                            <label class="form-label" for="form2Example17">Username </label>
                                             @error('nom')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -41,11 +41,12 @@
                                             @enderror
                                         </div>
 
-                                        <div class="form-outline
-                                                mb-4">
-                                            <input type="password" id="form2Example27"
-                                                class="form-control form-control-lg @error('password') is-invalid @enderror"
-                                                name="password" autocomplete="current-password" />
+                                        <div
+                                            class="form-outline
+                                                mb-4 input-field">
+                                            <input type="password" id=""
+                                                class="@error('password') is-invalid @enderror" name="password"
+                                                autocomplete="current-password" />
                                             <label class="form-label" for="form2Example27">Password</label>
 
                                             @error('password')
@@ -57,7 +58,7 @@
 
                                         <div class="pt-1
                                                 mb-4">
-                                            <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                            <button class="waves-effect btn blue text-white" type="submit">Login</button>
                                         </div>
                                         {{-- @if (Route::has('password.request'))
                                             <a class="btn btn-link" href="{{ route('password.request') }}"
@@ -65,13 +66,15 @@
                                                 Forgot your password
                                             </a>
                                         @endif --}}
-                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Identifiant oubliez? <a
-                                                href="#!" style="color: #393f81;">Register here</a></p>
+                                        <p class="mb-5 pb-lg-2" style="color: #393f81;float: right;">Identifiant
+                                            oubliez?</p>
                                         <a href="#!" class="small text-muted">Application gestion.</a>
                                         <a href="#!" class="small text-muted">Pharmacie</a>
                                     </form>
 
                                 </div>
+                                <div class="card-action"></div>
+
                             </div>
                         </div>
                     </div>

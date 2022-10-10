@@ -28,8 +28,8 @@
 
 
                                 <label for="">CATEGORIE DU PRODUIT</label>
-                                <select class="@error('categorie_id') is-invalid @enderror form-control my-2"
-                                    data-live-search="true" name="categorie_id">
+                                <select class="@error('categorie_id') is-invalid @enderror" data-live-search="true"
+                                    name="categorie_id">
                                     <optgroup label="selectionner la categorie">
                                         <option value="">.......</option>
                                         @foreach ($categorie as $cat)
@@ -65,7 +65,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-12">
                                 <label for="">QUANTITE SEUIL</label>
                                 <input type="number"
                                     class=" text-right  form-control my-2 @error('qteseuil') is-invalid @enderror"
@@ -75,9 +75,10 @@
                                 @enderror
 
                             </div>
-                            <div class="col-6">
+
+                            <div class="col-12">
                                 <label for="">UNITE </label>
-                                <select class="@error('unite_id') is-invalid @enderror form-control my-2" name="unite_id">
+                                <select class="@error('unite_id') is-invalid @enderror  my-2" name="unite_id">
                                     <option value="">........</option>
                                     <optgroup label="selectionner la forme">
                                         @foreach ($type as $typ)
@@ -111,10 +112,9 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <label for="">RAYON DES PRODUITS</label>
-                                <select name="rayon_id" id=""
-                                    class="form-control @error('rayon_id') is-invalid @enderror">
+                                <select name="rayon_id" id="" class=" @error('rayon_id') is-invalid @enderror">
                                     <option value="">.............</option>
                                     <optgroup label=" selectionner le rayon">
                                         @foreach ($rayon as $rayons)
@@ -129,9 +129,9 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <label for="">FOURNISSEUR </label>
-                                <select id="" class="form-control @error('fournisseur_id') is-invalid @enderror"
+                                <select id="" class=" @error('fournisseur_id') is-invalid @enderror"
                                     name="fournisseur_id">
                                     <option value="">...........</option>
                                     <optgroup label="selectionner le fournisseur">
@@ -151,8 +151,8 @@
                                 <label for="">EQUIVALENCE DU PRODUIT</label>
                                 <input type="text" class="my-2 form-control" name="equivalence"
                                     placeholder="Enter ..." value="{{ $produits->equivalence }}">
-                                <label for="">Famille Produit</label>
-                                <select name="famille_id" id="" class="form-control my-2">
+                                {{-- <label for="">Famille Produit</label> --}}
+                                {{-- <select name="famille_id" id="" class="form-control my-2">
                                     @foreach ($famille as $familles)
                                         @if ($familles->id == $produits->famille_id)
                                             <option value="{{ $familles->id }}" selected>{{ $familles->libelle }}
@@ -163,7 +163,7 @@
                                         @endif
                                     @endforeach
 
-                                </select>
+                                </select> --}}
                             </div>
 
                             <div class="col-6">
@@ -171,9 +171,6 @@
                                 <input type="date" name="fabrication" id="" class="form-control my-2"
                                     value="{{ $produits->date_fabrication }}">
 
-                                <label for="">date expiration (OPTIONNEL)</label>
-                                <input type="date" name="expiration" id="" class="form-control my-2"
-                                    value="{{ $produits->date_peremption }}">
 
                             </div>
                             <div class="col-6">

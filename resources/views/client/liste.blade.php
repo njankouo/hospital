@@ -31,7 +31,7 @@
                     </a>
                 </div>
 
-                <div class="card-body">
+                <div class="card-content">
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
 
                         <thead>

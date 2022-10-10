@@ -18,36 +18,35 @@
             <button class="close"></button>
         </div>
         <ul class="header-menu nav">
-            @can('admin')
-                <li class="nav-item">
-                    <a href="{{ route('chart') }}" class="nav-link">
-                        <i class="nav-link-icon fa fa-database"> </i>
-                        Statistics
-                    </a>
-                </li>
-            @endcan
+
+            <li class="nav-item">
+                <a href="{{ route('chart') }}" class="nav-link">
+                    <i class="nav-link-icon fa fa-database"> </i>
+                    Statistics
+                </a>
+            </li>
+
             {{-- <li class="btn-group nav-item">
                 <a href="javascript:void(0);" class="nav-link">
                     <i class="nav-link-icon fa fa-edit"></i>
                     Projects
                 </a>
             </li> --}}
-            @can('admin')
-                <li class="dropdown nav-item">
-                    <a href="{{ route('changePassword') }}" class="nav-link">
-                        <i class="nav-link-icon fa fa-cog"></i>
-                        Settings
-                    </a>
-                </li>
-            @endcan
-            @can('utilisateur')
-                <li class="dropdown nav-item">
-                    <a href="{{ route('changePassword') }}" class="nav-link">
-                        <i class="nav-link-icon fa fa-cog"></i>
-                        Settings
-                    </a>
-                </li>
-            @endcan
+
+            <li class="dropdown nav-item">
+                <a href="{{ route('changePassword') }}" class="nav-link">
+                    <i class="nav-link-icon fa fa-cog"></i>
+                    Settings
+                </a>
+            </li>
+
+            <li class="dropdown nav-item">
+                <a href="{{ route('profil.index') }}" class="nav-link">
+                    <i class="nav-link-icon fa fa-book"></i>
+                    Profile
+                </a>
+            </li>
+
             <li class="dropdown nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-link-icon fa fa-diamond"></i>
@@ -64,7 +63,14 @@
                     <div class="widget-content-left">
                         <div class="btn-group">
                             <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                <img width="42" class="rounded" src="{{ asset('img/pharma.jpg') }}" alt="">
+                                @if (optional(Auth()->user())->sexe == 'masculin')
+                                    <img width="42" class="rounded" src="{{ asset('img/lion.png') }}"
+                                        alt="">
+                                @else
+                                    <img width="42" class="rounded" src="{{ asset('img/lien.png') }}"
+                                        alt="">
+                                @endif
+
                                 <i class="fa fa-angle-down ml-2 opacity-8 text-light"></i>
                             </a>
                             <div tabindex="-1" role="menu" aria-hidden="true"
@@ -84,9 +90,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="widget-content-left  ml-3 header-user-info">
+                    <div class="widget-content-left  ml-3 header-user-light">
                         <div class="widget-heading nav-link">
-                            {{ auth()->user()->nom ?? 'qui ete vous?' }}
+                            <h4 class="text-light" style="font-style: italic">
+                                {{ auth()->user()->nom ?? 'qui ete vous?' }}</h4>
 
                         </div>
 

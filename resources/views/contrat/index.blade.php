@@ -31,12 +31,12 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-title my-4 mx-3 p-2">
+                <div class="card-content my-4 mx-3 p-2">
                     <h3 style="font-family: forte">liste des contrats </h3>
                     <a href="{{ route('contrat.creation') }}" class="btn btn-info"> création du nouveau contrat</a>
 
                 </div>
-                <div class=" card-body">
+                <div class=" card-content">
 
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
 
@@ -71,7 +71,7 @@
 
                                     <td>
                                         @if ($contrats->image == '')
-                                            <span class="badge badge-danger">aucun fichier image</span>
+                                            <span class="badge red text-white">aucun fichier image</span>
                                         @else
                                             <img class="rounded" src="{{ asset('img') }}/{{ $contrats->image }}"
                                                 alt="" style="width: 88px;height:50px;">
@@ -81,8 +81,9 @@
                                         <form method="POST" action="{{ route('contrat.delete', $contrats->id) }}">
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
-                                            <i type="submit" class="fa fa-trash fa-2x text-danger btn-flat show_confirm"
-                                                data-toggle="tooltip" title='Delete'></i>
+                                            <i type="submit"
+                                                class="material-icons fa-2x text-danger btn-flat show_confirm "
+                                                data-toggle="tooltip" title='Delete'> trash</i>
                                         </form>
                                         <a href="{{ route('edit', $contrats->id) }}" class="btn btn-info"> <i
                                                 class="fa fa-edit"></i></a>

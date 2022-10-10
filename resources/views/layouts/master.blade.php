@@ -14,7 +14,10 @@
     <link rel="icon" href="{{ asset('img/icon.png') }}">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
+    <link href="{{ asset('css/materialize.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/icon.css') }}">
+    <link rel="stylesheet"
+        href="https://pixinvent.com/materialize-material-design-admin-template/app-assets/vendors/vendors.min.css">
     <style>
         .loader {
             position: fixed;
@@ -167,7 +170,7 @@
                 </div>
 
 
-
+                <script src="{{ asset('js/materialize.min.js') }}"></script>
                 <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
                 <script src="{{ mix('js/app.js') }}"></script>
 
@@ -179,6 +182,14 @@
                         }, 300);
                     })
                 </script> --}}
+                @include('sweetalert::alert')
+                <script>
+                    // Or with jQuery
+
+                    $(document).ready(function() {
+                        $('select').formSelect();
+                    });
+                </script>
 </body>
 
 </html>

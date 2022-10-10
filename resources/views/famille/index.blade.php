@@ -8,7 +8,7 @@
                 <div class="card-title my-3 mx-3">
                     <h3 style="font-family:forte">liste des Familles Produits</h3>
                     <div style="margin-left: 80%">
-                        <a href="" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">
+                        <a class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl">
                             <i class="fa fa-plus"></i>Nouvelle Famille
                         </a>
                     </div>

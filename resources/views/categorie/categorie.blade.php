@@ -1,3 +1,21 @@
+<script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
+
+<script src="{{ asset('js/toastr.min.js') }}"></script>
+<script src="{{ asset('js/jquery.typeahead.min.js') }}"></script>
+
+<link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/select.dataTables.min.css') }}">
+
 @extends('layouts.master')
 
 

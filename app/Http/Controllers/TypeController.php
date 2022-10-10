@@ -11,10 +11,10 @@ class TypeController extends Controller
     //
     public function index(){
 
-        $data=[
-            'type'=>type_produit::paginate(5)
-        ];
-        return view('type.type',$data);
+
+            $type=type_produit::all();
+
+        return view('type.type',compact('type'));
     }
     public function create(Request $request){
         $request->validate([

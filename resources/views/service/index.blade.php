@@ -95,39 +95,39 @@
     <div class="modal-dialog modal-lg ">
         <div class="modal-content">
 
-            <div class="card">
-                <div class="card-title d-flex bg-primary text-light p-2">
 
-                    <i class="fa fa-users fa-2x"></i>
-                    <h3 style="font-size:20px;font-family:forte"> Nouveau service</h3>
-                </div>
-                <div class="card body">
+            <div class="card-title d-flex bg-primary text-light p-2">
 
-                    <form action="{{ route('service.create') }}" method="POST" class="form-block">
-                        @csrf
-                        <div class="row" style="margin: 10px;">
-
-
-                            <div class="col-12">
-                                <label for="">nouveau service</label>
-                                <input type="text" class="my-2 form-control @error('nom') is-invalid @enderror"
-                                    name="nom" placeholder="Enter ..." required>
-                                @error('libelle')
-                                    <p>{{ $message }}</p>
-                                @enderror
-
-
-
-                                <div class="col-8 my-4">
-                                    <button type="submit" class="btn btn-primary mx-1">save</button>
-                                    <a class="btn btn-danger mx-1" data-dismiss="modal">close</a>
-                                </div>
-                            </div>
-                    </form>
-                </div>
-                <div class="card-footer bg-primary"></div>
+                <i class="fa fa-users fa-2x"></i>
+                <h3 style="font-size:20px;font-family:forte"> Nouveau service</h3>
             </div>
+
+
+            <form action="{{ route('service.create') }}" method="POST" class="form-block">
+                @csrf
+                <div class="row" style="margin: 10px;">
+
+
+                    <div class="col-12">
+                        <label for="">nouveau service</label>
+                        <input type="text" class="my-2 form-control @error('nom') is-invalid @enderror"
+                            name="nom" placeholder="Enter ..." required>
+                        @error('libelle')
+                            <p>{{ $message }}</p>
+                        @enderror
+
+
+
+                        <div class="col-8 my-4">
+                            <button type="submit" class="btn btn-primary mx-1">save</button>
+                            <a class="btn btn-danger mx-1" data-dismiss="modal">close</a>
+                        </div>
+                    </div>
+            </form>
         </div>
+
     </div>
+</div>
+</div>
 </div>
 </div>

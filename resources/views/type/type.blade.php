@@ -38,7 +38,7 @@
                         </table>
                     </div>
                     <div class="card-footer">
-                        {{ $type->links() }}
+
                     </div>
                 </div>
             </div>

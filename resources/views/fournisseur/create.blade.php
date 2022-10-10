@@ -26,38 +26,24 @@
 
                             <div class="col-6">
                                 <label for="">Nom</label>
-                                <input type="text" class="my-2 form-control @error('nom') is-invalid @enderror"
-                                    name="nom" placeholder="Enter ...">
+                                <input type="text" class="my-2 @error('nom') is-invalid @enderror" name="nom"
+                                    placeholder="Enter ..." value="{{ old('nom') }}">
                                 @error('nom')
                                     <p>{{ $message }}</p>
                                 @enderror
-                                <label for="">sexe (Optionnel)</label>
-                                <select name="sexe" id=""
-                                    class="form-control my-2 @error('sexe') is-invalid @enderror">
-                                    <option value="" disabled>select gender</option>
-                                    <option value=""></option>
-                                    <option value="M">Masculin</option>
-                                    <option value="F">feminin</option>
-                                </select>
-                                @error('sexe')
-                                    <p>{{ $message }}</p>
-                                @enderror
+
                             </div>
                             <div class="col-6">
 
                                 <label for="">Prenom (Optionnel)</label>
                                 <input type="text" class="my-2 form-control @error('prenom') is-invalid @enderror"
-                                    placeholder="Enter ..." name="prenom">
+                                    placeholder="Enter ..." name="prenom" value="{{ old('prenom') }}">
                                 @error('prenom')
                                     <p>{{ $message }}</p>
                                 @enderror
-                                <label for="">telephone1</label>
-                                <input type="text" class="my-2 form-control @error('telephone1') is-invalid @enderror"
-                                    id="inputSuccess" placeholder="Enter ..." name="telephone1">
-                                @error('telephone1')
-                                    <p>{{ $message }}</p>
-                                @enderror
+
                             </div>
+
                             <div class="col-6">
                                 <label for="">telephone2</label>
                                 <input type="tel" class="form-control my-2 " name="telephone2" placeholder="..."
@@ -66,7 +52,7 @@
                             <div class="col-6">
                                 <label for="">email</label>
                                 <input type="email" class="form-control my-2 @error('email') is-invalid @enderror"
-                                    name="email" placeholder="..." required>
+                                    name="email" placeholder="..." value="{{ old('email') }}">
                                 @error('email')
                                     <p>{{ $message }}</p>
                                 @enderror
@@ -74,6 +60,31 @@
                             <div class="col-6">
                                 <label for="">status</label>
                                 <input type="text" class="form-control" name="status" value="actif">
+
+
+
+                                @error('sexe')
+                                    <p>{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="col s6">
+                                <label for="">sexe (Optionnel)</label>
+                                <select name="sexe" id="" class="my-2 @error('sexe') is-invalid @enderror">
+                                    <option value="" disabled>select gender</option>
+                                    <option value=""></option>
+                                    <option value="M">Masculin</option>
+                                    <option value="F">feminin</option>
+                                </select>
+                            </div>
+                            <div class="col s12">
+                                <label for="">telephone1</label>
+                                <input type="text" class="form-control @error('telephone1') is-invalid @enderror"
+                                    id="inputSuccess" placeholder="Enter ..." name="telephone1"
+                                    value="{{ old('telephone1') }}">
+                                @error('telephone1')
+                                    <p>{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="col-8 my-4">
                                 <button type="submit" class="btn btn-primary mx-1">save</button>
@@ -87,4 +98,10 @@
             <div class="card-footer bg-primary"></div>
         </div>
     </div>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('select').formSelect();
+        })
+    </script>
 @endsection

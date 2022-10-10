@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -59,7 +60,8 @@ class UserController extends Controller
                'status'=>$request->status,
                'numeroPieceIdentite'=>$request->numeroPieceIdentite,
     ]);
-    return redirect('/role');
+    return back()->with('success','utilisateur crée avec success');
+    // Alert::success('success', 'You\'ve Successfully Registered');
     }
     public function vue($id){
         $user=User::find($id);
@@ -77,7 +79,7 @@ class UserController extends Controller
                   'password' => $request->password
         ]);
 
-        return redirect('/role');
+        return back()->with('success','le role à ete attribué à cet utilisateur avec success');
 
      }
 

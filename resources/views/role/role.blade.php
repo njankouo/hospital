@@ -2,6 +2,7 @@
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script>
     $(document).ready(function() {
         $('#example').DataTable();
@@ -61,8 +62,8 @@
 
                                             </td>
                                             <td>
-                                                <a href="{{ route('role.vue', $roles->id) }}" class="btn btn"> <i
-                                                        class="fa fa-eye fa-2x"> </i></a>
+                                                <a href="{{ route('role.vue', $roles->id) }}" class="btn"> <i
+                                                        class="large material-icons "> add</i></a>
                                             </td>
 
                                         </tr>

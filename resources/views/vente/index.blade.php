@@ -31,7 +31,7 @@
                           <div class="row">
                               <div class="form-row">
 
-                                  <div class="col-6">
+                                  <div class="input-field col-12">
                                       <label for="">Date sortie</label>
                                       <input type="date"
                                           class="my-2 form-control @error('date_vente') is-invalid @enderror" name="date"
@@ -41,15 +41,18 @@
                                       @enderror
 
                                   </div>
-                                  <div class="col-6">
-                                      <label for="">responsable de la sortie</label>
+                              </div>
+                              <div class="row">
+                                  <div class="input-field col-12">
+
                                       <select name="responsable" id=""
-                                          class="form-control @error('responsable') is-invalid @enderror my-2">
-                                          <option value="">...........</option>
+                                          class=" @error('responsable') is-invalid @enderror my-2" multiple>
+
                                           @foreach ($user as $users)
                                               <option value="{{ $users->id }}">{{ $users->nom }}</option>
                                           @endforeach
                                       </select>
+                                      <label for="">responsable de la sortie</label>
                                       @error('responsable')
                                           <p>{{ $message }}</p>
                                       @enderror
@@ -67,7 +70,7 @@
                   </div>
 
               </div>
-              <div class="card-footer bg-primary p-3"></div>
+              <div class="card-action bg-primary p-3"></div>
           </div>
           <div class="col-6">
               <div class="card">
@@ -75,30 +78,29 @@
                       <p style="font-family: forte">Reservé aux Sorties Internes</p>
                   </div>
                   <div class="card-body">
-                      <div class="col-12">
+                      <div class="input-field col-12">
                           <label for="">Beneficiaire</label>
                           <input type="text" class="form-control" name="beneficiaire">
                       </div>
 
                       <div class="col-12">
                           <label for="">Service</label>
-                          <select name="service" id="" class="form-control">
+                          <select name="service" id="">
                               <optgroup label="selectionnez leservice concerné">
-                                  <option value="">....</option>
-                                  @foreach ($service as $services)
+                                  < @foreach ($service as $services)
                                       <option value="{{ $services->nom }}">{{ $services->nom }}</option>
-                                  @endforeach
+                                      @endforeach
 
                               </optgroup>
                           </select>
                       </div>
-                      <div class="col-12">
+                      <div class="input-field col-12">
                           <label for="">poste du beneficier(e)</label>
                           <input type="text" name="poste" class="form-control">
                       </div>
                   </div>
                   </form>
-                  <div class="card-footer bg-primary">
+                  <div class="card-action bg-primary">
 
                   </div>
 
@@ -110,7 +112,7 @@
       <div class="row">
           <div class="col-12">
               <div class="card">
-                  <div class="card-title my-4 mx-3 p-2">
+                  <div class="card-content my-4 mx-3 p-2">
                       <h3 style="font-family: forte">liste des sorties crées</h3>
                       @foreach ($produit as $produits)
                           @if ($produits->qtestock <= 0)
@@ -129,7 +131,7 @@
                           @endif
                       @endforeach
                   </div>
-                  <div class=" card-body">
+                  <div class=" card-content">
 
                       <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0"
                           width="100%">

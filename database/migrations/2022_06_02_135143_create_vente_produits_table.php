@@ -26,11 +26,12 @@ class CreateVenteProduitsTable extends Migration
             $table->string('reglement')->nullable();
             $table->string('unite')->nullable();
             $table->integer('remise')->nullable();
-            $table->string('beneficiare')->nullable();
+            $table->string('beneficiaire')->nullable();
 
             $table->string('service')->nullable();
 
             $table->string('poste')->nullable();
+            $table->string('stat');
             $table->timestamps();
         });
         schema::enableForeignKeyConstraints();

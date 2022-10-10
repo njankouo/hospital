@@ -29,7 +29,7 @@ class CommandeController extends Controller
         $request->validate([
             'fournisseur'=>'required',
             'date'=>'required',
-            'dateLivraison'=>'required',
+           // 'dateLivraison'=>'required',
             // 'pu'=>'required',
             // 'unite'=>'required',
             // 'produit'=>'required',
@@ -39,7 +39,7 @@ class CommandeController extends Controller
         [
             'fournisseur.required'=>'veuillez renseignetr le fournisseur',
             'date.required'=>'veuillez renseigner la date de commande',
-            'dateLivraison.required'=>'veuillez renseigner la date de livraison',
+           // 'dateLivraison.required'=>'veuillez renseigner la date de livraison',
             // 'pu.required'=>'veuillez renseigner le pu',
             // 'unite.required'=>"veuillez renseigner l\'unite",
             // 'produit.required'=>"veuillez renseigner le produit",

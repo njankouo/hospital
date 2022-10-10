@@ -21,7 +21,7 @@ class CreateProduitCommandeTable extends Migration
             $table->string('date_commande')->nullable();
             $table->string('date_livraison')->nullable();
             $table->string('status');
-            $table->string('status_paiement');
+            $table->string('status_paiement')->nullable();
             $table->string('reglement')->nullable();
              $table->string('pourcentage');
             $table->string('unite');

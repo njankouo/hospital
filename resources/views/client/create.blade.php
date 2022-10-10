@@ -12,14 +12,14 @@
                     <i class="fa fa-users fa-2x mx-2 my-2"></i>
                     <h3 style="font-size:20px;font-family:forte" class="my-2"> Nouveau Client</h3>
                 </div>
-                <div class="card body">
+                <div class="card-content">
                     <div class="row">
                         <form action="{{ route('create.client') }}" method="POST" class="form-block">
                             @csrf
                             <div class="form-row" style="margin: 10px;">
 
 
-                                <div class="col-6">
+                                <div class="col-12">
                                     <label for="">Nom</label>
                                     <input type="text" class="my-2 form-control @error('nom') is-invalid @enderror"
                                         name="nom" placeholder="Enter ..." value="{{ old('nom') }}">
@@ -33,19 +33,8 @@
                                         <p>{{ $message }}</p>
                                     @enderror
                                 </div>
-                                <div class="col-6">
-                                    <label for="">sexe</label>
-                                    <select name="sexe" id=""
-                                        class="form-control my-2 @error('sexe') is-invalid @enderror"
-                                        value="{{ old('sexe') }}">
-                                        <option value="" disabled>select gender</option>
-                                        <option value=""></option>
-                                        <option value="1">Masculin</option>
-                                        <option value="0">feminin</option>
-                                    </select>
-                                    @error('sexe')
-                                        <p>{{ $message }}</p>
-                                    @enderror
+                                <div class="col-12">
+
                                     <label for="">telephone </label>
                                     <input type="text" class="my-2 form-control @error('telephone') is-invalid @enderror"
                                         id="inputSuccess" placeholder="Enter ..." name="telephone"
@@ -56,7 +45,7 @@
                                 </div>
 
 
-                                <div class="col-6">
+                                <div class="col-12">
                                     <label for="">E-mail (OPTIONNEL)</label>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"
                                         placeholder="email...." name="email" value="{{ old('email') }}">
@@ -79,24 +68,50 @@
                                         <p>{{ $message }}</p>
                                     @enderror
 
+
+                                </div>
+                                <div class="col s6">
                                     <label>Status</label>
 
-                                    <select disabled="disabled" class="form-control my-2" name="status">
+                                    <select disabled="disabled" class="my-2" name="status">
                                         <option value="1">actif</option>
                                     </select>
                                 </div>
-                                <div class="col-8 my-4">
-                                    <a class="btn btn-danger mx-1" href="{{ route('client.liste') }}">retour
-                                    </a>
-                                    <button type="submit" class="btn btn-primary mx-1">save</button>
+                                <div class="col s12">
+                                    <label for="">sexe</label>
+                                    <select name="sexe" id="" class="my-2 @error('sexe') is-invalid @enderror"
+                                        value="{{ old('sexe') }}">
+                                        <option value="" disabled>select gender</option>
+                                        <option value=""></option>
+                                        <option value="1">Masculin</option>
+                                        <option value="0">feminin</option>
+                                    </select>
+                                    @error('sexe')
+                                        <p>{{ $message }}</p>
+                                    @enderror
+
                                 </div>
+
                             </div>
-                        </form>
+
                     </div>
 
                 </div>
-                <div class="card-footer bg-primary"></div>
+                <div class="card-action bg-primary">
+                    <div class="col-8 my-4">
+                        <a class="btn btn-danger mx-1" href="{{ route('client.liste') }}">retour
+                        </a>
+                        <button type="submit" class="btn btn-primary mx-1">save</button>
+                    </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('select').formSelect();
+        })
+    </script>
 @endsection

@@ -6,12 +6,13 @@ use App\Models\User;
 use App\Models\client;
 use App\Models\Contrat;
 use App\Models\produit;
+use App\Models\Service;
 use App\Models\VenteProduit;
 use Illuminate\Http\Request;
 use App\Models\CommandeArticle;
-use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
@@ -70,5 +71,6 @@ class HomeController extends Controller
     }
     public function info(){
         return view('infos.index');
+            Alert::success('success', 'You\'ve Successfully Registered');
     }
 }

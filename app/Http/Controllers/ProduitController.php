@@ -19,7 +19,7 @@ class ProduitController extends Controller
 {
     //
     public function index(){
-        $produit=Produit::latest()->paginate();
+        $produit=Produit::all();
         return view('produit.produit',compact('produit'));
     }
     public function create(){

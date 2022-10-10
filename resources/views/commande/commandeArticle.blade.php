@@ -33,9 +33,34 @@
                                 @enderror
                             </div>
                             <div class="col-6">
+                                <label for=""> Code Commande</label>
+                                <input type="text" class="my-2 form-control @error('code') is-invalid @enderror"
+                                    id="inputSuccess" placeholder="Enter ..." name="code"
+                                    value="{{ $commande->id }}"readonly>
+                                @error('code')
+                                    <p>{{ $message }}</p>
+                                @enderror
+                            </div>
 
+
+                            <div class="col-6">
+                                <label for="">produits</label>
+                                <select name="produit" id=""
+                                    class="my-2 @error('produit') is-invalid @enderror produit"
+                                    style="border-color: indigo">
+                                    <option value="">.....</option>
+                                    @foreach ($produit as $produits)
+                                        <option value="{{ $produits->id }}">{{ $produits->designation }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('produit')
+                                    <p>{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="col s6">
                                 <label for="">Fournisseur</label>
-                                <select id="" class="my-2 form-control @error('fournisseur') is-invalid @enderror"
+                                <select id="" class="my-2  @error('fournisseur') is-invalid @enderror"
                                     name="fournisseur" value="{{ $commande->fournisseur_id }}" readonly>
                                     <option value="">.....</option>
                                     @foreach ($fournisseur as $fournisseurs)
@@ -50,43 +75,10 @@
                                 @error('fournisseur')
                                     <p>{{ $message }}</p>
                                 @enderror
-
-                                <label for=""> Code Commande</label>
-                                <input type="text" class="my-2 form-control @error('code') is-invalid @enderror"
-                                    id="inputSuccess" placeholder="Enter ..." name="code"
-                                    value="{{ $commande->id }}"readonly>
-                                @error('code')
-                                    <p>{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <div class="col-6">
-                                <label for="">status commande</label>
-                                <input type="text" class="form-control my-2 @error('status') is-invalid @enderror"
-                                    name="status" value="encours" readonly>
-                                @error('status')
-                                    <p>{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="col-6">
-                                <label for="">produits</label>
-                                <select name="produit" id=""
-                                    class="form-control my-2 @error('produit') is-invalid @enderror produit"
-                                    style="border-color: indigo">
-                                    <option value="">.....</option>
-                                    @foreach ($produit as $produits)
-                                        <option value="{{ $produits->id }}">{{ $produits->designation }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('produit')
-                                    <p>{{ $message }}</p>
-                                @enderror
                             </div>
                             <div class="col-6">
                                 <label for="">unite </label>
-                                <select name="unite" id=""
-                                    class="form-control @error('unite') is-invalid @enderror">
+                                <select name="unite" id="" class="@error('unite') is-invalid @enderror">
                                     <option value="">.....</option>
                                     @foreach ($type as $types)
                                         <option value="{{ $types->nom }}">{{ $types->nom }}</option>
@@ -124,7 +116,7 @@
                             </div>
                             <div class="col-6">
                                 <label for=""> Mode de reglement</label>
-                                <select class="form-control" name="mode">
+                                <select class="" name="mode">
                                     <optgroup label="choose paiement">
                                         <option value="">.....</option>
                                         <option value="mobile">mobile(MTN/ORANGE...)</option>
@@ -135,17 +127,13 @@
 
                             </div>
                             <div class="col-6">
-                                <label for=""> remise (en pourcentage)</label>
-                                <input type="number" name="remise" id="" class="form-control">
-
-
-
+                                <label for="">status commande</label>
+                                <input type="text" class="form-control my-2 @error('status') is-invalid @enderror"
+                                    name="status" value="encours" readonly>
+                                @error('status')
+                                    <p>{{ $message }}</p>
+                                @enderror
                             </div>
-                            {{-- <div class="col-6">
-                                <label for=""> status de paiement</label>
-                                <input type="text" name="paiement_status" id="" class="form-control"
-                                    value="non reglé" readonly>
-                            </div> --}}
 
                             <div class="col-8 my-4">
                                 <button type="submit" class="btn btn-primary mx-1">valider la commande</button>
@@ -186,6 +174,11 @@
                     }
                 });
             });
+        });
+
+        $(document).ready(function() {
+            $('.datepicker').datepicker();
+
         });
     </script>
 @endsection

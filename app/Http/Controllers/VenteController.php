@@ -89,7 +89,7 @@ class VenteController extends Controller
             'unite.required'=>'renseignez l\'unite',
           //  'reglement.required'=>'renseignez le mode de reglement'
         ]);
-  try {
+  //try {
         VenteProduit::create([
              //dd($request->all())
             'produit_id'=>$request->produit,
@@ -111,19 +111,19 @@ class VenteController extends Controller
 
         return back()->with('success','sortie effectuée avec success!');
 
-        } catch (\Throwable $th) {
+       // } catch (\Throwable $th) {
             //throw $th;
-            return back()->with('error','vente non effectue');
-        }
+           // return back()->with('error','vente non effectue');
+       // }
 
     }
     public function listeVente(){
        // $detail=VenteProduit::all();
          $carbon=\Carbon\Carbon::now();
-        if (request()->start_date || request()->end_date) {
-        $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
-        $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
-        $detail = VenteProduit::whereBetween('date_vente',[$start_date,$end_date])->get();
+        if (request()->start || request()->end) {
+        $start = Carbon::parse(request()->start)->toDateTimeString();
+        $end = Carbon::parse(request()->end)->toDateTimeString();
+        $detail = VenteProduit::whereBetween('created_at',[$start,$end])->get();
     } else {
         $detail = VenteProduit::orderBy('id','DESC')->get();
     }
@@ -223,8 +223,8 @@ public function Ventegroup(){
     $cartItems = \Cart::getContent();
     return view('vente.cart',compact('cartItems'));
 }
-public function factureGroupe(){
-    $details= venteProduit::all();
+public function factureGroupe(Request $request){
+    $details= venteProduit::find($request->id);
     $cartItems = \Cart::getContent();
   //  $digit = new NumberFormatter("en", NumberFormatter::SPELLOUT);
     $pdf=PDF::loadview('vente.facture',compact('details','cartItems'))->setOptions(['setPaper'=>'A4']);
@@ -293,7 +293,7 @@ public function clearAllCart()
         ]);
         session()->flash('success', 'ventes ajouté avec success !');
 
-        return redirect()->route('vente.group');
+        return back()->with('success','facture generé avec success');
     }
 //utilisation de la bibliotheque cart et adaptation au projet de vente//
 
@@ -312,14 +312,91 @@ return response()->json($p);
 }
 public function ShowService(){
       $carbon=\Carbon\Carbon::now();
-        if (request()->start_date || request()->end_date) {
-        $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
-        $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
-        $detail = VenteProduit::whereBetween('date_vente',[$start_date,$end_date])->get();
+        if (request()->start || request()->end) {
+        $start= Carbon::parse(request()->start)->toDateTimeString();
+        $end = Carbon::parse(request()->end)->toDateTimeString();
+        $detail = VenteProduit::whereBetween('created_at',[$start,$end])->get();
     } else {
         $detail = VenteProduit::orderBy('id','DESC')->get();
     }
 return view('vente.ListeService',compact('detail','carbon'));
 }
+public function SortiePDF(){
+    $vente=VenteProduit::all();
+    $pdf=PDF::loadview('vente.listePDF',compact('vente'));
+    $pdf->setPaper('A4','landscape');
+    return $pdf->stream();
+}
+public function serviceAnexe(){
+     if (request()->start || request()->end) {
+        $start= Carbon::parse(request()->start)->toDateTimeString();
+        $end = Carbon::parse(request()->end)->toDateTimeString();
+        $detail = VenteProduit::whereBetween('created_at',[$start,$end])->get();
+    } else {
+        $detail = VenteProduit::orderBy('id','DESC')->get();
+    }
+    return view('vente.SortieAnnexe',compact('detail'));
+}
+public function AGORAPDF(){
+    $vente=VenteProduit::all();
+    $pdf=PDF::loadview('vente.AGORA',compact('vente'));
+    $pdf->setPaper('A4','landscape');
+    return $pdf->stream();
+}
 
+public function cartService(Request $request){
+     \Cart::add([
+            'id' => $request->id,
+            'name' => $request->name,
+            'price' => $request->pu,
+            'quantity' => $request->qte_sortie,
+            'attributes' => array(
+                'remise' => $request->remise,
+                'unite'=>$request->unite,
+                'beneficiaire'=>$request->beneficiaire,
+                'user'=>$request->user,
+                'poste'=>$request->poste,
+                'service'=>$request->service,
+            )
+        ]);
+        session()->flash('success', 'ventes ajouté avec success !');
+
+        return back()->with('success','facture generé avec success');
+
+}
+public function FactureService(){
+       $cartItems = \Cart::getContent();
+    return view('vente.CartService',compact('cartItems'));
+}
+public function nouvelFacture(){
+     $cartItems = \Cart::getContent();
+     $pdf=PDF::loadview('vente.FactureService',compact('cartItems'));
+     $pdf->setPaper('A4','landscape');
+     return $pdf->stream();
+ }
+     public function clearService(Request $request){
+  Cart::clear();
+
+        session()->flash('success', 'toutes les sorties retiré avec success!');
+
+        return redirect()->route('fact.service');
+
+}
+public function retirerunservice(Request $request){
+    \Cart::remove($request->id);
+        session()->flash('success', 'Item Cart Remove Successfully !');
+
+        return redirect()->route('fact.service');
+}
+public function autoc(Request $request){
+ $data = [];
+
+        if($request->filled('q')){
+            $data = VenteProduit::select("produit_id", "id")
+                        ->where('produit_id', 'LIKE', '%'. $request->get('q'). '%')
+                        ->get();
+        }
+
+        return response()->json($data);
+}
 }

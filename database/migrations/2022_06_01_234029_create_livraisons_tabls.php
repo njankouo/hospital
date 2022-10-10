@@ -21,9 +21,10 @@ class CreateLivraisonsTabls extends Migration
             $table->string('unite');
             $table->string ('fournisseur');
             $table->string('date_commande');
-            $table->string('date_livraison');
+            $table->string('date_livraison')->nullable();
+            $table->integer('status_paiement')->nullable();
             $table->string('status');
-              $table->string('status_paiement');
+             // $table->string('status_paiement');
             $table->foreignId('commande_id')->constrained('commandes');
 
 

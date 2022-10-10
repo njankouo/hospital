@@ -38,7 +38,7 @@
                                       <label for="">Date Livraison</label>
                                       <input type="date"
                                           class="my-2 form-control @error('dateLivraison') is-invalid @enderror"
-                                          name="dateLivraison" value="{{ $commande->date_livraison }}" readonly>
+                                          name="dateLivraison" value="{{ $commande->date_livraison }}">
                                       @error('dateLivraison')
                                           <p>{{ $message }}</p>
                                       @enderror

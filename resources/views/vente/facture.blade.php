@@ -136,6 +136,7 @@
                 CLIENT: @foreach ($cartItems as $item)
                     {{ $item->attributes->client }}
                 @endforeach
+                {{-- {{ $details->user }} --}}
             </h6>
             <h6>
                 VENDEUR: @foreach ($cartItems as $item)

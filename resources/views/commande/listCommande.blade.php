@@ -109,8 +109,11 @@
                                         <td>
                                             {{-- <a class="btn btn" href="{{ route('bon.commande', $commandes->id) }}"><i
                                                     class="fa fa-eye fa-2x text-info"></i></a> --}}
-                                            <a href="{{ route('edit.commande', $commandes->id) }}" class="btn btn">
-                                                <i class="fa fa-pencil fa-2x"></i>
+                                            <a href="{{ route('edit.commande', $commandes->id) }}"
+                                                class="waves-effect btn ">
+                                                <i class="fa fa-pencil fa-2x">
+
+                                                </i>
                                             </a>
                                             {{-- <a href="{{ route('add.to.cart', $commandes->id) }}" class="btn btn">
                                                 <i class="fa fa-cart-plus fa-2x text-warning"></i>

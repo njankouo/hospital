@@ -25,7 +25,7 @@
                         <a href="{{ route('fournisseur.pdf') }}" class="btn btn-secondary mx-4">Format PDF</a>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-content">
                         <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
                             <thead class="text-center">
                                 <tr>
@@ -60,9 +60,9 @@
                                         <td>{{ $fours->email }}</td>
                                         <td>
                                             @if (count($fours->contrat))
-                                                <span class="badge badge-info">contrat en cour</span>
+                                                <span class="badge blue text-white">contrat en cour</span>
                                             @else
-                                                <span class="badge badge-danger">aucun contrat</span>
+                                                <span class="badge red text-white">aucun contrat</span>
                                             @endif
                                         </td>
 

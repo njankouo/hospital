@@ -26,11 +26,11 @@ class CreateProduitsTable extends Migration
             $table->date('date_peremption')->nullable();
              $table->date('date_fabrication')->nullable();
             $table->string('grammage')->nullable();
-            $table->foreignId('rayon_id')->constrained('rayons');
-            $table->foreignId('type_article_id')->constrained('type_articles')->nullable();
-             $table->foreignId('categorie_id')->constrained('categories')->nullable();
-             $table->foreignId('fournisseur_id')->constrained('fournisseurs');
-             $table->foreignId('famille_id')->constrained('familles')->nullable();
+            $table->foreignId('rayon_id')->nullable()->constrained('rayons');
+            $table->foreignId('type_article_id')->nullable()->constrained('type_articles');
+             $table->foreignId('categorie_id')->nullable()->constrained('categories');
+             $table->foreignId('fournisseur_id')->nullable()->constrained('fournisseurs');
+             $table->foreignId('famille_id')->nullable()->constrained('familles');
 
             $table->timestamps();
         });

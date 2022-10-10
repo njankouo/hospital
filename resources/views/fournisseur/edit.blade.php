@@ -31,16 +31,16 @@
                                 <label for="">Nom</label>
                                 <input type="text" class="my-2 form-control @error('nom') is-invalid @enderror"
                                     name="nom" placeholder="Enter ..." value="{{ $fournisseur->nom }}"
-                                    @error('nom') <p>{{ $message }}</p> @enderror <label for="">sexe</label>
+                                    @error('nom')> <p>{{ $message }}</p> @enderror <label for="">sexe</label>
                                 <select name="sexe" id=""
                                     class="form-control my-2 @error('sexe') is-invalid @enderror">
-                                    <option value="" disabled>select gender</option>
-                                    <option value=""></option>
-                                    @if ($fournisseur->sexe == 1)
-                                        <option value="1" selected>Masculin</option>
-                                    @else
-                                        <option value="0" selected>feminin</option>
-                                    @endif
+
+                                    <option value="">.........</option>
+
+                                    <option value="M">Masculin</option>
+
+                                    <option value="F">feminin</option>
+
 
 
                                 </select>

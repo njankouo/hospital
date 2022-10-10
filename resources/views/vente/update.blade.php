@@ -20,7 +20,7 @@
          <div class="col-12">
              <div class="card">
                  <div class="card-header">
-                     <p style="font-family: forte">annuler vente</p>
+                     <p style="font-family: forte">modifier la vente</p>
                  </div>
                  <div class="card-body">
                      <form action="{{ route('vente.update', ['vent' => $vent->id]) }}" method="POST" class="form-block">
@@ -29,7 +29,7 @@
                          <div class="form-row" style="margin: 10px;">
 
 
-                             <div class="col-6">
+                             <div class="col-12">
                                  <label for="">Date Vente</label>
                                  <input type="date" class="my-2 form-control @error('date') is-invalid @enderror"
                                      name="date" placeholder="Enter ..." value="{{ $vent->date_vente }}">
@@ -44,23 +44,33 @@
                              </div>
                              <div class="col-6">
                                  <label for=""> Code Vente</label>
-                                 <input type="text" class="my-2 form-control @error('code') is-invalid @enderror"
-                                     id="inputSuccess" placeholder="Enter ..." name="code" value="{{ $vent->id }}">
+                                 <input type="text" class="my-2  @error('code') is-invalid @enderror" id="inputSuccess"
+                                     placeholder="Enter ..." name="code" value="{{ $vent->id }}">
                                  @error('code')
                                      <p>{{ $message }}</p>
                                  @enderror
                              </div>
-                             <label for="">Nom Du Client</label>
-                             <input type="text" value="{{ $vent->client }}" class="form-control my-2" name="client">
-                             @error('client')
-                                 <p class="text-danger">{{ $message }}</p>
-                             @enderror
-                             <div class="col-6">
-                                 <label for="">****produits</label>
+                             <div class="col s6">
+                                 <label for="">Nom Du Client</label>
+                                 <input type="text" value="{{ $vent->client }}" class=" my-2" name="client" validate>
+                                 @error('client')
+                                     <p class="text-danger">{{ $message }}</p>
+                                 @enderror
+                             </div>
+                             <div class="col s12">
+                                 <label for="">****unite </label>
+                                 <input type="text" class="form-control my-2" name="unite"
+                                     value="{{ $vent->unite }}">
+                                 @error('unite')
+                                     <p>{{ $message }}</p>
+                                 @enderror
+                             </div>
+                             <div class="col-12">
+                                 <label for="">produits</label>
                                  <select name="produit" id="produit_name"
-                                     class=" produit_name form-control my-2 @error('produit') is-invalid @enderror"
+                                     class=" produit_name my-2 @error('produit') is-invalid @enderror"
                                      style="border-color: indigo">
-                                     <option value="">.....</option>
+
                                      @foreach ($produit as $produits)
                                          @if ($vent->produit_id == $produits->id)
                                              <option value="{{ $produits->id }}" selected>
@@ -75,14 +85,7 @@
                                      <p>{{ $message }}</p>
                                  @enderror
                              </div>
-                             <div class="col-6">
-                                 <label for="">****unite </label>
-                                 <input type="text" class="form-control my-2" name="unite"
-                                     value="{{ $vent->unite }}">
-                                 @error('unite')
-                                     <p>{{ $message }}</p>
-                                 @enderror
-                             </div>
+
 
                              <div class="col-6">
                                  <label for="">****tva</label>

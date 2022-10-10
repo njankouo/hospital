@@ -16,10 +16,11 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContratController;
 use App\Http\Controllers\FamilleController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\FournisseurController;
-use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -154,7 +155,8 @@ Route::post('cart/add',[CommandeController::class,'addCart'])->name('cart.add');
 Route::post('/cart/clean',[CommandeController::class,'clearAllCart'])->name('clear.commande');
 Route::post('Group/livrable',[CartController::class,'addLivraison'])->name('cart.livraison');
 Route::post('Group/livraison/delete',[CartController::class,'deleteL'])->name('clear.livraison');
-
+Route::post('cart/service',[VenteController::class,'cartService'])->name('cart.service');
+Route::post('clear/service',[VenteController::class,'clearService'])->name('clear.service');
 /**remove one vente */
 
 Route::post('cart/enlever',[VenteController::class,'deleteOne'])->name('cart.remove');
@@ -172,3 +174,11 @@ Route::post('/service',[ServiceController::class,'creation'])->name('service.cre
 Route::get('changeStatus', [CommandeController::class,'changeStatus'])->name('toggle.find');
 
 Route::get('sortie/service',[VenteController::class,'ShowService'])->name('show.service')->middleware('auth.admin');
+Route::get('PDF/service',[VenteController::class,'SortiePDF'])->name('sortie.pdf');
+Route::get('/service/annexe',[VenteController::class,'serviceAnexe'])->name('service.anexe');
+Route::get('/Agora/pdf',[VenteController::class,'AGORAPDF'])->name('agora.pdf');
+Route::get('cart/service',[VenteController::class,'FactureService'])->name('fact.service');
+Route::get('/facture/service',[VenteController::class,'nouvelFacture'])->name('nouvel.facture');
+route::post('service/dele/one',[VenteController::class,'retirerunservice'])->name('return.service');
+Route::get('/profile',[ProfileController::class,'index'])->name('profil.index');
+    Route::get('autocomplete',[VenteController::class,'autoc'])->name('Autocomplete');
