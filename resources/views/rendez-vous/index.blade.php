@@ -152,8 +152,7 @@
                                                         <div class="col-sm-6">
                                                         <label>Date Rdv</label>
 
-                                                            <input type="text" class="form-control" placeholder="date rendez-vous" id="mdate" data-dtp="dtp_jxS5O" name="date">
-
+                                                        <input type="datetime-local" id="date-format" class="form-control" placeholder="Date RDV" name="date">
                                                     </div>
                                                     </div>
                                                     <br>
@@ -178,6 +177,14 @@
                                                             </div>
 
                                                         </div>
+                                                        <br>
+                                            <div class="form-row">
+                                                <div class="col-sm-12  mt-2 mt-sm-0">
+                                                    <label for="">Fin RDV</label>
+                                                    <input type="datetime-local" id="date-format" class="form-control" placeholder="Date Fin RDV" name="end_date">
+                                                   
+                                                </div>
+                                            </div>
 
                                                     </div>
 

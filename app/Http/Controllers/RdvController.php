@@ -34,6 +34,7 @@ class RdvController extends Controller
         Rdv::create([
                 'patient_id'=>$request->patient_id,
                 'date'=>$request->date,
+                'end_date'=>$request->end_date,
                 'responsable'=>$request->responsable,
         ]);
 

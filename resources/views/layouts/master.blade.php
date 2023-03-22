@@ -15,8 +15,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
      <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
-
-
+    
     <link href="{{ asset('vendor/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
     <!-- Clockpicker -->
     <link href="{{ asset('vendor/clockpicker/css/bootstrap-clockpicker.min.css') }}" rel="stylesheet">
@@ -32,11 +31,6 @@
     <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <script src="https://cdn.tiny.cloud/1/oaqwwrk2zfuwe4lm3wfuzscmbw98cnxjdzlv4dslscprhz8k/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>tinymce.init({selector:'textarea'});</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
 
 </head>
 <body>
@@ -170,7 +164,7 @@
     <script src="{{ asset('js/plugins-init/select2-init.js') }}"></script>
 
 
-    <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
+ 
     <script src="{{ asset('vendor/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <!-- clockpicker -->
     <script src="{{ asset('vendor/clockpicker/js/bootstrap-clockpicker.min.js') }}"></script>

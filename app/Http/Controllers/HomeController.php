@@ -28,7 +28,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $tasks=Rdv::all();
-        return view('home',compact('tasks'));
+        $events = [];
+
+        $appointments = Rdv::all();
+
+        foreach ($appointments as $appointment) {
+            $events[] = [
+                'title' => $appointment->responsable . ' ('.$appointment->patient->nom.')',
+               //'start' => $appointment->created_at,
+                'start' => $appointment->date,
+                'end' => $appointment->end_date,
+            ];
+        }
+        return view('home',compact('events'));
     }
 }

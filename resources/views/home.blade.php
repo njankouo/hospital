@@ -1,10 +1,10 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-
 
 @extends('layouts.app')
 
 @section('contenu')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.css"/>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 
 <div class="content-body">
     <!-- row -->
@@ -74,136 +74,33 @@
             <!-- /# column -->
         </div>
    <div class="row">
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-intro-title">Rendez-Vous</h4>
-
-                                <div class="">
-                                    <div id="external-events" class="my-3">
-
-                                        <div class="external-event" data-class="bg-primary"><i class="fa fa-move"></i>New Theme Release</div>
-                                        <div class="external-event" data-class="bg-success"><i class="fa fa-move"></i>My Event
-                                        </div>
-                                        <div class="external-event" data-class="bg-warning"><i class="fa fa-move"></i>Meet manager</div>
-                                        <div class="external-event" data-class="bg-dark"><i class="fa fa-move"></i>Create New theme</div>
-                                    </div>
-                                    <!-- checkbox -->
-
-
+                  <div class="col-12">
+                        
+                                <div id="calendar" >
+                                  
                                 </div>
+                           
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="calendar"></div>
-                            </div>
-                        </div>
-</div>
+
+   </div>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/lang-all.js"></script>
 <script>
-    $(document).ready(function () {
-
-    var SITEURL = "{{ url('/') }}";
-
-    $.ajaxSetup({
-        headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'timeGridWeek',
+            slotMinTime: '8:00:00',
+            slotMaxTime: '19:00:00',
+            locale: 'fr',
+            navLinks: true,
+            editable: true,
+          
+            events: @json($events),
+        });
+        calendar.render();
     });
-
-    var calendar = $('#calendar').fullCalendar({
-                        editable: true,
-                        events: SITEURL + "/fullcalender",
-                        displayEventTime: false,
-                        editable: true,
-                        eventRender: function (event, element, view) {
-                            if (event.allDay === 'true') {
-                                    event.allDay = true;
-                            } else {
-                                    event.allDay = false;
-                            }
-                        },
-                        selectable: true,
-                        selectHelper: true,
-                        select: function (start, end, allDay) {
-                            var title = prompt('Event Title:');
-                            if (title) {
-                                var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
-                                var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
-                                $.ajax({
-                                    url: SITEURL + "/fullcalenderAjax",
-                                    data: {
-                                        title: title,
-                                        start: start,
-                                        end: end,
-                                        type: 'add'
-                                    },
-                                    type: "POST",
-                                    success: function (data) {
-                                        displayMessage("Event Created Successfully");
-
-                                        calendar.fullCalendar('renderEvent',
-                                            {
-                                                id: data.id,
-                                                title: title,
-                                                start: start,
-                                                end: end,
-                                                allDay: allDay
-                                            },true);
-
-                                        calendar.fullCalendar('unselect');
-                                    }
-                                });
-                            }
-                        },
-                        eventDrop: function (event, delta) {
-                            var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
-                            var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
-
-                            $.ajax({
-                                url: SITEURL + '/fullcalenderAjax',
-                                data: {
-                                    title: event.title,
-                                    start: start,
-                                    end: end,
-                                    id: event.id,
-                                    type: 'update'
-                                },
-                                type: "POST",
-                                success: function (response) {
-                                    displayMessage("Event Updated Successfully");
-                                }
-                            });
-                        },
-                        eventClick: function (event) {
-                            var deleteMsg = confirm("Do you really want to delete?");
-                            if (deleteMsg) {
-                                $.ajax({
-                                    type: "POST",
-                                    url: SITEURL + '/fullcalenderAjax',
-                                    data: {
-                                            id: event.id,
-                                            type: 'delete'
-                                    },
-                                    success: function (response) {
-                                        calendar.fullCalendar('removeEvents', event.id);
-                                        displayMessage("Event Deleted Successfully");
-                                    }
-                                });
-                            }
-                        }
-
-                    });
-
-    });
-
-    function displayMessage(message) {
-        toastr.success(message, 'Event');
-    }
-
- </script>
+</script>
 
 
 @endsection

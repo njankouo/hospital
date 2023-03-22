@@ -10,7 +10,7 @@ class Rdv extends Model
     
     use HasFactory;
     protected $table='rendez_vous';
-    protected $fillable=['patient_id','responsable','date','status'];
+    protected $fillable=['patient_id','responsable','date','status','end_date'];
     public function patient(){
         return $this->belongsTo(Patient::class,'patient_id','id');
     }
