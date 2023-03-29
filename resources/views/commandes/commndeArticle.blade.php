@@ -63,12 +63,12 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Conditionnement</label>
-                                <select class="js-example-disabled-multi" name="states[]" multiple="multiple" name="conditionnement">
+                                <select class="js-example-disabled-multi" multiple="multiple" name="conditionnement_id">
                                     <option>renseignez le conditionnement</option>
                                     @foreach ($conditionnement as $conditionnements)
 
 
-                                    <option value="{{ $conditionnements->libelle }}">{{ $conditionnements->libelle }}</option>
+                                    <option value="{{ $conditionnements->id }}">{{ $conditionnements->libelle }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -80,6 +80,11 @@
                             <div class="form-group col-md-6">
                                 <label> Prix Unitaire</label>
                                 <input type="number" class="form-control pu" placeholder="prix Unitaire" name="pu" id="pu">
+
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Code Commande</label>
+                                <input type="number" class="form-control" placeholder="Code Commande" name="code" value="{{$commande->id  }}" readonly >
 
                             </div>
                         </div>

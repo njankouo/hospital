@@ -1,11 +1,9 @@
-
- <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
- <link href="./vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
+<script src="{{ asset('js/toastr.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('vendor/toastr/css/toastr.min.css') }}">
  @extends('layouts.master')
 
 
- @section('title','liste des utilisateurs')
+ @section('title','liste des Produits Ppharmaceutiques')
 
  @section('contenu')
 
@@ -197,6 +195,19 @@
      </div>
  </div>
 
+
+ <!-- All init script -->
+
+ <script>
+    @if (Session::has('success'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            positionClass: 'toastr-success-bottom-right'
+        }
+        toastr.success("{{ session('success') }}");
+    @endif
+</script>
 
  <script>
     function previewFile(input) {

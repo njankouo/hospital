@@ -46,11 +46,13 @@ public function saveProduit(){
 public function ValidCommande(Request $request){
     $request->validate([],[]);
     CommandeArticle::create([
-        'designation'=>$request->produit,
+        'produit_id'=>$request->produit,
         'qte'=>$request->qteCommande,
         'pu'=>$request->pu,
         'dateCommande'=>$request->dateCommande,
         'dateLivraison'=>$request->dateLivraison,
+        'code'=>$request->code,
+        'conditionnement_id'=>$request->conditionnement_id,
     ]);
     return back()->with('success');
 }
@@ -62,7 +64,9 @@ public function addLivraison(Request $request, CommandeArticle $commande){
         'pu'=>$request->pu,
         'dateCommande'=>$request->dateCommande,
         'dateLivraison'=>$request->dateLivraison,
-
+        'conditionnement_id'=>$request->conditionnement_id,
+        'code'=>$request->code,
+       // dd($request->all())
 
    ]);
    $commande->update([

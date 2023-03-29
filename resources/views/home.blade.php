@@ -11,59 +11,58 @@
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-lg-3 col-sm-6">
-                <div class="card">
-                    <div class="stat-widget-two card-body">
-                        <div class="stat-content">
-                            <div class="stat-text">Utilisateurs </div>
-                            <div class="stat-digit"> {{App\Models\User::count() }}</div>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-success w-85" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card">
-                    <div class="stat-widget-two card-body">
-                        <div class="stat-content">
-                            <div class="stat-text">Produits Pharmaceutiques</div>
-                            <div class="stat-digit">{{ App\Models\Produit::count() }}</div>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary w-75" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card">
+                        <div class="stat-widget-one card-body">
+                            <div class="stat-icon d-inline-block">
+                                <i class="ti-time text-success border-success"></i>
+                            </div>
+                            <div class="stat-content d-inline-block">
+                                <div class="stat-text">Patients</div>
+                                <div class="stat-digit"> {{ App\Models\Patient::count() }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card">
-                    <div class="stat-widget-two card-body">
-                        <div class="stat-content">
-                            <div class="stat-text">Chambres</div>
-                            <div class="stat-digit"> {{ \App\Models\Chambre::count() }}</div>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-warning w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card">
-                    <div class="stat-widget-two card-body">
-                        <div class="stat-content">
-                            <div class="stat-text">Patients</div>
-                            <div class="stat-digit"> {{ App\Models\Patient::count() }}</div>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-danger w-65" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card">
+                        <div class="stat-widget-one card-body">
+                            <div class="stat-icon d-inline-block">
+                                <i class="ti-user text-primary border-primary"></i>
+                            </div>
+                            <div class="stat-content d-inline-block">
+                                <div class="stat-text">Utilisateurs</div>
+                                <div class="stat-digit">{{App\Models\User::count() }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- /# card -->
-            </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card">
+                        <div class="stat-widget-one card-body">
+                            <div class="stat-icon d-inline-block">
+                                <i class="ti-layout-grid2 text-pink border-pink"></i>
+                            </div>
+                            <div class="stat-content d-inline-block">
+                                <div class="stat-text">Chambres</div>
+                                <div class="stat-digit">{{ \App\Models\Chambre::count() }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card">
+                        <div class="stat-widget-one card-body">
+                            <div class="stat-icon d-inline-block">
+                                <i class="ti-link text-danger border-danger"></i>
+                            </div>
+                            <div class="stat-content d-inline-block">
+                                <div class="stat-text">Produits phar..</div>
+                                <div class="stat-digit">{{ App\Models\Produit::count() }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
             {{-- @foreach ($produit as $produits)
@@ -75,11 +74,11 @@
         </div>
    <div class="row">
                   <div class="col-12">
-                        
+
                                 <div id="calendar" >
-                                  
+
                                 </div>
-                           
+
                             </div>
 
    </div>
@@ -89,13 +88,13 @@
     document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'timeGridWeek',
+           initialView: 'timeGridWeek',
             slotMinTime: '8:00:00',
             slotMaxTime: '19:00:00',
             locale: 'fr',
             navLinks: true,
             editable: true,
-          
+
             events: @json($events),
         });
         calendar.render();

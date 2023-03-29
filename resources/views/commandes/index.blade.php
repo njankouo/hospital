@@ -36,18 +36,22 @@
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" placeholder="date commande..." name="dateCommande" value="{{\Carbon\Carbon::now()  }}" readonly>
+                                <label for="date_commande">Date Commande</label>
+                                <input type="date" class="form-control" name="dateCommande"  >
                             </div>
                             <div class="col-sm-6 mt-2 mt-sm-0">
+                                <label for="date_livraison">Date Livraison</label>
                                 <input type="date" class="form-control" placeholder="date livraison" id="mdate" data-dtp="dtp_mFN7C" name="dateLivraison">
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-sm-6 mt-2 mt-sm-0">
+                                <label for="fournisseur">Fournisseur</label>
                                 <input type="text" class="form-control" placeholder="fournisseur..." name="fournisseur">
                             </div>
                             <div class="col-sm-6 mt-2 mt-sm-0">
+                                <label for="responsable_commande">Responsable Commande</label>
                                 <input type="text" class="form-control" placeholder="responsable de la commande..." value="{{ Auth()->user()->name ?? '' }}" readonly name="responsableCom">
                             </div>
                         </div>
@@ -61,20 +65,20 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Liste Des Commandes Crees</h4>
+                        <h4 class="card-title">Liste Des Commandes Cr&eacute;es</h4>
                         <a type="button" class="btn btn-rounded btn-info text-white" href="{{ route('save.commande') }}" style="float: right"><span class="btn-icon-left text-info"><i class="fa fa-cloud color-info"></i>
-                        </span>Produit Commande</a>
+                        </span>Produits Command&eacute;s</a>
                   </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" class="display" style="min-width: 845px">
+                            <table id="example" class="display" style="min-width: 845px;text-align:center">
                                 <thead>
                                     <tr>
                                        <th>Date Commande</th>
                                         <th>Date Livraison</th>
                                         <th>Fournisseur</th>
                                         <th>Responsable Commande</th>
-                                        <th style="text-align: center">Action</th>
+                                        <th >Action</th>
 
                                     </tr>
                                 </thead>
@@ -92,6 +96,7 @@
                                                 </span>Valider</a>
                                             </td>
                                         </tr>
+
                                         @endforeach
                                 </tbody>
 

@@ -70,6 +70,7 @@
     </section>
 
     <h4 style="text-align: center;text-decoration:underline"> ORDONANCE MEDICALE</h4>
+    {!! DNS1D::getBarcodeHTML('4445645656', 'PHARMA') !!}
     <p style="color:dimgrey;margin:1%;text-align:right">{{ $ordonance->patient->nom }} &nbsp;{{ $ordonance->patient->prenom }}</p>
     <section>
         <table class="content-table" style="text-align: center">
@@ -97,6 +98,8 @@
     </section>
 <footer style="margin-bottom: 0">
     <p style="color:dimgrey;">{{ Carbon\Carbon::now() }}</p>
+
+
 </footer>
 </body>
 </html>

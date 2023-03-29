@@ -78,7 +78,7 @@ Route::Post('produits',[ProduitController::class,'addProduct'])->name('add.produ
 Route::POST('commandes',[CommandeController::class,'addCommande'])->name('add.commande');
 Route::Post('patients/add',[PatientController::class,'addPatient'])->name('add.patients');
 Route::post('valide/commande',[CommandeController::class,'ValidCommande'])->name('add.commandes');
-Route::POST('ajouter/produit',[CommandeController::class,'addLivraison'])->name('add.livraison');
+Route::PUT('ajouter/produits/{commande}',[CommandeController::class,'addLivraison'])->name('add.livraison');
 Route::POST('chambre',[ChambreController::class,'save'])->name('add.chambre');
 Route::POST('add/consultation',[ConsultationController::class,'addConsultation'])->name('add.consultations');
 Route::POST('add/prescription/',[PrescriptionController::class,'savePrescription'])->name('add.presciption');

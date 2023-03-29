@@ -16,7 +16,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Livraisons</a></li>
 
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Acceuil</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('home') }}">Acceuil</a></li>
                 </ol>
             </div>
         </div>
@@ -24,9 +24,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">livraisons Validés</h4>
-                        <button type="button" class="btn btn-rounded btn-primary"><span class="btn-icon-left text-primary"><i class="fa fa-shopping-cart"></i>
-                        </span>Bon De Livraison</button>
+                        <h4 class="card-title">livraisons Effectu&eacute;es</h4>
+
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -46,8 +45,8 @@
                                 <tbody>
                                     @foreach ($livraison as $livraisons)
                                     <tr>
-                                        <td></td>
-                                        <td>{{ $livraisons->produit_id}}</td>
+                                        <td>00{{ $livraisons->code }}</td>
+                                        <td>{{ $livraisons->produit->designation}}</td>
                                         <td>{{ $livraisons->pu }}</td>
                                         <td>{{ $livraisons->qte }}</td>
                                         <td>{{ $livraisons->dateCommande }}</td>
@@ -62,8 +61,7 @@
                                             </span>Voir</button>
                                             &nbsp; &nbsp; &nbsp;
 
-                                            <button type="button" class="btn btn-rounded btn-info"><span class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
-                                            </span>facture</button>
+
                                         </td>
                                     </tr>
                                       <div data-backdrop="false" class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="example-lg{{ $livraisons->id }}">
@@ -77,35 +75,33 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <div class="card">
 
+                                                            <div id="accordion-ten" class="accordion accordion-header-shadow accordion-rounded">
+                                                                <div class="accordion__item">
+                                                                    <div class="accordion__header collapsed accordion__header--primary" data-toggle="collapse" data-target="#header-shadow_collapseOne" aria-expanded="false">
+                                                                        <span class="accordion__header--icon"></span>
+                                                                        <span class="accordion__header--text">Code Commande: 00{{ $livraisons->code }}</span>
+                                                                        <span class="accordion__header--indicator"></span>
+                                                                    </div>
+                                                                    <div id="header-shadow_collapseOne" class="accordion__body collapse" data-parent="#accordion-ten" style="">
+                                                                        <div class="accordion__body--text">
+                                                                            <h6>Designation: {{ $livraisons->produit->designation}}</h6>
+                                                                            <h6>Quantit&eacute;: {{ $livraisons->qte }} {{ $livraisons->conditionnement->libelle }}</h6>
+                                                                            <h6>Prix D'achat: {{ $livraisons->pu }}</h6>
+                                                                            <h6>Date Commande: {{ $livraisons->dateCommande }}</h6>
+                                                                            <h6>Livraison Effectu&eacute;e Le {{ $livraisons->dateLivraison }}</h6>
 
-                                                                    <div class="basic-list-group">
-                                                                        <ul class="list-group">
-                                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                                Designation <span class="badge badge-primary badge-pill">{{ $livraisons->produit_id }}</span>
-                                                                            </li>
-                                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                                Quantite <span class="badge badge-primary badge-pill">{{ $livraisons->qte }}</span>
-                                                                            </li>
-                                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                                Prix Unitaire <span class="badge badge-primary badge-pill">{{ $livraisons->pu }}</span>
-                                                                            </li>
-                                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                                Date Commande <span class="badge badge-primary badge-pill">{{ $livraisons->dateCommande }}</span>
-                                                                            </li>
-                                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                                Date Livraison <span class="badge badge-primary badge-pill">{{ $livraisons->dateLivraison }}</span>
-                                                                            </li>
-                                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                                Status <span class="badge badge-primary badge-pill">Livré</span>
-                                                                            </li>
-                                                                        </ul>
+                                                                            <h5 style="font-weight:bold;text-align:right">PRIX TTC {{ $livraisons->qte * $livraisons->pu }}</h5>
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
 
-                                                    </div>
+
+                                                            </div>
+
+
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>

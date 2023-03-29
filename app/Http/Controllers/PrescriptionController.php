@@ -6,6 +6,8 @@ use App\Models\Consultation;
 use App\Models\Patient;
 use App\Models\Prescription;
 use App\Models\Produit;
+use BaconQrCode\Encoder\QrCode;
+
 use Illuminate\Http\Request;
 use Symfony\Contracts\Service\Attribute\Required;
 use PDF;
@@ -53,9 +55,11 @@ class PrescriptionController extends Controller
         return view('ordonance.index',compact('ordonance'));
     }
     public function ordonancePdf($id){
+
         $ordonance=Prescription::find($id);
         $pdf=PDF::LoadView('ordonance.pdf',compact('ordonance'));
         return $pdf->stream();
+
 
     }
 }

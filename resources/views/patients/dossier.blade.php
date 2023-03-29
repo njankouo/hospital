@@ -23,7 +23,7 @@
         </div>
         <h5 style="text-align: center">PATIENT:&nbsp;{{ $patient->nom }}&nbsp;{{ $patient->prenom }}</h5>
         <div class="card-body">
-            <!-- Nav tabs -->
+
             <div class="default-tab">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
@@ -37,6 +37,7 @@
                         <a class="nav-link active" data-toggle="tab" href="#message">Dossier Patient</a>
                     </li>
                 </ul>
+
                 <div class="tab-content">
                     <div class="tab-pane fade" id="home" role="tabpanel">
                         <div class="pt-4">
@@ -97,52 +98,90 @@
                     <div class="tab-pane fade active show" id="message">
                         <div class="pt-4">
                             <h4 style="text-align: center;color:blue;font-weight:bold;size:25px;text-transform:underline">CONSULTATIONS PATIENT</h4>
-                            <a type="button" class="btn btn-secondary" style="float: right">Imprimer <span class="btn-icon-right"><i class="fa fa-file"></i></span>
-                            </a>
+
                                 @foreach ($consultation as $consultations)
                                 @if($consultations->patient_id==$patient->id)
-                                    <div class="mt-4">
-                                <h6 style="text-decoration: underline">DATE CONSULTATION: {{ $consultations->created_at }}</h6>
-                                <h6 >NOM ET PRENOM: {{ $consultations->patient->nom }}&nbsp; {{ $consultations->patient->prenom }}</</h6>
-                                <h6 >AGE: {{ $consultations->age }}</</h6>
-                                <h6 >POID: {{ $consultations->poid }}</</h6>
-                                <h6 >TENSION: {{ $consultations->tension }}</</h6>
-                                <h6 >ALLERGIES: {{ $consultations->add_allergie }}</</h6>
-                                <h6 >MOTIF CONSULTATION: {{ $consultations->motif }}</</h6>
-                                <h6 >DIAGNOSTIQUE: {{ $consultations->diagnostique }}</</h6>
-                                <h6 style="text-align:center">SUIVI PAR: {{ $consultations->responsable }}</</h6>
+
+                            <div class="card">
+                                <div class="card-header d-block">
+                                    <h4 class="card-title">CONSULTATION DU: {{ $consultations->created_at }}</h4>
+                                 </div>
+                                <div class="card-body">
+                                    <div id="accordion-seven" class="accordion accordion-header-bg accordion-bordered">
+                                        <div class="accordion__item">
+                                            <div class="accordion__header accordion__header--primary collapsed" data-toggle="collapse" data-target="#header-bg_collapseOne" aria-expanded="false">
+                                                <span class="accordion__header--icon"></span>
+                                                <span class="accordion__header--text"> Consultation Suivi Par: {{ $consultations->responsable }}</span>
+                                                <span class="accordion__header--indicator"></span>
+                                            </div>
+                                            <div id="header-bg_collapseOne" class="accordion__body collapse" data-parent="#accordion-seven" style="">
+                                                <div class="accordion__body--text">
+                                                    <h6 >NOM ET PRENOM: {{ $consultations->patient->nom }}&nbsp; {{ $consultations->patient->prenom }}</</h6>
+                                                    <h6 >AGE: {{ $consultations->age }}</</h6>
+                                                    <h6 >POID: {{ $consultations->poid }}</</h6>
+                                                    <h6 >TENSION: {{ $consultations->tension }}</</h6>
+                                                    <h6 >ALLERGIES: {{ $consultations->add_allergie }}</</h6>
+                                                    <h6 >MOTIF CONSULTATION: {{ $consultations->motif }}</</h6>
+                                                    <h6 >DIAGNOSTIQUE: {{ $consultations->diagnostique }}</</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
                             </div>
                                 @endif
                            @endforeach
-                           <hr>
+
                            <h4 style="text-align: center;color:blue;font-weight:bold;size:25px;text-transform:underline">PRESCIPTIONS MEDICALES</h4>
                            <div class="card">
 
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-responsive-sm">
-                                        <thead>
-                                            <tr>
 
-                                                <th>Medicament</th>
-                                                <th>Quantite</th>
-                                                <th>Posologie</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
 
                                                @foreach ($prescription as $prescriptions)
                                                    @if($prescriptions->patient_id==$patient->id)
-                                                   <h6 style="text-decoration: underline">DATE PRESCRIPTION: {{ $consultations->created_at }}</h6>
-                                                   <tr>
-                                                    <td>{!! html_entity_decode($prescriptions->medicament ) !!}
-                                                    </td>
-                                                    <td>{!! html_entity_decode($prescriptions->qte ) !!}
-                                                    </td>
-                                                    <td>{!! html_entity_decode($prescriptions->dosage ) !!}</td>
 
-                                                   </tr>
+                                            <div id="accordion-nine" class="accordion accordion-active-header">
+                                                <div class="accordion__item">
+                                                    <div class="accordion__header collapsed" data-toggle="collapse" data-target="#active-header_collapseOne" aria-expanded="false">
+                                                        <span class="accordion__header--icon"></span>
+                                                        <span class="accordion__header--text">PRESCRIPTION DU: {{ $consultations->created_at }}</span>
+                                                        <span class="accordion__header--indicator"></span>
+                                                    </div>
+                                                    <div id="active-header_collapseOne" class="accordion__body collapse" data-parent="#accordion-nine" style="">
+                                                        <div class="accordion__body--text">
+                                                            <table class="table table-responsive-sm">
+                                                                <thead>
+                                                                    <tr>
+
+                                                                        <th>Medicament</th>
+                                                                        <th>Quantite</th>
+                                                                        <th>Posologie</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                               <tr>
+
+                                                                    <td>{!! html_entity_decode($prescriptions->medicament ) !!}
+                                                                </td>
+                                                                <td>{!! html_entity_decode($prescriptions->qte ) !!}
+                                                                </td>
+                                                                <td>{!! html_entity_decode($prescriptions->dosage ) !!}</td>
+
+                                                               </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
                                                    @endif
                                                @endforeach
 
@@ -150,8 +189,7 @@
 
 
 
-                                        </tbody>
-                                    </table>
+
                                 </div>
                             </div>
                         </div>

@@ -14,9 +14,10 @@
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('commandes') }}">Commandes</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Commandes validés</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Commandes</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Acceuil</a></li>
+
+                    <li class="breadcrumb-item active"><a href="{{ route('home') }}">Acceuil</a></li>
                 </ol>
             </div>
         </div>
@@ -46,9 +47,13 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($commande as $commandes)
+                                    @if ($commandes->status==1)
+                                    @else
+
+
                                     <tr>
-                                        <td></td>
-                                        <td>{{ $commandes->designation}}</td>
+                                        <td><?php echo '00'?>{{ $commandes->code }}</td>
+                                        <td>{{ $commandes->produit->designation}}</td>
                                         <td>{{ $commandes->pu }}</td>
                                         <td>{{ $commandes->qte }}</td>
                                         <td>{{ $commandes->dateCommande }}</td>
@@ -80,13 +85,13 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <form action="{{ route('add.livraison') }}" method="post">
+                                                            <form action="{{ route('add.livraison',['commande'=>$commandes->id]) }}" method="post">
                                                                 @csrf
-
+                                                                <input type="hidden" name="_method" value="put">
                                                                 <div class="basic-form">
                                                                         <div class="form-row">
                                                                             <div class="col-sm-6">
-                                                                                <input type="text" class="form-control" placeholder="Designation" value="{{ $commandes->designation }}" name="produit_id">
+                                                                                <input type="text" class="form-control" placeholder="Designation" value="{{ $commandes->produit_id }}" name="produit_id">
                                                                             </div>
                                                                             <div class="col-sm-6 mt-2 mt-sm-0">
                                                                                 <input type="number" class="form-control" placeholder="quantite" name="qte" value="{{ $commandes->qte }}">
@@ -103,10 +108,19 @@
                                                                         </div>
                                                                         <br>
                                                                         <div class="form-row">
-                                                                            <div class="col-sm-12">
+                                                                            <div class="col-sm-6">
                                                                                 <input type="number" class="form-control" placeholder="prix unitaire" value="{{ $commandes->pu }}" name="pu">
                                                                             </div>
+                                                                            <div class="col-sm-6">
+                                                                                <input type="number" class="form-control" placeholder="conditionnement" value="{{ $commandes->conditionnement_id }}" name="conditionnement_id">
+                                                                            </div>
 
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="form-row">
+                                                                            <div class="col-sm-12">
+                                                                                <input type="number" class="form-control" placeholder="code commande" value="{{ $commandes->code }}" name="code">
+                                                                            </div>
                                                                         </div>
                                                                         <br>
                                                                         <div class="form-row">
@@ -132,6 +146,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                     @endforeach
                                 </tbody>
 
