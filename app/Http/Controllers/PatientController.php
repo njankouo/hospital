@@ -18,25 +18,33 @@ class PatientController extends Controller
     public function addPatient(Request $request)
     {
         $request->validate([],[]);
-        Patient::create([
-            'nom'=>$request->nom,
-            'date'=>$request->date,
-            'prenom'=>$request->prenom,
-            'telephone'=>$request->telephone,
-            'lieu'=>$request->lieu,
-            'tel'=>$request->tel,
-            'sexe'=>$request->sexe,
-            'email'=>$request->email,
-            'profession'=>$request->profession,
-            'prevenir'=>$request->prevenir,
-            'assurance'=>$request->assurance,
-            'numAssurance'=>$request->numAssurance,
-            'adresse'=>$request->adresse,
-            'groupe'=>$request->groupe,
-            'etat'=>$request->etat,
-            'age'=>$request->age,
-        ]);
-        return back()->with('success','patient enregistre avec success');
+
+        try{
+         Patient::create([
+                    'nom'=>$request->nom,
+                    'date'=>$request->date,
+                    'prenom'=>$request->prenom,
+                    'telephone'=>$request->telephone,
+                    'lieu'=>$request->lieu,
+                    'tel'=>$request->tel,
+                    'sexe'=>$request->sexe,
+                    'email'=>$request->email,
+                    'profession'=>$request->profession,
+                    'prevenir'=>$request->prevenir,
+                    'assurance'=>$request->assurance,
+                    'numAssurance'=>$request->numAssurance,
+                    'adresse'=>$request->adresse,
+                    'groupe'=>$request->groupe,
+                    'etat'=>$request->etat,
+                    'age'=>$request->age,
+                ]);
+             return back()->with('message','patient enregistre avec success');
+        }catch(\Exception $e){
+         return back()->with('error',"erreur survenue l'ors de l'enregistrement");
+        }
+
+
+
     }
     public function updatePatient($id){
         $patient=Patient::find($id);

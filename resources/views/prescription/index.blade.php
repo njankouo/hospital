@@ -20,7 +20,7 @@
             </div>
         </div>
             <div class="row">
-                <div class="col-7">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Formulaire De Prescription</h4>
@@ -47,7 +47,8 @@
                                       <div>
                                     <div class="form-group">
                                         <label for="Medicament">Medicaments</label>
-                                        <select class="multi-select select2-hidden-accessible" name="medicament[]" multiple="" data-select2-id="3" tabindex="-1" aria-hidden="true">
+                                        <select class="multi-select select2-hidden-accessible" name="medicament[]" multiple="" data-select2-id="3" tabindex="-1" aria-hidden="true" >
+
                                             <optgroup label="selectionnez les medicaments">
                                                 @foreach ($produit as $produits)
 

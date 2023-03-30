@@ -38,7 +38,7 @@ class RdvController extends Controller
                 'responsable'=>$request->responsable,
         ]);
 
-        return back()->with('success','Rendez-Vous Creé avec succes');
+        return back()->with('message','Rendez-Vous Creé avec succes');
     }
         public function generateTelephone(Request $request){
             $req=Patient::select('tel')->where('id',$request->id)->first();

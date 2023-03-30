@@ -1,4 +1,8 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+ <link rel="stylesheet" type="text/css"
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+
 @extends('layouts.master')
 
 @section('title','gestion des RDV')
@@ -38,10 +42,10 @@
                             <table id="example" class="display" style="min-width: 845px;text-align:center">
                                 <thead>
                                     <tr style="text-align: center">
-                                        <th style="width: 20%">Responsable Rdv</th>
+                                        <th style="width: 30%">Responsable Rdv</th>
                                         <th style="width: 30%">Patient</th>
-                                        <th style="width: 15%">Date Rdv</th>
-                                        <th style="width: 15%">Status Rdv</th>
+                                        <th style="width: 25%">Date Rdv</th>
+
                                         <th style="width: 35%">Action</th>
                                     </tr>
                                 </thead>
@@ -49,84 +53,21 @@
                                   @foreach ($rdv as $rdvs)
 
 
-                                    <tr>
+                                    <tr  data-toggle="modal" style="cursor:pointer">
                                         <td>{{$rdvs->responsable}}</td>
                                         <td>{{$rdvs->patient->nom}} {{$rdvs->patient->prenom}}</td>
                                         <td>{{$rdvs->date}}</td>
-                                        <td>{{$rdvs->status}}</td>
+
                                         <td style="width: 45%">
                                             <a type="button" class="btn btn-rounded btn-primary" href=""><span class="btn-icon-left text-info"><i class="fa fa-edit color-info"></i>
                                             </span>editer</a>
-                                            <a style="margin: 2%" type="button" class="btn btn-rounded btn-danger" href=""><span class="btn-icon-left text-info"><i class="fa fa-edit color-info"></i>
+                                            <a style="margin: 2%" type="button" class="btn btn-rounded btn-danger" href=""><span class="btn-icon-left text-info"><i class="fa fa-trash color-info"></i>
                                             </span>Annuler</a>
-                                            <a style="margin: 2%" type="button" class="btn btn-rounded btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg{{ $rdvs->id }}" ><span class="btn-icon-left text-info"><i class="fa fa-whatsapp color-info"></i>
-                                            </span>Message</a>
+
 
                                         </td>
                                     </tr>
-                                    <div class="modal fade bd-example-modal-lg{{ $rdvs->id }}" tabindex="-1" role="dialog" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Formulaire Des Rendez-Vous</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
 
-                                                    <div class="basic-form">
-                                                        <form method="POST" action="">
-
-                                                            <div class="form-row">
-                                                                <div class="col-sm-12">
-                                                                    <label>Responsable Rdv</label>
-                                                                    <input type="text" class="form-control" placeholder="Responsable Rdv..." name="responsable" value="{{auth()->user()->name}}">
-                                                                </div>
-                                                                 </div>
-                                                            <br>
-
-                                                    <div class="form-row">
-                                                                    <div class="col-sm-6  mt-2 mt-sm-0">
-                                                                        <label>Patient</label>
-                                                                        <select id="single-select" data-select2-id="single-select" tabindex="-1" class="select2-hidden-accessible patient" aria-hidden="true" name="patient_id">
-
-                                                                        <optgroup label="selectionnez le Patient">
-                                                                                @foreach ($patient as $patients)
-
-
-                                                                            <option value="{{ $patients->id }}">{{ $patients->nom }} {{ $patients->prenom }}</option>
-                                                                            @endforeach
-                                                                        </optgroup>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <label for="telephone">Telephone Patient</label>
-                                                                        <input type="text" class="form-control telephone" placeholder="telephone patient"  name="number" id="telephone">
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                    <div class="form-row">
-                                                        <div class="col-sm-12 mt-2 mt-sm-0">
-                                                            <label>Message</label>
-
-                                                            <textarea name="message" class="form-control"></textarea>
-                                                        </div>
-                                                    </div>
-                                                            </div>
-
-
-                                                    </div>
-
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
-                                                    <button type="submit" class="btn btn-primary">Valider</button>
-                                                </div>
-                                            </form>
-                                            </div>
-                                        </div>
-                                    </div>
                                     @endforeach
                                 </tbody>
 
@@ -182,7 +123,7 @@
                                                 <div class="col-sm-12  mt-2 mt-sm-0">
                                                     <label for="">Fin RDV</label>
                                                     <input type="datetime-local" id="date-format" class="form-control" placeholder="Date Fin RDV" name="end_date">
-                                                   
+
                                                 </div>
                                             </div>
 
@@ -208,6 +149,18 @@
     </div>
 </div>
 @stop
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+ @if(Session::has('message'))
+  toastr.options =
+  {
+    "closeButton" : true,
+    "progressBar" : true
+  }
+        toastr.success("{{ session('message') }}");
+  @endif
+  </script>
 <script>
     $(document).ready(function() {
         $(document).on('change', '.patient', function() {

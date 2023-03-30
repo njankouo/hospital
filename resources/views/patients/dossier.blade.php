@@ -103,6 +103,7 @@
                                 @if($consultations->patient_id==$patient->id)
 
                             <div class="card">
+
                                 <div class="card-header d-block">
                                     <h4 class="card-title">CONSULTATION DU: {{ $consultations->created_at }}</h4>
                                  </div>
@@ -131,7 +132,7 @@
                                     </div>
                                 </div>
                             </div>
-                                @endif
+                            @endif
                            @endforeach
 
                            <h4 style="text-align: center;color:blue;font-weight:bold;size:25px;text-transform:underline">PRESCIPTIONS MEDICALES</h4>

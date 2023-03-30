@@ -1,5 +1,8 @@
-<script src="{{ asset('js/toastr.min.js') }}"></script>
-<link rel="stylesheet" href="{{ asset('vendor/toastr/css/toastr.min.css') }}">
+<link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+ <link rel="stylesheet" type="text/css"
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+
  @extends('layouts.master')
 
 
@@ -198,16 +201,18 @@
 
  <!-- All init script -->
 
- <script>
-    @if (Session::has('success'))
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true,
-            positionClass: 'toastr-success-bottom-right'
-        }
-        toastr.success("{{ session('success') }}");
-    @endif
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+ @if(Session::has('message'))
+  toastr.options =
+  {
+    "closeButton" : true,
+    "progressBar" : true
+  }
+        toastr.success("{{ session('message') }}");
+  @endif
+  </script>
 
  <script>
     function previewFile(input) {

@@ -14,8 +14,7 @@
     <link href="{{ asset('vendor/jqvmap/css/jqvmap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
-     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
-    
+
     <link href="{{ asset('vendor/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
     <!-- Clockpicker -->
     <link href="{{ asset('vendor/clockpicker/css/bootstrap-clockpicker.min.css') }}" rel="stylesheet">
@@ -164,7 +163,7 @@
     <script src="{{ asset('js/plugins-init/select2-init.js') }}"></script>
 
 
- 
+
     <script src="{{ asset('vendor/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <!-- clockpicker -->
     <script src="{{ asset('vendor/clockpicker/js/bootstrap-clockpicker.min.js') }}"></script>

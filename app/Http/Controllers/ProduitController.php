@@ -54,7 +54,7 @@ class ProduitController extends Controller
 
         ]);
        // dd($request->all());
-        return back()->with('success','produit enregistre avec success');
+        return back()->with('message','produit enregistre avec success');
     }
     public function edit($id){
         $produit=Produit::find($id);
