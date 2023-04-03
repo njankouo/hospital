@@ -13,7 +13,9 @@ class PatientController extends Controller
     //
     public function index(){
         $patient=Patient::orderBy('id','desc')->get();
-         return view('patients.index',compact('patient'));
+        $consultation=Consultation::all();
+        $hospitalisation=Hospitalisation::all();
+         return view('patients.index',compact('patient','consultation','hospitalisation'));
     }
     public function addPatient(Request $request)
     {

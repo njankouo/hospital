@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <div class="quixnav">
     <div class="quixnav-scroll">
         <ul class="metismenu" id="menu">
@@ -11,8 +12,9 @@
                         class="icon icon-app-store"></i><span class="nav-text">Utilisateurs</span></a>
 
             </li>
+            <li class="nav-label">Gest. Produits</li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                        class="icon icon-chart-bar-33"></i><span class="nav-text">Produits Pharmaceutiques</span></a>
+                        class="icon icon-chart-bar-33"></i><span class="nav-text">Produits En Stock</span></a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('formes') }}">formes Galleliques</a></li>
                     <li><a href="{{ route('conditionnements') }}">Conditionnements</a></li>
@@ -27,13 +29,24 @@
                         class="icon icon-world-2"></i><span class="nav-text">Gest. Patients</span></a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('patient') }}">Liste Des Patients</a></li>
-                    {{-- <li><a href="./ui-alert.html">Dossiers Pateints</a></li> --}}
+
                     <li><a href="{{route('rdv.view')}}">Rendez-Vous</a></li>
+                      <li><a href="{{route('examen')}}">Autres Examens</a></li>
                 </ul>
             </li>
+            <li class="nav-label">Ventes</li>
+            {{-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                class="icon icon-shopping_cart_checkout"></i><span class="nav-text">Ventes Produits</span></a> --}}
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">   <span class="material-symbols-outlined">
+                    shopping_cart_checkout
+                    </span><span class="nav-text">Ventes Produits</span></a>
+                <ul aria-expanded="false">
+            <li><a href="{{ route('ventes') }}">Liste Des Ventes</a></li>
 
+        </ul>
+    </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                        class="icon icon-plug"></i><span class="nav-text">Services Centre Sante</span></a>
+                        class="icon icon-plug"></i><span class="nav-text">Services</span></a>
                 <ul aria-expanded="false">
                     <li><a href="./uc-select2.html">Liste Des Services</a></li>
                     <li><a href="{{ route('chambres') }}">Liste Des Chambres</a></li>
@@ -61,23 +74,16 @@
 
             <li class="nav-label">Caisse</li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                        class="icon icon-single-copy-06"></i><span class="nav-text">Plages Horaires</span></a>
+                        class="icon icon-single-copy-06"></i><span class="nav-text">Payements</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="./page-register.html">Register</a></li>
-                    <li><a href="./page-login.html">Login</a></li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                        <ul aria-expanded="false">
-                            <li><a href="./page-error-400.html">Error 400</a></li>
-                            <li><a href="./page-error-403.html">Error 403</a></li>
-                            <li><a href="./page-error-404.html">Error 404</a></li>
-                            <li><a href="./page-error-500.html">Error 500</a></li>
-                            <li><a href="./page-error-503.html">Error 503</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="./page-lock-screen.html">Lock Screen</a></li>
+                    <li><a href="{{ route('caisse') }}">Paiements Consultations </a></li>
+                    <li><a href=""></a></li>
                 </ul>
             </li>
+            <i class="icon icon-exit"></i> <li class="nav-label">Deconnexion</li>
         </ul>
+
+
     </div>
 
 

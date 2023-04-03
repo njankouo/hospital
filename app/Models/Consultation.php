@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Consultation extends Model
 {
     use HasFactory;
-    protected $fillable=['note','patient_id','taille','poid','tension','responsable','motif','diagnostique','activite','allergie','add_allergie','antecedant','antecedant_churirgicaux','antecedant_familliale','autre_antecedant','resultat'];
+    protected $fillable=['montant','versement','status','note','patient_id','taille','poid','tension','responsable','motif','diagnostique','activite','allergie','add_allergie','antecedant','antecedant_churirgicaux','antecedant_familliale','autre_antecedant'];
 
 
     public function patient(){

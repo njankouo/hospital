@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\CaisseController;
 use App\Http\Controllers\ChambreController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\ConditionnementController;
 use App\Http\Controllers\ConsultationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExamenController;
 use App\Http\Controllers\FamilleController;
 use App\Http\Controllers\FormeGalleliqueController;
 use App\Http\Controllers\FournisseurController;
@@ -17,6 +19,7 @@ use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RdvController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VenteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,8 +70,12 @@ Route::get('ordonance/pdf/{id}',[PrescriptionController::class,'ordonancePdf'])-
 Route::get('rendez/vous',[RdvController::class,'index'])->name('rdv.view');
 Route::get('hospitalisation',[HospitalisationController::class,'index'])->name('hospitalisation');
 Route::get('produit/pdf',[ProduitController::class,'pdf'])->name('produit.pdf');
-
+Route::get('ventes/create',[VenteController::class,'save'])->name('add.vente');
 Route::get('dossier/patient/{id}',[PatientController::class,'dossier'])->name('dossier.patient');
+Route::get('examen',[ExamenController::class,'index'])->name('examen');
+Route::get('examen/{id}',[ExamenController::class,'option'])->name('examen.info');
+Route::get('caisses',[CaisseController::class,'index'])->name('caisse');
+Route::get('ventes',[VenteController::class,'index'])->name('ventes');
 
 Route::Post('forme',[FormeGalleliqueController::class,'addForme'])->name('add.forme');
 Route::POST('uses',[UserController::class,'addUsers'])->name('add.users');
@@ -78,7 +85,7 @@ Route::Post('produits',[ProduitController::class,'addProduct'])->name('add.produ
 Route::POST('commandes',[CommandeController::class,'addCommande'])->name('add.commande');
 Route::Post('patients/add',[PatientController::class,'addPatient'])->name('add.patients');
 Route::post('valide/commande',[CommandeController::class,'ValidCommande'])->name('add.commandes');
-Route::PUT('ajouter/produits/{commande}',[CommandeController::class,'addLivraison'])->name('add.livraison');
+
 Route::POST('chambre',[ChambreController::class,'save'])->name('add.chambre');
 Route::POST('add/consultation',[ConsultationController::class,'addConsultation'])->name('add.consultations');
 Route::POST('add/prescription/',[PrescriptionController::class,'savePrescription'])->name('add.presciption');
@@ -91,3 +98,6 @@ Route::put('produit/edi/{produit}',[ProduitController::class,'editProduit'])->na
 Route::put('edit/patient/{patient}',[PatientController::class,'Editpatient'])->name('edit.patient');
 Route::put('hospit/{hospitalisation}',[HospitalisationController::class,'edit'])->name('edition.hospitalisation');
 Route::PUT('edit/{user}',[UserController::class,'edition'])->name('updat.user');
+Route::PUT('ajouter/produits/{commande}',[CommandeController::class,'addLivraison'])->name('add.livraison');
+Route::PUT('consultations/{consultation}',[ConsultationController::class,'update_consultation'])->name('update.consultation');
+Route::put('caisses/{consultation}',[CaisseController::class,'update_caisse'])->name('update.consultations');

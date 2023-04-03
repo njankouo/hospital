@@ -44,9 +44,10 @@
                                     <tr style="text-align: center">
                                         <th style="width: 30%">Responsable Rdv</th>
                                         <th style="width: 30%">Patient</th>
+                                          <th style="width: 30%">Titre RDV</th>
                                         <th style="width: 25%">Date Rdv</th>
 
-                                        <th style="width: 35%">Action</th>
+                                        <th style="width: 25%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,6 +57,7 @@
                                     <tr  data-toggle="modal" style="cursor:pointer">
                                         <td>{{$rdvs->responsable}}</td>
                                         <td>{{$rdvs->patient->nom}} {{$rdvs->patient->prenom}}</td>
+                                        <td></td>
                                         <td>{{$rdvs->date}}</td>
 
                                         <td style="width: 45%">
@@ -120,11 +122,16 @@
                                                         </div>
                                                         <br>
                                             <div class="form-row">
-                                                <div class="col-sm-12  mt-2 mt-sm-0">
+                                                <div class="col-sm-6  mt-2 mt-sm-0">
                                                     <label for="">Fin RDV</label>
                                                     <input type="datetime-local" id="date-format" class="form-control" placeholder="Date Fin RDV" name="end_date">
 
                                                 </div>
+                                                <div class="col-sm-6  mt-2 mt-sm-0">
+                                                      <label for="">Titre RDV</label>
+                                                <input type="text"  class="form-control" placeholder="Titre RDV" name="titre">
+
+                                                 </div>
                                             </div>
 
                                                     </div>

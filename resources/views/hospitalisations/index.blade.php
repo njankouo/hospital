@@ -83,8 +83,8 @@
                                                 <div class="modal-body">
 
                                                     @if ($hospitalisations->chambre_id==1)
-                                                    <label for="">ces informations sont d&eacute;ja archiv&eacute;</label>
-                                                    <input type="checkbox" name="chambre_id" value="1" checked>
+                                                    <h5 style="text-align: center;font-weight:bold">ces informations sont d&eacute;ja archiv&eacute;</h5>
+
                                                     @else
                                                     <label for="">cochez pour archiver l'hospitalisation ce patient</label>
                                                     <input type="checkbox" name="chambre_id" value="1">
@@ -93,9 +93,14 @@
 
                                                   </div>
                                                 <div class="modal-footer">
+                                                    @if ($hospitalisations->chambre_id==1)
+                                                    <button type="button" class="btn btn-primary modal-dismiss">fermer</button>
 
+                                                    @else
                                                     <button type="submit" class="btn btn-primary">archiver</button>
-                                                </div>
+
+                                                    @endif
+                                                     </div>
                                             </form>
                                             </div>
                                         </div>

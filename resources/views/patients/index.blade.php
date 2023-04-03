@@ -147,6 +147,7 @@
                                         <th >Prenom</th>
 
                                         <th >Telephone</th>
+                                        <th>Etat</th>
                                         {{-- <th >Nom Assurance</th>
                                         <th >Numero Assurance</th> --}}
                                         <th >Action</th>
@@ -168,22 +169,49 @@
 
 
 
-                                           {{-- <td>
-                                            {{ $patients->assurance }}
-                                           </td>
+
+
+                                            <td>
+
+                                          @forelse ($consultation as $consultations )
+                                          @if ($patients->id==$consultations->patient_id)
+                                          @if ($consultations->status==1)
+
+
+                                          <a href="javascript:void()" class="badge badge-rounded badge-outline-info"> consultation en Cours...</a>
+                                          @endif
+
+
+                                          @endif
+                                          @empty
+
+                                          @endforelse
+
+                                          @forelse ($hospitalisation as $hospitalisations)
+                                              @if($patients->id==$hospitalisations->patient_id)
+                                              @if($hospitalisations->status==1)
+                                              <a href="javascript:void()" class="badge badge-rounded badge-outline-primary"> Hospitalisation en Cours...</a>
+
+                                              @endif
+
+                                              @endif
+                                          @empty
+
+                                          @endforelse
+
+                                            </td>
                                            <td>
-                                            {{ $patients->numAssurance }}
-                                           </td> --}}
 
-                                           <td>
-                                            <a  style ="margin:2%" type="button" class="text-white btn btn-rounded btn-info" href="{{ route('update.patient',$patients->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-edit color-info"></i>
-                                            </span>editer</a>
+                                            <span><a href="{{ route('update.patient',$patients->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil fa-2x color-muted"></i> </a>
+                                              </span>
 
-                                            <button type="button" class="text-white btn btn-rounded btn-primary" data-toggle="modal" data-target="#example-lg{{ $patients->id }}" data-item-id="1"><span class="btn-icon-left text-info"><i class="fa fa-eye color-info"></i>
-                                            </span>voir</button>
-
-                                            <a type="button" class="text-white btn btn-rounded btn-secondary" style ="margin:2%" href="{{ route('dossier.patient',$patients->id) }}" ><span class="btn-icon-left text-info"><i class="fa fa-file color-secondary"></i>
-                                            </span>dossier</a>
+                                          <span> <a data-toggle="modal" data-target="#example-lg{{ $patients->id }}" data-item-id="1" class="mr-2">
+                                            <i class="fa fa-eye fa-2x text-secondary"></i>
+                                            </a>
+                                        </span>
+                                            <a style ="margin:2%" href="{{ route('dossier.patient',$patients->id) }}"class="mr-2" >
+                                                <i class="fa fa-file text-primary fa-2x"></i>
+                                            </a>
                                         </td>
                                     </tr>
 

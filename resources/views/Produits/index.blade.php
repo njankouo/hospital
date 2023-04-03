@@ -149,7 +149,7 @@
                                         </div>
                      <div class="card-body">
                          <div class="table-responsive">
-                             <table id="example" class="display" style="min-width: 845px;text-align:center">
+                             <table id="example"  style="text-align:center" class="table table-hover verticle-middle table-responsive-sm">
                                  <thead>
                                      <tr>
                                          <th style="width: 20%">Designation</th>
@@ -179,8 +179,11 @@
                                             {{ $produits->pu }}
                                          </td>
                                          <td>
-                                            <a type="button" class="btn btn-rounded btn-primary" href="{{ route('edit.produit',$produits->id) }}"><span class="btn-icon-left text-primary"><i class="fa fa-edit"></i>
-                                            </span>Editer</a>
+
+                                            <span>
+                                                <a href="{{ route('edit.produit',$produits->id) }}" class="mr-4" data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn" ><i class="fa fa-pencil color-muted"></i> </a>
+                                             </span>
+
                                          </td>
                                      </tr>
 
