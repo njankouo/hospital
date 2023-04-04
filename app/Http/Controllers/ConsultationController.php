@@ -73,6 +73,7 @@ class ConsultationController extends Controller
         ]);
         $consultation->update([
             'status'=>$request->status,
+           // dd($request->status)
         ]);
         return back()->with('message','consultation finalisé avec success');
     }

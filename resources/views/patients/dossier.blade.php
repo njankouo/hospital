@@ -41,8 +41,8 @@
                 <div class="tab-content">
                     <div class="tab-pane fade" id="home" role="tabpanel">
                         <div class="pt-4">
-                            <h4 style="text-align: center;color:blue;font-weight:bold;size:25px;text-transform:underline">INFORMATIONS PATIENT</h4>
-                            <h6>
+                            <h4 style="text-align: center;color:blue;font-weight:bold;size:25px;text-transform:underline;font-style:italic">INFORMATIONS PATIENT</h4>
+                            {{-- <h6>
                                 NOM ET PRENOM: {{ $patient->nom }}&nbsp;{{ $patient->prenom }}
                             </h6>
                             <h6>
@@ -81,17 +81,101 @@
                             </h6>
                             <h6>
                                ETAT CIVIL: {{ $patient->etat }}
-                            </h6>
+                            </h6> --}}
+                            <div class="card">
+                                <div class="card-header d-block">
 
+                                    <p class="mb-0 subtitle" style="text-align: center">
+                                        NOM ET PRENOM: {{ $patient->nom }}&nbsp;{{ $patient->prenom }}
+
+                                    </p>
+                                    <p class="mb-0 subtitle" style="text-align: center">
+                                        DATE NAISSANCE: {{ $patient->date }}
+                                    </p>
+                                    <p class="mb-0 subtitle" style="text-align: center">
+                                        AGE: {{ $patient->age }}
+                                    </p>
+
+                                    <p class="mb-0 subtitle" style="text-align: center">
+                                        LIEU DE NAISSANCE: {{ $patient->lieu }}
+                                    </p>
+                                    <p class="mb-0 subtitle" style="text-align: center">
+                                        PROFESSION: {{ $patient->profession }}
+                                    </p>
+                                    <p class="mb-0 subtitle" style="text-align: center">
+                                        ADRESSE: {{ $patient->adresse }}
+                                    </p>
+                                    <p class="mb-0 subtitle" style="text-align: center">
+                                        TELEPHONE: {{ $patient->telephone }}
+                                    </p>
+                                    <p class="mb-0 subtitle" style="text-align: center">
+                                        ASSURANCE: {{ $patient->assurance }}
+                                    </p>
+                                    <p class="mb-0 subtitle" style="text-align: center">
+                                        GROUPE SANGUIN: {{ $patient->groupe }}
+                                    </p>
+                                    <p class="mb-0 subtitle" style="text-align: center">
+                                        ETAT CIVIL: {{ $patient->etat }}
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-info progress-bar-striped" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%; height:10px;" role="progressbar">
+                                            <span class="sr-only">100% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="profile">
                         <div class="pt-4">
-                            <h4>This is profile title</h4>
-                            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-                            </p>
-                            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-                            </p>
+                            {{-- @foreach ($consultation as $consultations)
+                           @if ($consultations->patient_id==$patient->id)
+
+                           <h5>  ANTECEDANTS CHIRURGICAUX: {{ $consultations->antecedant_churirgicaux }}</h5>
+                             <h5> ANTECEDANTS FAMILLIALES: {{ $consultations->antecedant_familliale }}</h5>
+                           @else
+                           @endif
+                           @endforeach --}}
+                           <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Antec&eacute;dants&nbsp;{{ $patient->nom }}&nbsp;{{ $patient->prenom }}</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table header-border table-hover verticle-middle">
+                                        <thead>
+                                            <tr>
+
+                                                <th scope="col">Antecedants Familliales</th>
+                                                <th scope="col">Antecedants Chirurgicaux</th>
+                                                <th scope="col">Autres Antecedants</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($consultation as $consultations)
+                                             @if ($consultations->patient_id==$patient->id)
+                                            <tr>
+
+                                                <td>{{ $consultations->antecedant_familliale }}</td>
+                                                <td>
+                                                    {{ $consultations->antecedant_churirgicaux }}
+                                                </td>
+                                                <td>
+
+                                                </td>
+                                            </tr>
+                                            @endif
+                                             @endforeach
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     </div>
 
@@ -100,7 +184,7 @@
                             <h4 style="text-align: center;color:blue;font-weight:bold;size:25px;text-transform:underline">CONSULTATIONS PATIENT</h4>
 
                                 @foreach ($consultation as $consultations)
-                                @if($consultations->patient_id==$patient->id)
+                                @if($consultations->patient_id==$patient->id )
 
                             <div class="card">
 
@@ -117,7 +201,7 @@
                                             </div>
                                             <div id="header-bg_collapseOne" class="accordion__body collapse" data-parent="#accordion-seven" style="">
                                                 <div class="accordion__body--text">
-                                                    <h6 >NOM ET PRENOM: {{ $consultations->patient->nom }}&nbsp; {{ $consultations->patient->prenom }}</</h6>
+                                                    <h6 >NOM ET PRENOM: {{ $patient->nom }}&nbsp; {{ $patient->prenom }}</</h6>
                                                     <h6 >AGE: {{ $consultations->age }}</</h6>
                                                     <h6 >POID: {{ $consultations->poid }}</</h6>
                                                     <h6 >TENSION: {{ $consultations->tension }}</</h6>
@@ -132,10 +216,14 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- @else
+                            <h4 style="text-align: center;color:blue;font-weight:bold;size:25px;text-transform:underline">AUCUNE CONSULTATIONS N'A ETE EFFECTUEE POUR LE MOMENT...</h4> --}}
+
+
                             @endif
                            @endforeach
 
-                           <h4 style="text-align: center;color:blue;font-weight:bold;size:25px;text-transform:underline">PRESCIPTIONS MEDICALES</h4>
+                           <h4 style="text-align: center;color:blue;font-weight:bold;size:25px;text-transform:underline;text-fixed:fixed">PRESCIPTIONS MEDICALES</h4>
                            <div class="card">
 
                             <div class="card-body">

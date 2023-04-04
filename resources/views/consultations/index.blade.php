@@ -186,10 +186,10 @@
                            <tr>
                             <td style="cursor: pointer">
                                 @if ($consultations->status==0)
-                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-sm{{ $consultations->id }}" style="-webkit-animation: pulse 0.5s infinite"><i class="fa fa-eye fa-2x text-white" ></i></button>
+                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm{{ $consultations->id }}" style="-webkit-animation: pulse 1s infinite"><i class="fa fa-pencil fa-2x text-white" ></i></button>
 
                                 @else
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm{{ $consultations->id }}" style="-webkit-animation: pulse 1s infinite"><i class="fa fa-pencil fa-2x text-white" ></i></button>
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-sm{{ $consultations->id }}" style="-webkit-animation: pulse 0.5s infinite"><i class="fa fa-eye fa-2x text-white" ></i></button>
 
                                 @endif
                                </td>
@@ -211,9 +211,9 @@
                                                 @csrf
                                                 <input type="hidden" value="put" name="_method">
 
-                                                @if ($consultations->status==1)
+                                                @if ($consultations->status==0)
                                                 <label for="status">Valider Consultation</label>
-                                                <input type="checkbox" name="status" value="0" class=" @error('status') is-invalid @enderror">
+                                                <input type="checkbox" name="status" value="1" class=" @error('status') is-invalid @enderror">
                                                 @error('status')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -224,9 +224,10 @@
 
                                         <div class="modal-footer">
                                             @if($consultations->status==0)
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                                                <button type="submit" class="btn btn-primary">Terminer</button>
                                             @else
-                                          <button type="submit" class="btn btn-primary">Terminer</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+
                                           @endif
                                         </div>
                                     </form>

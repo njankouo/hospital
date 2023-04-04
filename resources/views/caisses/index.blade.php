@@ -34,7 +34,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" class="display table table-hover" style="min-width: 845px; text-align: center">
+                            <table id="example2" class="display table table-hover" style="min-width: 845px; text-align: center">
                                 <thead>
                                     <tr style="text-align: center">
                                         <th></th>
@@ -45,6 +45,7 @@
                                         <th>Versement</th>
 
                                         <th >Reste A payer</th>
+                                        <th>Date De Paiement</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,6 +67,7 @@
                                         <td>{{ $consultations->montant }}</td>
                                         <td>{{ $consultations->versement }}</td>
                                         <td>{{ $consultations->montant - $consultations->versement}}</td>
+                                        <td>{{ $consultations->updated_at->diffForHumans() }}</td>
                                         <div class="modal fade" id="exampleModalCenter{{ $consultations->id }}">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">

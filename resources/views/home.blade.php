@@ -44,8 +44,8 @@
                                 <i class="ti-layout-grid2 text-pink border-pink"></i>
                             </div>
                             <div class="stat-content d-inline-block">
-                                <div class="stat-text">Chambres</div>
-                                <div class="stat-digit">{{ \App\Models\Chambre::count() }}</div>
+                                <div class="stat-text">Rendez-Vous</div>
+                                <div class="stat-digit">{{ \App\Models\RDV::count() }}</div>
                             </div>
                         </div>
                     </div>
