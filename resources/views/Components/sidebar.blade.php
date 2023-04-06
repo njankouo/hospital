@@ -3,13 +3,13 @@
     <div class="quixnav-scroll">
         <ul class="metismenu" id="menu">
             <li class="nav-label">Module Centre De Sante </li>
-            <li><a class="has-arrow" href="{{ route('home') }}" aria-expanded="false"><i
-                        class="icon icon-single-04"></i><span class="nav-text">Tableau De Bord</span></a>
+            <li><a class="" href="{{ route('home') }}" aria-expanded="false"><i
+                        class="icon icon-app-store"></i><span class="nav-text">Tableau De Bord</span></a>
 
             </li>
             <li class="nav-label">Gest. Utilisateurs</li>
             <li><a class="has-arrow" href="{{ route('users') }}" ><i
-                        class="icon icon-app-store"></i><span class="nav-text">Utilisateurs</span></a>
+                        class="fa fa-users"></i><span class="nav-text">Utilisateurs</span></a>
 
             </li>
             <li class="nav-label">Gest. Produits</li>
@@ -73,12 +73,9 @@
             </li>
 
             <li class="nav-label">Caisse</li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                        class="icon icon-single-copy-06"></i><span class="nav-text">Payements</span></a>
-                <ul aria-expanded="false">
-                    <li><a href="{{ route('caisse') }}">Paiements Consultations </a></li>
-                    <li><a href=""></a></li>
-                </ul>
+            <li><a class="" href="{{ route('caisse') }}" aria-expanded="false"><i
+                        class="icon icon-single-copy-06"></i><span class="nav-text">Paiements</span></a>
+
             </li>
             <i class="icon icon-exit"></i> <li class="nav-label">Deconnexion</li>
         </ul>

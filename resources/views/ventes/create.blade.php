@@ -42,7 +42,7 @@
                 <ol class="breadcrumb">
 
                     <li class="breadcrumb-item active"><a href="{{ route('home') }}">Acceuil</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Ventes</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('ventes') }}">Ventes</a></li>
                 </ol>
             </div>
         </div>
@@ -56,30 +56,54 @@
                 </div>
                 <div class="card-body">
                     <div class="basic-form">
-                        <form>
+                        <form method="post" action="{{ route('addvente.produit') }}">
+
+                            @csrf
                             <div class="form-row">
                                 <div class="col-sm-6">
                                     <label for="designation">Designation</label>
-                                    <input type="text" class="form-control" placeholder="Designation">
+                                    <select id="single-select" data-select2-id="single-select" tabindex="-1" class="select2-hidden-accessible form-control" aria-hidden="true" name="designation">
+
+                                    @foreach ($produit as $produits)
+
+
+                                        <option value="{{ $produits->id }}">{{ $produits->designation }}</option>
+                                        @endforeach
+
+                                    </select>
                                 </div>
                                 <div class="col-sm-6 mt-2 mt-sm-0">
                                     <label for="pu">Prix Unitaire</label>
-                                    <input type="number" class="form-control" style="text-align: right" placeholder="prix unitaire">
+                                    <input type="number" class="form-control" style="text-align: right" placeholder="prix unitaire" name="pu">
                                 </div>
 
                                 <div class="col-sm-6">
                                     <label for="designation">Conditionnement</label>
                                     <select name="conditionnement" id="" class="form-control">
-                                        <option value=""></option>
+                                        @foreach ($conditionnement as $conditionnements)
+
+                                        <option value="{{ $conditionnements->libelle }}">{{ $conditionnements->libelle }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-6 mt-2 mt-sm-0">
                                     <label for="pu">Quantite</label>
-                                    <input type="number" class="form-control" style="text-align: right" placeholder="quantite">
+                                    <input type="number" class="form-control" style="text-align: right" placeholder="quantite" name="qte">
                                 </div>
-
+                                <div class="col-sm-6 mt-2 mt-sm-0">
+                                    <label for="pu">Code Vente</label>
+                                    <input type="number" class="form-control" style="text-align: right" placeholder="code vente" readonly value="{{ $vente->id }}" name="code">
+                                </div>
+                                <div class="col-sm-6 mt-2 mt-sm-0">
+                                    <label for="pu">Date Vente</label>
+                                    <input type="text" class="form-control" style="text-align: right" placeholder="date vente" readonly value="{{ $vente->date }}" name="date_vente">
+                                </div>
+                                <div class="col-sm-12 mt-2 mt-sm-0">
+                                    <label for="pu">Vendu par</label>
+                                    <input type="text" class="form-control" style="text-align: right"  readonly value="{{ $vente->responsable }}" name="responsable">
+                                </div>
                                 <div class=" mt-2" >
-                                    <button type="button" class="btn btn-primary btn-lg" >Valider</button>
+                                    <button type="submit" class="btn btn-primary" style="float: right" >Valider</button>
 
                                 </div>
                                </div>

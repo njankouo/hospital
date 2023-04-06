@@ -33,7 +33,7 @@
                             <thead>
                                 <tr style="text-align: center">
                                     <th >Nom et Prenom</th>
-                                 
+
                                     <th >Action</th>
                                 </tr>
                             </thead>
@@ -43,12 +43,12 @@
                                 <tr style="text-align: center">
 
                                     <td>{{ $patients->nom }}  {{ $patients->nom }}</td>
-     
-                                       <td>
-                                        <a  style ="margin:2%" type="button" class="text-white btn btn-rounded btn-primary" href="{{ route('examen.info',$patients->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-eye color-primary"></i>
-                                        </span>Option</a>
 
-                                       
+                                       <td>
+                                        {{-- <a  style ="margin:2%" type="button" class="text-white btn btn-rounded btn-primary" href="{{ route('examen.info',$patients->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-eye color-primary"></i>
+                                        </span>Option</a> --}}
+
+                                      <a  href="{{ route('examen.info',$patients->id) }}" class="btn btn-primary"> <i class="fa fa-pencil text-light"></i></a>
                                     </td>
                                 </tr>
 

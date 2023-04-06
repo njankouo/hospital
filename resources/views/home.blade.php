@@ -45,7 +45,7 @@
                             </div>
                             <div class="stat-content d-inline-block">
                                 <div class="stat-text">Rendez-Vous</div>
-                                <div class="stat-digit">{{ \App\Models\RDV::count() }}</div>
+                                <div class="stat-digit">{{ $count }}</div>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="stat-content d-inline-block">
                                 <div class="stat-text">Produits phar..</div>
-                                <div class="stat-digit">{{ App\Models\Produit::count() }}</div>
+                                <div class="stat-digit">{{ App\Models\Produit::count()}}</div>
                             </div>
                         </div>
                     </div>

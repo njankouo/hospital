@@ -1,6 +1,11 @@
 <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
  <link rel="stylesheet" type="text/css"
      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+     <style>
+        i:hover{
+           transform:scale(1.5);
+        }
+     </style>
 @extends('layouts.master')
 
 @section('title','gestion des paiements')
@@ -39,7 +44,7 @@
                                     <tr style="text-align: center">
                                         <th></th>
                                         <th >Nom Patient</th>
-                                        <th >Dedie&eacute; a:</th>
+                                        <th>Motifs Versements</th>
 
                                         <th >Montant</th>
                                         <th>Versement</th>
@@ -55,15 +60,16 @@
 
                                     <tr>
                                         <td>
-                                            @if ($consultations->montant-$consultations->versement==0)
-                                                <i class="fa fa-check fa-2x text-success"></i>
-                                                @else
-                                                <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{ $consultations->id }}"><i class="fa fa-money fa-2x text-white"></i></button>
+                                            @if ($consultations->montant==0)
 
+                                                <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{ $consultations->id }}"><i class="fa fa-pencil text-white"></i></button>
+
+                                                @else
+                                               <button class="btn btn-primary"><i class="fa fa-check text-white"></i></button>
                                             @endif
                                         </td>
                                         <td>{{ $consultations->patient->nom }}&nbsp;{{ $consultations->patient->prenom }}</td>
-                                        <td>Consult{{$consultations->id }}</td>
+                                        <td>{{$consultations->motifs_caisse }}</td>
                                         <td>{{ $consultations->montant }}</td>
                                         <td>{{ $consultations->versement }}</td>
                                         <td>{{ $consultations->montant - $consultations->versement}}</td>
@@ -81,11 +87,18 @@
                                                             @csrf
                                                             <input type="hidden" value="put" name="_method">
                                                             <label for="versement">Versement</label>
-                                                            <input type="number" style="text-align: right;" name="versement" class="form-control" placeholder="Versement Consultation">
+                                                            <input type="number" style="text-align: right;" name="versement" class="form-control" placeholder="Versement">
 
-                                                            <label for="versement">Montant Consultation</label>
-                                                            <input type="number" style="text-align: right;" name="montant" class="form-control" placeholder="montant consultation">
+                                                            <label for="versement">Montant</label>
+                                                            <input type="number" style="text-align: right;" name="montant" class="form-control" placeholder="montant">
+                                                            <label for="Motif">Motif Versement</label>
+                                                            <select name="motifs_caisse" id="" class="form-control">
 
+                                                               <option value="examen medical">Examen Medical</option>
+                                                               <option value="bilan medical">Bilan Medical</option>
+                                                                <option value="consultation">Consultation</option>
+                                                                <option value="hospitalisation">Hospitalisation</option>
+                                                            </select>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>

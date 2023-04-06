@@ -134,13 +134,14 @@
                     <div class="card-header">
                         <h4 class="card-title">Liste Des Patients</h4>
 
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Patients <span
-            class="btn-icon-right"><i class="fa fa-plus"></i></span></button>
+                      {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Patients <span
+            class="btn-icon-right"><i class="fa fa-plus"></i></span></button> --}}
+            <span><a  class="mr-4 btn btn-primary" data-toggle="modal" style="-webkit-animation: pulse 1s infinite"  data-target=".bd-example-modal-lg"><i class="fa fa-plus text-white"></i> </a>
 
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example2" class="display table table-hover" style="min-width: 845px">
+                            <table id="example" class="display table table-hover" style="min-width: 845px">
                                 <thead>
                                     <tr style="text-align: center">
                                         <th >Nom</th>
@@ -194,15 +195,15 @@
                                             </td>
                                            <td>
 
-                                            <span><a href="{{ route('update.patient',$patients->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil fa-2x color-muted"></i> </a>
+                                            <span><a href="{{ route('update.patient',$patients->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted"></i> </a>
                                               </span>
 
                                           <span> <a data-toggle="modal" data-target="#example-lg{{ $patients->id }}" data-item-id="1" class="mr-2">
-                                            <i class="fa fa-eye fa-2x text-secondary"></i>
+                                            <i class="fa fa-eye text-secondary"></i>
                                             </a>
                                         </span>
                                             <a style ="margin:2%" href="{{ route('dossier.patient',$patients->id) }}"class="mr-2" >
-                                                <i class="fa fa-file text-primary fa-2x"></i>
+                                                <i class="fa fa-file text-primary "></i>
                                             </a>
                                         </td>
                                     </tr>

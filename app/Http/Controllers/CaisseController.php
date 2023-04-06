@@ -26,7 +26,8 @@ class CaisseController extends Controller
         else{
             $consultation->update([
                 'versement'=>$request->versement,
-                'montant'=>$request->montant
+                'montant'=>$request->montant,
+                'motifs_caisse'=>$request->motifs_caisse,
             ]);
             return back()->with('message','paiement realise avec success');
         }

@@ -29,17 +29,21 @@ class HomeController extends Controller
     public function index()
     {
         $events = [];
-
+        $count=Rdv::where('status','=','1')->count();
         $appointments = Rdv::all();
 
         foreach ($appointments as $appointment) {
+            if($appointment->status==0){
+
+            }else{
             $events[] = [
-                'title' => $appointment->responsable . ' ('.$appointment->patient->nom.')',
+                'title' => $appointment->titre . ' ('.$appointment->patient->nom.')',
                //'start' => $appointment->created_at,
                 'start' => $appointment->date,
                 'end' => $appointment->end_date,
             ];
         }
-        return view('home',compact('events'));
+    }
+        return view('home',compact('events','count'));
     }
 }

@@ -31,9 +31,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Liste Des Rendez-Vous</h4>
+            <a type="button" class="btn btn-primary" style="-webkit-animation: pulse 1s infinite"  data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-plus fa-2x text-white" ></i></a>
 
-                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Rendez-Vous <span
-            class="btn-icon-right"><i class="fa fa-plus"></i></span></button>
 
                     </div>
                     <div class="card-body">
@@ -42,12 +41,13 @@
                             <table id="example" class="display" style="min-width: 845px;text-align:center">
                                 <thead>
                                     <tr style="text-align: center">
-                                        <th style="width: 30%">Responsable Rdv</th>
-                                        <th style="width: 30%">Patient</th>
-                                          <th style="width: 30%">Titre RDV</th>
-                                        <th style="width: 25%">Date Rdv</th>
+                                        <th>Status Rdv</th>
+                                        <th >Responsable Rdv</th>
+                                        <th>Patient</th>
+                                          <th>Titre RDV</th>
+                                        <th >Date Rdv</th>
 
-                                        <th style="width: 25%">Action</th>
+                                        <th >Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -55,21 +55,54 @@
 
 
                                     <tr  data-toggle="modal" style="cursor:pointer">
+                                        <td>
+                                            @if ($rdvs->status==1)
+                                            <i class="fa fa-close text-danger"></i>
+                                            @else
+                                            <i class="fa fa-check text-success"></i>
+                                            @endif
+                                        </td>
                                         <td>{{$rdvs->responsable}}</td>
                                         <td>{{$rdvs->patient->nom}} {{$rdvs->patient->prenom}}</td>
-                                        <td></td>
+                                        <td>{{ $rdvs->titre }}</td>
                                         <td>{{$rdvs->date}}</td>
 
-                                        <td style="width: 45%">
-                                            <a type="button" class="btn btn-rounded btn-primary" href=""><span class="btn-icon-left text-info"><i class="fa fa-edit color-info"></i>
-                                            </span>editer</a>
-                                            <a style="margin: 2%" type="button" class="btn btn-rounded btn-danger" href=""><span class="btn-icon-left text-info"><i class="fa fa-trash color-info"></i>
-                                            </span>Annuler</a>
-
-
+                                        <td>
+                                            <span><a  class="mr-4"  data-placement="top" title="Archiver" data-toggle="modal" data-target="#exampleModalCenter{{ $rdvs->id }}"><i class="fa fa-pencil text-primary"></i> </a>
+                                                <a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="Message"><i class="fa fa-telegram text-success"></i></a></span>
                                         </td>
                                     </tr>
+                                    <div class="modal fade" id="exampleModalCenter{{ $rdvs->id }}">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Archiver Rendez-Vous</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                        @if($rdvs->status==1)
+                                                        <form action="{{route('update.rdv',['rdv'=>$rdvs->id])  }}" method="post">
 
+                                                            @csrf
+                                                            <input type="hidden" name="_method" value="put">
+                                                            <label for="rdv">Rendez-Vous Honor&eacute;</label>
+                                                            <input type="checkbox" name="status" id="" value="0">
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-primary">Valider</button>
+                                                </form>
+                                                    @else
+                                                    <h5 style="text-align: center">Le Patient {{ $rdvs->patient->nom }}&nbsp;{{ $rdvs->patient->prenom }} A honor&eacute; son Rendez-vous</h5>
+                                                      @endif
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @endforeach
                                 </tbody>
 

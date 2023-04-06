@@ -36,6 +36,7 @@ class RdvController extends Controller
                 'date'=>$request->date,
                 'end_date'=>$request->end_date,
                 'responsable'=>$request->responsable,
+                'titre'=>$request->titre
         ]);
 
         return back()->with('message','Rendez-Vous Creé avec succes');
@@ -89,4 +90,22 @@ class RdvController extends Controller
         }
 
 
-}}
+}
+    public function updat_rdv(Request $request,Rdv $rdv){
+        $request->validate([
+            'status'=>'required',
+        ],
+        [
+            'status.required'=>'selectionnez le champ svp'
+        ]
+
+        );
+
+        $rdv->update([
+            'status'=>$request->status,
+          //  dd($request->all())
+        ]);
+        return back()->with('message','rendez-vous archive avec succes');
+
+    }
+}

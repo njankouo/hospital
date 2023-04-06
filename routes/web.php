@@ -70,7 +70,7 @@ Route::get('ordonance/pdf/{id}',[PrescriptionController::class,'ordonancePdf'])-
 Route::get('rendez/vous',[RdvController::class,'index'])->name('rdv.view');
 Route::get('hospitalisation',[HospitalisationController::class,'index'])->name('hospitalisation');
 Route::get('produit/pdf',[ProduitController::class,'pdf'])->name('produit.pdf');
-Route::get('ventes/create',[VenteController::class,'save'])->name('add.vente');
+Route::get('ventes/create/{id}',[VenteController::class,'save'])->name('add.vente');
 Route::get('dossier/patient/{id}',[PatientController::class,'dossier'])->name('dossier.patient');
 Route::get('examen',[ExamenController::class,'index'])->name('examen');
 Route::get('examen/{id}',[ExamenController::class,'option'])->name('examen.info');
@@ -92,7 +92,8 @@ Route::POST('add/prescription/',[PrescriptionController::class,'savePrescription
 Route::POST('add/rdv',[RdvController::class,'save'])->name('add.rdv');
 Route::get('add/rdvs',[RdvController::class,'sendCustomMessage']);
 Route::POST('add/hospitalisation',[HospitalisationController::class,'save'])->name('add.hospitalisation');
-
+Route::POST('ventes/save',[VenteController::class,'save_vente'])->name('save.vente');
+Route::POST('addVente',[VenteController::class,'addvente'])->name('addvente.produit');
 
 Route::put('produit/edi/{produit}',[ProduitController::class,'editProduit'])->name('edition.produit');
 Route::put('edit/patient/{patient}',[PatientController::class,'Editpatient'])->name('edit.patient');
@@ -101,3 +102,4 @@ Route::PUT('edit/{user}',[UserController::class,'edition'])->name('updat.user');
 Route::PUT('ajouter/produits/{commande}',[CommandeController::class,'addLivraison'])->name('add.livraison');
 Route::PUT('consultations/{consultation}',[ConsultationController::class,'update_consultation'])->name('update.consultation');
 Route::put('caisses/{consultation}',[CaisseController::class,'update_caisse'])->name('update.consultations');
+Route::PUT('update/rdv/{rdv}',[RdvController::class,'updat_rdv'])->name('update.rdv');
