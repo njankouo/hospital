@@ -47,6 +47,13 @@ class VenteController extends Controller
     public function addvente(Request $request){
         $request->validate([],[]);
 
+        // $produit=Produit::where('id','qte')->get();
+        // $vente=Produit_Vente::all();
+
+        // if($produit->qte<$_POST['qte'] || $produit->id==$vente->id)
+        // {
+        //     return back()->with('error','cette quantite ne peut sortie en stock');
+        // }else{
         Produit_Vente::create([
 
 
@@ -55,9 +62,43 @@ class VenteController extends Controller
         'pu'=>$request->pu,
         'responsable'=>$request->responsable,
         'date'=>$request->date_vente,
+        'code'=>$request->code,
         'conditionnement'=>$request->conditionnement
 
         ]);
         return back()->with('message','produit selectionne avec succes');
+    }
+
+
+    public function listeVente(){
+        $vente=Produit_Vente::orderBy('id','asc')->get();
+        return view('ventes.list',compact('vente'));
+    }
+
+    public function addToCart($id)
+    {
+        $product = Produit_Vente::findOrFail($id);
+
+        $cart = session()->get('cart', []);
+
+        if(isset($cart[$id])) {
+            $cart[$id]['qte']++;
+        } else {
+            $cart[$id] = [
+                "produit_id" => $product->produit_id,
+                "qte" => 1,
+                "pu" => $product->pu,
+                "conditionnement" => $product->conditionnement
+            ];
+        }
+
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
+    }
+
+    public function softVente($id){
+        $vente=Produit_Vente::find($id);
+        $vente->forcedelete();
+        return back()->with('success','vente annulé avec succes');
     }
 }

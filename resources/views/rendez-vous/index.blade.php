@@ -69,9 +69,33 @@
 
                                         <td>
                                             <span><a  class="mr-4"  data-placement="top" title="Archiver" data-toggle="modal" data-target="#exampleModalCenter{{ $rdvs->id }}"><i class="fa fa-pencil text-primary"></i> </a>
-                                                <a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="Message"><i class="fa fa-telegram text-success"></i></a></span>
+                                                <a data-toggle="modal" data-target="#exampleModalpopover{{ $rdvs->id }}"><i class="fa fa-telegram text-success"></i></a></span>
                                         </td>
                                     </tr>
+                                    <div class="modal fade" id="exampleModalpopover{{$rdvs->id}}">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Envoyez Du Message</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{ route('send.message') }}" method="post">
+                                                        @csrf
+                                                  <label for="Telephone">Telephone</label>
+                                                  <input type="text" name="telephone" class="form-control" value="{{ $rdvs->telephone }}">
+                                                  <label for="message">Message</label>
+                                                  <textarea name="message" id="" cols="5" rows="5" class="form-control"></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="modal fade" id="exampleModalCenter{{ $rdvs->id }}">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -95,7 +119,7 @@
                                                     <button type="submit" class="btn btn-primary">Valider</button>
                                                 </form>
                                                     @else
-                                                    <h5 style="text-align: center">Le Patient {{ $rdvs->patient->nom }}&nbsp;{{ $rdvs->patient->prenom }} A honor&eacute; son Rendez-vous</h5>
+                                                    <h5 style="text-align: center">Le Patient {{ $rdvs->patient->nom }}&nbsp;{{ $rdvs->patient->prenom }} A honor&eacute; son Rendez-vous {{ $rdvs->updated_at->diffForHumans() }}</h5>
                                                       @endif
 
 
@@ -148,7 +172,7 @@
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label for="telephone">Telephone Patient</label>
-                                                                <input type="text" class="form-control telephone" placeholder="telephone patient"  name="phone" id="telephone">
+                                                                <input type="text" class="form-control telephone" placeholder="telephone patient"  name="telephone" id="telephone">
 
                                                             </div>
 
@@ -201,6 +225,16 @@
         toastr.success("{{ session('message') }}");
   @endif
   </script>
+  <script>
+    @if(Session::has('error'))
+     toastr.options =
+     {
+       "closeButton" : true,
+       "progressBar" : true
+     }
+           toastr.error("{{ session('error') }}");
+     @endif
+     </script>
 <script>
     $(document).ready(function() {
         $(document).on('change', '.patient', function() {

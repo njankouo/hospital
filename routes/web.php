@@ -76,7 +76,15 @@ Route::get('examen',[ExamenController::class,'index'])->name('examen');
 Route::get('examen/{id}',[ExamenController::class,'option'])->name('examen.info');
 Route::get('caisses',[CaisseController::class,'index'])->name('caisse');
 Route::get('ventes',[VenteController::class,'index'])->name('ventes');
+Route::get('produits/ventes',[VenteController::class,'listeVente'])->name('ventes.produits');
+Route::get('fichier/consultation/{id}',[ConsultationController::class,'fichierConsultation'])->name('fichier.consultation');
+Route::get('add-to-cart/{id}', [VenteController::class, 'addToCart'])->name('add.to.cart');
+Route::get('set/chambre/{id}',[ChambreController::class,'mask'])->name('soft.chambre');
+Route::get('soft/produit/{id}',[ProduitController::class,'softProduct'])->name('soft.produit');
+Route::get('soft/user/{id}',[UserController::class,'softUser'])->name('soft.user');
+Route::get('soft/vente/{id}',[VenteController::class,'softVente'])->name('soft.vente');
 
+Route::POST('send/message',[RdvController::class,'saveMessage'])->name('send.message');
 Route::Post('forme',[FormeGalleliqueController::class,'addForme'])->name('add.forme');
 Route::POST('uses',[UserController::class,'addUsers'])->name('add.users');
 Route::post('familles',[FamilleController::class,'addFamille'])->name('add.famille');
@@ -94,6 +102,8 @@ Route::get('add/rdvs',[RdvController::class,'sendCustomMessage']);
 Route::POST('add/hospitalisation',[HospitalisationController::class,'save'])->name('add.hospitalisation');
 Route::POST('ventes/save',[VenteController::class,'save_vente'])->name('save.vente');
 Route::POST('addVente',[VenteController::class,'addvente'])->name('addvente.produit');
+Route::POST('add/prescription/examen',[ExamenController::class,'addPprescription'])->name('prescrition.examen');
+
 
 Route::put('produit/edi/{produit}',[ProduitController::class,'editProduit'])->name('edition.produit');
 Route::put('edit/patient/{patient}',[PatientController::class,'Editpatient'])->name('edit.patient');

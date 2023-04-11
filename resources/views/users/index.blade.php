@@ -31,8 +31,9 @@
                     <div class="card-header">
                         <h4 class="card-title">Liste Des Utilisateurs</h4>
 
-                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Utilisateur <span
-                             class="btn-icon-right"><i class="fa fa-plus"></i></span></button>
+                             {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Utilisateur <span
+                             class="btn-icon-right"><i class="fa fa-plus"></i></span></button> --}}
+                             <a type="button" class="btn btn-primary" style="-webkit-animation: pulse 1s infinite"  data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-plus fa-2x text-white" ></i></a>
 
                     </div>
                     <div class="card-body">
@@ -62,13 +63,21 @@
                                             @if ($users->password==null)
 
 
-                                            <a type="button" class="btn btn-rounded btn-info" href="{{ route('users.edit',$users->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-edit color-info"></i>
-                                            </span>completer</a>
-                                            @else
-                                            <a type="button" class="btn btn-rounded btn-primary" href="{{ route('users.edit',$users->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-edit color-info"></i>
-                                            </span>editer</a>
-                                            @endif
+                                            {{-- <a type="button" class="btn btn-rounded btn-info" href="{{ route('users.edit',$users->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-edit color-info"></i>
+                                            </span>completer</a> --}}
+                                            <a  href="{{ route('users.edit',$users->id) }}" class="mr-4" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit text-danger"></i> </a>
 
+                                            @else
+                                            {{-- <a type="button" class="btn btn-rounded btn-primary" href="{{ route('users.edit',$users->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-edit color-info"></i>
+                                            </span>editer</a> --}}
+                                            <span>
+                                                <a  href="{{ route('users.edit',$users->id) }}" class="mr-4" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil text-primary"></i> </a>
+                                              </span>
+
+                                            @endif
+                                              <a href="{{ route('soft.user',$users->id) }}">
+                                                <i class="fa fa-trash text-danger"></i>
+                                            </a>
 
                                         </td>
 

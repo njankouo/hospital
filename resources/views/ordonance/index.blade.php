@@ -3,6 +3,11 @@
 @section('title','Gestion Des Ordonances')
 
 @section('contenu')
+<style>
+    i:hover{
+       transform:scale(1.5);
+    }
+ </style>
 <div class="content-body">
     <div class="container-fluid">
         <div class="row page-titles mx-0">
@@ -24,6 +29,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Liste Des Ordonances</h4>
+
                                        </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -49,8 +55,10 @@
                                     <td>{!! html_entity_decode($ordonances->qte) !!}</td>
                                     <td>{!! html_entity_decode($ordonances->dosage) !!}</td>
                                     <td>
-                                        <a  href="{{ route('ordonance.pdf',$ordonances->id) }}" type="button" class="btn btn-rounded btn-primary"><span class="btn-icon-left text-primary"><i class="fa fa-print"></i>
-                                        </span>Imprimer</a>
+                                        {{-- <a  href="{{ route('ordonance.pdf',$ordonances->id) }}" type="button" class="btn btn-rounded btn-primary"><span class="btn-icon-left text-primary"><i class="fa fa-print"></i>
+                                        </span>Imprimer</a> --}}
+                                        <a  href="{{ route('ordonance.pdf',$ordonances->id) }}" class="mr-4" data-toggle="tooltip" data-placement="top" title="ordonance"><i class="fa fa-download text-primary"></i> </a>
+
                                     </td>
                                    </tr>
                                    @endforeach

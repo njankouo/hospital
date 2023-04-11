@@ -19,7 +19,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Chambres</a></li>
 
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Acceuil</a></li>
+                    <li class="breadcrumb-item active"><a href="{{route('home')}}">Acceuil</a></li>
                 </ol>
             </div>
         </div>
@@ -28,46 +28,39 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Liste Des Chambres</h4>
-                        <button type="button" class="btn btn-rounded btn-primary" data-toggle="modal" data-target="#example-lg"><span class="btn-icon-left text-primary"><i class="fa fa-plus"></i>
-                        </span>Chambres</button>
+                        {{-- <button type="button" class="btn btn-rounded btn-primary" data-toggle="modal" data-target="#example-lg"><span class="btn-icon-left text-primary"><i class="fa fa-plus"></i>
+                        </span>Chambres</button> --}}
+                        <span><a  class="mr-4 btn btn-primary" data-toggle="modal" style="-webkit-animation: pulse 1s infinite"  data-target="#example-lg"><i class="fa fa-plus text-white"></i> </a>
+
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" class="display" style="min-width: 845px">
+                            <table id="example" class="display" style="min-width: 845px;text-align:center">
                                 <thead>
-                                    <tr style="text-align: center">
+                                    <tr>
 
-                                        <th >Numer De Chambre</th>
+                                        <th >Numero</th>
+                                        <th >Categorie</th>
+                                        <th >Prix</th>
                                         <th >Status</th>
-                                        <th >Appreciation</th>
+
+                                        <th>Action</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($chambre as $chambres)
-                                    @if ($chambres->id==1)
-                                        @else
-                                        <tr style="text-align: center;">
 
-                                            <td>{{ $chambres->numero }}</td>
+                                             <td>{{$chambres->numero}}</td>
+                                            <td>{{ $chambres->appreciation }}</td>
+                                            <td>{{ $chambres->prix }}</td>
+                                            <td></td>
                                             <td>
-                                                @if ($chambres->appreciation==0)
-                                                <a href="javascript:void()" class="badge badge-rounded badge-outline-info">CLASSIQUE</a>
-                                                    @else
-                                                    <a href="javascript:void()" class="badge badge-rounded badge-outline-primary">VIP</a>
-                                                @endif
+                                                <i class="fa fa-pencil text-primary"></i>
+                                             <a href="{{ route('soft.chambre',$chambres->id) }}"><i class="fa fa-trash text-danger m-2"></i></a>
                                             </td>
-                                            <td>
-                                                @foreach ($hospitalisation as $hospitalisations)
-                                                @if($chambres->id==$hospitalisations->chambre_id)
-                                                <a href="javascript:void()" class="badge badge-rounded badge-outline-danger">occup&eacute;</a>
-                                                @endif
-                                                @endforeach
-
-                                            </td>
-
                                         </tr>
-                                    @endif
+
 
                                     @endforeach
 
@@ -75,7 +68,7 @@
 
                             </table>
                             <div data-backdrop="false" class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="example-lg">
-                                <div class="modal-dialog modal-lg ">
+                                <div class="modal-dialog modal-dialog-centered ">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Ajout Des Chambres</h5>
@@ -91,10 +84,18 @@
                                                     </div>
                                                     <div class="col-sm-6 mt-2 mt-sm-0">
                                                         <select id="inputState" class="form-control" name="appreciation">
-                                                            <option selected="">Appreciation de la chambre</option>
+                                                            <option selected="">Categorie de la chambre</option>
 
-                                                            <option value="0">CLASSIQUE</option>
-                                                            <option value="1">VIP</option>
+                                                            <option value="CLASSIQUE">CLASSIQUE</option>
+                                                            <option value="VIP">VIP</option>
+                                                            <option value="bloc">Bloc</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-12 mt-2 mt-sm-4">
+                                                        <select class="form-control" name="prix">
+                                                            <option value="2500">2500</option>
+                                                            <option value="5000">5000</option>
+                                                            <option value="10000">10000</option>
                                                         </select>
                                                     </div>
                                                 </div>

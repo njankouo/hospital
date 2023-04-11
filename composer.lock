@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9985708fc26a5a6fbb6bed7c73563a79",
+    "content-hash": "82dfe62fa18b03351ffa60d5e5de511c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6395,6 +6395,130 @@
                 }
             ],
             "time": "2022-01-24T18:55:24+00:00"
+        },
+        {
+            "name": "vonage/client",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Vonage/vonage-php-sdk.git",
+                "reference": "010da761ba6bcf761a548e45d0cfa4f210e28dba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Vonage/vonage-php-sdk/zipball/010da761ba6bcf761a548e45d0cfa4f210e28dba",
+                "reference": "010da761ba6bcf761a548e45d0cfa4f210e28dba",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0",
+                "php": "~7.4 || ~8.0 || ~8.1",
+                "vonage/client-core": "^3.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Seconde",
+                    "email": "jim.seconde@vonage.com",
+                    "role": "PHP Developer Advocate"
+                },
+                {
+                    "name": "Tim Lytle",
+                    "homepage": "https://twitter.com/tjlytle",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Michael Heap",
+                    "homepage": "https://www.twitter.com/mheap",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Lorna Mitchell",
+                    "homepage": "https://lornajane.net/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Chris Tankersley",
+                    "homepage": "https://twitter.com/dragonmantank",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Client for using Vonage's API.",
+            "support": {
+                "email": "devrel@vonage.com",
+                "issues": "https://github.com/Vonage/vonage-php-sdk/issues",
+                "source": "https://github.com/Vonage/vonage-php-sdk/tree/3.0.0"
+            },
+            "time": "2022-01-27T12:19:25+00:00"
+        },
+        {
+            "name": "vonage/client-core",
+            "version": "3.1.6",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:Vonage/vonage-php-sdk-core.git",
+                "reference": "0ef4eeee503f378ffbd432cbef5e65f3b29d5d61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Vonage/vonage-php-sdk-core/zipball/0ef4eeee503f378ffbd432cbef5e65f3b29d5d61",
+                "reference": "0ef4eeee503f378ffbd432cbef5e65f3b29d5d61",
+                "shasum": ""
+            },
+            "require": {
+                "composer/package-versions-deprecated": "^1.11",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "laminas/laminas-diactoros": "^2.4",
+                "lcobucci/jwt": "^3.4|^4.0",
+                "php": "~7.4 || ~8.0 || ~8.1",
+                "psr/container": "^1.0 | ^2.0",
+                "psr/http-client-implementation": "^1.0",
+                "psr/log": "^1.1|^2.0|^3.0",
+                "vonage/nexmo-bridge": "^0.1.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": ">=6",
+                "helmich/phpunit-json-assert": "^3.3",
+                "php": "~7.4 || ~8.0 || ~8.1",
+                "php-http/mock-client": "^1.4",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^8.5|^9.4",
+                "roave/security-advisories": "dev-latest",
+                "softcreatr/jsonpath": "^0.7 || ^0.8",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Vonage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "James Seconde",
+                    "email": "jim.seconde@vonage.com",
+                    "role": "PHP Developer Advocate"
+                }
+            ],
+            "description": "PHP Client for using Vonage's API.",
+            "homepage": "https://developer.nexmo.com",
+            "support": {
+                "docs": "https://developer.vonage.com",
+                "email": "devrel@vonage.com",
+                "issues": "https://github.com/Vonage/vonage-php-sdk-core/issues",
+                "source": "https://github.com/Vonage/vonage-php-sdk-core"
+            },
+            "time": "2023-01-04T14:25:09+00:00"
         },
         {
             "name": "vonage/nexmo-bridge",

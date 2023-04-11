@@ -195,13 +195,7 @@
 
 
 
-    <script>
-        document.getElementById('yourBox').onchange = function() {
-        document.getElementById('yourText').disabled = !this.checked;
-        document.getElementById('yourcheck').disabled = this.checked;
-    };
 
-    </script>
 </body>
 
 </html>

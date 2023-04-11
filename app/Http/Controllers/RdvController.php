@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use App\Models\Rdv;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -36,7 +37,8 @@ class RdvController extends Controller
                 'date'=>$request->date,
                 'end_date'=>$request->end_date,
                 'responsable'=>$request->responsable,
-                'titre'=>$request->titre
+                'titre'=>$request->titre,
+                'telephone'=>$request->telephone,
         ]);
 
         return back()->with('message','Rendez-Vous Creé avec succes');
@@ -46,8 +48,8 @@ class RdvController extends Controller
             return response()->json($req);
         }
 
-        public function sendCustomMessage(Request $request)
-        {
+        // public function sendCustomMessage(Request $request)
+        // {
            // $receiverNumber = "+15075025677";
         //     $message = "This is testing from CodeSolutionStuff.com";
 
@@ -69,28 +71,28 @@ class RdvController extends Controller
         //     } catch (Exception $e) {
         //         dd("Error: ". $e->getMessage());
         //     }
-        try {
+        // try {
 
-            $basic  = new \Nexmo\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
-            $client = new \Nexmo\Client($basic);
+        //     $basic  = new \Nexmo\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
+        //     $client = new \Nexmo\Client($basic);
 
-            $receiverNumber = "699072561";
-            $message = "This is testing from ItSolutionStuff.com";
+        //     $receiverNumber = "699072561";
+        //     $message = "This is testing from ItSolutionStuff.com";
 
-            $message = $client->message()->send([
-                'to' => $receiverNumber,
-                'from' => 'Vonage APIs',
-                'text' => $message
-            ]);
+        //     $message = $client->message()->send([
+        //         'to' => $receiverNumber,
+        //         'from' => 'Vonage APIs',
+        //         'text' => $message
+        //     ]);
 
-            dd('SMS Sent Successfully.');
+        //     dd('SMS Sent Successfully.');
 
-        } catch (Exception $e) {
-            dd("Error: ". $e->getMessage());
-        }
+        // } catch (Exception $e) {
+        //     dd("Error: ". $e->getMessage());
+        // }
 
 
-}
+//}
     public function updat_rdv(Request $request,Rdv $rdv){
         $request->validate([
             'status'=>'required',
@@ -107,5 +109,30 @@ class RdvController extends Controller
         ]);
         return back()->with('message','rendez-vous archive avec succes');
 
+
+
     }
+    public function  saveMessage(){
+
+        try{
+            $basic  = new \Vonage\Client\Credentials\Basic("eced6fc6", "XbyUsIVxXcwm5P65");
+            $client = new \Vonage\Client($basic);
+            $response = $client->sms()->send(
+                new \Vonage\SMS\Message\SMS($_POST['telephone'], 'centre de sante du nil', $_POST['message'])
+            );
+
+    //dd($request->all());
+    $message = $response->current();
+
+    // if ($message->getStatus() == 0) {
+    //     echo "The message was sent successfully\n";
+    // } else {
+    //     echo "The message failed with status: " . $message->getStatus() . "\n";
+    // }
+    return back()->with('message','message envoyé avec succes');
+        }catch(Exception $e){
+            return back()->with('error',"erreur survenue l'ors de l'envoie du message");
+        }
+        }
+
 }

@@ -107,4 +107,9 @@ class ProduitController extends Controller
         $pdf=PDF::loadView('Produits.pdf',compact('produit'));
         return $pdf->stream();
     }
+    public function softProduct($id){
+        $produit=Produit::find($id);
+        $produit->delete();
+        return back()->with('success','produits archivé avec succes');
+    }
 }

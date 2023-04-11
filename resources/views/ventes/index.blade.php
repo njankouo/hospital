@@ -78,16 +78,17 @@
                             <tbody>
                                 @foreach ($vente as $ventes)
 
+
                                 <tr>
-
-
                                     <td>{{ $ventes->id }}</td>
                                     <td>{{ $ventes->date }}</td>
                                     <td>{{ $ventes->responsable }}</td>
                                     <td>
                                         <span><a  href="{{ route('add.vente',$ventes->id) }}" class="mr-4" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                   
                                     </td>
                                 </tr>
+
                                 @endforeach
                             </tbody>
                         </table>

@@ -103,7 +103,18 @@
                                         <input type="text" class="form-control" placeholder="Numero assurance..." name="numAssurance">
                                     </div>
                                     <div class="col-sm-6 mt-2 mt-sm-0">
-                                        <input type="text" class="form-control" placeholder="groupe sanguin..." name="groupe">
+                                        <select name="groupe" class="form-control">
+                                            <option value=''>Groupes Sanguins</option>
+                                            <option value="O-" {{old("groupe")?:''? "selected":""}}>O-</option>
+                                            <option value="O+" {{old("groupe")?:''? "selected":""}}>O+</option>
+                                            <option value="B-" {{old("groupe")?:''? "selected":""}}>B-</option>
+                                            <option value="B+" {{old("groupe")?:''? "selected":""}}>B+</option>
+                                            <option value="A-" {{old("groupe")?:''? "selected":""}}>A-</option>
+                                            <option value="A+" {{old("groupe")?:''? "selected":""}}>A+</option>
+                                            <option value="AB-" {{old("groupe")?:''? "selected":""}}>AB-</option>
+                                            <option value="AB+" {{old("groupe")?:''? "selected":""}}>AB+</option>
+
+                                        </select>
                                     </div>
                                     </div>
                                     <br>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -30,7 +31,7 @@ class UserController extends Controller
         ]
         );
         //dd($request->all());
-            User::create(
+         $user=   User::create(
                 [
                     'name'=>$request->name,
                     'prenom'=>$request->prenom,
@@ -44,6 +45,7 @@ class UserController extends Controller
                 ]
 
                 );
+                $user->notify(new UserNotification());
                 return back()->with('info','utilisateur enregistre avec success');
     }
     public function editUser($id){
@@ -66,5 +68,10 @@ class UserController extends Controller
             'telephone'=>$request->telephone,
         ]);
         return back()->with('success','mise a jour realisée avec succes');
+}
+public function softUser($id){
+    $user=User::find($id);
+    $user->forcedelete();
+    return back()->with('success','utilisateur supprimé avec succes');
 }
 }

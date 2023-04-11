@@ -8,7 +8,7 @@
 
             </li>
             <li class="nav-label">Gest. Utilisateurs</li>
-            <li><a class="has-arrow" href="{{ route('users') }}" ><i
+            <li><a class="" href="{{ route('users') }}" ><i
                         class="fa fa-users"></i><span class="nav-text">Utilisateurs</span></a>
 
             </li>
@@ -31,7 +31,7 @@
                     <li><a href="{{ route('patient') }}">Liste Des Patients</a></li>
 
                     <li><a href="{{route('rdv.view')}}">Rendez-Vous</a></li>
-                      <li><a href="{{route('examen')}}">Autres Examens</a></li>
+                      <li><a href="{{route('examen')}}">Examens Medicaux</a></li>
                 </ul>
             </li>
             <li class="nav-label">Ventes</li>
@@ -41,17 +41,17 @@
                     shopping_cart_checkout
                     </span><span class="nav-text">Ventes Produits</span></a>
                 <ul aria-expanded="false">
-            <li><a href="{{ route('ventes') }}">Liste Des Ventes</a></li>
-
+            <li><a href="{{ route('ventes') }}">Nouvelle Vente</a></li>
+            <li><a href="{{ route('ventes.produits') }}">Details Des Ventes</a></li>
         </ul>
     </li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+            {{-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="icon icon-plug"></i><span class="nav-text">Services</span></a>
                 <ul aria-expanded="false">
                     <li><a href="./uc-select2.html">Liste Des Services</a></li>
                     <li><a href="{{ route('chambres') }}">Liste Des Chambres</a></li>
                 </ul>
-            </li>
+            </li> --}}
 
 
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
@@ -66,7 +66,7 @@
                 <ul aria-expanded="false">
                     <li><a href="{{ route('consultations') }}">Liste Des Consultations</a></li>
                     <li><a href="{{ route('ordonance.view') }}">Ordonnances</a></li>
-                    <li><a href="table-datatable-basic.html">Examens</a></li>
+                    {{-- <li><a href="table-datatable-basic.html">Examens</a></li> --}}
                     <li><a href="{{ route('hospitalisation') }}">Hospitalisations</a></li>
 
                 </ul>
@@ -77,7 +77,21 @@
                         class="icon icon-single-copy-06"></i><span class="nav-text">Paiements</span></a>
 
             </li>
-            <i class="icon icon-exit"></i> <li class="nav-label">Deconnexion</li>
+
+
+         <li><a class="dropdown-item" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+                                <i class="fa fa-close"></i>
+                                <span class="ml-2"> Deconnexion</span>
+
+         </a>
+        </li>
+
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
         </ul>
 
 

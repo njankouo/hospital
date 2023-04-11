@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Consultation;
 use App\Models\Patient;
 use Illuminate\Http\Request;
-
+use PDF;
 class ConsultationController extends Controller
 {
     public function index(){
@@ -76,5 +76,9 @@ class ConsultationController extends Controller
            // dd($request->status)
         ]);
         return back()->with('message','consultation finalisé avec success');
+    }
+    public function fichierConsultation(){
+        $pdf=PDF::LoadView('consultations.fichier');
+        return $pdf->stream();
     }
 }

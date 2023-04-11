@@ -16,7 +16,8 @@
         "laravel/ui": "^3.4",
         "milon/barcode": "^10.0",
         "nexmo/client": "^2.4",
-        "twilio/sdk": "^7.0"
+        "twilio/sdk": "^7.0",
+        "vonage/client": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

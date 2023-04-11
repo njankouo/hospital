@@ -52,7 +52,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Formulaire Des Ventes</h4>
-                    <span class="pulse-button">panier</i></span>
+
                 </div>
                 <div class="card-body">
                     <div class="basic-form">

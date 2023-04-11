@@ -17,8 +17,14 @@ class ChambreController extends Controller
         $request->validate([]);
         Chambre::create([
             'appreciation'=>$request->appreciation,
-            'numero'=>$request->numero
+            'numero'=>$request->numero,
+            'prix'=>$request->prix
         ]);
         return back()->with('info','chambre enregistre avec success');
+    }
+    public function mask($id){
+        $chambre=Chambre::find($id);
+        $chambre->delete();
+        return back()->with('success','chambre masqué avec succes');
     }
 }

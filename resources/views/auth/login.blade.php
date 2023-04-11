@@ -83,7 +83,14 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link href="./css/style.css" rel="stylesheet">
-
+<style>
+    body{
+        background-image:url('images/back (2).jpg');
+        background-attachement:fixed;
+        background-position: center;
+        object-fit: cover;
+    }
+</style>
 </head>
 
 <body class="h-100">

@@ -27,7 +27,10 @@
                   <h4 class="card-title">Liste Des Consultations</h4>
                   {{-- <a type="button" class="btn btn-primary" href="{{ route('save.consultation') }}"> Consultation <span
                      class="btn-icon-right"></span></a>--}}
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-plus"></i>Consultation</button>
+                  {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-plus"></i>Consultation</button>
+                  --}}
+                  <a type="button" class="btn btn-primary" style="-webkit-animation: pulse 1s infinite"  data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-plus fa-2x text-white" ></i></a>
+
                   <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
                      <div class="modal-dialog modal-xl">
                         <div class="modal-content">
@@ -90,8 +93,8 @@
                                     @enderror
                                     <label>Le Patient A t'il (elle) Des Allergies ?</label>&nbsp;&nbsp;
                                     <br/>
-                                    <input type="checkbox" name="allergie" id="yourBox" value="1"> OUI&nbsp;&nbsp;
-                                    <input type="checkbox" name="allergie" id="yourcheck " value="0"> NON
+                                    <input type="radio" name="allergie" id="yourBox" value="1"> OUI&nbsp;&nbsp;
+                                    <input type="radio" name="allergie" id="yourcheck " value="0"> NON
                                     <br/><br/>
                                     <label>Preciser Ces Allergies </label>
                                     <input type="text" name="add_allergie" id="yourText" name="precision" class="form-control" disabled>
@@ -186,10 +189,10 @@
                            <tr>
                             <td style="cursor: pointer">
                                 @if ($consultations->status==0)
-                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm{{ $consultations->id }}" style="-webkit-animation: pulse 1s infinite"><i class="fa fa-pencil fa-2x text-white" ></i></button>
+                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bd-example-modal-sm{{ $consultations->id }}" style="-webkit-animation: pulse 1s infinite"><i class="fa fa-pencil text-white" ></i></button>
 
                                 @else
-                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-sm{{ $consultations->id }}" style="-webkit-animation: pulse 0.5s infinite"><i class="fa fa-eye fa-2x text-white" ></i></button>
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-sm{{ $consultations->id }}" style="-webkit-animation: pulse 0.5s infinite"><i class="fa fa-check text-white" ></i></button>
 
                                 @endif
                                </td>
@@ -198,6 +201,7 @@
                               <td>{{ $consultations->diagnostique }}</td>
                               <td>{{ $consultations->created_at->diffForHumans() }}</td>
                               <div class="modal fade bd-example-modal-sm{{ $consultations->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -235,10 +239,15 @@
                                 </div>
                             </div>
                               <td>
-                                 <button  style="margin: 3%" type="button" class="text-white btn btn-rounded btn-primary" data-toggle="modal" data-target="#example-lg{{ $consultations->id }}" data-item-id="1"><span class="btn-icon-left text-info"><i class="fa fa-eye color-info"></i>
-                                 </span>voir</button>
-                                 <a type="button" class="text-white btn btn-rounded btn-secondary" href="{{ route('add.prescription',$consultations->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-pencil color-info"></i>
-                                 </span>Prescrire</a>
+                                 {{-- <button  style="margin: 3%" type="button" class="text-white btn btn-rounded btn-primary" data-toggle="modal" data-target="#example-lg{{ $consultations->id }}" data-item-id="1"><span class="btn-icon-left text-info"><i class="fa fa-eye color-info"></i>
+                                 </span>voir</button> --}}
+                                 <a   class="text-white" data-toggle="modal" data-target="#example-lg{{ $consultations->id }}" data-item-id="1"><i class="fa fa-eye text-primary"></i> </a>
+
+                                 {{-- <a type="button" class="text-white btn btn-rounded btn-secondary" href="{{ route('add.prescription',$consultations->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-pencil color-info"></i>
+                                 </span>Prescrire</a> --}}
+                                 <a  href="{{ route('add.prescription',$consultations->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="prescription"><i class="fa fa-pencil text-secondary"></i> </a>
+                                 <a  href="{{ route('fichier.consultation',$consultations->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="fichier consultation"><i class="fa fa-file text-warning"></i> </a>
+
                               </td>
                            </tr>
                            <div data-backdrop="false" class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="example-lg{{ $consultations->id }}">
@@ -315,4 +324,11 @@
         toastr.success("{{ session('message') }}");
   @endif
   </script>
+    <script>
+        document.getElementById('yourBox').onchange = function() {
+        document.getElementById('yourText').disabled = !this.checked;
+        document.getElementById('yourcheck').disabled = this.checked;
+    };
+
+    </script>
 @stop
