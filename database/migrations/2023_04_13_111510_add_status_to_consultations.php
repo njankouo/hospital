@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommandeProduitsTable extends Migration
+class AddStatusToConsultations extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateCommandeProduitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('commande_produits', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('consultations', function (Blueprint $table) {
+            //
+            $table->integer('status')->default(0);
         });
     }
 
@@ -26,6 +26,8 @@ class CreateCommandeProduitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commande_produits');
+        Schema::table('consultations', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -38,13 +38,13 @@
              <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                  <ol class="breadcrumb">
                      <li class="breadcrumb-item"><a href="javascript:void(0)">Formes Galleliques</a></li>
-                     <li class="breadcrumb-item active"><a href="javascript:void(0)">Hospital</a></li>
+                     <li class="breadcrumb-item active"><a href="{{ route('home') }}">Acceuil</a></li>
                  </ol>
              </div>
          </div>
          <!-- row -->
    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-             <div class="modal-dialog modal-lg">
+             <div class="modal-dialog modal-centered">
                  <div class="modal-content">
                      <div class="modal-header">
                          <h5 class="modal-title">Formulaire Des Formes Galleliques</h5>
@@ -59,12 +59,11 @@
                                  <div class="form-row">
 
                                      <div class="col-sm-12 mt-2 mt-sm-0">
-                                         <input type="text" class="form-control" placeholder="Libelle..." name="libelle">
+                                        <label for="">Ajouter Une Forme Gallelique</label>
+                                         <input type="text" class="form-control" placeholder="pullules/comprimés/gellules...." name="libelle">
                                      </div>
                                  </div>
                                  <br>
-
-
 
                                  </div>
 
@@ -83,20 +82,21 @@
              <div class="col-12">
                  <div class="card">
                      <div class="card-header">
-                         <h4 class="card-title">Liste Des Formes Galleliques</h4>
+                         <h4 class="card-title">Formes Galleliques</h4>
 
-         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Forme  Gallelique  <span
-            class="btn-icon-right"><i class="fa fa-plus"></i></span></button>
+         {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Forme  Gallelique  <span
+            class="btn-icon-right"><i class="fa fa-plus"></i></span></button> --}}
+            <span><a  class="mr-4 btn btn-primary" data-toggle="modal" style="-webkit-animation: pulse 1s infinite"  data-target=".bd-example-modal-lg"><i class="fa fa-plus text-white"></i> </a>
 
                      </div>
                      <div class="card-body">
                          <div class="table-responsive">
-                             <table id="example" class="display" style="min-width: 845px">
+                             <table id="example" class="display" style="min-width: 845px;text-align:center">
                                  <thead>
                                      <tr>
                                         <th>#</th>
                                          <th>Libelle</th>
-                                         <th style="text-align: center">Action</th>
+                                         <th >Action</th>
 
                                      </tr>
                                  </thead>
@@ -108,13 +108,9 @@
                                          <td>{{ $formes->id }}</td>
                                          <td>{{ $formes->libelle }}</td>
 
-                                    <td style="text-align: center">
-                                        <button type="button" class="btn btn-rounded btn-danger"><span
-                                            class="btn-icon-left text-danger"><i class="fa fa-remove color-danger"></i>
-                                        </span>supprimer</button>&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-rounded btn-info"><span
-                                            class="btn-icon-left text-info"><i class="fa fa-edit color-danger"></i>
-                                        </span>mise a jour</button>
+                                    <td >
+                                        <a type="button" class="btn btn-rounded btn-danger" href=""><i class="fa fa-trash text-white"></i> </a>
+
                                     </td>
                                      </tr>
                                      @endforeach

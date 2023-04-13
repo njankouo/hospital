@@ -206,15 +206,16 @@
                                             </td>
                                            <td>
 
-                                            <span><a href="{{ route('update.patient',$patients->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted"></i> </a>
+                                            <span>
+                                                <a href="{{ route('update.patient',$patients->id) }}" class="mr-2 btn btn-rounded btn-primary" data-toggle="tooltip" data-placement="top" title="Edit" ><i class="fa fa-pencil text-light"></i> </a>
                                               </span>
 
-                                          <span> <a data-toggle="modal" data-target="#example-lg{{ $patients->id }}" data-item-id="1" class="mr-2">
-                                            <i class="fa fa-eye text-secondary"></i>
+                                          <span> <a data-toggle="modal" data-target="#example-lg{{ $patients->id }}" data-item-id="1" class="mr-2 btn btn-rounded btn-success">
+                                            <i class="fa fa-eye text-light"></i>
                                             </a>
                                         </span>
-                                            <a style ="margin:2%" href="{{ route('dossier.patient',$patients->id) }}"class="mr-2" >
-                                                <i class="fa fa-file text-primary "></i>
+                                            <a style ="margin:2%" href="{{ route('dossier.patient',$patients->id) }}"class="mr-2 btn btn-rounded btn-primary" >
+                                                <i class="fa fa-file text-light "></i>
                                             </a>
                                         </td>
                                     </tr>

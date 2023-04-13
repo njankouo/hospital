@@ -181,9 +181,9 @@
                                          <td>
 
                                             <span>
-                                                <a href="{{ route('edit.produit',$produits->id) }}" class="mr-4" data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn" ><i class="fa fa-pencil color-muted"></i> </a>
-                                                <a href="{{ route('soft.produit',$produits->id) }}">
-                                                    <i class="fa fa-trash text-danger"></i>
+                                                <a href="{{ route('edit.produit',$produits->id) }}" class="mr-4 btn btn-rounded btn-primary" data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn" ><i class="fa fa-pencil color-muted"></i> </a>
+                                                <a href="{{ route('soft.produit',$produits->id) }}" class="btn btn-rounded btn-danger">
+                                                    <i class="fa fa-trash text-light"></i>
                                                 </a>
                                             </span>
 

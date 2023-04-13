@@ -65,7 +65,7 @@
                                         </td>
                                     </tr>
                                       <div data-backdrop="false" class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="example-lg{{ $livraisons->id }}">
-                                        <div class="modal-dialog modal-lg ">
+                                        <div class="modal-dialog modal-centered ">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Descritption Du Produit Livré</h5>
