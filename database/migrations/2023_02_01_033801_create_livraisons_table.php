@@ -15,6 +15,13 @@ class CreateLivraisonsTable extends Migration
     {
         Schema::create('livraisons', function (Blueprint $table) {
             $table->id();
+            $table->integer('code')->nullable();
+            $table->integer('conditionnement_id');
+            $table->date('dateCommande');
+            $table->integer('produit_id')->nullable();
+            $table->integer('pu');
+            $table->integer('qte')->nullable();
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

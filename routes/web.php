@@ -83,6 +83,8 @@ Route::get('set/chambre/{id}',[ChambreController::class,'mask'])->name('soft.cha
 Route::get('soft/produit/{id}',[ProduitController::class,'softProduct'])->name('soft.produit');
 Route::get('soft/user/{id}',[UserController::class,'softUser'])->name('soft.user');
 Route::get('soft/vente/{id}',[VenteController::class,'softVente'])->name('soft.vente');
+Route::get('hospitalisation/soft/{id}',[HospitalisationController::class,'softHospit'])->name('soft.hospitalisation');
+Route::get('rdvs/rev/{id}',[RdvController::class,'softrdv'])->name('soft.rdv');
 
 Route::POST('send/message',[RdvController::class,'saveMessage'])->name('send.message');
 Route::Post('forme',[FormeGalleliqueController::class,'addForme'])->name('add.forme');

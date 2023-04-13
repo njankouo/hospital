@@ -21,6 +21,9 @@ class CreatePatientsTable extends Migration
             $table->integer('telephone');
             $table->integer('tel');
            $table->date('date');
+           $table->string('age');
+           $table->string('groupe');
+           $table->string('etat');
             $table->string('email');
             $table->integer('sexe');
             $table->string('adresse');

@@ -19,21 +19,21 @@ class HospitalisationController extends Controller
     }
 
     public function save(Request $request){
-        $request->validate([
-            'patient_id'=>'required',
-            'datedebut'=>'required',
-            'datefin'=>'required',
-            'note'=>'required',
-            'chambre_id'=>'required',
-        ],
-        [
-            'patient_id.required'=>'renseignez le patient',
-            'datedebut.required'=>'renseignez la date de debut',
-            'datefin.required'=>'renseignez la date de fin',
-            'note.required'=>'renseignez une note',
-            'chambre_id.required'=>'renseignez la chambre',
-        ]
-        );
+        // $request->validate([
+        //     'patient_id'=>'required',
+        //     'datedebut'=>'required',
+        //     'datefin'=>'required',
+        //     'note'=>'required',
+        //     'chambre_id'=>'required',
+        // ],
+        // [
+        //     'patient_id.required'=>'renseignez le patient',
+        //     'datedebut.required'=>'renseignez la date de debut',
+        //     'datefin.required'=>'renseignez la date de fin',
+        //     'note.required'=>'renseignez une note',
+        //     'chambre_id.required'=>'renseignez la chambre',
+        // ]
+        // );
 
         Hospitalisation::create([
             'patient_id'=>$request->patient_id,
@@ -41,7 +41,7 @@ class HospitalisationController extends Controller
             'datefin'=>$request->datefin,
             'note'=>$request->note,
             'chambre_id'=>$request->chambre_id,
-            'responsable'=>$request->responsable
+            'responsable'=>$request->responsable,
 
         ]);
         return back()->with('success','hospitalisation creé avec succes');
@@ -50,8 +50,15 @@ class HospitalisationController extends Controller
         $request->validate([],[]);
 
         $hospitalisation->update([
-            'chambre_id'=>$request->chambre_id
+            'patient_id'=>$request->patient_id
         ]);
         return back()->with('success','hospitalisation terminée');
     }
+
+    public function softHospit($id){
+        $hospitalisation=Hospitalisation::find($id);
+        $hospitalisation->delete();
+        return back()->with('success','hospitalisation terminé');
+    }
+
 }

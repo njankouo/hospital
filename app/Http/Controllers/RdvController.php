@@ -135,4 +135,11 @@ class RdvController extends Controller
         }
         }
 
+        public function softrdv($id){
+            $rdv=Rdv::find($id);
+
+            $rdv->delete();
+            return back()->with('success','rendez-vous annulé avec success');
+        }
+
 }

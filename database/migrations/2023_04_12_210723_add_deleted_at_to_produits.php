@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChambresTable extends Migration
+class AddDeletedAtToProduits extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class CreateChambresTable extends Migration
      */
     public function up()
     {
-        Schema::create('chambres', function (Blueprint $table) {
-            $table->id();
-            $table->string('numero');
-            $table->string('appreciation');
-            $table->string('status')->nullable();
+        Schema::table('produits', function (Blueprint $table) {
+            //
             $table->date('deleted_at')->nullable();
-            $table->integer('prix');
-
-            $table->timestamps();
         });
     }
 
@@ -32,6 +26,8 @@ class CreateChambresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chambres');
+        Schema::table('produits', function (Blueprint $table) {
+            //
+        });
     }
 }

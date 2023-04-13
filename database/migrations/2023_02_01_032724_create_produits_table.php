@@ -24,6 +24,7 @@ class CreateProduitsTable extends Migration
             $table->foreignId('famille_id')->constrained('familles')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('conditionnement_id')->constrained('conditionnements')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('forme_id')->constrained('forme_galleliques')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }

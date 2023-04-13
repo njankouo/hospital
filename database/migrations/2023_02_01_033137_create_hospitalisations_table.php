@@ -15,6 +15,13 @@ class CreateHospitalisationsTable extends Migration
     {
         Schema::create('hospitalisations', function (Blueprint $table) {
             $table->id();
+            $table->integer('chambre_id');
+            $table->date('datedebut');
+            $table->date('datefin');
+            $table->string('note');
+            $table->integer('patient_id');
+            $table->string('responsable');
+            $table->integer('status');
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@ class PatientController extends Controller
     {
         $request->validate([],[]);
 
-        try{
+        // try{
          Patient::create([
                     'nom'=>$request->nom,
                     'date'=>$request->date,
@@ -41,9 +41,9 @@ class PatientController extends Controller
                     'age'=>$request->age,
                 ]);
              return back()->with('message','patient enregistre avec success');
-        }catch(\Exception $e){
-         return back()->with('error',"erreur survenue l'ors de l'enregistrement");
-        }
+        // }catch(\Exception $e){
+        //  return back()->with('error',"erreur survenue l'ors de l'enregistrement");
+        // }
 
 
 

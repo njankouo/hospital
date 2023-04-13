@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVenteProduitsTable extends Migration
+class CreateCommandeArticlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateVenteProduitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vente_produits', function (Blueprint $table) {
+        Schema::create('commande_articles', function (Blueprint $table) {
             $table->id();
-            $table->integer('code');
-            $table->string('conditionnement');
-            $table->string('date');
+            $table->string('code');
 
+            $table->date('dateCommande');
+            $table->date('dateLivraison');
             $table->integer('produit_id');
             $table->integer('pu');
             $table->integer('qte');
-            $table->string('responsable');
+            $table->integer('status');
+            // $table->foreign('conditionnement_id')
+            //       ->references('id')->on('conditionnements')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -34,6 +36,6 @@ class CreateVenteProduitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vente_produits');
+        Schema::dropIfExists('commande_articles');
     }
 }

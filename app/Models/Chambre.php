@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Chambre extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable=['numero','appreciation','status','prix'];
+    protected $fillable=['numero','appreciation','status','prix','nbrelit'];
     public function hospitalisation(){
-        return $this->hasMany(Hospitalisation::class);
+        return $this->hasOne(Hospitalisation::class);
     }
 }

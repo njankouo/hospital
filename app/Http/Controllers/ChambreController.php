@@ -9,16 +9,18 @@ use Illuminate\Http\Request;
 class ChambreController extends Controller
 {
     public function index(){
-        $chambre=Chambre::orderBy('id','desc')->get();
-        $hospitalisation=Hospitalisation::all();
-        return view('chambres.index',compact('chambre','hospitalisation'));
+        $cham=Chambre::has('hospitalisation')->get();
+       // $hospitalisation=Hospitalisation::all();
+       $chambres=Chambre::all();
+        return view('chambres.index',compact('cham','chambres'));
     }
     public function save(Request $request){
         $request->validate([]);
         Chambre::create([
             'appreciation'=>$request->appreciation,
             'numero'=>$request->numero,
-            'prix'=>$request->prix
+            'prix'=>$request->prix,
+            'nbrelit'=>$request->nbre_lit
         ]);
         return back()->with('info','chambre enregistre avec success');
     }

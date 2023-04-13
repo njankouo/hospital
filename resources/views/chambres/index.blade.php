@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-7">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Liste Des Chambres</h4>
@@ -42,22 +42,29 @@
                                         <th >Numero</th>
                                         <th >Categorie</th>
                                         <th >Prix</th>
-                                        <th >Status</th>
+                                        <th>Nombre De Lit</th>
+                                        {{-- <th >Status</th> --}}
 
                                         <th>Action</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($chambre as $chambres)
+                                    @foreach ($chambres as $chambre)
 
-                                             <td>{{$chambres->numero}}</td>
-                                            <td>{{ $chambres->appreciation }}</td>
-                                            <td>{{ $chambres->prix }}</td>
-                                            <td></td>
+                                             <td>{{$chambre->numero}}</td>
+                                            <td>{{ $chambre->appreciation }}</td>
+                                            <td>{{ $chambre->prix }}</td>
+                                            <td><a href="javascript:void()" class="badge badge-circle badge-outline-success">{{ $chambre->nbrelit }}</a></td>
+                                            {{-- <td>
+                                            @if($chambres->id==$chambres->hospitalisation->chambre_id)
+                                           {{$chambres->hospitalisation->count()}} Lits Occup&eacute;
+                                            @endif
+                                            </td> --}}
                                             <td>
                                                 <i class="fa fa-pencil text-primary"></i>
-                                             <a href="{{ route('soft.chambre',$chambres->id) }}"><i class="fa fa-trash text-danger m-2"></i></a>
+                                             {{-- <a href="{{ route('soft.chambre',$chambre->id) }}"><i class="fa fa-trash text-danger m-2"></i></a>
+                                            --}}
                                             </td>
                                         </tr>
 
@@ -91,12 +98,15 @@
                                                             <option value="bloc">Bloc</option>
                                                         </select>
                                                     </div>
-                                                    <div class="col-sm-12 mt-2 mt-sm-4">
+                                                    <div class="col-sm-6 mt-2 mt-sm-4">
                                                         <select class="form-control" name="prix">
                                                             <option value="2500">2500</option>
                                                             <option value="5000">5000</option>
                                                             <option value="10000">10000</option>
                                                         </select>
+                                                    </div>
+                                                    <div class="col-sm-6 mt-2 mt-sm-4">
+                                                       <input type="number" class="form-control" name="nbre_lit" placeholder="entrer le nombre de lit">
                                                     </div>
                                                 </div>
 
@@ -113,9 +123,45 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
+            <div class="col-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Chambres Et Lit(s) Occup&eacute;</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-responsive-sm text-center"  width='50%'>
+                                <thead>
+                                    <tr>
+
+                                        <th>Numero</th>
+                                        <th>Lit(s) Ocup&eacute;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($cham as $chambres)
+                                    <tr>
+                                        <td>{{ $chambres->numero }}</td>
+                                        <td>
+                                            @if($chambres->id==$chambres->hospitalisation->chambre_id)
+
+                                            {{$chambres->hospitalisation->count() }}
+
+                                            @endif
+                                            </td>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
 @stop

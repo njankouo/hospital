@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVentesTable extends Migration
+class AddSoftDeletesToVenteProduits extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateVentesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ventes', function (Blueprint $table) {
-            $table->id();
-            $table->date('date');
-            $table->string('responsable');
-            $table->timestamps();
+        Schema::table('vente_produits', function (Blueprint $table) {
+            //
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +26,8 @@ class CreateVentesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ventes');
+        Schema::table('vente_produits', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFournisseursTable extends Migration
+class AddPoidToConsultations extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateFournisseursTable extends Migration
      */
     public function up()
     {
-        Schema::create('fournisseurs', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('consultations', function (Blueprint $table) {
+            //
+            $table->integer('poid');
         });
     }
 
@@ -26,6 +26,8 @@ class CreateFournisseursTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fournisseurs');
+        Schema::table('consultations', function (Blueprint $table) {
+            //
+        });
     }
 }

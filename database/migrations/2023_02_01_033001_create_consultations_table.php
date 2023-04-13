@@ -15,6 +15,12 @@ class CreateConsultationsTable extends Migration
     {
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
+            $table->string('activite');
+            $table->string('add_allergie');
+            $table->string('allergie');
+            $table->string('antecedant');
+            $table->string('antecedant_churirgicaux');
+            $table->string('antecedant_familliale');
             $table->timestamps();
         });
     }

@@ -68,9 +68,11 @@
                                         <td>{{$rdvs->date}}</td>
 
                                         <td>
-                                            <span><a  class="mr-4"  data-placement="top" title="Archiver" data-toggle="modal" data-target="#exampleModalCenter{{ $rdvs->id }}"><i class="fa fa-pencil text-primary"></i> </a>
-                                                <a data-toggle="modal" data-target="#exampleModalpopover{{ $rdvs->id }}"><i class="fa fa-telegram text-success"></i></a></span>
-                                        </td>
+                                            <a class="btn btn-rounded btn-success"   data-toggle="modal" data-target="#exampleModalCenter{{ $rdvs->id }}"><i class="fa fa-pencil text-white"></i> </a>
+                                                <a class="btn btn-rounded btn-primary" data-toggle="modal" data-target="#exampleModalpopover{{ $rdvs->id }}"><i class="fa fa-telegram text-light"></i></a>
+                                                <a type="button" class="btn btn-rounded btn-danger" href="{{ route('soft.rdv',$rdvs->id) }}"><i class="fa fa-trash text-white"></i> </a>
+
+                                            </td>
                                     </tr>
                                     <div class="modal fade" id="exampleModalpopover{{$rdvs->id}}">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
