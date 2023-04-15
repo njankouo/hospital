@@ -9,13 +9,17 @@ use Illuminate\Http\Request;
 class ChambreController extends Controller
 {
     public function index(){
-        $cham=Chambre::has('hospitalisation')->get();
+        $cham=Chambre::withcount('hospitalisation')->get();
        // $hospitalisation=Hospitalisation::all();
-       $chambres=Chambre::all();
-        return view('chambres.index',compact('cham','chambres'));
+
+        return view('chambres.index',compact('cham'));
     }
     public function save(Request $request){
-        $request->validate([]);
+        $request->validate([
+            'numero'=>'required|unique:chambres,numero',
+        ],
+       [ 'numero.required'=>'renseignez le numero du lit']
+    );
         Chambre::create([
             'appreciation'=>$request->appreciation,
             'numero'=>$request->numero,

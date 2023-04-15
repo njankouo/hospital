@@ -142,4 +142,14 @@ class RdvController extends Controller
             return back()->with('success','rendez-vous annulé avec success');
         }
 
+        public function RdvAnule(){
+            $rdv=Rdv::onlyTrashed()->get();
+            return view('rendez-vous.annul',compact('rdv'));
+        }
+        public function restoration($id){
+            Rdv::whereId($id)->restore();
+
+            return back()->with('success','rendez-vous Restorer avec succes');
+        }
+
 }

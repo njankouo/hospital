@@ -45,7 +45,7 @@
                                 <li class="media dropdown-item">
                                     <span class="danger"><i class="ti-bookmark"></i></span>
                                     <div class="media-body">
-                                        <a href="#">
+                                        <a type="button"  href="{{ route('rdv.annule') }}">
                                             <p><strong>Rendez-Vous</strong>  <strong>Annul&eacute;es</strong>
                                             </p>
                                         </a>

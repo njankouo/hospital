@@ -32,6 +32,7 @@ class HomeController extends Controller
         $count=Rdv::where('status','=','1')->count();
         $appointments = Rdv::all();
 
+
         foreach ($appointments as $appointment) {
             if($appointment->status==0){
 

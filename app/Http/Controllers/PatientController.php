@@ -13,6 +13,7 @@ class PatientController extends Controller
     //
     public function index(){
         $patient=Patient::orderBy('id','desc')->get();
+        $patient=Patient::withcount('hospitalisation','consultation')->get();
         $consultation=Consultation::all();
         $hospitalisation=Hospitalisation::all();
          return view('patients.index',compact('patient','consultation','hospitalisation'));

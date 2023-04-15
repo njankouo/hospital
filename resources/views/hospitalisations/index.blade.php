@@ -59,11 +59,9 @@
                                         <td>
 
 
-                                            @if ($hospitalisations->chambre_id==1)
-                                            <a href="javascript:void()" class="badge badge-rounded badge-outline-danger">lib&eacute;r&eacute;</a>
-                                            @else
-                                            {{  $hospitalisations->chambre->numero}}
-                                            @endif
+
+                                            {{ $hospitalisations->chambre->numero}}
+
                                         </td>
                                         <td>{{ $hospitalisations->datedebut }}</td>
                                         <td>{{ $hospitalisations->datefin }}</td>
@@ -75,7 +73,7 @@
 
                                             @endif
 
-                                            <a type="button" class="btn btn-rounded btn-danger" href="{{ route('soft.hospitalisation',$hospitalisations->id) }}"><i class="fa fa-trash text-white"></i> </a>
+                                            <a type="button" class="btn btn-rounded btn-danger" href="{{ route('soft.hospitalisation',$hospitalisations->id) }}"><i class="fa fa-archive text-white"></i> </a>
 
                                         </td>
                                     </tr>
@@ -96,8 +94,9 @@
 
                                                     <label for="">Selectionnez Le Patient Hospitalis&eacute;</label>
                                                   <select name="patient_id" id="" class="form-control">
+                                                    <option value=""></option>
                                                     @foreach ($patient as $patients)
-                                                   <option value=""></option>
+
                                                    <option value="{{ $patients->id }}">{{ $patients->nom }} &nbsp;{{ $patients->prenom }}</option>
                                                     @endforeach
                                                   </select>
@@ -139,8 +138,12 @@
                                                                     <select  name="chambre_id" class="form-control">
 
                                                                         @foreach ($chambre as $chambres)
-                                                                            <option value="{{$chambres->id}}">{{ $chambres->numero }}</option>
-                                                                       @endforeach
+                                                                        @if ($chambres->nbrelit==$chambres->hospitalisation_count)
+                                                                           @else
+                                                                           <option value="{{$chambres->id}}">{{ $chambres->numero }}</option>
+
+                                                                        @endif
+                                                                         @endforeach
                                                                     </select>
                                                                 </div>
                                                                 <br>

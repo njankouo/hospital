@@ -179,30 +179,18 @@
                                                 {{ $patients->telephone }}
                                             </td>
                                             <td>
-                                        @if ($patients->created_at!=\Carbon\Carbon::now())
-                                        @else
-                                          @forelse ($consultation as $consultations )
-                                          @if ($patients->id==$consultations->patient_id)
-                                          @if ($consultations->status==1)
-                                          <a href="javascript:void()" class="badge badge-rounded badge-outline-info"> consultation realis&eacute;</a>
 
-                                          @elseif($consultations->status==0)
-                                          <span class="badge badge-primary">non Consult&eacute;</span>
-                                          @endif
-                                          @endif
-                                          @empty
-                                          @endforelse
-                                          @forelse ($hospitalisation as $hospitalisations)
-                                              @if($patients->id==$hospitalisations->patient_id)
-                                              @if($hospitalisations->status==1)
-                                              <a href="javascript:void()" class="badge badge-rounded badge-outline-primary"> Hospitalisation realis&eacute;</a>
-                                                @elseif($hospitalisations->status==0)
-                                                <span class="badge badge-secondary">non Hospitalis&eacute;</span>
-                                              @endif
-                                              @endif
-                                          @empty
-                                          @endforelse
-                                          @endif
+                                        @if ($patients->id==$patients->hospitalisation_count)
+
+                                                <span class="badge badge-secondary">hospitalisation En Cours...</span>
+                                                @if ($patients->id==$patients->consultation_count)
+
+                                                <span class="badge badge-info"> Consultation En Cours...</span>
+                                       @endif
+
+
+                                      @endif
+
                                             </td>
                                            <td>
 

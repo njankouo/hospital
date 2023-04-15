@@ -13,7 +13,7 @@ class HospitalisationController extends Controller
 
     public function index(){
         $patient=Patient::all();
-        $chambre=Chambre::all();
+        $chambre=Chambre::withcount('hospitalisation')->get();
         $hospitalisation=Hospitalisation::orderBy('id','desc')->get();
         return view('hospitalisations.index',compact('patient','chambre','hospitalisation'));
     }

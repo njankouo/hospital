@@ -85,6 +85,8 @@ Route::get('soft/user/{id}',[UserController::class,'softUser'])->name('soft.user
 Route::get('soft/vente/{id}',[VenteController::class,'softVente'])->name('soft.vente');
 Route::get('hospitalisation/soft/{id}',[HospitalisationController::class,'softHospit'])->name('soft.hospitalisation');
 Route::get('rdvs/rev/{id}',[RdvController::class,'softrdv'])->name('soft.rdv');
+Route::get('rdv/annule',[RdvController::class,'RdvAnule'])->name('rdv.annule');
+Route::get('rdv/restore/{id}',[RdvController::class,'restoration'])->name('restore.rdv');
 
 Route::POST('send/message',[RdvController::class,'saveMessage'])->name('send.message');
 Route::Post('forme',[FormeGalleliqueController::class,'addForme'])->name('add.forme');
