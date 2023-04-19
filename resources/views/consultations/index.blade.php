@@ -1,6 +1,22 @@
+<script>
+    function check(elem){
+        if(elem.selectedIndex==2){
+            document.getElementById('other-medoc').style.display='none';
+            document.getElementById("other-div").style.display='block';
+        }
+        if(elem.selectedIndex==1){
+            document.getElementById("other-div").style.display='none';
+            document.getElementById('other-medoc').style.display='block';
+        }
+    }
+</script>
 <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
- <link rel="stylesheet" type="text/css"
-     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<style>
+    i:hover{
+       transform:scale(1.5);
+    }
+ </style>
 @extends('layouts.master')
 @section('title','registre des consultations')
 @section('contenu')
@@ -188,120 +204,208 @@
                            @foreach ($consultation as $consultations)
                            <tr>
                             <td style="cursor: pointer">
-                                @if ($consultations->status==0)
-                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bd-example-modal-sm{{ $consultations->id }}" style="-webkit-animation: pulse 1s infinite"><i class="fa fa-pencil text-white" ></i></button>
 
-                                @else
-                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-sm{{ $consultations->id }}" style="-webkit-animation: pulse 0.5s infinite"><i class="fa fa-check text-white" ></i></button>
+                                <a type="button" href="{{ route('update.consultation',$consultations->id) }}" class="btn btn-secondary btn btn-rounded">
+                                <i class="fa fa-archive"></i></a>
 
-                                @endif
                                </td>
                               <td>{{ $consultations->responsable }}</td>
                               <td>{{ $consultations->patient->nom }}</td>
                               <td>{{ $consultations->diagnostique }}</td>
                               <td>{{ $consultations->created_at->diffForHumans() }}</td>
-                              <div class="modal fade bd-example-modal-sm{{ $consultations->id }}" tabindex="-1" role="dialog" aria-hidden="true">
 
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Terminer La Consultation De&nbsp;{{ $consultations->patient->nom }}&nbsp;{{ $consultations->patient->prenom }}</h5>
-                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                           <form action="{{ route('update.consultation',['consultation'=>$consultations->id]) }}" method="post">
+                              <td>
+                                 {{-- <button  style="margin: 3%" type="button" class="text-white btn btn-rounded btn-primary" data-toggle="modal" data-target="#example-lg{{ $consultations->id }}" data-item-id="1"><span class="btn-icon-left text-info"><i class="fa fa-eye color-info"></i>
+                                 </span>voir</button> --}}
+                                 <button type="button"   class="btn btn-rounded text-white btn-primary" data-toggle="modal" data-target="#exampleModalLong{{ $consultations->id }}"><i class="fa fa-eye text-white"></i> </button>
+                                 <button type="button"   class="btn btn-rounded text-white btn-warning" data-toggle="modal" data-target="#exampleModalCenter{{ $consultations->id }}"><i class="fa fa-calendar text-white"></i> </button>
 
-                                                @csrf
-                                                <input type="hidden" value="put" name="_method">
+                                 {{-- <a type="button" class="text-white btn btn-rounded btn-secondary" href="{{ route('add.prescription',$consultations->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-pencil color-info"></i>
+                                 </span>Prescrire</a> --}}
+                                 <button  type="button"  class="btn btn-rounded btn-secondary" data-toggle="modal" data-target="#exampleModalpopover{{ $consultations->id }}"><i class="fa fa-book text-white"></i> </button>
+                                 <a  class="btn btn-rounded btn-warning" href="{{ route('fichier.consultation',$consultations->id) }}"  data-toggle="tooltip" data-placement="top" title="fichier consultation"><i class="fa fa-file text-white"></i> </a>
 
-                                                @if ($consultations->status==0)
-                                                <label for="status">Valider Consultation</label>
-                                                <input type="checkbox" name="status" value="1" class=" @error('status') is-invalid @enderror">
-                                                @error('status')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                                @else
-                                                    <h5 style="text-align: center;font-weight:bold;font-style:italic">Consultation Termin&eacute;</h5>
-                                                @endif
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            @if($consultations->status==0)
-                                                <button type="submit" class="btn btn-primary">Terminer</button>
-                                            @else
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
-
-                                          @endif
-                                        </div>
+                              </td>
+                           </tr>
+                           <div class="modal fade" id="exampleModalCenter{{ $consultations->id }}">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Definir Un RDV Pour:{{ $consultations->patient->nom }} &nbsp;{{ $consultations->patient->prenom }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('rdv.consultation') }}" method="post">
+                                            @csrf
+                                        <label for="date">Date RDV</label>
+                                        <input type="datetime-local" name="date" id="date" class="form-control">
+                                        <label for="end">Fin RDV</label>
+                                        <input type="datetime-local" class="form-control" name="end_date">
+                                        <label for="motif">Motif</label>
+                                        <input type="text" name="motif" class="form-control" placeholder="motif du Rdv...">
+                                        <label for="responsable">Suivi Par</label>
+                                        <input type="text" value="{{ auth()->user()->name ??''}}" class="form-control" readonly name="responsable">
+                                        <label for="code">Code Consultation</label>
+                                        <input type="text" name="code" id="" class="form-control" value="{{ $consultations->id }}" readonly>
+                                        <label for="code_patient">Code Patient</label>
+                                        <input type="text" class="form-control" name="patient_id" value="{{ $consultations->patient_id }}">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
                                     </form>
                                     </div>
                                 </div>
                             </div>
-                              <td>
-                                 {{-- <button  style="margin: 3%" type="button" class="text-white btn btn-rounded btn-primary" data-toggle="modal" data-target="#example-lg{{ $consultations->id }}" data-item-id="1"><span class="btn-icon-left text-info"><i class="fa fa-eye color-info"></i>
-                                 </span>voir</button> --}}
-                                 <a   class="text-white" data-toggle="modal" data-target="#example-lg{{ $consultations->id }}" data-item-id="1"><i class="fa fa-eye text-primary"></i> </a>
-
-                                 {{-- <a type="button" class="text-white btn btn-rounded btn-secondary" href="{{ route('add.prescription',$consultations->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-pencil color-info"></i>
-                                 </span>Prescrire</a> --}}
-                                 <a  href="{{ route('add.prescription',$consultations->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="prescription"><i class="fa fa-pencil text-secondary"></i> </a>
-                                 <a  href="{{ route('fichier.consultation',$consultations->id) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="fichier consultation"><i class="fa fa-file text-warning"></i> </a>
-
-                              </td>
-                           </tr>
-                           <div data-backdrop="false" class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="example-lg{{ $consultations->id }}">
-                              <div class="modal-dialog modal-lg ">
-                                 <div class="modal-content">
+                        </div>
+                           {{-- href="{{ route('add.prescription',$consultations->id) }}" --}}
+                           <div class="modal fade" id="exampleModalpopover{{ $consultations->id }}">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
                                     <div class="modal-header">
-                                       <h5 class="modal-title">INFORMATION DE LA CONSULTATION</h5>
-                                       <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                       </button>
+                                        <h5 class="modal-title">Prescription Pour {{ $consultations->patient->nom }} &nbsp;{{ $consultations->patient->prenom }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                        </button>
                                     </div>
                                     <div class="modal-body">
-                                       <div class="row">
-                                          <div class="col-md-7">
-                                             <h4>PATIENT : {{ $consultations->patient->nom }} &nbsp;{{ $consultations->patient->prenom }} </h4>
-                                             <h4>TENSION : {{ $consultations->tension }} Mmhg</h4>
-                                             <h4>POID : {{ $consultations->poid }} KG</h4>
-                                             <h4>TAILLE : {{ $consultations->taille }} m</h4>
-                                             <h4>ANTECEDANT : {{ $consultations->antecedant }}</h4>
-                                             <h4>ACTIVITE QUOTDIENNE : {{ $consultations->activite }}</h4>
-                                             <h4>IMC(Indice De Masse Corporelle) : <?php $tailles= (float)$consultations->taille * (float) $consultations->taille
+                                        <label for="patient">Code Patient</label>
+                                        <input type="text" class="form-control" value="{{ $consultations->patient_id }}" readonly name="patient_id">
+                                        <label for="responsable">Responsable Prescription</label>
+                                        <input type="text" name="responsable" id="" class="form-control" name="responsable" value="{{ auth()->user()->name }}">
+                                        <label for="element">Element A Prescrire</label>
+                                        <select  id="mySelect" class="form-control" onChange="check(this);">
+                                            <option>Element A Prescrire</option>
+                                            <option value="medecin">Medicament</option>
+                                            <option value="autre">Autre</option>
+                                        </select>
+                                        <div id="other-div" style="display: none">
+                                            <label for="dispositif">Dispositif</label>
+                                            <input type="text" class="form-control" name="dispositif" placeholder="Preciser Le Dispositif A Prescrire...">
+                                        </div>
 
-                                             ?>
-                                              {{ $consultations->poid/$tailles }}
-                                            </h4>
-                                          </div>
-                                          <div class="col-md-5">
-                                             <h4>MOTIFS CONSULTATIONS: {!! html_entity_decode( $consultations->motif ) !!}
-                                             </h4>
-                                             <h4>DIAGNOSTIQUE : {{ $consultations->diagnostique }}</h4>
-                                             <h4>EST-IL ALLERGIQUE? :
-                                                @if ($consultations->allergie==0)
-                                                non
-                                                @else
-                                                oui
-                                                @endif
-                                             </h4>
-                                             @if($consultations->allergie==0)
-                                             @else
-                                             <h4>ALLERGIE : {{ $consultations->add_allergie }}</h4>
-                                             @endif
-                                          </div>
-                                          <div class="col-4"></div>
-                                          <div class="col-7">
-                                             <h6 style="text-decoration: underline">RESPONSABLE CONSULTATION : {{ $consultations->responsable }}</h6>
-                                          </div>
-                                       </div>
+                                        <div id="other-medoc" style="display: none">
+                                            <label for="Medicament">Medicaments</label>
+                                            <select class="multi-select select2-hidden-accessible" name="medicament[]" multiple="" data-select2-id="3" tabindex="-1" aria-hidden="true" >
+
+                                                <optgroup label="selectionnez les medicaments">
+                                                    @foreach ($produit as $produits)
+
+
+                                                <option value="{{ $produits->designation }}<br/><br/>">{{ $produits->designation }}</option>
+                                                @endforeach
+
+                                                <input class="select2-search__field" type="hidden" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Select a state" style="width: 275.984px;">
+                                                <label for="reponsable">Posologie</label>
+                                                <select class="maximum-search-length select2-hidden-accessible" data-select2-id="70" tabindex="-1" aria-hidden="true"multiple="multiple" name="dosage[]">
+
+                                                        <optgroup label="Selectionnez la posologie" >
+                                                                <option value="1 CPx3/j <br/><br/>">1 CPx3/j</option>
+                                                                <option value="1 CPx2/j <br/><br/>">1 CPx2/j</option>
+                                                                <option value="1 GELx3/j <br/><br/>">1 GELx3/j</option>
+                                                                <option value="1 GELx3/j <br/><br/>">1 GELx3/j</option>
+                                                            </optgroup>
+                                                        </select>
+
+
+
+                                                <label for="qte">Quantite</label>
+                                                <select id="remain-open" data-select2-id="remain-open" tabindex="-1" class="multi-select select2-hidden-accessible" aria-hidden="true" multiple name="qte[]">
+
+                                                    <option value="1 BOITE<br/><br/>">1 BOITE</option>
+                                                    <option value="2 BOITE<br/><br/>">2 BOITE</option>
+                                                    <option value="3 BOITE<br/><br/>">3 BOITE</option>
+                                                </select>
+                                        </div>
+                                        <label for="code">Code Consultation</label>
+                                        <input type="text" value="{{ $consultations->id }}" class="form-control" readonly>
                                     </div>
+
                                     <div class="modal-footer">
-                                       <h6>DATE DE CREATION : {{ $consultations->created_at->diffForHumans() }}</h6>
-                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                        <button type="button" class="btn btn-primary">Valider</button>
                                     </div>
-                                 </div>
+                                </div>
+                            </div>
+                        </div>
+                           <div class="modal fade" id="exampleModalLong{{ $consultations->id }}">
+                              <div class="modal-dialog">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title">Consulation {{ $consultations->patient->nom }} &nbsp;{{ $consultations->patient->prenom }}</h5>
+                                          <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="card"  style="border: white;background-color:rgb(118, 181, 184)">
+                                          <div class="card-body text-center text-white">Coordonn&eacute;es  Personnelles</div>
+
+                                        </div>
+                                        <div class="col-12">
+                                      <b> Nom:&nbsp;{{ $consultations->patient->nom }}</b>
+                                      <br>
+                                      <b> Date De Naissance:&nbsp;{{ $consultations->patient->date }}</b>
+                                      <br>
+                                      <b> Adresse:&nbsp;{{ $consultations->patient->adresse }}</b>
+                                      <br>
+                                      <b> Telephone:&nbsp;{{ $consultations->patient->telephone }}</b>
+                                      <br>
+                                      <b> Profession:&nbsp;{{ $consultations->patient->profession }}</b>
+                                      <br>
+                                      <b> Sexe:&nbsp;
+                                         @if ( $consultations->patient->sexe==1)
+                                        Masculin
+
+                                      @else
+                                      Feminin
+                                      @endif
+                                    </b>
+                                      </div>
+                                      <div class="card"  style="border: white;background-color:rgb(118, 181, 184)">
+                                        <div class="card-body text-center text-white">Ant&eacute;c&eacute;dants</div>
+                                    </div>
+                                        <div class="col-12">
+                                            <b>Antecedants Churirgicaux: {{ $consultations->antecedant_churirgicaux }}</b>
+                                            <br>
+                                            <b>Antecedants Medicaux:{{ $consultations->antecedant }}</b>
+                                            <br>
+                                            <b>Antecedants Familliaux: {{$consultations->antecedant_familliale }}</b>
+                                        </div>
+                                        <div class="card"  style="border: white;background-color:rgb(118, 181, 184)">
+                                            <div class="card-body text-center text-white">Informations Supplementaires</div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-6">
+                                            <b>Allergies: {{ $consultations->add_allergie }}</b>
+                                            <br>
+                                            <b>Poid: {{ $consultations->poid }} Kg</b>
+                                        </div>
+                                            <div class="col-6">
+                                                <b>Taille: {{ $consultations->taille }}  Cm</b>
+                                            <br>
+                                            <b>Tension: {{ $consultations->tension }}</b>
+                                            <br>
+                                            <b>IMC(Indice De Masse Corporelle) : <?php $tailles= (float)$consultations->taille * (float) $consultations->taille
+
+                                                ?>
+                                                 {{ $consultations->poid/$tailles }}</b>
+                                        </div>
+                                          </div>
+                                          <div class="card"  style="border: white;background-color:rgb(118, 181, 184)">
+                                            <div class="card-body text-center text-white">Observation</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <b>{{ $consultations->note }}</b>
+                                        </div>
+                                    </div>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+                                      </div>
+
+                                  </div>
                               </div>
-                           </div>
+
                            @endforeach
                         </tbody>
                      </table>
@@ -331,4 +435,5 @@
     };
 
     </script>
+
 @stop

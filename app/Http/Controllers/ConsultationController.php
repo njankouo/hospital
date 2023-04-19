@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Consultation;
 use App\Models\Patient;
+use App\Models\Produit;
+use App\Models\Rdv;
 use Illuminate\Http\Request;
 use PDF;
 class ConsultationController extends Controller
 {
     public function index(){
-        $consultation=Consultation::orderBy('id','desc')->get();
+        $consultation=Consultation::withcount('patient')->get();
         $patient=Patient::all();
-        return view('consultations.index',compact('consultation','patient'));
+        $produit=Produit::all();
+        return view('consultations.index',compact('consultation','patient','produit'));
     }
 
     public function new(){
@@ -65,20 +68,26 @@ class ConsultationController extends Controller
         ]);
         return back()->with('message','consultation enregistre avec success');
     }
-    public function update_consultation(Request $request,Consultation $consultation ){
-        $request->validate([
-            'status'=>'required',
-        ],[
-            'status.required'=>'faites la selection avant de soumettre'
-        ]);
-        $consultation->update([
-            'status'=>$request->status,
-           // dd($request->status)
-        ]);
+    public function update_consultation($id){
+        $consultation=Consultation::find($id);
+        $consultation->delete();
         return back()->with('message','consultation finalisé avec success');
     }
     public function fichierConsultation(){
         $pdf=PDF::LoadView('consultations.fichier');
         return $pdf->stream();
+    }
+    public function addRdv(Request $request){
+        $request->validate([],[]);
+
+        Rdv::create([
+            'date'=>$request->date,
+            'responsable'=>$request->responsable,
+            'consultation_id'=>$request->consultation_id,
+            'end_date'=>$request->end_date,
+            'titre'=>$request->motif,
+            'patient_id'=>$request->patient_id
+        ]);
+return back()->with('success','prochain rendez-vous etablit');
     }
 }

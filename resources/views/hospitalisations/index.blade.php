@@ -138,7 +138,7 @@
                                                                     <select  name="chambre_id" class="form-control">
 
                                                                         @foreach ($chambre as $chambres)
-                                                                        @if ($chambres->nbrelit==$chambres->hospitalisation_count)
+                                                                        @if ($chambres->nbrelit=$chambres->hospitalisation_count)
                                                                            @else
                                                                            <option value="{{$chambres->id}}">{{ $chambres->numero }}</option>
 

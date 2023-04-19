@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddHospitalisationIdToChambres extends Migration
+class AddDeletedAtToCommandeArticles extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddHospitalisationIdToChambres extends Migration
      */
     public function up()
     {
-        Schema::table('chambres', function (Blueprint $table) {
+        Schema::table('commande_articles', function (Blueprint $table) {
             //
-            $table->foreignId('hospitalisation_id')->constrained('hospitalisations');
+            $table->softDeletes()->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddHospitalisationIdToChambres extends Migration
      */
     public function down()
     {
-        Schema::table('chambres', function (Blueprint $table) {
+        Schema::table('commande_articles', function (Blueprint $table) {
             //
         });
     }

@@ -32,16 +32,27 @@ class RdvController extends Controller
             'date.required'=>'renseignez la date de Rdv',
         ]);
 
-        Rdv::create([
-                'patient_id'=>$request->patient_id,
-                'date'=>$request->date,
-                'end_date'=>$request->end_date,
-                'responsable'=>$request->responsable,
-                'titre'=>$request->titre,
-                'telephone'=>$request->telephone,
-        ]);
+            $rdv=Rdv::all();
 
-        return back()->with('message','Rendez-Vous Creé avec succes');
+            foreach($rdv as $rdvs){
+                if($rdvs->date!=$request->input('date')){
+
+                    Rdv::create([
+                        'patient_id'=>$request->patient_id,
+                        'date'=>$request->date,
+                        'end_date'=>$request->end_date,
+                        'responsable'=>$request->responsable,
+                        'titre'=>$request->titre,
+                        'telephone'=>$request->telephone,
+                ]);
+
+                return back()->with('message','Rendez-Vous Creé avec succes');
+
+                }else{
+                    return back()->with('error','Cette Plage D\'horaire est deja prise');
+                }
+            }
+
     }
         public function generateTelephone(Request $request){
             $req=Patient::select('tel')->where('id',$request->id)->first();
@@ -151,5 +162,16 @@ class RdvController extends Controller
 
             return back()->with('success','rendez-vous Restorer avec succes');
         }
+ public function updating(Request $request,Rdv $rdv)
+{
+    $request->validate([],[]);
 
+    $rdv->update([
+        'date'=>$request->date,
+
+        'titre'=>$request->titre,
+      //  dd($request->all())
+    ]);
+    return back()->with('success','Rdv Mis A Jour Avec Succes');
+}
 }

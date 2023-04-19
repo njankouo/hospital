@@ -36,11 +36,11 @@
                                 <li class="media dropdown-item">
                                     <span class="primary"><i class="ti-shopping-cart"></i></span>
                                     <div class="media-body">
-                                        <a href="#">
+                                        <a href="{{ route('commande.restored') }}">
                                             <p><strong>Total </strong>Des Commandes Annul&eacute;es</p>
                                         </a>
                                     </div>
-                                    <span class="notify-time">3:20 am</span>
+                                    <span class="notify-time"></span>
                                 </li>
                                 <li class="media dropdown-item">
                                     <span class="danger"><i class="ti-bookmark"></i></span>
@@ -50,7 +50,7 @@
                                             </p>
                                         </a>
                                     </div>
-                                    <span class="notify-time">3:20 am</span>
+                                    <span class="notify-time"></span>
                                 </li>
                                 <li class="media dropdown-item">
                                     <span class="primary"><i class="ti-heart"></i></span>
@@ -59,18 +59,18 @@
                                             <p><strong>Ventes</strong> Annul&eacute;es</p>
                                         </a>
                                     </div>
-                                    <span class="notify-time">3:20 am</span>
+                                    <span class="notify-time"></span>
                                 </li>
-                                {{-- <li class="media dropdown-item">
+                               <li class="media dropdown-item">
                                     <span class="success"><i class="ti-image"></i></span>
                                     <div class="media-body">
-                                        <a href="#">
-                                            <p><strong> James.</strong> has added a<strong>customer</strong> Successfully
+                                        <a href="{{ route('hospit.finish') }}">
+                                            <p><strong> Hospitalisations Termin&eacute;s</strong>
                                             </p>
                                         </a>
                                     </div>
-                                    <span class="notify-time">3:20 am</span>
-                                </li> --}}
+                                    <span class="notify-time"></span>
+                                </li>
                             </ul>
                             <a class="all-notification" href="#">Quitter <i
                                     class="ti-arrow-right"></i></a>

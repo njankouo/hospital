@@ -87,6 +87,9 @@ Route::get('hospitalisation/soft/{id}',[HospitalisationController::class,'softHo
 Route::get('rdvs/rev/{id}',[RdvController::class,'softrdv'])->name('soft.rdv');
 Route::get('rdv/annule',[RdvController::class,'RdvAnule'])->name('rdv.annule');
 Route::get('rdv/restore/{id}',[RdvController::class,'restoration'])->name('restore.rdv');
+Route::get('hospitalisation/finish',[HospitalisationController::class,'hospitFinish'])->name('hospit.finish');
+Route::get('soft/commande/{id}',[CommandeController::class,'softcommande'])->name('soft.commande');
+Route::get('commande/delete',[CommandeController::class,'restored'])->name('commande.restored');
 
 Route::POST('send/message',[RdvController::class,'saveMessage'])->name('send.message');
 Route::Post('forme',[FormeGalleliqueController::class,'addForme'])->name('add.forme');
@@ -97,6 +100,7 @@ Route::Post('produits',[ProduitController::class,'addProduct'])->name('add.produ
 Route::POST('commandes',[CommandeController::class,'addCommande'])->name('add.commande');
 Route::Post('patients/add',[PatientController::class,'addPatient'])->name('add.patients');
 Route::post('valide/commande',[CommandeController::class,'ValidCommande'])->name('add.commandes');
+Route::POST('add/rdv/consultation',[ConsultationController::class,'addRdv'])->name('rdv.consultation');
 
 Route::POST('chambre',[ChambreController::class,'save'])->name('add.chambre');
 Route::POST('add/consultation',[ConsultationController::class,'addConsultation'])->name('add.consultations');
@@ -114,6 +118,7 @@ Route::put('edit/patient/{patient}',[PatientController::class,'Editpatient'])->n
 Route::put('hospit/{hospitalisation}',[HospitalisationController::class,'edit'])->name('edition.hospitalisation');
 Route::PUT('edit/{user}',[UserController::class,'edition'])->name('updat.user');
 Route::PUT('ajouter/produits/{commande}',[CommandeController::class,'addLivraison'])->name('add.livraison');
-Route::PUT('consultations/{consultation}',[ConsultationController::class,'update_consultation'])->name('update.consultation');
+Route::get('consultations/{id}',[ConsultationController::class,'update_consultation'])->name('update.consultation');
 Route::put('caisses/{consultation}',[CaisseController::class,'update_caisse'])->name('update.consultations');
 Route::PUT('update/rdv/{rdv}',[RdvController::class,'updat_rdv'])->name('update.rdv');
+Route::PUT('rdvs/updat/{rdvs}',[RdvController::class,'updating'])->name('edit.rdv');

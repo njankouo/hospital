@@ -60,7 +60,7 @@
                                       </div>
                                       <div class="form-group">
                                         <label for="reponsable">Posologie</label>
-                                        <select class="multi-select select2-hidden-accessible" data-select2-id="4" tabindex="-1" aria-hidden="true" name="dosage[]" multiple="">
+                                        <select  name="dosage[]" multiple="multiple">
                                             <optgroup label="Selectionnez la posologie" >
                                                 <option value="1 CPx3/j <br/><br/>">1 CPx3/j</option>
                                                 <option value="1 CPx2/j <br/><br/>">1 CPx2/j</option>
@@ -68,6 +68,7 @@
                                                 <option value="1 GELx3/j <br/><br/>">1 GELx3/j</option>
                                             </optgroup>
                                         </select>
+                                      </div>
                                         <div class="form-group">
                                             <label for="qte">Quantite</label>
                                             <select id="remain-open" data-select2-id="remain-open" tabindex="-1" class="multi-select select2-hidden-accessible" aria-hidden="true" multiple name="qte[]">
@@ -76,6 +77,7 @@
                                                 <option value="2 BOITE<br/><br/>">2 BOITE</option>
                                                 <option value="3 BOITE<br/><br/>">3 BOITE</option>
                                             </select>
+
                                         </div>
                                       <div>
                                         <br/>

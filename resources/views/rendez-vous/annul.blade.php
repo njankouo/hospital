@@ -51,11 +51,39 @@
                                             restore_from_trash
                                     </span>
                                 </a>
-                                <a class="btn btn-rounded btn-secondary" href=""><span class="material-symbols-outlined">
+                                <button class="btn btn-rounded btn-secondary"data-toggle="modal" data-target="#exampleModalCenter"><span class="material-symbols-outlined">
                                     edit
                             </span>
-                        </a>
+                        </button>
                                     </td>
+                                    <div class="modal fade" id="exampleModalCenter">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Formulaire De Mise A Jour</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                        <form action="{{ route('edit.rdv',['rdvs'=>$rdvs->id]) }}" method="post">
+
+                                                            @csrf
+                                                            <input type="hidden" value="put" name="_method">
+                                                            <label for="date">Date Rdv</label>
+                                                            <input type="datetime" name="date" id="date" class="form-control" value="{{ $rdvs->date }}">
+                                                            <label for="motifs">Motifs Rdv</label>
+                                                            <input type="text" value="{{ $rdvs->titre }}" class="form-control" name="titre">
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-primary">Modifier</button>
+                                                </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </tr>
                                 @endforeach
                             </tbody>

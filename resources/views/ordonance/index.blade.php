@@ -57,9 +57,38 @@
                                     <td>
                                         {{-- <a  href="{{ route('ordonance.pdf',$ordonances->id) }}" type="button" class="btn btn-rounded btn-primary"><span class="btn-icon-left text-primary"><i class="fa fa-print"></i>
                                         </span>Imprimer</a> --}}
-                                        <a  href="{{ route('ordonance.pdf',$ordonances->id) }}" class="mr-4" data-toggle="tooltip" data-placement="top" title="ordonance"><i class="fa fa-download text-primary"></i> </a>
+                                        <a  href="{{ route('ordonance.pdf',$ordonances->id) }}" class="mr-2 btn btn-rounded btn-primary" data-toggle="tooltip" data-placement="top" title="ordonance"><i class="fa fa-download text-light"></i> </a>
+                                        <button class="mr-2 btn btn-rounded btn-secondary"data-toggle="modal" data-target="#exampleModalpopover{{ $ordonances->id }}"><i class="fa fa-edit text-light"></i> </button>
 
                                     </td>
+                                    <div class="modal fade" id="exampleModalpopover{{ $ordonances->id }}">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Ajouter Des Medicaments A la Prescription De {{ !empty($ordonances->patient) ? $ordonances->patient->nom:'' }}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <label for="Medicament">Medicaments</label>
+                                                    <select class="multi-select select2-hidden-accessible" name="medicament[]" multiple="" data-select2-id="3" tabindex="-1" aria-hidden="true" >
+
+                                                        <optgroup label="selectionnez les medicaments">
+                                                            @foreach ($produit as $produits)
+
+
+                                                        <option value="{{ $produits->designation }}<br/><br/>">{{ $produits->designation }}</option>
+                                                        @endforeach
+                                                    </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                    </tr>
                                    @endforeach
                                 </tbody>

@@ -52,7 +52,8 @@ class PrescriptionController extends Controller
 
     public function ordonance(){
         $ordonance=Prescription::orderBy('id','desc')->get();
-        return view('ordonance.index',compact('ordonance'));
+        $produit=Produit::all();
+        return view('ordonance.index',compact('ordonance','produit'));
     }
     public function ordonancePdf($id){
 

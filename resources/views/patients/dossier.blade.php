@@ -230,14 +230,14 @@
                                 <div class="table-responsive">
 
 
-                                               @foreach ($prescription as $prescriptions)
+                                               {{-- @foreach ($prescription as $prescriptions)
                                                    @if($prescriptions->patient_id==$patient->id)
 
                                             <div id="accordion-nine" class="accordion accordion-active-header">
                                                 <div class="accordion__item">
                                                     <div class="accordion__header collapsed" data-toggle="collapse" data-target="#active-header_collapseOne" aria-expanded="false">
                                                         <span class="accordion__header--icon"></span>
-                                                        <span class="accordion__header--text">PRESCRIPTION DU: {{ $consultations->created_at }}</span>
+                                                        <span class="accordion__header--text">PRESCRIPTION DU: {{ $consultation->created_at }}</span>
                                                         <span class="accordion__header--indicator"></span>
                                                     </div>
                                                     <div id="active-header_collapseOne" class="accordion__body collapse" data-parent="#accordion-nine" style="">
@@ -272,7 +272,7 @@
 
                                             </div>
                                                    @endif
-                                               @endforeach
+                                               @endforeach --}}
 
 
 

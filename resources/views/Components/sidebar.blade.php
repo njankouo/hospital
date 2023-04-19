@@ -64,9 +64,9 @@
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="icon icon-layout-25"></i><span class="nav-text">Consultations</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ route('consultations') }}">Liste Des Consultations</a></li>
+                    <li><a href="{{ route('consultations') }}">Consultations M&eacute;dicales</a></li>
                     <li><a href="{{ route('ordonance.view') }}">Ordonnances</a></li>
-                    {{-- <li><a href="table-datatable-basic.html">Examens</a></li> --}}
+                   <li><a href="table-datatable-basic.html">Op&eacute;ration M&eacute;dicale</a></li>
                     <li><a href="{{ route('hospitalisation') }}">Hospitalisations</a></li>
 
                 </ul>

@@ -6,6 +6,7 @@ use App\Models\Chambre;
 use App\Models\Hospitalisation;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Twilio\Rest\Preview\HostedNumbers;
 
 class HospitalisationController extends Controller
 {
@@ -18,6 +19,11 @@ class HospitalisationController extends Controller
         return view('hospitalisations.index',compact('patient','chambre','hospitalisation'));
     }
 
+
+    public function hospitFinish(){
+        $hospitalisation=Hospitalisation::onlyTrashed()->get();
+        return view('hospitalisations.finish',compact('hospitalisation'));
+    }
     public function save(Request $request){
         // $request->validate([
         //     'patient_id'=>'required',

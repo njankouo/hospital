@@ -54,7 +54,7 @@
     </style>
 </head>
 <body>
-    <section style="width:100%;height:3%">
+    {{-- <section style="width:100%;height:3%">
      Hopital Central
      <img src="{{ public_path('images/images.png') }}" style="width: 100px; height: 100px;float:right">
 
@@ -67,11 +67,13 @@
        </section>
     <section style="width:50%;height:3%">
      BP:63
-    </section>
-
+    </section> --}}
+    <h4 style="text-align: center;font-weight:bold;font-style:italic">CENTRE HOSPITALIER DELUGE</h4>
+    <p>Douala-Cameroun</p>
+    <p>A L'ettention De {{ $ordonance->patient->nom }} &nbsp;{{ $ordonance->patient->prenom }}</p>
     <h4 style="text-align: center;text-decoration:underline"> ORDONANCE MEDICALE</h4>
-    {!! DNS1D::getBarcodeHTML('4445645656', 'PHARMA') !!}
-    <p style="color:dimgrey;margin:1%;text-align:right">{{ $ordonance->patient->nom }} &nbsp;{{ $ordonance->patient->prenom }}</p>
+    {{-- {!! DNS1D::getBarcodeHTML('4445645656', 'PHARMA') !!} --}}
+
     <section>
         <table class="content-table" style="text-align: center">
             <thead>

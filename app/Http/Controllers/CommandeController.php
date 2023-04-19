@@ -76,4 +76,14 @@ public function addLivraison(Request $request, CommandeArticle $commande){
   // dd($request->input('status'));
     return back()->with('success');
 }
+public function softcommande($id){
+    $commande=CommandeArticle::find($id);
+    $commande->delete();
+    return back()->with('success','commande annulé avec succes');
+}
+
+public function restored(){
+    $commande=CommandeArticle::onlyTrashed()->get();
+    return view('commandes.commandeSoft',compact('commande'));
+}
 }

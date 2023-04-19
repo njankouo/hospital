@@ -66,12 +66,15 @@
                                             @endif
                                                  </td>
                                         <td>
-                                            <button type="button" class="btn btn-rounded btn-warning" data-toggle="modal" data-target="#example-lg{{ $commandes->id }}" data-item-id="1"><span class="btn-icon-left text-warning"><i class="fa fa-eye color-warning"></i>
-                                            </span>Voir</button>
-                                            &nbsp; &nbsp; &nbsp;
+                                            <button type="button" class="btn btn-rounded btn-warning" data-toggle="modal" data-target="#example-lg{{ $commandes->id }}" data-item-id="1"><i class="fa fa-eye text-white"></i>
+                            </button>
 
-                                            <button type="button" class="btn btn-rounded btn-info"><span class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
-                                            </span>facture</button>
+
+                                            <button type="button" class="btn btn-rounded btn-info"><i class="fa fa-plus text-white"></i>
+                                            </button>
+
+                                            <a type="button" class="btn btn-rounded btn-danger" href="{{ route('soft.commande',$commandes->id) }}"><i class="fa fa-minus text-white"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                       <div data-backdrop="false" class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="example-lg{{ $commandes->id }}">

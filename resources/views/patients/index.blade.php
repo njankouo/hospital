@@ -180,16 +180,18 @@
                                             </td>
                                             <td>
 
-                                        @if ($patients->id==$patients->hospitalisation_count)
+                                        @if ($patients->hospitalisation_count)
 
                                                 <span class="badge badge-secondary">hospitalisation En Cours...</span>
-                                                @if ($patients->id==$patients->consultation_count)
-
-                                                <span class="badge badge-info"> Consultation En Cours...</span>
-                                       @endif
 
 
                                       @endif
+
+                                      @if ($patients->consultation_count)
+
+                                      <span class="badge badge-info"> Consultation En Cours...</span>
+                                     @endif
+
 
                                             </td>
                                            <td>
