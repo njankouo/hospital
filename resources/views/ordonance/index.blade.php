@@ -51,7 +51,12 @@
 
                                     <td>{{ !empty($ordonances->patient) ? $ordonances->patient->nom:'' }} </td>
                                     <td>{!! html_entity_decode($ordonances->responsable) !!}</td>
+                                    @if (isset($ordonances->dispositif))
+                                        <td colspan="1"><span class="badge badge-primary"> {{ $ordonances->dispositif }}</span></td>
+                                    @else
                                     <td>{!! html_entity_decode($ordonances->medicament) !!}</td>
+                                    @endif
+
                                     <td>{!! html_entity_decode($ordonances->qte) !!}</td>
                                     <td>{!! html_entity_decode($ordonances->dosage) !!}</td>
                                     <td>
@@ -70,7 +75,9 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <label for="Medicament">Medicaments</label>
+                                                    <input class="select2-search__field" type="hidden" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Select a state" style="width: 275.984px;">
+
+                                                     <label for="Medicament">Medicaments</label>
                                                     <select class="multi-select select2-hidden-accessible" name="medicament[]" multiple="" data-select2-id="3" tabindex="-1" aria-hidden="true" >
 
                                                         <optgroup label="selectionnez les medicaments">

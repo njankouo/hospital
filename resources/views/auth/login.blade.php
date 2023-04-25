@@ -102,11 +102,11 @@
                         <div class="row no-gutters">
                             <div class="col-xl-12">
                                 <div class="auth-form">
-                                    <h4 class="text-center mb-4">Connectez-Vous a Votre Compte</h4>
+                                    <h4 class="text-center mb-4">Connectez-Vous...</h4>
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="form-group">
-                                            <label><strong>Name</strong></label>
+                                            <label><strong>Nom</strong></label>
                                             <input type="text" class="form-control @error('name') is-invalid
 
                                             @enderror" name="name">
@@ -118,7 +118,7 @@
                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label><strong>Password</strong></label>
+                                            <label><strong>Mot De Passe</strong></label>
                                             <input type="password" class="form-control @error('password') is-invalid
 
                                             @enderror" name="password">

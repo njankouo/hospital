@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="date_commande">Date Commande</label>
-                                <input type="date" class="form-control" name="dateCommande"  >
+                                <input type="text" class="form-control" name="dateCommande" value="{{ Carbon\Carbon::now() }}" >
                             </div>
                             <div class="col-sm-6 mt-2 mt-sm-0">
                                 <label for="date_livraison">Date Livraison</label>

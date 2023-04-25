@@ -64,7 +64,7 @@ Route::get('livraison',[LivraisonController::class,'index'])->name('add.livraiso
 Route::get('chambres',[ChambreController::class,'index'])->name('chambres');
 Route::get('consultations',[ConsultationController::class,'index'])->name('consultations');
 Route::get('consult',[ConsultationController::class,'new'])->name('save.consultation');
-Route::get('add/prescription/{id}',[PrescriptionController::class,'index'])->name('add.prescription');
+//Route::get('add/prescription/{id}',[PrescriptionController::class,'index'])->name('add.prescription');
 Route::get('ordonance',[PrescriptionController::class,'ordonance'])->name('ordonance.view');
 Route::get('ordonance/pdf/{id}',[PrescriptionController::class,'ordonancePdf'])->name('ordonance.pdf');
 Route::get('rendez/vous',[RdvController::class,'index'])->name('rdv.view');
@@ -90,6 +90,8 @@ Route::get('rdv/restore/{id}',[RdvController::class,'restoration'])->name('resto
 Route::get('hospitalisation/finish',[HospitalisationController::class,'hospitFinish'])->name('hospit.finish');
 Route::get('soft/commande/{id}',[CommandeController::class,'softcommande'])->name('soft.commande');
 Route::get('commande/delete',[CommandeController::class,'restored'])->name('commande.restored');
+Route::get('facture/commande/{id}',[CommandeController::class,'facture'])->name('facture.commande');
+
 
 Route::POST('send/message',[RdvController::class,'saveMessage'])->name('send.message');
 Route::Post('forme',[FormeGalleliqueController::class,'addForme'])->name('add.forme');

@@ -14,39 +14,50 @@ use PDF;
 class PrescriptionController extends Controller
 {
     //
-    public function index($id){
-        $consultation=Consultation::find($id);
-        $produit=Produit::all();
-        $patient=Patient::all();
-        return view('prescription.index',compact('consultation','produit','patient'));
-    }
+    // public function index($id){
+    //     $consultation=Consultation::find($id);
+    //     $produit=Produit::all();
+    //     $patient=Patient::all();
+    //     return view('prescription.index',compact('consultation','produit','patient'));
+    // }
     public function savePrescription(Request $request){
-        $request->validate([
-            'patient_id'=>'Required',
-            'medicament'=>'Required',
-            'dosage'=>'Required',
+        // $request->validate([
+        //     'patient_id'=>'Required',
+        //     'medicament'=>'Required',
+        //     'dosage'=>'Required',
 
-        ],[
-            'patient_id.required'=>'renseignez le patient',
-            'medicament.required'=>'renseignez le medicament',
-            'dosage.required'=>'renseignez le dosage',
-        ]);
+        // ],[
+        //     'patient_id.required'=>'renseignez le patient',
+        //     'medicament.required'=>'renseignez le medicament',
+        //     'dosage.required'=>'renseignez le dosage',
+        // ]);
 
        $prescription = new Prescription();
-//dd($request->input('responsable'));
+//dd($request->all());
+if($request->input('dosage')==''|| $request->input('medicament')=='' || $request->input('qte')==''){
+
+     $responsable = $request->input('responsable');
+       $dispositif=$request->input('dispositif');
+       $patient_id = $request->input('patient_id');
+       $prescription->patient_id =  $patient_id;
+       $prescription->dispositif=$dispositif;
+       $prescription->responsable =  $responsable;
+       $prescription->save();
+
+}else{
        $dosage = $request->input('dosage');
        $medicament = $request->input('medicament');
        $responsable = $request->input('responsable');
        $patient_id = $request->input('patient_id');
        $qte = $request->input('qte');
-       $prescription->dosage = implode(',', $dosage);
+       $prescription['dosage'] = implode(',', $request->dosage);
        $prescription->patient_id =  $patient_id;
        $prescription->medicament = implode(',', $medicament);
        $prescription->responsable =  $responsable;
        $prescription->qte = implode(',', $qte);
        $prescription->save();
 
-
+}
        return redirect('/ordonance');
     }
 

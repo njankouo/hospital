@@ -10,6 +10,7 @@
         }
     }
 </script>
+
 <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <style>
@@ -61,7 +62,7 @@
                                     <form method="post" action="{{ route('add.consultations') }}" id="step-form-horizontal" class="step-form-horizontal">
                                         @csrf
                                     <label>Suivi Par:</label>
-                                    <input type="text" class="form-control" placeholder="responsable consultation" value="{{ auth()->user()->name }}" name="responsable">
+                                    <input type="text" class="form-control" placeholder="responsable consultation" value="{{ auth()->user()->name??'' }}" name="responsable">
                                     <label>Motifs De La Consultation</label>
                                     <input type="text" class="form-control" name="motif" placeholder="Motif Consultation">
                                     <label>Poids</label>
@@ -259,7 +260,7 @@
                                 </div>
                             </div>
                         </div>
-                           {{-- href="{{ route('add.prescription',$consultations->id) }}" --}}
+
                            <div class="modal fade" id="exampleModalpopover{{ $consultations->id }}">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -269,15 +270,21 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
+                                        <form method="post" action="{{ route('add.presciption') }}"  enctype="multipart/form-data">
+                                            @csrf
+
                                         <label for="patient">Code Patient</label>
                                         <input type="text" class="form-control" value="{{ $consultations->patient_id }}" readonly name="patient_id">
                                         <label for="responsable">Responsable Prescription</label>
-                                        <input type="text" name="responsable" id="" class="form-control" name="responsable" value="{{ auth()->user()->name }}">
+                                        <input type="text" name="responsable" id="" class="form-control" name="responsable" value="{{ auth()->user()->name??'' }}">
                                         <label for="element">Element A Prescrire</label>
                                         <select  id="mySelect" class="form-control" onChange="check(this);">
-                                            <option>Element A Prescrire</option>
-                                            <option value="medecin">Medicament</option>
+                                            <option>Prescription Medicale</option>
+                                            <option value="medecin">Prescription Medicament</option>
                                             <option value="autre">Autre</option>
+                                            <option value="examen medicaux">Prescription Examen Medicaux</option>
+                                            <option value="therapie">Prescription De Thérapie</option>
+                                            <option value="Regime Alimentaire">Prescription Regime Alimentaire</option>
                                         </select>
                                         <div id="other-div" style="display: none">
                                             <label for="dispositif">Dispositif</label>
@@ -295,9 +302,9 @@
                                                 <option value="{{ $produits->designation }}<br/><br/>">{{ $produits->designation }}</option>
                                                 @endforeach
 
-                                                <input class="select2-search__field" type="hidden" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Select a state" style="width: 275.984px;">
                                                 <label for="reponsable">Posologie</label>
-                                                <select class="maximum-search-length select2-hidden-accessible" data-select2-id="70" tabindex="-1" aria-hidden="true"multiple="multiple" name="dosage[]">
+
+                                                <select multiple>
 
                                                         <optgroup label="Selectionnez la posologie" >
                                                                 <option value="1 CPx3/j <br/><br/>">1 CPx3/j</option>
@@ -323,8 +330,10 @@
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                        <button type="button" class="btn btn-primary">Valider</button>
+                                        <button type="submit" class="btn btn-primary">Valider</button>
                                     </div>
+
+                                </form>
                                 </div>
                             </div>
                         </div>

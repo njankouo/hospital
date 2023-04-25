@@ -7,6 +7,7 @@ use App\Models\CommandeArticle;
 use App\Models\Conditionnement;
 use App\Models\Livraison;
 use App\Models\Produit;
+use PDF;
 use Illuminate\Http\Request;
 
 class CommandeController extends Controller
@@ -85,5 +86,10 @@ public function softcommande($id){
 public function restored(){
     $commande=CommandeArticle::onlyTrashed()->get();
     return view('commandes.commandeSoft',compact('commande'));
+}
+public function facture($id){
+    $pdf=PDF::loadview('commandes.facture');
+    return $pdf->stream();
+
 }
 }
