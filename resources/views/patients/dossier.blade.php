@@ -206,8 +206,20 @@
                                                     <h6 >POID: {{ $consultations->poid }}</</h6>
                                                     <h6 >TENSION: {{ $consultations->tension }}</</h6>
                                                     <h6 >ALLERGIES: {{ $consultations->add_allergie }}</</h6>
-                                                    <h6 >MOTIF CONSULTATION: {{ $consultations->motif }}</</h6>
-                                                    <h6 >DIAGNOSTIQUE: {{ $consultations->diagnostique }}</</h6>
+                                                    <h6 style="text-align: center;font-weight:bold">MOTIF CONSULTATION: {{ $consultations->motif }}</</h6>
+                                                    <h4 style="text-align: center">
+                                                        Symptomes:
+                                                    {{ $consultations->symptomes}}</h4>
+                                                    <h4 style="text-align:center;font-weight:bold">
+                                                        Medicaments Prises Actuellement:
+                                                        {{ $consultations->medicaments }}
+                                                    </h4>
+                                                    <h4 style="text-align:center;font-weight:bold">
+                                                        Resultats D'examens Anterieurs:
+                                                        {{ $consultations->resultats }}
+                                                    </h4>
+                                                    <h4 style="text-align:center;font-weight:bold">DIAGNOSTIQUE: {{ $consultations->diagnostique }}</</h6>
+
                                                 </div>
                                             </div>
                                         </div>

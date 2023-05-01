@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Consultation extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable=['motifs_caisse','montant','versement','status','note','patient_id','taille','poid','tension','responsable','motif','diagnostique','activite','allergie','add_allergie','antecedant','antecedant_churirgicaux','antecedant_familliale','autre_antecedant'];
+    protected $fillable=['motifs_caisse','montant','versement','status','note','patient_id','taille','poid','tension','responsable','motif','diagnostique','activite','allergie','add_allergie','antecedant','antecedant_churirgicaux','antecedant_familliale','autre_antecedant','symptomes','medicaments','resultats'];
 
 
     public function patient(){

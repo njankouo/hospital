@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIdToCommandesTable extends Migration
+class AddSymptomesToConsultationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddIdToCommandesTable extends Migration
      */
     public function up()
     {
-        Schema::table('commandes', function (Blueprint $table) {
+        Schema::table('consultations', function (Blueprint $table) {
             //
-            $table->uuid('id')->primary();
+            $table->string('symptomes')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddIdToCommandesTable extends Migration
      */
     public function down()
     {
-        Schema::table('commandes', function (Blueprint $table) {
+        Schema::table('consultations', function (Blueprint $table) {
             //
         });
     }

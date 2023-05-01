@@ -74,4 +74,9 @@ if($request->input('dosage')==''|| $request->input('medicament')=='' || $request
 
 
     }
+    public function deleteOrdonanace($id){
+        $ordonance=Prescription::find($id);
+        $ordonance->delete();
+        return back()->with('success','ordonance retirée avec succes');
+    }
 }

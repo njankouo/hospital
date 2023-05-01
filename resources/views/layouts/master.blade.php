@@ -28,8 +28,7 @@
 
 
     <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <script src="https://cdn.tiny.cloud/1/oaqwwrk2zfuwe4lm3wfuzscmbw98cnxjdzlv4dslscprhz8k/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>tinymce.init({selector:'textarea'});</script>
+
 
 </head>
 <body>

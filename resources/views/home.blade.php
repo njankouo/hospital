@@ -94,7 +94,9 @@
             locale: 'fr',
             navLinks: true,
             editable: true,
-
+            eventColor:'#378006',
+            overlap:false,
+            rendering:'background',
             events: @json($events),
         });
         calendar.render();

@@ -27,8 +27,11 @@
             <div class="row">
                 <div class="col-xl-3">
                     <div class="nav flex-column nav-pills">
-                        <a href="#v-pills-home" data-toggle="pill" class="nav-link show">BILAN </a>
+                        <a href="#v-pills-home" data-toggle="pill" class="nav-link show">BILAN Sanguin</a>
                         <a href="#v-pills-profile" data-toggle="pill" class="nav-link">RADIOLOGIE</a>
+                        <a href="#v-pills-profil" data-toggle="pill" class="nav-link">Echographie</a>
+                        <a href="#v-pills-profi" data-toggle="pill" class="nav-link">Scanner</a>
+                        <a href="#v-pills-prof" data-toggle="pill" class="nav-link">IRM</a>
                         <a href="#v-pills-messages" data-toggle="pill" class="nav-link active">CERTIFICATS MEDICAUX</a>
                       <a href="#v-pills-settings" data-toggle="pill" class="nav-link">PRESCRIPTIONS</a>
                     </div>
@@ -56,6 +59,46 @@
                                 </div>
 
                         </div>
+                        <div id="v-pills-profil" class="tab-pane fade">
+                        </div>
+                        <div id="v-pills-profi" class="tab-pane fade">
+                        </div>
+                        <div id="v-pills-prof" class="tab-pane fade">
+                        </div>
+
+                            {{-- <div class="col-8">
+                            <div class="basic-form">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="First name">
+
+                                            <input type="text" class="form-control mt-3" placeholder="Last name">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div> --}}
+
+                {{-- </div>
+
+                        <div id="v-pills-profile" class="tab-pane fade">
+                            <div class="col-8">
+                            <div class="basic-form">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="First name">
+
+                                            <input type="text" class="form-control mt-3" placeholder="Last name">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                </div> --}}
+
                         <div id="v-pills-messages" class="tab-pane fade">
                             <div class="row">
                             <div class="col-8">

@@ -1,16 +1,6 @@
-<script>
-    function check(elem){
-        if(elem.selectedIndex==2){
-            document.getElementById('other-medoc').style.display='none';
-            document.getElementById("other-div").style.display='block';
-        }
-        if(elem.selectedIndex==1){
-            document.getElementById("other-div").style.display='none';
-            document.getElementById('other-medoc').style.display='block';
-        }
-    }
-</script>
 
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
 <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <style>
@@ -65,58 +55,64 @@
                                     <input type="text" class="form-control" placeholder="responsable consultation" value="{{ auth()->user()->name??'' }}" name="responsable">
                                     <label>Motifs De La Consultation</label>
                                     <input type="text" class="form-control" name="motif" placeholder="Motif Consultation">
-                                    <label>Poids</label>
+                                    <label>Poids (optionel)</label>
                                     <input type="text" class="form-control @error('poid') is-invalid
                                        @enderror" placeholder="Poid" name="poid">
                                     @error('poid')
                                     <span  class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <label>Taille</label>
+                                    <label>Taille (optionel)</label>
                                     <input type="text" class="form-control @error('taille') is-invalid
                                        @enderror" placeholder="Taille" name="taille">
                                     @error('taille')
                                     <span  class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <label>Tension</label>
+                                    <label>Tension (optionel)</label>
                                     <input type="text" class="form-control @error('tension') is-invalid
                                        @enderror" placeholder="Tension" name="tension">
                                     @error('tension')
                                     <span  class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <label>Activite Personnelle</label>
-                                    <input type="text" class="form-control @error('activite') is-invalid
-                                       @enderror" placeholder="Activite Personnelle" name="activite">
-                                    @error('activite')
+                                    <label>Symptomes Actuelles</label>
+                                    <input type="text" class="form-control @error('symptome') is-invalid
+                                       @enderror" placeholder="symptomes actuelles" name="symptomes">
+                                    @error('symptome')
                                     <span  class="text-danger">{{ $message }}</span>
                                     @enderror
 
                                  </div>
                          <div class="col s6">
-                                    <label>Temperature </label>
-                                    <input type="text" name="temperature" id="yourText" name="precision" class="form-control" >
-                                    <label>Pression Arterielle </label>
-                                    <input type="text" name="pression" id="yourText"  class="form-control" >
+                                     <label>Pression Arterielle (optionel)</label>
+                                    <input type="text" name="pression"   class="form-control" >
                                     <label>Activites Quotidiennes </label>
                                     <input type="text"  name="activite" class="form-control @error('activite') is-invalid
                                        @enderror" id="" >
                                     @error('activite')
                                     <span class="text-danger"> {{ $message }}</span>
                                     @enderror
+                                    <label>Preciser Les Allergies (optionnel) </label>
+                                    <input type="text" name="add_allergie"  name="precision" class="form-control" placeholder="preciser les allergies">
+
+
+                                    {{-- <label>Le Patient A t'il (elle) Des Allergies ?</label>&nbsp;&nbsp;
+                                    <br/>
+                                    <input type="radio" name="allergie" id="yourBox" value="1"> OUI&nbsp;&nbsp;
+                                    <input type="radio" name="allergie" id="yourcheck " value="0"> NON
+                                    <br/><br/> --}}
+                                    <label for="medicament">Medicament(s) Prise(s) Actuellement(s)</label>
+                                    <input type="text" class="form-control" placeholder="medicament prises actuellement" name="medicaments">
+                                    {{-- <label for="resultat">Resultat(s) Examen(s) Anterieur(s)</label>
+                                    <textarea class="form-control" cols="2" rows="3" name="resultat"></textarea> --}}
+                                    <label>Resulats D'examens Anterieurs</label>
+                                    <input type="text" name="temperature"  name="resultats" class="form-control" placeholder="resultats Examens Anterieurs" >
+
                                     <label>Diagnostique</label>
                                     <input type="text" class="form-control @error('diagnostique') is-invalid
                                        @enderror" placeholder="Diagnostique" name="diagnostique">
                                     @error('diagnostique')
                                     <span  class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <label>Le Patient A t'il (elle) Des Allergies ?</label>&nbsp;&nbsp;
-                                    <br/>
-                                    <input type="radio" name="allergie" id="yourBox" value="1"> OUI&nbsp;&nbsp;
-                                    <input type="radio" name="allergie" id="yourcheck " value="0"> NON
-                                    <br/><br/>
-                                    <label>Preciser Ces Allergies </label>
-                                    <input type="text" name="add_allergie" id="yourText" name="precision" class="form-control" disabled>
-
-                                 </div>
+                                </div>
                                  <div class="col s4">
                                     <label>Antecedents Medicaux</label>
                                     <textarea name="antecedant" id="" cols="2" rows="3" class="form-control"></textarea>
@@ -130,7 +126,7 @@
                                     <span  class="text-danger">{{ $message }}</span>
 
                                 @enderror
-                                <label>Antecedents Familliales</label>
+                                <label>Antecedents Familliaux</label>
 
                                 <textarea name="antecedant_familliale" id="" cols="3" rows="3" class="form-control"></textarea>
                                 @error('antecedant')
@@ -206,8 +202,8 @@
                            <tr>
                             <td style="cursor: pointer">
 
-                                <a type="button" href="{{ route('update.consultation',$consultations->id) }}" class="btn btn-secondary btn btn-rounded">
-                                <i class="fa fa-archive"></i></a>
+                                <a type="button" href="{{ route('update.consultation',$consultations->id) }}" class="btn btn-danger btn btn-rounded">
+                                <i class="fa fa-minus"></i></a>
 
                                </td>
                               <td>{{ $consultations->responsable }}</td>
@@ -223,10 +219,12 @@
 
                                  {{-- <a type="button" class="text-white btn btn-rounded btn-secondary" href="{{ route('add.prescription',$consultations->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-pencil color-info"></i>
                                  </span>Prescrire</a> --}}
-                                 <button  type="button"  class="btn btn-rounded btn-secondary" data-toggle="modal" data-target="#exampleModalpopover{{ $consultations->id }}"><i class="fa fa-book text-white"></i> </button>
+                                 <a  type="button"  class="btn btn-rounded btn-secondary" href="{{ route('addprescription',$consultations->id) }}"   data-toggle="tooltip" data-placement="top" title="Prescription medicale"><i class="fa fa-book text-white"></i> </a>
                                  <a  class="btn btn-rounded btn-warning" href="{{ route('fichier.consultation',$consultations->id) }}"  data-toggle="tooltip" data-placement="top" title="fichier consultation"><i class="fa fa-file text-white"></i> </a>
 
                               </td>
+
+
                            </tr>
                            <div class="modal fade" id="exampleModalCenter{{ $consultations->id }}">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -261,82 +259,6 @@
                             </div>
                         </div>
 
-                           <div class="modal fade" id="exampleModalpopover{{ $consultations->id }}">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Prescription Pour {{ $consultations->patient->nom }} &nbsp;{{ $consultations->patient->prenom }}</h5>
-                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form method="post" action="{{ route('add.presciption') }}"  enctype="multipart/form-data">
-                                            @csrf
-
-                                        <label for="patient">Code Patient</label>
-                                        <input type="text" class="form-control" value="{{ $consultations->patient_id }}" readonly name="patient_id">
-                                        <label for="responsable">Responsable Prescription</label>
-                                        <input type="text" name="responsable" id="" class="form-control" name="responsable" value="{{ auth()->user()->name??'' }}">
-                                        <label for="element">Element A Prescrire</label>
-                                        <select  id="mySelect" class="form-control" onChange="check(this);">
-                                            <option>Prescription Medicale</option>
-                                            <option value="medecin">Prescription Medicament</option>
-                                            <option value="autre">Autre</option>
-                                            <option value="examen medicaux">Prescription Examen Medicaux</option>
-                                            <option value="therapie">Prescription De Thérapie</option>
-                                            <option value="Regime Alimentaire">Prescription Regime Alimentaire</option>
-                                        </select>
-                                        <div id="other-div" style="display: none">
-                                            <label for="dispositif">Dispositif</label>
-                                            <input type="text" class="form-control" name="dispositif" placeholder="Preciser Le Dispositif A Prescrire...">
-                                        </div>
-
-                                        <div id="other-medoc" style="display: none">
-                                            <label for="Medicament">Medicaments</label>
-                                            <select class="multi-select select2-hidden-accessible" name="medicament[]" multiple="" data-select2-id="3" tabindex="-1" aria-hidden="true" >
-
-                                                <optgroup label="selectionnez les medicaments">
-                                                    @foreach ($produit as $produits)
-
-
-                                                <option value="{{ $produits->designation }}<br/><br/>">{{ $produits->designation }}</option>
-                                                @endforeach
-
-                                                <label for="reponsable">Posologie</label>
-
-                                                <select multiple>
-
-                                                        <optgroup label="Selectionnez la posologie" >
-                                                                <option value="1 CPx3/j <br/><br/>">1 CPx3/j</option>
-                                                                <option value="1 CPx2/j <br/><br/>">1 CPx2/j</option>
-                                                                <option value="1 GELx3/j <br/><br/>">1 GELx3/j</option>
-                                                                <option value="1 GELx3/j <br/><br/>">1 GELx3/j</option>
-                                                            </optgroup>
-                                                        </select>
-
-
-
-                                                <label for="qte">Quantite</label>
-                                                <select id="remain-open" data-select2-id="remain-open" tabindex="-1" class="multi-select select2-hidden-accessible" aria-hidden="true" multiple name="qte[]">
-
-                                                    <option value="1 BOITE<br/><br/>">1 BOITE</option>
-                                                    <option value="2 BOITE<br/><br/>">2 BOITE</option>
-                                                    <option value="3 BOITE<br/><br/>">3 BOITE</option>
-                                                </select>
-                                        </div>
-                                        <label for="code">Code Consultation</label>
-                                        <input type="text" value="{{ $consultations->id }}" class="form-control" readonly>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                        <button type="submit" class="btn btn-primary">Valider</button>
-                                    </div>
-
-                                </form>
-                                </div>
-                            </div>
-                        </div>
                            <div class="modal fade" id="exampleModalLong{{ $consultations->id }}">
                               <div class="modal-dialog">
                                   <div class="modal-content">
@@ -425,6 +347,18 @@
       </div>
    </div>
 </div>
+<script>
+    function check(elem){
+        if(elem.selectedIndex==2){
+            document.getElementById('other-medoc').style.display='none';
+            document.getElementById("other-div").style.display='block';
+        }
+        if(elem.selectedIndex==1){
+            document.getElementById("other-div").style.display='none';
+            document.getElementById('other-medoc').style.display='block';
+        }
+    }
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
@@ -437,12 +371,11 @@
         toastr.success("{{ session('message') }}");
   @endif
   </script>
-    <script>
-        document.getElementById('yourBox').onchange = function() {
-        document.getElementById('yourText').disabled = !this.checked;
-        document.getElementById('yourcheck').disabled = this.checked;
-    };
 
-    </script>
-
+<script>
+    new MultiSelectTag('countries')  // id
+</script>
+<script>
+    new MultiSelectTag('dosage')  // id
+</script>
 @stop

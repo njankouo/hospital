@@ -32,6 +32,7 @@
                         <table id="example" class="display table table-hover" style="min-width: 845px">
                             <thead>
                                 <tr style="text-align: center">
+                                    <th >Code Patient</th>
                                     <th >Nom et Prenom</th>
 
                                     <th >Action</th>
@@ -41,7 +42,7 @@
                                 @foreach ($patient as $patients)
 
                                 <tr style="text-align: center">
-
+                                    <td>{{ $patients->id }}</td>
                                     <td>{{ $patients->nom }}  {{ $patients->nom }}</td>
 
                                        <td>

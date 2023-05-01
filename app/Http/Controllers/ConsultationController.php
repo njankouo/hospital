@@ -24,30 +24,30 @@ class ConsultationController extends Controller
 
     public function addConsultation(Request $request){
 
-        $request->validate([
-            'patient_id' => 'required',
-             'poid' => 'required',
-             'tension' => 'required',
-             'motif' => 'required',
-             'responsable' => 'required',
-             'taille' => 'required',
-             'diagnostique' => 'required',
-             'activite' => 'required',
-             'antecedant' => 'required',
-        ],[
-            'patient_id.required'=>'renseignez le patient',
-            'poid.required'=>'renseignez le poid',
-            'tension.required'=>'renseignez la tension',
-            'motif.required'=>'renseignez le motif',
-            'responsable.required'=>'renseignez le responsable de la consultation',
-            'taille.required'=>'renseignez la taille',
-            'diagnostique.required'=>'renseignez le diagnostique',
-            'activite.required'=>"renseignez l'activite quotidienne",
-            'antecedant.required'=>"renseignez l'antecedant",
-        ]);
+        // $request->validate([
+        //     'patient_id' => 'required',
+        //      'poid' => 'required',
+        //      'tension' => 'required',
+        //      'motif' => 'required',
+        //      'responsable' => 'required',
+        //      'taille' => 'required',
+        //      'diagnostique' => 'required',
+        //      'activite' => 'required',
+        //      'antecedant' => 'required',
+        // ],[
+        //     'patient_id.required'=>'renseignez le patient',
+        //     'poid.required'=>'renseignez le poid',
+        //     'tension.required'=>'renseignez la tension',
+        //     'motif.required'=>'renseignez le motif',
+        //     'responsable.required'=>'renseignez le responsable de la consultation',
+        //     'taille.required'=>'renseignez la taille',
+        //     'diagnostique.required'=>'renseignez le diagnostique',
+        //     'activite.required'=>"renseignez l'activite quotidienne",
+        //     'antecedant.required'=>"renseignez l'antecedant",
+        // ]);
 
         Consultation::create([
-            // dd($request->input('note'))
+        // dd($request->all()),
             'patient_id'=>$request->patient_id,
             'poid'=>$request->poid,
             'tension'=>$request->tension,
@@ -64,6 +64,9 @@ class ConsultationController extends Controller
             'antecedant_familliale'=>$request->antecedant_familliale,
             'autre_antecedant'=>$request->autre_antecedant,
             'note'=>$request->note,
+            'symptomes'=>$request->symptomes,
+            'medicaments'=>$request->medicaments,
+            'resultats'=>$request->resultats
            // 'resultat'=>$request->resultat,
         ]);
         return back()->with('message','consultation enregistre avec success');
@@ -73,8 +76,9 @@ class ConsultationController extends Controller
         $consultation->delete();
         return back()->with('message','consultation finalisé avec success');
     }
-    public function fichierConsultation(){
-        $pdf=PDF::LoadView('consultations.fichier');
+    public function fichierConsultation($id){
+        $consultation=Consultation::find($id);
+        $pdf=PDF::LoadView('consultations.fichier',compact('consultation'));
         return $pdf->stream();
     }
     public function addRdv(Request $request){
@@ -89,5 +93,10 @@ class ConsultationController extends Controller
             'patient_id'=>$request->patient_id
         ]);
 return back()->with('success','prochain rendez-vous etablit');
+    }
+    public function addPrescription($id){
+        $consultations=Consultation::find($id);
+        $produit=Produit::all();
+        return view('consultations.addprescription',compact('consultations','produit'));
     }
 }

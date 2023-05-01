@@ -76,7 +76,7 @@
                                             <input type="text" class="form-control" placeholder="adresse Patients..." name="adresse">
                                         </div>
                                         <div class="col-sm-6 mt-2 mt-sm-0">
-                                            <input type="text" class="form-control" placeholder="date de naissance exp: 04/04/1889" name="date">
+                                            <input type="date" class="form-control" placeholder="date de naissance exp: 04/04/1889" name="date">
                                         </div>
                                     </div>
                                     <br>
@@ -120,7 +120,11 @@
                                     <br>
                                     <div class="form-row">
                                         <div class="col-sm-6 mt-2 mt-sm-0">
-                                            <input type="text" class="form-control" placeholder="Etat Civil..." name="etat">
+                                            <select name="etat" id="" class="form-control">
+                                                <option value=""@disabled(true)>Renseignez Votre Regime</option>
+                                                <option value="celibataire">Celibataire</option>
+                                                <option value="marié(e)">Marié(e)</option>
+                                            </select>
                                         </div>
                                         <div class="col-sm-6 mt-2 mt-sm-0">
                                             <input type="text" class="form-control" placeholder="Age..." name="age">
@@ -155,6 +159,7 @@
                             <table id="example" class="display table table-hover" style="min-width: 845px">
                                 <thead>
                                     <tr style="text-align: center">
+                                        <th>Code Patient</th>
                                         <th >Nom</th>
                                         <th >Prenom</th>
 
@@ -169,7 +174,7 @@
                                     @foreach ($patient as $patients)
 
                                     <tr style="text-align: center">
-
+                                        <td>{{ $patients->id }}</td>
                                         <td>{{ $patients->nom }}</td>
 
                                         <td>{{ $patients->prenom }}</td>

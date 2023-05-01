@@ -46,6 +46,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     @foreach ($ordonance as $ordonances)
                                    <tr>
 
@@ -64,6 +65,7 @@
                                         </span>Imprimer</a> --}}
                                         <a  href="{{ route('ordonance.pdf',$ordonances->id) }}" class="mr-2 btn btn-rounded btn-primary" data-toggle="tooltip" data-placement="top" title="ordonance"><i class="fa fa-download text-light"></i> </a>
                                         <button class="mr-2 btn btn-rounded btn-secondary"data-toggle="modal" data-target="#exampleModalpopover{{ $ordonances->id }}"><i class="fa fa-edit text-light"></i> </button>
+                                        <a class="mr-2 btn btn-rounded btn-danger" href="{{ route('delete.ordonance',$ordonances->id) }}"><i class="fa fa-trash text-light"></i> </a>
 
                                     </td>
                                     <div class="modal fade" id="exampleModalpopover{{ $ordonances->id }}">
@@ -75,23 +77,25 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <input class="select2-search__field" type="hidden" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Select a state" style="width: 275.984px;">
+                                                    <form action="">
 
                                                      <label for="Medicament">Medicaments</label>
-                                                    <select class="multi-select select2-hidden-accessible" name="medicament[]" multiple="" data-select2-id="3" tabindex="-1" aria-hidden="true" >
 
-                                                        <optgroup label="selectionnez les medicaments">
+                                                     <select class="multi-select select2-hidden-accessible" name="medicament[]" multiple="" data-select2-id="3" tabindex="-1" aria-hidden="true" >
+
+
                                                             @foreach ($produit as $produits)
 
 
                                                         <option value="{{ $produits->designation }}<br/><br/>">{{ $produits->designation }}</option>
                                                         @endforeach
-                                                    </optgroup>
+
                                                     </select>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                                     <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                                </form>
                                                 </div>
                                             </div>
                                         </div>

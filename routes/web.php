@@ -91,6 +91,8 @@ Route::get('hospitalisation/finish',[HospitalisationController::class,'hospitFin
 Route::get('soft/commande/{id}',[CommandeController::class,'softcommande'])->name('soft.commande');
 Route::get('commande/delete',[CommandeController::class,'restored'])->name('commande.restored');
 Route::get('facture/commande/{id}',[CommandeController::class,'facture'])->name('facture.commande');
+Route::get('add/prescription/{id}',[ConsultationController::class,'addPrescription'])->name('addprescription');
+Route::get('delete/ordonance/{id}',[PrescriptionController::class,'deleteOrdonanace'])->name('delete.ordonance');
 
 
 Route::POST('send/message',[RdvController::class,'saveMessage'])->name('send.message');

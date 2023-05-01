@@ -37,14 +37,18 @@ class HomeController extends Controller
             if($appointment->status==0){
 
             }else{
+                if(Auth()->user()->name==$appointment->responsable){
+
+
             $events[] = [
-                'title' => $appointment->titre . ' ('.$appointment->patient->nom.')',
+                'title' => $appointment->titre . ' ('.$appointment->patient->nom.')'.'('.$appointment->responsable.')',
                //'start' => $appointment->created_at,
                 'start' => $appointment->date,
                 'end' => $appointment->end_date,
             ];
         }
     }
+}
         return view('home',compact('events','count'));
     }
 }

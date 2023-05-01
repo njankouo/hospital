@@ -35,7 +35,7 @@ class RdvController extends Controller
             $rdv=Rdv::all();
 
             foreach($rdv as $rdvs){
-                if($rdvs->date!=$request->input('date')){
+                if($rdvs->date!=$request->input('date') || $rdvs->responsable!=$request->input('responsable')){
 
                     Rdv::create([
                         'patient_id'=>$request->patient_id,
