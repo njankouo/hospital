@@ -164,7 +164,7 @@
                                         <th >Prenom</th>
 
                                         <th >Telephone</th>
-                                        <th>Etat</th>
+                                        {{-- <th>Etat</th> --}}
                                         {{-- <th >Nom Assurance</th>
                                         <th >Numero Assurance</th> --}}
                                         <th >Action</th>
@@ -183,7 +183,7 @@
                                             <td>
                                                 {{ $patients->telephone }}
                                             </td>
-                                            <td>
+                                            {{-- <td>
 
                                         @if ($patients->hospitalisation_count)
 
@@ -198,18 +198,18 @@
                                      @endif
 
 
-                                            </td>
+                                            </td> --}}
                                            <td>
 
                                             <span>
-                                                <a href="{{ route('update.patient',$patients->id) }}" class="mr-2 btn btn-rounded btn-primary" data-toggle="tooltip" data-placement="top" title="Edit" ><i class="fa fa-pencil text-light"></i> </a>
+                                                <a href="{{ route('update.patient',$patients->id) }}" class="mr-2 btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit" ><i class="fa fa-pencil text-light"></i> </a>
                                               </span>
 
-                                          <span> <a data-toggle="modal" data-target="#example-lg{{ $patients->id }}" data-item-id="1" class="mr-2 btn btn-rounded btn-success">
+                                          <span> <a data-toggle="modal" data-target="#example-lg{{ $patients->id }}" data-item-id="1" class="mr-2 btn btn-success">
                                             <i class="fa fa-eye text-light"></i>
                                             </a>
                                         </span>
-                                            <a style ="margin:2%" href="{{ route('dossier.patient',$patients->id) }}"class="mr-2 btn btn-rounded btn-primary" >
+                                            <a style ="margin:2%" href="{{ route('dossier.patient',$patients->id) }}"class="mr-2 btn btn-primary" >
                                                 <i class="fa fa-file text-light "></i>
                                             </a>
                                         </td>

@@ -202,8 +202,8 @@
                            <tr>
                             <td style="cursor: pointer">
 
-                                <a type="button" href="{{ route('update.consultation',$consultations->id) }}" class="btn btn-danger btn btn-rounded">
-                                <i class="fa fa-minus"></i></a>
+                                {{-- <a type="button" href="{{ route('update.consultation',$consultations->id) }}" class="btn btn-danger btn btn-rounded">
+                                <i class="fa fa-minus"></i></a> --}}
 
                                </td>
                               <td>{{ $consultations->responsable }}</td>
@@ -214,13 +214,13 @@
                               <td>
                                  {{-- <button  style="margin: 3%" type="button" class="text-white btn btn-rounded btn-primary" data-toggle="modal" data-target="#example-lg{{ $consultations->id }}" data-item-id="1"><span class="btn-icon-left text-info"><i class="fa fa-eye color-info"></i>
                                  </span>voir</button> --}}
-                                 <button type="button"   class="btn btn-rounded text-white btn-primary" data-toggle="modal" data-target="#exampleModalLong{{ $consultations->id }}"><i class="fa fa-eye text-white"></i> </button>
-                                 <button type="button"   class="btn btn-rounded text-white btn-warning" data-toggle="modal" data-target="#exampleModalCenter{{ $consultations->id }}"><i class="fa fa-calendar text-white"></i> </button>
+                                 <button type="button"   class="btn text-white btn-primary" data-toggle="modal" data-target="#exampleModalLong{{ $consultations->id }}"><i class="fa fa-eye text-white"></i> </button>
+                                 <button type="button"   class="btn text-white btn-warning" data-toggle="modal" data-target="#exampleModalCenter{{ $consultations->id }}"><i class="fa fa-calendar text-white"></i> </button>
 
                                  {{-- <a type="button" class="text-white btn btn-rounded btn-secondary" href="{{ route('add.prescription',$consultations->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-pencil color-info"></i>
                                  </span>Prescrire</a> --}}
-                                 <a  type="button"  class="btn btn-rounded btn-secondary" href="{{ route('addprescription',$consultations->id) }}"   data-toggle="tooltip" data-placement="top" title="Prescription medicale"><i class="fa fa-book text-white"></i> </a>
-                                 <a  class="btn btn-rounded btn-warning" href="{{ route('fichier.consultation',$consultations->id) }}"  data-toggle="tooltip" data-placement="top" title="fichier consultation"><i class="fa fa-file text-white"></i> </a>
+                                 <a  type="button"  class="btn btn-secondary" href="{{ route('addprescription',$consultations->id) }}"   data-toggle="tooltip" data-placement="top" title="Prescription medicale"><i class="fa fa-book text-white"></i> </a>
+                                 <a  class="btn btn-warning" href="{{ route('fichier.consultation',$consultations->id) }}"  data-toggle="tooltip" data-placement="top" title="fichier consultation"><i class="fa fa-file text-white"></i> </a>
 
                               </td>
 

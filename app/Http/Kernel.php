@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -28,6 +29,10 @@ class Kernel extends HttpKernel
      *
      * @var array<string, array<int, class-string|string>>
      */
+    protected function schedule(Schedule $schedule)
+{
+    $schedule->command('sms:send')->daily();
+}
     protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,

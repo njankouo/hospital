@@ -7,6 +7,7 @@ use App\Http\Controllers\ConditionnementController;
 use App\Http\Controllers\ConsultationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DossierController;
 use App\Http\Controllers\ExamenController;
 use App\Http\Controllers\FamilleController;
 use App\Http\Controllers\FormeGalleliqueController;
@@ -93,7 +94,9 @@ Route::get('commande/delete',[CommandeController::class,'restored'])->name('comm
 Route::get('facture/commande/{id}',[CommandeController::class,'facture'])->name('facture.commande');
 Route::get('add/prescription/{id}',[ConsultationController::class,'addPrescription'])->name('addprescription');
 Route::get('delete/ordonance/{id}',[PrescriptionController::class,'deleteOrdonanace'])->name('delete.ordonance');
-
+Route::get('/dosseir',[DossierController::class,'index'])->name('dossier');
+Route::get('dossier/medical/{id}',[DossierController::class,'dossier'])->name('dossier.medical');
+Route::get('dossier/download/{id}',[DossierController::class,'download_pdf'])->name('download');
 
 Route::POST('send/message',[RdvController::class,'saveMessage'])->name('send.message');
 Route::Post('forme',[FormeGalleliqueController::class,'addForme'])->name('add.forme');

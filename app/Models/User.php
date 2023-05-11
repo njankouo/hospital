@@ -59,4 +59,7 @@ class User extends Authenticatable
     {
         return $this->password;
     }
+    public function rdv(){
+        return $this->hasMany(Rdv::class);
+    }
 }

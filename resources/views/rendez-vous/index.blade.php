@@ -52,6 +52,8 @@
                                 </thead>
                                 <tbody>
                                   @foreach ($rdv as $rdvs)
+                                        @if(auth()->user()->name==$rdvs->user->name)
+
 
 
                                     <tr  data-toggle="modal" style="cursor:pointer">
@@ -62,7 +64,7 @@
                                             <i class="fa fa-check text-success"></i>
                                             @endif
                                         </td>
-                                        <td>{{$rdvs->responsable}}</td>
+                                        <td>{{$rdvs->user->name}}</td>
                                         <td>{{$rdvs->patient->nom}} {{$rdvs->patient->prenom}}</td>
                                         <td>{{ $rdvs->titre }}</td>
                                         <td>{{$rdvs->date}}</td>
@@ -130,6 +132,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                     @endforeach
                                 </tbody>
 
@@ -150,8 +153,17 @@
                                                     <div class="form-row">
                                                         <div class="col-sm-6">
                                                             <label>Responsable Rdv</label>
-                                                            <input type="text" class="form-control" placeholder="Responsable Rdv..." name="responsable" value="{{auth()->user()->name}}">
-                                                        </div>
+                                                            <select name="user_id" id="" class="form-control">
+                                                                @foreach ($user as $users)
+                                                                @if (auth()->check())
+
+
+                                                                <option value="{{ $users->id }}" checked>{{ $users->name }}</option>
+                                                                @endif
+                                                                @endforeach
+
+                                                            </select>
+                                                         </div>
                                                         <div class="col-sm-6">
                                                         <label>Date Rdv</label>
 

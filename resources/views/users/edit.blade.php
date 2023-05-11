@@ -27,7 +27,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Mise a Jour Utilisateurs</h3>
-                <form method="post" action="{{ route('updat.user',['user'=>$user->id]) }}">
+                <form method="post" action="{{ route('register',['user'=>$user->id]) }}">
                     @csrf
                     <input type="hidden" name="_method" value="put">
                 <button type="submit" class="btn btn-rounded btn-info" style="float: right"><span class="btn-icon-left text-info"><i class="fa fa-check color-info"></i>

@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use App\Models\Rdv;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Infobip\InfobipClient;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Vonage\Message\Shortcode\Alert;
 
 class RdvController extends Controller
 {
@@ -19,7 +23,8 @@ class RdvController extends Controller
         $patient=Patient::all();
         $rdv=Rdv::orderBy('id','desc')->get();
         $tasks=Rdv::all();
-        return view('rendez-vous.index',compact('patient','rdv','tasks'));
+        $user=User::all();
+        return view('rendez-vous.index',compact('patient','rdv','tasks','user'));
     }
 
     public function save(Request $request){
@@ -32,26 +37,30 @@ class RdvController extends Controller
             'date.required'=>'renseignez la date de Rdv',
         ]);
 
-            $rdv=Rdv::all();
+                Rdv::create([
+                    'patient_id'=>$request->patient_id,
+                    'date'=>$request->date,
+                    'end_date'=>$request->end_date,
+                    'user_id'=>$request->user_id,
+                    'titre'=>$request->titre,
+                    'telephone'=>$request->telephone,
+            ]);
 
-            foreach($rdv as $rdvs){
-                if($rdvs->date!=$request->input('date') || $rdvs->responsable!=$request->input('responsable')){
+            return back()->with('success','Rendez-Vous Creé avec succes');
 
-                    Rdv::create([
-                        'patient_id'=>$request->patient_id,
-                        'date'=>$request->date,
-                        'end_date'=>$request->end_date,
-                        'responsable'=>$request->responsable,
-                        'titre'=>$request->titre,
-                        'telephone'=>$request->telephone,
-                ]);
 
-                return back()->with('message','Rendez-Vous Creé avec succes');
 
-                }else{
-                    return back()->with('error','Cette Plage D\'horaire est deja prise');
-                }
-            }
+
+
+
+
+
+                  //  dd($request->all());
+
+
+
+
+
 
     }
         public function generateTelephone(Request $request){
@@ -125,25 +134,7 @@ class RdvController extends Controller
     }
     public function  saveMessage(){
 
-        try{
-            $basic  = new \Vonage\Client\Credentials\Basic("eced6fc6", "XbyUsIVxXcwm5P65");
-            $client = new \Vonage\Client($basic);
-            $response = $client->sms()->send(
-                new \Vonage\SMS\Message\SMS($_POST['telephone'], 'centre de sante du nil', $_POST['message'])
-            );
 
-    //dd($request->all());
-    $message = $response->current();
-
-    // if ($message->getStatus() == 0) {
-    //     echo "The message was sent successfully\n";
-    // } else {
-    //     echo "The message failed with status: " . $message->getStatus() . "\n";
-    // }
-    return back()->with('message','message envoyé avec succes');
-        }catch(Exception $e){
-            return back()->with('error',"erreur survenue l'ors de l'envoie du message");
-        }
         }
 
         public function softrdv($id){
@@ -174,4 +165,33 @@ class RdvController extends Controller
     ]);
     return back()->with('success','Rdv Mis A Jour Avec Succes');
 }
+
+
+/**message automatise avec infobip
+ *
+ */
+
+ public function getMessage(){
+        $rdv=Rdv::where('date','>',Carbon::now())->where('status','=',0)->get();
+        $infobip=new Infobip();
+        $infobip->setApikey(config('app.infobip_api_key'));
+
+
+        foreach($rdv as $rdvs){
+            $message=[
+                    'from'=>'Monica',
+                    'to'=>$rdvs->telephone,
+                    'text'=>'vous avez un rendz-vous demain',
+            ];
+
+            $response=$infobip->sendMessage($message);
+            if($response->status==200){
+                echo 'message envoye';
+            }else{
+                echo 'message non envoye';
+            }
+
+        }
+
+ }
 }

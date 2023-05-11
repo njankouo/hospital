@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'e36e996cb46addf9b35503ce2abbd8e4d6e50e00',
+        'reference' => 'da748a90a40461998ee941d30e92f04b740d7bff',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -406,6 +406,15 @@
                 0 => 'v8.83.27',
             ),
         ),
+        'infobip/infobip-api-php-client' => array(
+            'pretty_version' => '3.2.0',
+            'version' => '3.2.0.0',
+            'reference' => '076be729a28aa77fb37620ba6fa4af06df973d96',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../infobip/infobip-api-php-client',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -442,7 +451,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'e36e996cb46addf9b35503ce2abbd8e4d6e50e00',
+            'reference' => 'da748a90a40461998ee941d30e92f04b740d7bff',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
