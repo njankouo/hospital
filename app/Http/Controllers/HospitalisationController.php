@@ -48,6 +48,9 @@ class HospitalisationController extends Controller
             'note'=>$request->note,
             'chambre_id'=>$request->chambre_id,
             'responsable'=>$request->responsable,
+            'medicament'=>$request->medicament,
+            'dose'=>$request->dose,
+            'antecedant'=>$request->antecedant
 
         ]);
         return back()->with('success','hospitalisation creé avec succes');

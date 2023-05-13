@@ -49,8 +49,7 @@
                                         <td>{{ $patients->created_at->DiffForHumans() }}</td>
                                         <td>
                                          <a href="{{ route('dossier.medical',$patients->id) }}"class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                                         <a href=""class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                         <a href="{{ route('download',$patients->id) }}"class="btn btn-warning"><i class="fa fa-download"></i></a>
+                                           <a href="{{ route('download',$patients->id) }}"class="btn btn-warning"><i class="fa fa-download"></i></a>
 
                                         </td>
                                     </tr>

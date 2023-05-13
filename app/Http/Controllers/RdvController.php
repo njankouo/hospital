@@ -11,6 +11,7 @@ use Infobip\InfobipClient;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Vonage\Message\Shortcode\Alert;
+use Twilio\Rest\Client;
 
 class RdvController extends Controller
 {
@@ -18,7 +19,11 @@ class RdvController extends Controller
     // public function __construct(Client $client){
     //     $this->client = $client;
     // }
+    // protected $client;
 
+    // public function __construct(Client $client){
+    //     $this->client = $client;
+    // }
     public function index(){
         $patient=Patient::all();
         $rdv=Rdv::orderBy('id','desc')->get();
@@ -171,27 +176,55 @@ class RdvController extends Controller
  *
  */
 
- public function getMessage(){
-        $rdv=Rdv::where('date','>',Carbon::now())->where('status','=',0)->get();
-        $infobip=new Infobip();
-        $infobip->setApikey(config('app.infobip_api_key'));
+//  public function getMessage(){
+//         $rdv=Rdv::where('date','>',Carbon::now())->where('status','=',0)->get();
+//         $infobip=new Infobip();
+//         $infobip->setApikey(config('app.infobip_api_key'));
 
 
-        foreach($rdv as $rdvs){
-            $message=[
-                    'from'=>'Monica',
-                    'to'=>$rdvs->telephone,
-                    'text'=>'vous avez un rendz-vous demain',
-            ];
+//         foreach($rdv as $rdvs){
+//             $message=[
+//                     'from'=>'Monica',
+//                     'to'=>$rdvs->telephone,
+//                     'text'=>'vous avez un rendz-vous demain',
+//             ];
 
-            $response=$infobip->sendMessage($message);
-            if($response->status==200){
-                echo 'message envoye';
-            }else{
-                echo 'message non envoye';
-            }
+//             $response=$infobip->sendMessage($message);
+//             if($response->status==200){
+//                 echo 'message envoye';
+//             }else{
+//                 echo 'message non envoye';
+//             }
 
-        }
+//         }
 
- }
+//  }
+//  public function sendMessage(Request $request)
+//     {
+//         $this->validate($request, [
+//             'receiver' => 'required|max:15',
+//             'message' => 'required|min:5|max:155',
+//         ]);
+
+//         try {
+//             $accountSid = getenv("TWILIO_ACCOUNT_SID");
+//             $authToken = getenv("TWILIO_AUTH_TOKEN");
+//             $twilioNumber = getenv("TWILIO_PHONE_NUMBER");
+
+//             $client = new Client($accountSid, $authToken);
+
+//             $client->messages->create($request->receiver, [
+//                 'from' => $twilioNumber,
+//                 'body' => $request->message
+//             ]);
+
+//             return back()
+//             ->with('success','Sms has been successfully sent.');
+
+//         } catch (\Exception $e) {
+//             dd($e->getMessage());
+//             return back()
+//             ->with('error', $e->getMessage());
+//         }
+//     }
 }

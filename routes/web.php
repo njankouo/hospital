@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CaisseController;
+use App\Http\Controllers\CertificatController;
 use App\Http\Controllers\ChambreController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\ConditionnementController;
@@ -97,6 +98,9 @@ Route::get('delete/ordonance/{id}',[PrescriptionController::class,'deleteOrdonan
 Route::get('/dosseir',[DossierController::class,'index'])->name('dossier');
 Route::get('dossier/medical/{id}',[DossierController::class,'dossier'])->name('dossier.medical');
 Route::get('dossier/download/{id}',[DossierController::class,'download_pdf'])->name('download');
+Route::get('aptitude/{id}',[CertificatController::class,'index'])->name('aptitude');
+Route::get('/vaccination{id}',[CertificatController::class,'index2'])->name('vaccination');
+Route::get('/travail{id}',[CertificatController::class,'index3'])->name('travail');
 
 Route::POST('send/message',[RdvController::class,'saveMessage'])->name('send.message');
 Route::Post('forme',[FormeGalleliqueController::class,'addForme'])->name('add.forme');
@@ -119,6 +123,8 @@ Route::POST('ventes/save',[VenteController::class,'save_vente'])->name('save.ven
 Route::POST('addVente',[VenteController::class,'addvente'])->name('addvente.produit');
 Route::POST('add/prescription/examen',[ExamenController::class,'addPprescription'])->name('prescrition.examen');
 
+
+Route::post('send-sms', [ RdvController::class, 'sendMessage' ])->name('send.sms');
 
 Route::put('produit/edi/{produit}',[ProduitController::class,'editProduit'])->name('edition.produit');
 Route::put('edit/patient/{patient}',[PatientController::class,'Editpatient'])->name('edit.patient');

@@ -86,10 +86,10 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{ route('send.message') }}" method="post">
+                                                    <form action="{{ route('send.sms') }}" method="post" enctype="multipart/form-data">
                                                         @csrf
                                                   <label for="Telephone">Telephone</label>
-                                                  <input type="text" name="telephone" class="form-control" value="{{ $rdvs->telephone }}">
+                                                  <input type="text" name="receiver" class="form-control" value="{{ $rdvs->telephone }}">
                                                   <label for="message">Message</label>
                                                   <textarea name="message" id="" cols="5" rows="5" class="form-control"></textarea>
                                                 </div>

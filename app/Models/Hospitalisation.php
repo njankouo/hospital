@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Hospitalisation extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable=['responsable','patient_id','note','datedebut','datefin','chambre_id'];
+    protected $fillable=['responsable','patient_id','note','datedebut','datefin','chambre_id','medicament','antecedant','dose'];
 
     public function chambre(){
         return $this->belongsTo(Chambre::class,'chambre_id','id');

@@ -12,7 +12,7 @@
                         class="fa fa-users"></i><span class="nav-text">Utilisateurs</span></a>
 
             </li>
-            <li class="nav-label">Gest. Produits</li>
+            <li class="nav-label">Gestion De La pharmacie</li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="icon icon-chart-bar-33"></i><span class="nav-text">Produits En Stock</span></a>
                 <ul aria-expanded="false">
@@ -24,6 +24,14 @@
                     <li><a href="{{ route('add.livraisons') }}">Livraisons</a></li>
                 </ul>
             </li>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">   <span class="material-symbols-outlined">
+                shopping_cart_checkout
+                </span><span class="nav-text">Ventes Produits</span></a>
+            <ul aria-expanded="false">
+        <li><a href="{{ route('ventes') }}">Nouvelle Vente</a></li>
+        <li><a href="{{ route('ventes.produits') }}">Details Des Ventes</a></li>
+    </ul>
+</li>
             <li class="nav-label">Patients</li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="icon icon-world-2"></i><span class="nav-text">Gest. Patients</span></a>
@@ -35,17 +43,10 @@
                       <li><a href="{{route('dossier')}}">Dossiers Medicaux</a></li>
                 </ul>
             </li>
-            <li class="nav-label">Ventes</li>
+
             {{-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                 class="icon icon-shopping_cart_checkout"></i><span class="nav-text">Ventes Produits</span></a> --}}
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">   <span class="material-symbols-outlined">
-                    shopping_cart_checkout
-                    </span><span class="nav-text">Ventes Produits</span></a>
-                <ul aria-expanded="false">
-            <li><a href="{{ route('ventes') }}">Nouvelle Vente</a></li>
-            <li><a href="{{ route('ventes.produits') }}">Details Des Ventes</a></li>
-        </ul>
-    </li>
+
             {{-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="icon icon-plug"></i><span class="nav-text">Services</span></a>
                 <ul aria-expanded="false">
@@ -75,7 +76,7 @@
 
             <li class="nav-label">Caisse</li>
             <li><a class="" href="{{ route('caisse') }}" aria-expanded="false"><i
-                        class="icon icon-single-copy-06"></i><span class="nav-text">Paiements</span></a>
+                        class="icon icon-single-copy-06"></i><span class="nav-text">Facturation</span></a>
 
             </li>
 

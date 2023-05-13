@@ -1,3 +1,14 @@
+<style>
+     .content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 700px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+</style>
 @extends('layouts.master')
 
 @section('title','dossier patient')
@@ -34,7 +45,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#message">Dossier Patient</a>
+                        <a class="nav-link active" data-toggle="tab" href="#message">Certificats M&eacute;dicaux</a>
                     </li>
                 </ul>
 
@@ -144,11 +155,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table header-border table-hover verticle-middle">
+                                    <table class="content-table" style="text-align: center">
                                         <thead>
                                             <tr>
 
-                                                <th scope="col">Antecedants Familliales</th>
+                                                <th scope="col">Antecedants Familliaux</th>
                                                 <th scope="col">Antecedants Chirurgicaux</th>
                                                 <th scope="col">Autres Antecedants</th>
                                             </tr>
@@ -180,120 +191,25 @@
                     </div>
 
                     <div class="tab-pane fade active show" id="message">
-                        <div class="pt-4">
-                            <h4 style="text-align: center;color:blue;font-weight:bold;size:25px;text-transform:underline">CONSULTATIONS PATIENT</h4>
+                        <div class="row">
+                            <div class="col-4">
+                                <a href="{{ route('aptitude',$patient->id) }}">
+                                <img src="{{ asset('images/pdf.png') }}" alt="fichier pdf"width="105px" height="105px" />
+                                <p>Certificat M&eacute;dical D'aptitude</p></a>
 
-                                @foreach ($consultation as $consultations)
-                                @if($consultations->patient_id==$patient->id )
-
-                            <div class="card">
-
-                                <div class="card-header d-block">
-                                    <h4 class="card-title">CONSULTATION DU: {{ $consultations->created_at }}</h4>
-                                 </div>
-                                <div class="card-body">
-                                    <div id="accordion-seven" class="accordion accordion-header-bg accordion-bordered">
-                                        <div class="accordion__item">
-                                            <div class="accordion__header accordion__header--primary collapsed" data-toggle="collapse" data-target="#header-bg_collapseOne" aria-expanded="false">
-                                                <span class="accordion__header--icon"></span>
-                                                <span class="accordion__header--text"> Consultation Suivi Par: {{ $consultations->responsable }}</span>
-                                                <span class="accordion__header--indicator"></span>
-                                            </div>
-                                            <div id="header-bg_collapseOne" class="accordion__body collapse" data-parent="#accordion-seven" style="">
-                                                <div class="accordion__body--text">
-                                                    <h6 >NOM ET PRENOM: {{ $patient->nom }}&nbsp; {{ $patient->prenom }}</</h6>
-                                                    <h6 >AGE: {{ $consultations->age }}</</h6>
-                                                    <h6 >POID: {{ $consultations->poid }}</</h6>
-                                                    <h6 >TENSION: {{ $consultations->tension }}</</h6>
-                                                    <h6 >ALLERGIES: {{ $consultations->add_allergie }}</</h6>
-                                                    <h6 style="text-align: center;font-weight:bold">MOTIF CONSULTATION: {{ $consultations->motif }}</</h6>
-                                                    <h4 style="text-align: center">
-                                                        Symptomes:
-                                                    {{ $consultations->symptomes}}</h4>
-                                                    <h4 style="text-align:center;font-weight:bold">
-                                                        Medicaments Prises Actuellement:
-                                                        {{ $consultations->medicaments }}
-                                                    </h4>
-                                                    <h4 style="text-align:center;font-weight:bold">
-                                                        Resultats D'examens Anterieurs:
-                                                        {{ $consultations->resultats }}
-                                                    </h4>
-                                                    <h4 style="text-align:center;font-weight:bold">DIAGNOSTIQUE: {{ $consultations->diagnostique }}</</h6>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
                             </div>
-                            {{-- @else
-                            <h4 style="text-align: center;color:blue;font-weight:bold;size:25px;text-transform:underline">AUCUNE CONSULTATIONS N'A ETE EFFECTUEE POUR LE MOMENT...</h4> --}}
+                            <div class="col-4">
+                                <a href="{{ route('travail',$patient->id) }}">
+                                <img src="{{ asset('images/pdf.png') }}" alt="fichier pdf" width="105px" height="105px"/>
+                                <p> Certificat M&eacute;dical D'arret de travail</p></a>
 
-
-                            @endif
-                           @endforeach
-
-                           <h4 style="text-align: center;color:blue;font-weight:bold;size:25px;text-transform:underline;text-fixed:fixed">PRESCIPTIONS MEDICALES</h4>
-                           <div class="card">
-
-                            <div class="card-body">
-                                <div class="table-responsive">
-
-
-                                               {{-- @foreach ($prescription as $prescriptions)
-                                                   @if($prescriptions->patient_id==$patient->id)
-
-                                            <div id="accordion-nine" class="accordion accordion-active-header">
-                                                <div class="accordion__item">
-                                                    <div class="accordion__header collapsed" data-toggle="collapse" data-target="#active-header_collapseOne" aria-expanded="false">
-                                                        <span class="accordion__header--icon"></span>
-                                                        <span class="accordion__header--text">PRESCRIPTION DU: {{ $consultation->created_at }}</span>
-                                                        <span class="accordion__header--indicator"></span>
-                                                    </div>
-                                                    <div id="active-header_collapseOne" class="accordion__body collapse" data-parent="#accordion-nine" style="">
-                                                        <div class="accordion__body--text">
-                                                            <table class="table table-responsive-sm">
-                                                                <thead>
-                                                                    <tr>
-
-                                                                        <th>Medicament</th>
-                                                                        <th>Quantite</th>
-                                                                        <th>Posologie</th>
-
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-
-                                                               <tr>
-
-                                                                    <td>{!! html_entity_decode($prescriptions->medicament ) !!}
-                                                                </td>
-                                                                <td>{!! html_entity_decode($prescriptions->qte ) !!}
-                                                                </td>
-                                                                <td>{!! html_entity_decode($prescriptions->dosage ) !!}</td>
-
-                                                               </tr>
-                                                            </tbody>
-                                                        </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                                   @endif
-                                               @endforeach --}}
-
-
-
-
-
-
-                                </div>
                             </div>
-                        </div>
+                            <div class="col-4">
+                                <a href="{{ route('vaccination',$patient->id) }}">
+                                <img src="{{ asset('images/pdf.png') }}" alt="fichier pdf" width="105px" height="105px"/>
+                                <p>  Certificat M&eacute;dical De Vaccination</p></a>
+
+                            </div>
                         </div>
                     </div>
                 </div>

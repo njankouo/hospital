@@ -119,7 +119,7 @@
                                     </div>
                                     @endforeach
                                     <div data-backdrop="false" class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="example-lg">
-                                        <div class="modal-dialog modal-centered ">
+                                        <div class="modal-dialog modal-lg modal-centered  ">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Formulaire Hospitalisation</h5>
@@ -161,8 +161,31 @@
                                                                     <label id="date_fin">Suivie Par:</label>
                                                                     <input type="text" class="form-control" placeholder="Suivie Par:"  name="responsable" value="{{ Auth()->user()->name }}">
                                                                 </div>
-                                                                <br>
-                                                                <div class="col-sm-12 mt-2 mt-sm-0">
+                                                                <div class="col-12">
+
+
+                                                                <label for="patient">Patient</label>
+                                                                <select name="patient_id" id="patient" class="form-control">
+                                                                    @foreach ($patient as $patients)
+                                                                    <option value="{{ $patients->id }}">{{ $patients->nom }}</option>
+
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label for="medicament">M&eacute;dicament Prises Actuellements</label>
+                                                                <input type="text" class="form-control" name="medicament" id="medicament">
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label for="dose">dose</label>
+                                                                <input type="text" class="form-control" name="dose" id="dose">
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label for="antecedants">Antecedants M&eacute;dicaux</label>
+                                                                <textarea name="antecedant" id="antecedant" cols="5" rows="5" class="form-control"></textarea>
+                                                            </div>
+
+                                                                <div class="col-sm-6 mt-2 mt-sm-0">
                                                                     <label for="note">Motifs Hospitalisation</label>
                                                                  <textarea name="note" id="" cols="5" rows="5" class="form-control"></textarea>
                                                                 </div>

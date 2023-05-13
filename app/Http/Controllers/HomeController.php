@@ -37,11 +37,11 @@ class HomeController extends Controller
             if($appointment->status==0){
 
             }else{
-                if(Auth()->user()->name==$appointment->responsable){
+                if(Auth()->user()->name==$appointment->user->name){
 
 
             $events[] = [
-                'title' => $appointment->titre . ' ('.$appointment->patient->nom.')'.'('.$appointment->responsable.')',
+                'title' => $appointment->titre .' ('.$appointment->patient->nom.')'.'('.$appointment->user->name.')',
                //'start' => $appointment->created_at,
                 'start' => $appointment->date,
                 'end' => $appointment->end_date,
