@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Infobip\InfobipClient;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Vonage\Message\Shortcode\Alert;
 use Twilio\Rest\Client;
@@ -33,25 +34,41 @@ class RdvController extends Controller
     }
 
     public function save(Request $request){
-        $request->validate([
-            'patient_id'=>'required',
-            'date'=>'date',
-            //'responsable'=>'required',
-        ],[
-            'patient_id.required'=>'renseignez le patient',
-            'date.required'=>'renseignez la date de Rdv',
-        ]);
 
-                Rdv::create([
-                    'patient_id'=>$request->patient_id,
-                    'date'=>$request->date,
-                    'end_date'=>$request->end_date,
-                    'user_id'=>$request->user_id,
-                    'titre'=>$request->titre,
-                    'telephone'=>$request->telephone,
-            ]);
+            $start_time = Carbon::parse($request->date);
+            $end_time = Carbon::parse($request->end_date);
+            $duree = $start_time->diffInMinutes($end_time);
+           // dd($duree);
+          //  echo "La durée du rendez-vous est de $duree minutes.";
+            // Vérifier si le nouveau rendez-vous chevauche un rendez-vous existant pour le médecin
+            $user = User::findOrFail($request->user_id);
+            $rdv = $user->rdv()->where(function($query) use ($start_time, $end_time) {
+                $query->whereBetween('date', [$start_time, $end_time])
+                      ->orWhereBetween('end_date', [$start_time, $end_time])
+                      ->orWhere(function($query) use ($start_time, $end_time) {
+                          $query->where('date', '<=', $start_time)
+                                ->where('end_date', '>=', $end_time);
+                      });
+            })->get();
 
-            return back()->with('success','Rendez-Vous Creé avec succes');
+            if ($rdv->count() > 0) {
+             return back()->with('error','plage horaire déja utilisé veuillez re-programmer le rendez-vous');
+            }
+
+            // Créer le nouveau rendez-vous
+            $appointment = new Rdv;
+            $appointment->date = $start_time;
+            $appointment->end_date = $end_time;
+            $appointment->patient_id = $request->patient_id;
+            $appointment->titre = $request->titre;
+            $appointment->telephone = $request->telephone;
+            $appointment->user_id = $request->user_id;
+        //    $appointment->duration=$duree;
+            $appointment->save();
+
+            return back()->with('message','rendez-vous crée avec succes');
+
+        }
 
 
 
@@ -59,15 +76,6 @@ class RdvController extends Controller
 
 
 
-
-                  //  dd($request->all());
-
-
-
-
-
-
-    }
         public function generateTelephone(Request $request){
             $req=Patient::select('tel')->where('id',$request->id)->first();
             return response()->json($req);
@@ -146,7 +154,7 @@ class RdvController extends Controller
             $rdv=Rdv::find($id);
 
             $rdv->delete();
-            return back()->with('success','rendez-vous annulé avec success');
+            return back()->with('message','rendez-vous annulé avec success');
         }
 
         public function RdvAnule(){
@@ -156,19 +164,19 @@ class RdvController extends Controller
         public function restoration($id){
             Rdv::whereId($id)->restore();
 
-            return back()->with('success','rendez-vous Restorer avec succes');
+            return back()->with('message','rendez-vous Restorer avec succes');
         }
- public function updating(Request $request,Rdv $rdv)
+ public function updating(Request $request,Rdv $rdvs)
 {
     $request->validate([],[]);
 
-    $rdv->update([
+    $rdvs->update([
         'date'=>$request->date,
 
         'titre'=>$request->titre,
-      //  dd($request->all())
+      dd($request->all())
     ]);
-    return back()->with('success','Rdv Mis A Jour Avec Succes');
+    return back()->with('message','Rdv Mis A Jour Avec Succes');
 }
 
 

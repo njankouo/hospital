@@ -235,16 +235,16 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('rdv.consultation') }}" method="post">
+                                        <form action="{{ route('add.rdv') }}" method="post">
                                             @csrf
                                         <label for="date">Date RDV</label>
                                         <input type="datetime-local" name="date" id="date" class="form-control">
                                         <label for="end">Fin RDV</label>
                                         <input type="datetime-local" class="form-control" name="end_date">
                                         <label for="motif">Motif</label>
-                                        <input type="text" name="motif" class="form-control" placeholder="motif du Rdv...">
+                                        <input type="text" name="titre" class="form-control" placeholder="motif du Rdv...">
                                         <label for="responsable">Suivi Par</label>
-                                        <input type="text" value="{{ auth()->user()->name ??''}}" class="form-control" readonly name="responsable">
+                                        <input type="text" value="{{ auth()->user()->id }}" class="form-control" readonly name="user_id">
                                         <label for="code">Code Consultation</label>
                                         <input type="text" name="code" id="" class="form-control" value="{{ $consultations->id }}" readonly>
                                         <label for="code_patient">Code Patient</label>

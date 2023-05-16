@@ -69,7 +69,9 @@ Route::get('consult',[ConsultationController::class,'new'])->name('save.consulta
 //Route::get('add/prescription/{id}',[PrescriptionController::class,'index'])->name('add.prescription');
 Route::get('ordonance',[PrescriptionController::class,'ordonance'])->name('ordonance.view');
 Route::get('ordonance/pdf/{id}',[PrescriptionController::class,'ordonancePdf'])->name('ordonance.pdf');
+
 Route::get('rendez/vous',[RdvController::class,'index'])->name('rdv.view');
+
 Route::get('hospitalisation',[HospitalisationController::class,'index'])->name('hospitalisation');
 Route::get('produit/pdf',[ProduitController::class,'pdf'])->name('produit.pdf');
 Route::get('ventes/create/{id}',[VenteController::class,'save'])->name('add.vente');
@@ -116,7 +118,9 @@ Route::POST('add/rdv/consultation',[ConsultationController::class,'addRdv'])->na
 Route::POST('chambre',[ChambreController::class,'save'])->name('add.chambre');
 Route::POST('add/consultation',[ConsultationController::class,'addConsultation'])->name('add.consultations');
 Route::POST('add/prescription/',[PrescriptionController::class,'savePrescription'])->name('add.presciption');
-Route::POST('add/rdv',[RdvController::class,'save'])->name('add.rdv');
+
+Route::POST('add/rdv/',[RdvController::class,'save'])->name('add.rdv');
+
 Route::get('add/rdvs',[RdvController::class,'sendCustomMessage']);
 Route::POST('add/hospitalisation',[HospitalisationController::class,'save'])->name('add.hospitalisation');
 Route::POST('ventes/save',[VenteController::class,'save_vente'])->name('save.vente');
@@ -134,4 +138,5 @@ Route::PUT('ajouter/produits/{commande}',[CommandeController::class,'addLivraiso
 Route::get('consultations/{id}',[ConsultationController::class,'update_consultation'])->name('update.consultation');
 Route::put('caisses/{consultation}',[CaisseController::class,'update_caisse'])->name('update.consultations');
 Route::PUT('update/rdv/{rdv}',[RdvController::class,'updat_rdv'])->name('update.rdv');
+
 Route::PUT('rdvs/updat/{rdvs}',[RdvController::class,'updating'])->name('edit.rdv');

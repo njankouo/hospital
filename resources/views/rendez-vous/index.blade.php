@@ -52,7 +52,7 @@
                                 </thead>
                                 <tbody>
                                   @foreach ($rdv as $rdvs)
-                                        @if(auth()->user()->name==$rdvs->user->name)
+                                        {{-- @if(auth()->user()->name==$rdvs->user->name) --}}
 
 
 
@@ -70,14 +70,14 @@
                                         <td>{{$rdvs->date}}</td>
 
                                         <td>
-                                            <a class="btn btn-rounded btn-success"   data-toggle="modal" data-target="#exampleModalCenter{{ $rdvs->id }}"><i class="fa fa-pencil text-white"></i> </a>
-                                                <a class="btn btn-rounded btn-primary" data-toggle="modal" data-target="#exampleModalpopover{{ $rdvs->id }}"><i class="fa fa-telegram text-light"></i></a>
+                                            <a class="btn btn-success"   data-toggle="modal" data-target="#exampleModalCenter{{ $rdvs->id }}"><i class="fa fa-pencil text-white"></i> </a>
+                                                {{-- <a class="btn btn-rounded btn-primary" data-toggle="modal" data-target="#exampleModalpopover{{ $rdvs->id }}"><i class="fa fa-telegram text-light"></i></a> --}}
                                                 @if ($rdvs->status==1)
-                                                <a type="button" class="btn btn-rounded btn-danger" href="{{ route('soft.rdv',$rdvs->id) }}"><i class="fa fa-trash text-white"></i> </a>
+                                                <a type="button" class="btn btn-danger" href="{{ route('soft.rdv',$rdvs->id) }}"><i class="fa fa-trash text-white"></i> </a>
                                                 @endif
                                             </td>
                                     </tr>
-                                    <div class="modal fade" id="exampleModalpopover{{$rdvs->id}}">
+                                    {{-- <div class="modal fade" id="exampleModalpopover{{$rdvs->id}}">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -100,7 +100,7 @@
                                             </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="modal fade" id="exampleModalCenter{{ $rdvs->id }}">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -132,7 +132,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @endif
+                                    {{-- @endif --}}
                                     @endforeach
                                 </tbody>
 

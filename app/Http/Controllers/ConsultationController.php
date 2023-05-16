@@ -86,7 +86,7 @@ class ConsultationController extends Controller
 
         Rdv::create([
             'date'=>$request->date,
-            'responsable'=>$request->responsable,
+            'user_id'=>$request->user_id,
             'consultation_id'=>$request->consultation_id,
             'end_date'=>$request->end_date,
             'titre'=>$request->motif,
