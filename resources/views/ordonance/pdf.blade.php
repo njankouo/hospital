@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ordonance Medicale</title>
+    <title>Ordonance Medicale Ou Prescription M&eacute;dicales</title>
     <style>
 
 
@@ -68,13 +68,36 @@
     <section style="width:50%;height:3%">
      BP:63
     </section> --}}
-    <h4 style="text-align: center;font-weight:bold;font-style:italic">CENTRE HOSPITALIER DELUGE</h4>
-    <p>Douala-Cameroun</p>
-    <p>A L'ettention De {{ $ordonance->patient->nom }} &nbsp;{{ $ordonance->patient->prenom }}</p>
-    <h4 style="text-align: center;text-decoration:underline"> ORDONANCE MEDICALE</h4>
-    {{-- {!! DNS1D::getBarcodeHTML('4445645656', 'PHARMA') !!} --}}
+    <header>
 
+    <h6>Nom: {{ $ordonance->patient->nom }}</h6>
+    <h6>Telephone: {{ $ordonance->patient->telephone }}</h6>
+    <h6>Adresse: {{ $ordonance->patient->adresse }}</h6>
+
+        @if (isset($ordonance->examen))
+        <h4 style="text-align: center;text-decoration:underline">
+            Examen M&eacute;dical
+        </h4>
+        @else
+        <h4 style="text-align: center;text-decoration:underline">
+            Ordonance M&eacute;dicale
+        </h4>
+        @endif
+<hr style="background-color: blue">
+<h6 style="text-align: center;font-weight:bold;font-style:italic;margin:0px">centre m&eacute;dico-chirurgical d'urologie</h6>
+<h6 style="text-align: center;font-weight:bold;font-style:italic;margin:0px">Douala-Cameroun</h6>
+<h6 style="text-align: center;font-weight:bold;font-style:italic;margin:0px">+237 .........</h6>
+
+
+    {{-- {!! DNS1D::getBarcodeHTML('4445645656', 'PHARMA') !!} --}}
+</header>
     <section>
+
+        @if (isset($ordonance->examen))
+        <div style="text-align:center">
+        <h5>Type D'examen M&eacute;dical: {{ $ordonance->examen }}</h5>
+   </div>
+        @else
         <table class="content-table" style="text-align: center">
             <thead>
               <tr>
@@ -95,8 +118,10 @@
               </tr>
             </tbody>
         </table>
+        @endif
 
-       <p style="text-align: right;color:dimgrey;"> Prescrite Par :{{ $ordonance->responsable }}</p>
+
+       <p style="text-align: right;color:black; font-weight:bold"> Prescrite Par :{{ $ordonance->responsable }}</p>
     </section>
 <footer style="margin-bottom: 0">
     <p style="color:dimgrey;">{{ Carbon\Carbon::now() }}</p>

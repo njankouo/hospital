@@ -39,9 +39,15 @@ if($request->input('dosage')==''|| $request->input('medicament')=='' || $request
      $responsable = $request->input('responsable');
        $dispositif=$request->input('dispositif');
        $patient_id = $request->input('patient_id');
+        $examen=$request->input('examen');
+        $prescription_name=$request->input('prescription_name');
+        $consultation_id=$request->input('consultation_id');
        $prescription->patient_id =  $patient_id;
        $prescription->dispositif=$dispositif;
        $prescription->responsable =  $responsable;
+       $prescription->examen =  $examen;
+       $prescription->prescription_name =  $prescription_name;
+       $prescription->consultation_id =  $consultation_id;
        $prescription->save();
 
 }else{
@@ -50,13 +56,19 @@ if($request->input('dosage')==''|| $request->input('medicament')=='' || $request
        $responsable = $request->input('responsable');
        $patient_id = $request->input('patient_id');
        $qte = $request->input('qte');
+        $consultation_id=$request->input('consultation_id');
+
        $prescription['dosage'] = implode(',', $request->dosage);
        $prescription->patient_id =  $patient_id;
        $prescription->medicament = implode(',', $medicament);
        $prescription->responsable =  $responsable;
+       $prescription->consultation_id=$consultation_id;
        $prescription->qte = implode(',', $qte);
        $prescription->save();
 
+}
+if($request->has('examen')){
+    return redirect('/examen');
 }
        return redirect('/ordonance');
     }

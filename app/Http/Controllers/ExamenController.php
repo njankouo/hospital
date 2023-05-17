@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consultation;
+use App\Models\Examen;
 use App\Models\Patient;
 use App\Models\Prescription;
 use App\Models\Produit;
@@ -13,16 +14,16 @@ class ExamenController extends Controller
     //
 
     public function index(){
-        $patient=Patient::orderBy('id','desc')->get();
-        $consultation=Consultation::orderBy('id','asc')->get();
-        return view('examens.index',compact('patient','consultation'));
+        $patient=Prescription::orderBy('patient_id','desc')->get();
+        //$consultation=Consultation::orderBy('id','asc')->get();
+        return view('examens.index',compact('patient'));
     }
 
     public function option($id){
-        $patient=Patient::find($id);
-        $produit=Produit::all();
+        $patient=Prescription::find($id);
+      //  $produit=Produit::all();
 
-        return view('examens.info',compact('patient','produit'));
+        return view('examens.info',compact('patient'));
     }
 
     public function addPprescription(Request $request){
@@ -52,5 +53,27 @@ class ExamenController extends Controller
 
 
                return redirect('/ordonance');
+    }
+
+    public function save(Request $request){
+        //dd($request->all());
+        // $request->validate([
+        //     'file'=>'required',
+        //     'observation'=>'required',
+
+        // ],[
+            
+        // ]);
+        Examen::create([
+            'file'=>$request->file,
+            'date_naissance'=>$request->date_naissance,
+            'date_examen'=>$request->date_examen,
+            'observation'=>$request->observation,
+            'adresse'=>$request->adresse,
+            'patient_id'=>$request->patient_id,
+            'consultation_id'=>$request->consultation_id,
+            'traitement'=>$request->traitement
+        ]);
+        return back()->with('success','examen finalisé avec success');
     }
 }

@@ -18,4 +18,8 @@ class Consultation extends Model
     public function rdv(){
         return $this->hasMany(Rdv::class);
     }
+
+    public function prescription(){
+        return $this->hasMany(Prescription::class);
+    }
 }

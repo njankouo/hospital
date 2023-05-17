@@ -48,14 +48,14 @@
                 <input type="text" class="form-control" value="{{ $consultations->patient_id }}" readonly name="patient_id">
                 <label for="responsable">Responsable Prescription</label>
                 <input type="text" name="responsable" id="" class="form-control" name="responsable" value="{{ auth()->user()->name??'' }}">
-                <label for="element">Element A Prescrire</label>
-                <select  id="mySelect" class="form-control" onChange="check(this);">
+                <label for="element">prescription</label>
+                <select  id="mySelect" class="form-control" onChange="check(this);" name="prescription_name">
                     <option selected>Prescription Medicale</option>
-                    <option value="medecin">Prescription Medicament</option>
-                    <option value="autre">Autre</option>
-                    <option value="examen medicaux">Prescription Examen Medicaux</option>
-                    <option value="therapie">Prescription De Thérapie</option>
-                    <option value="Regime Alimentaire">Prescription Regime Alimentaire</option>
+                    <option value="medecin">Medicaments</option>
+                    <option value="autre">Autres</option>
+                    <option value="examen medicaux">Examens Medicaux</option>
+                    {{-- <option value="therapie">Prescription De Thérapie</option>
+                    <option value="Regime Alimentaire">Prescription Regime Alimentaire</option> --}}
                 </select>
                 <div id="other-div" style="display: none">
                     <label for="dispositif">Dispositif</label>
@@ -97,8 +97,21 @@
                             <option value="3 BOITE<br/><br/>">3 BOITE</option>
                         </select>
                 </div>
+                <div id="other-exams" style="display: none">
+                    <label for="examens">Types D'examens M&eacute;dicaux </label>
+
+                    <select name="examen" id="examens" class="form-control" name="examen">
+                        <option selected>
+                            faites le choix de l'examen m&eacute;dical
+                        </option>
+                        <option value="analyse de sang">Analyse de sang</option>
+                        <option value="radiographie">Radiographie</option>
+                        <option value="echographie">Echographie</option>
+                        <option value="IRM">IRM</option>
+                    </select>
+                </div>
                 <label for="code">Code Consultation</label>
-                <input type="text" value="{{ $consultations->id }}" class="form-control" readonly>
+                <input type="text" value="{{ $consultations->id }}" class="form-control" readonly name="consultation_id">
             </div>
 
             <div class="card-footer">
@@ -121,11 +134,21 @@
         function check(elem){
             if(elem.selectedIndex==2){
                 document.getElementById('other-medoc').style.display='none';
+                document.getElementById('other-exams').style.display='none';
                 document.getElementById("other-div").style.display='block';
             }
             if(elem.selectedIndex==1){
                 document.getElementById("other-div").style.display='none';
+                document.getElementById('other-exams').style.display='none';
                 document.getElementById('other-medoc').style.display='block';
+            }if(elem.selectedIndex==3){
+                document.getElementById("other-div").style.display='none';
+                document.getElementById('other-medoc').style.display='none';
+                document.getElementById('other-exams').style.display='block';
+            }if(elem.selectedIndex==0){
+                document.getElementById("other-div").style.display='none';
+                document.getElementById('other-medoc').style.display='none';
+                document.getElementById('other-exams').style.display='none';
             }
         }
     </script>

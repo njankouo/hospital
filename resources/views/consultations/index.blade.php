@@ -244,7 +244,7 @@
                                         <label for="motif">Motif</label>
                                         <input type="text" name="titre" class="form-control" placeholder="motif du Rdv...">
                                         <label for="responsable">Suivi Par</label>
-                                        <input type="text" value="{{ auth()->user()->id }}" class="form-control" readonly name="user_id">
+                                        <input type="text" value="" class="form-control" readonly name="user_id">
                                         <label for="code">Code Consultation</label>
                                         <input type="text" name="code" id="" class="form-control" value="{{ $consultations->id }}" readonly>
                                         <label for="code_patient">Code Patient</label>

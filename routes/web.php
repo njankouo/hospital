@@ -40,7 +40,10 @@ use App\Http\Controllers\VenteController;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    // Routes qui nécessitent une authentification
+
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('dasboard',[DashboardController::class,'index'])->name('dashboard');
 Route::get('patients',[PatientController::class,'index'])->name('patient');
@@ -126,7 +129,7 @@ Route::POST('add/hospitalisation',[HospitalisationController::class,'save'])->na
 Route::POST('ventes/save',[VenteController::class,'save_vente'])->name('save.vente');
 Route::POST('addVente',[VenteController::class,'addvente'])->name('addvente.produit');
 Route::POST('add/prescription/examen',[ExamenController::class,'addPprescription'])->name('prescrition.examen');
-
+Route::POST('add/examen',[ExamenController::class,'save'])->name('add.examen');
 
 Route::post('send-sms', [ RdvController::class, 'sendMessage' ])->name('send.sms');
 
@@ -140,3 +143,4 @@ Route::put('caisses/{consultation}',[CaisseController::class,'update_caisse'])->
 Route::PUT('update/rdv/{rdv}',[RdvController::class,'updat_rdv'])->name('update.rdv');
 
 Route::PUT('rdvs/updat/{rdvs}',[RdvController::class,'updating'])->name('edit.rdv');
+

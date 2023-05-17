@@ -37,6 +37,7 @@
                                 <thead>
                                     <tr>
                                         <th>Patient</th>
+
                                         <th>Suivi Par</th>
 
                                         <th>Medicament(s)</th>
@@ -48,13 +49,16 @@
                                 <tbody>
 
                                     @foreach ($ordonance as $ordonances)
+                                    @if (isset($ordonances->examen))
+                                        @else
+
                                    <tr>
 
                                     <td>{{ !empty($ordonances->patient) ? $ordonances->patient->nom:'' }} </td>
                                     <td>{!! html_entity_decode($ordonances->responsable) !!}</td>
                                     @if (isset($ordonances->dispositif))
                                         <td colspan="1"><span class="badge badge-primary"> {{ $ordonances->dispositif }}</span></td>
-                                    @else
+                                     @else
                                     <td>{!! html_entity_decode($ordonances->medicament) !!}</td>
                                     @endif
 
@@ -101,6 +105,7 @@
                                         </div>
                                     </div>
                                    </tr>
+                                   @endif
                                    @endforeach
                                 </tbody>
 

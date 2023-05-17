@@ -24,6 +24,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
+
     /**
      * The application's route middleware groups.
      *
@@ -32,7 +33,11 @@ class Kernel extends HttpKernel
     protected function schedule(Schedule $schedule)
 {
     $schedule->command('sms:send')->daily();
+    // $schedule->command('send:reminder-sms')->daily();
 }
+// protected $commands = [
+//     Commands\SendReminderSms::class,
+// ];
     protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
@@ -42,8 +47,12 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+           // \App\Http\Middleware\InactivityTimeoutMiddleware::class,
         ],
-
+        // 'auth' => [
+        //     \Illuminate\Auth\Middleware\Authenticate::class,
+        //     \App\Http\Middleware\InactivityTimeoutMiddleware::class,
+        // ],
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
