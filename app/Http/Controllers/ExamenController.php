@@ -8,15 +8,17 @@ use App\Models\Patient;
 use App\Models\Prescription;
 use App\Models\Produit;
 use Illuminate\Http\Request;
-
+use PDF;
 class ExamenController extends Controller
 {
     //
 
     public function index(){
-        $patient=Prescription::orderBy('patient_id','desc')->get();
-        //$consultation=Consultation::orderBy('id','asc')->get();
-        return view('examens.index',compact('patient'));
+        $prescription=Prescription::orderBy('id','desc')->get();
+        $consultation=Consultation::orderBy('id','asc')->get();
+        $patients=Patient::all();
+        $examen=Examen::orderBy('id','asc')->get();
+        return view('examens.index',compact('prescription','patients','examen','consultation'));
     }
 
     public function option($id){
@@ -62,7 +64,7 @@ class ExamenController extends Controller
         //     'observation'=>'required',
 
         // ],[
-            
+
         // ]);
         Examen::create([
             'file'=>$request->file,
@@ -75,5 +77,14 @@ class ExamenController extends Controller
             'traitement'=>$request->traitement
         ]);
         return back()->with('success','examen finalisé avec success');
+    }
+    public function viewPdf($id){
+        $patient=Examen::find($id);
+        $pdf=PDF::Loadview('examens.fichier',compact('patient'));
+        return $pdf->stream();
+    }
+    public function generation(Request $request){
+        $req=Patient::select('prenom','adresse','date')->where('id',$request->id)->first();
+        return response()->json($req);
     }
 }

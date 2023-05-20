@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Models\Rdv;
+use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 use Twilio\Rest\Client;
 
 class SendReminderSms extends Command
@@ -40,22 +42,24 @@ class SendReminderSms extends Command
     public function handle()
     {
 
-    $appointments = Rdv::whereBetween('date', [now(), now()->addDay()])
-                               ->get();
+    // $appointments = Rdv::whereBetween('date', [now(), now()->addDay()])
+    //                            ->get();
 
-    foreach ($appointments as $appointment) {
-        $sid    = env('TWILIO_ACCOUNT_SID');
-        $token  = env('TWILIO_AUTH_TOKEN');
-        $twilio = new Client($sid, $token);
+    // foreach ($appointments as $appointment) {
+    //     $sid    = env('TWILIO_ACCOUNT_SID');
+    //     $token  = env('TWILIO_AUTH_TOKEN');
+    //     $twilio = new Client($sid, $token);
 
-        $message = $twilio->messages
-                          ->create($appointment->telephone, // to
-                                   array(
-                                       "from" => env('TWILIO_FROM'),
-                                       "body" => "Reminder: Your appointment is tomorrow at " . $appointment->time
-                                   )
-                          );
+    //     $message = $twilio->messages
+    //                       ->create($appointment->telephone, // to
+    //                                array(
+    //                                    "from" => env('TWILIO_FROM'),
+    //                                    "body" => "Reminder: Your appointment is tomorrow at " . $appointment->time
+    //                                )
+    //                       );
+    // }
+
+   
     }
-}
     }
 

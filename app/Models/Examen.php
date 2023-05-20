@@ -15,5 +15,10 @@ class Examen extends Model
     public function consultation(){
             return $this->belongsTo(Consultation::class,'consultation_id','id');
     }
+    public function prescription(){
+        return $this->belongsTo(Prescription::class,'prescription_id','id');
+    }
+
+
     protected $fillable=['patient_id','consultation_id','date_naissance','date_examen','adresse','file','observation'];
 }

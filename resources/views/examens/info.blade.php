@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 @extends('layouts.master')
 
 @section('title','gestion des options')
@@ -26,6 +26,8 @@
             <h4 class="text-light">
              Patient: {{$patient->patient->nom}}&nbsp;{{$patient->patient->prenom}}
             </h4>
+            <a  href="{{ route('examen.pdf',$patient->id) }}" class="btn btn-primary"> <i class="fa fa-download text-light fa-2x"></i></a>
+
         </div>
     </div>
         </div>
@@ -46,30 +48,30 @@
                   <label for="date">Date Examen</label>
                   <input type="text" class="form-control" id="date" value="{{\Carbon\Carbon::now()}}" name="date_examen" readonly/>
                   <label for="file">fichier Examen</label>
-                  <input type="file" class="form-control" id="date" name="file"/>
+                  <input type="file" class="form-control"  onchange="previewFile(this)" name="file"/>
                   <label for="code">Code Enregistrement</label>
                   <input type="text" class="form-control" value="{{ $patient->id }}" name="consultation_id" readonly/>
-                
+
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary" style="float:right">Valider</button>
-          
+
         </div>
-    </div> 
+    </div>
     <div class="card-footer bg-primary"></div>
-    
+
     </div>
     <div class="col-5">
         <div class="card">
             <div class="card-header">
-                <h6>
+                <h6 style="text-align: center">
                     Resultat Examen M&eacute;dical {{ $patient->examen }}
                 </h6>
             </div>
-      
+
             <div class="card-body">
                 <section>
-                    <img src="{{asset('images/téléchargement.jpeg')}}" alt="" id="toZoom">
+                  <center><img src="{{asset('images/téléchargement.png')}}" alt="" id="previewImg" class="img-responsive" width="55%" height="85%"></center>
                     <div class="idMyModal modal">
                         <span class="close">&times;</span>
                         <img class="modal-content">
@@ -86,5 +88,29 @@
     </div>
 </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function previewFile(input) {
+            var file = $('input[type=file]').get(0).files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    $('#previewImg').attr('src', reader.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+     @if(Session::has('success'))
+      toastr.options =
+      {
+        "closeButton" : true,
+        "progressBar" : true
+      }
+            toastr.success("{{ session('success') }}");
+      @endif
+      </script>
 @stop

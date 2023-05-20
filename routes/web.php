@@ -106,6 +106,9 @@ Route::get('dossier/download/{id}',[DossierController::class,'download_pdf'])->n
 Route::get('aptitude/{id}',[CertificatController::class,'index'])->name('aptitude');
 Route::get('/vaccination{id}',[CertificatController::class,'index2'])->name('vaccination');
 Route::get('/travail{id}',[CertificatController::class,'index3'])->name('travail');
+Route::get('examen/pdf/{id}',[ExamenController::class,'viewPdf'])->name('examen.pdf');
+
+Route::get('/generate/exam',[ExamenController::class,'generation'])->name('generate');
 
 Route::POST('send/message',[RdvController::class,'saveMessage'])->name('send.message');
 Route::Post('forme',[FormeGalleliqueController::class,'addForme'])->name('add.forme');
@@ -114,7 +117,9 @@ Route::post('familles',[FamilleController::class,'addFamille'])->name('add.famil
 Route::post('conditionnements',[ConditionnementController::class,'addCondition'])->name('add.conditionnement');
 Route::Post('produits',[ProduitController::class,'addProduct'])->name('add.product');
 Route::POST('commandes',[CommandeController::class,'addCommande'])->name('add.commande');
+
 Route::Post('patients/add',[PatientController::class,'addPatient'])->name('add.patients');
+
 Route::post('valide/commande',[CommandeController::class,'ValidCommande'])->name('add.commandes');
 Route::POST('add/rdv/consultation',[ConsultationController::class,'addRdv'])->name('rdv.consultation');
 

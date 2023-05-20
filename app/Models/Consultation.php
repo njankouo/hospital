@@ -22,4 +22,7 @@ class Consultation extends Model
     public function prescription(){
         return $this->hasMany(Prescription::class);
     }
+    public function examen(){
+        return $this->hasMany(Examen::class);
+    }
 }

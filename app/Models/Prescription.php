@@ -18,4 +18,7 @@ class Prescription extends Model
     public function consultation(){
         return $this->belongsTo(Consultation::class,'consultation_id','id');
     }
+    public function examen(){
+        return $this->hasMany(Examen::class);
+    }
 }
