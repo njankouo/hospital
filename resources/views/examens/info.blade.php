@@ -36,8 +36,9 @@
              <div class="card">
             <div class="card-header"></div>
             <div class="card-body">
-            <form method="POST" action="{{route('add.examen')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('add.examen',['patient'=>$patient->id])}}" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="_method" value="PUT">
                 <div class="form-group">
                   <label for="code">Code Patient</label>
                   <input type="text" class="form-control" id="code" value="{{$patient->patient_id}}"readonly name="patient_id"/>
@@ -80,7 +81,7 @@
                 <label for="observations">Observations</label>
                 <textarea class="form-control" placeholder="resultats des examens" name="observation"></textarea>
                 <label id="traitements_recommande">Traitements Recommandés</label>
-                 <textarea class="form-control" name="recommandation" class="form-control" placeholder="traitements recommandés"></textarea>
+                 <textarea class="form-control" name="traitement" class="form-control" placeholder="traitements recommandés"></textarea>
             </div>
         </div>
     </form>

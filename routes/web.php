@@ -79,7 +79,9 @@ Route::get('hospitalisation',[HospitalisationController::class,'index'])->name('
 Route::get('produit/pdf',[ProduitController::class,'pdf'])->name('produit.pdf');
 Route::get('ventes/create/{id}',[VenteController::class,'save'])->name('add.vente');
 Route::get('dossier/patient/{id}',[PatientController::class,'dossier'])->name('dossier.patient');
-Route::get('examen',[ExamenController::class,'index'])->name('examen');
+
+Route::get('examen/vue/',[ExamenController::class,'index'])->name('examen.index');
+
 Route::get('examen/{id}',[ExamenController::class,'option'])->name('examen.info');
 Route::get('caisses',[CaisseController::class,'index'])->name('caisse');
 Route::get('ventes',[VenteController::class,'index'])->name('ventes');
@@ -109,6 +111,8 @@ Route::get('/travail{id}',[CertificatController::class,'index3'])->name('travail
 Route::get('examen/pdf/{id}',[ExamenController::class,'viewPdf'])->name('examen.pdf');
 
 Route::get('/generate/exam',[ExamenController::class,'generation'])->name('generate');
+Route::get('consultation/',[ConsultationController::class,'gen'])->name('generate.consultation');
+
 
 Route::POST('send/message',[RdvController::class,'saveMessage'])->name('send.message');
 Route::Post('forme',[FormeGalleliqueController::class,'addForme'])->name('add.forme');
@@ -125,16 +129,20 @@ Route::POST('add/rdv/consultation',[ConsultationController::class,'addRdv'])->na
 
 Route::POST('chambre',[ChambreController::class,'save'])->name('add.chambre');
 Route::POST('add/consultation',[ConsultationController::class,'addConsultation'])->name('add.consultations');
+
 Route::POST('add/prescription/',[PrescriptionController::class,'savePrescription'])->name('add.presciption');
 
-Route::POST('add/rdv/',[RdvController::class,'save'])->name('add.rdv');
+Route::POST('add/rdv',[RdvController::class,'save'])->name('add.rdv');
 
 Route::get('add/rdvs',[RdvController::class,'sendCustomMessage']);
 Route::POST('add/hospitalisation',[HospitalisationController::class,'save'])->name('add.hospitalisation');
 Route::POST('ventes/save',[VenteController::class,'save_vente'])->name('save.vente');
 Route::POST('addVente',[VenteController::class,'addvente'])->name('addvente.produit');
 Route::POST('add/prescription/examen',[ExamenController::class,'addPprescription'])->name('prescrition.examen');
-Route::POST('add/examen',[ExamenController::class,'save'])->name('add.examen');
+ROUTE::POST('new/examen',[ExamenController::class,'addExams'])->name('new.examen');
+
+
+Route::PUT('add/examen/{patient}',[ExamenController::class,'save'])->name('add.examen');
 
 Route::post('send-sms', [ RdvController::class, 'sendMessage' ])->name('send.sms');
 

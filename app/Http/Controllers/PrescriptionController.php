@@ -67,10 +67,10 @@ if($request->input('dosage')==''|| $request->input('medicament')=='' || $request
        $prescription->save();
 
 }
-if($request->has('examen')){
-    return redirect('/examen');
-}
-       return redirect('/ordonance');
+// if($request->has('examen')){
+//     return redirect('/examen');
+// }
+       return back()->with('success');
     }
 
     public function ordonance(){

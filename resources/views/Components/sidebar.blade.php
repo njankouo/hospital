@@ -39,7 +39,7 @@
                     <li><a href="{{ route('patient') }}">Liste Des Patients</a></li>
 
                     <li><a href="{{route('rdv.view')}}">Rendez-Vous</a></li>
-                      <li><a href="{{route('examen')}}">Examens Medicaux</a></li>
+                      <li><a href="{{route('examen.index')}}">Examens Medicaux</a></li>
                       <li><a href="{{route('dossier')}}">Dossiers Medicaux</a></li>
                 </ul>
             </li>

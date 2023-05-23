@@ -1,4 +1,14 @@
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @extends('layouts.master')
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+crossorigin="anonymous"
+referrerpolicy="no-referrer"
+></script>
 
 @section('title','Autres Examens')
 
@@ -40,10 +50,10 @@
                             <div class="modal-body">
 
                                 <div class="basic-form">
-                                    <form method="POST" action="{{route('add.examen')}}">
+                                    <form method="POST" action="{{route('new.examen')}}">
                                         @csrf
                                         <div class="form-row">
-                                        <div class="col-6">
+                                        {{-- <div class="col-6">
 
                                             <label for="code_consultation">Code Consultation</label>
                                             <select name="consultation_id" id="" class="form-control">
@@ -53,21 +63,22 @@
                                                 <option value="{{ $consultations->id }}">{{ $consultations->id }}</option>
                                                 @endforeach
                                             </select>
-                                        </div>
-                                        <div class="col-6">
+                                        </div> --}}
+                                        <div class="col-12">
                                             <label for="code_prescription">Code prescription</label>
-                                            <select name="prescription_id" id="" class="form-control">
+                                            <select name="prescription_id" id="mySelect2" class="form-control code">
+                                                <option>Selectionnez le code De Prescription pour examen médical</option>
                                                 @foreach ($prescription as $prescriptions)
-
-
+                                                    @if ($prescriptions->examen!=null)
                                                 <option value="{{ $prescriptions->id }}">{{ $prescriptions->id }}</option>
+                                                @endif
                                                 @endforeach
                                             </select>
-                                            <label for="code_prescription"></label>
+
                                         </div>
                                         </div>
                                         <hr style="background-color: blue">
-                                        <h6 style="text-align: center;font-weight:bold;font-style:italic">Informations Du Patient</h6>
+                                        <h6 style="text-align: center;font-weight:bold;font-style:italic">Informations Prescriptions M&eacute;dicale</h6>
                                         <div class="form-row">
                                             <div class="col-sm-6">
                                                 <label for="Nom">Nom Patient</label>
@@ -80,20 +91,20 @@
                                                 </select>
                                             </div>
                                             <div class="col-sm-6 mt-2 mt-sm-0">
-                                                <label for="prenom">Prenom Patient</label>
-                                                <input type="text" class="form-control prenom" placeholder="Prenom Patients..." name="prenom">
+                                                <label for="examen">Examen Medical</label>
+                                                <input type="text" class="form-control examen" placeholder="Examen Medical..." name="examen">
                                             </div>
                                             <br>
-                                            <div class="col-sm-6 mt-2 mt-sm-0">
-                                                <label for="adresse">Adresse</label>
-                                                <input type="text" class="form-control adresse" placeholder="adresse..." name="adresse">
+                                            <div class="col-sm-12 mt-2 mt-sm-0">
+                                                <label for="adresse">Prescrit Par:</label>
+                                                <input type="text" class="form-control responsable" placeholder="prescrit par..." name="responsable">
                                             </div>
-                                            <br>
+                                            {{-- <br>
                                             <div class="col-sm-6 mt-2 mt-sm-0">
                                                 <label for="adresse">Date Naissance</label>
                                                 <input type="text" class="form-control date" placeholder="date naissance..." name="date_naissance">
                                             </div>
-                                            <br>
+                                            <br> --}}
                                             <div class="col-sm-12 mt-2 mt-sm-0">
                                                 <label for="adresse">Date Examen</label>
                                                 <input type="text" class="form-control" placeholder="date examen..." name="date_examen" value="{{ Carbon\Carbon::now() }}">
@@ -142,8 +153,8 @@
                                     <td>{{ $examens->responsable }}</td>
                                     <td>{{ $examens->patient->nom }}</td>
                                     <td>
-                                        {{-- <span class="badge badge-info text-white">
-                                        {{ $patients->examen }} --}}
+                                         <span class="badge badge-info text-white">
+                                        {{ $examens->examen }}
                                     </span>
                                     </td>
 
@@ -170,11 +181,26 @@
     </div>
     </div>
 </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+ @if(Session::has('success'))
+  toastr.options =
+  {
+    "closeButton" : true,
+    "progressBar" : true
+  }
+        toastr.success("{{ session('success') }}");
+  @endif
+  </script>
 @stop
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 <script>
     $(document).ready(function() {
-        $(document).on('change', '.patient', function() {
+        $(document).on('change', '.code', function() {
             var prod = $(this).val();
             var a = $(this).parent();
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
@@ -197,9 +223,9 @@
                   // console.log(data.telephone);
                    //  a.find('.pu').val(data.pv)
                    // query('.pu').html(data);
-                    $(".date").val(data.date);
-                    $(".adresse").val(data.adresse);
-                    $(".prenom").val(data.prenom);
+                   $(".responsable").val(data.responsable);
+                    $(".patient").val(data.patient_id);
+                    $(".examen").val(data.examen);
                 },
                 error: function() {
                    // alert('none');
@@ -209,3 +235,10 @@
         });
     });
     </script>
+<script>
+  //  $('#mySelect2').select2();
+  //  document.getElementById('mySelect2').select2();
+    $(document).ready(function () {
+  $('#mySelect2').select2();
+});
+</script>

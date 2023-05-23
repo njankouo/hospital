@@ -22,7 +22,7 @@ class ConsultationController extends Controller
         return view('consultations.new',compact('patient'));
     }
 
-    public function addConsultation(Request $request){
+    public function addConsultation(Request $request,Patient $patient){
 
         // $request->validate([
         //     'patient_id' => 'required',
@@ -45,7 +45,7 @@ class ConsultationController extends Controller
         //     'activite.required'=>"renseignez l'activite quotidienne",
         //     'antecedant.required'=>"renseignez l'antecedant",
         // ]);
-
+        $patient=Patient::all();
         Consultation::create([
         // dd($request->all()),
             'patient_id'=>$request->patient_id,
@@ -59,16 +59,27 @@ class ConsultationController extends Controller
             'antecedant'=>$request->antecedant,
             'allergie'=>$request->allergie,
             'add_allergie'=>$request->add_allergie,
-            'antecedant'=>$request->antecedant,
-            'antecedant_churirgicaux'=>$request->antecedant_churirgicaux,
-            'antecedant_familliale'=>$request->antecedant_familliale,
-            'autre_antecedant'=>$request->autre_antecedant,
+            // 'antecedant'=>$request->antecedant,
+            // 'antecedant_churirgicaux'=>$request->antecedant_churirgicaux,
+            // 'antecedant_familliale'=>$request->antecedant_familliale,
+            // 'autre_antecedant'=>$request->autre_antecedant,
             'note'=>$request->note,
             'symptomes'=>$request->symptomes,
             'medicaments'=>$request->medicaments,
             'resultats'=>$request->resultats
            // 'resultat'=>$request->resultat,
         ]);
+        // foreach($patient as $patients){
+        //         if($patients->id==$request->input('patient_id')){
+        //             $patient->create([
+        //                 'antecedant'=>$request->antecedant,
+        //                 'antecedant_churirgicaux'=>$request->antecedant_churirgicaux,
+        //                 'antecedant_familliale'=>$request->antecedant_familliale,
+        //             ]);
+        //         }
+        // }
+
+
         return back()->with('message','consultation enregistre avec success');
     }
     public function update_consultation($id){
@@ -98,5 +109,9 @@ return back()->with('success','prochain rendez-vous etablit');
         $consultations=Consultation::find($id);
         $produit=Produit::all();
         return view('consultations.addprescription',compact('consultations','produit'));
+    }
+    public function gen(Request $request){
+        $req=Patient::select('antecedant','antecedant_churirgicaux','antecedant_familliale')->where('id',$request->id)->first();
+        return response()->json($req);
     }
 }

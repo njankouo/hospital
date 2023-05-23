@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Patient extends Model
 {
     use HasFactory,HasUuid;
-     protected $fillable=['nom','prenom','telephone','email','sexe','lieu','tel','adresse','assurance','numAssurance','date','prevenir','profession','groupe','etat','age'];
+     protected $fillable=['antecedant','antecedant_churirgicaux','antecedant_familliale','nom','prenom','telephone','email','sexe','lieu','tel','adresse','assurance','numAssurance','date','prevenir','profession','groupe','etat','age'];
      public function consultation(){
         return $this->hasMany(Consultation::class);
      }

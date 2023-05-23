@@ -54,7 +54,7 @@ class RdvController extends Controller
             if ($rdv->count() > 0) {
              return back()->with('error','plage horaire déja utilisé veuillez re-programmer le rendez-vous');
             }
-
+               // dd($request->all());
             // Créer le nouveau rendez-vous
             $appointment = new Rdv;
             $appointment->date = $start_time;

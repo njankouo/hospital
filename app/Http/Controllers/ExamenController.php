@@ -15,14 +15,14 @@ class ExamenController extends Controller
 
     public function index(){
         $prescription=Prescription::orderBy('id','desc')->get();
-        $consultation=Consultation::orderBy('id','asc')->get();
+       // $consultation=Consultation::orderBy('id','asc')->get();
         $patients=Patient::all();
         $examen=Examen::orderBy('id','asc')->get();
-        return view('examens.index',compact('prescription','patients','examen','consultation'));
+        return view('examens.index',compact('prescription','patients','examen'));
     }
 
     public function option($id){
-        $patient=Prescription::find($id);
+        $patient=Examen::find($id);
       //  $produit=Produit::all();
 
         return view('examens.info',compact('patient'));
@@ -57,7 +57,7 @@ class ExamenController extends Controller
                return redirect('/ordonance');
     }
 
-    public function save(Request $request){
+    public function save(Request $request,Examen $patient){
         //dd($request->all());
         // $request->validate([
         //     'file'=>'required',
@@ -66,17 +66,30 @@ class ExamenController extends Controller
         // ],[
 
         // ]);
-        Examen::create([
+       // dd($request->all());
+        $patient->update([
             'file'=>$request->file,
-            'date_naissance'=>$request->date_naissance,
-            'date_examen'=>$request->date_examen,
+           // 'date_naissance'=>$request->date_naissance,
+           // 'date_examen'=>$request->date_examen,
             'observation'=>$request->observation,
-            'adresse'=>$request->adresse,
-            'patient_id'=>$request->patient_id,
-            'consultation_id'=>$request->consultation_id,
+           // 'adresse'=>$request->adresse,
+            //'patient_id'=>$request->patient_id,
+
             'traitement'=>$request->traitement
         ]);
         return back()->with('success','examen finalisé avec success');
+    }
+
+    public function addExams(Request $request){
+        Examen::create([
+         'responsable'=>$request->responsable,
+         'date_examen'=>$request->date_examen,
+         'examen'=>$request->examen,
+            'patient_id'=>$request->patient_id,
+            'prescription_id'=>$request->prescription_id,
+            'traitement'=>$request->traitement,
+        ]);
+        return back()->with('success','examen initialisé avec success');
     }
     public function viewPdf($id){
         $patient=Examen::find($id);
@@ -84,7 +97,7 @@ class ExamenController extends Controller
         return $pdf->stream();
     }
     public function generation(Request $request){
-        $req=Patient::select('prenom','adresse','date')->where('id',$request->id)->first();
+        $req=Prescription::select('patient_id','examen','prescription_name','responsable')->where('id',$request->id)->first();
         return response()->json($req);
     }
 }

@@ -1,7 +1,7 @@
 
 <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
-<link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <style>
     i:hover{
@@ -9,6 +9,12 @@
     }
  </style>
 @extends('layouts.master')
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+crossorigin="anonymous"
+referrerpolicy="no-referrer"
+></script>
 @section('title','registre des consultations')
 @section('contenu')
 <div class="content-body">
@@ -104,7 +110,7 @@
                                     {{-- <label for="resultat">Resultat(s) Examen(s) Anterieur(s)</label>
                                     <textarea class="form-control" cols="2" rows="3" name="resultat"></textarea> --}}
                                     <label>Resulats D'examens Anterieurs</label>
-                                    <input type="text" name="temperature"  name="resultats" class="form-control" placeholder="resultats Examens Anterieurs" >
+                                    <input type="file" name="temperature"  name="resultats" class="form-control" placeholder="resultats Examens Anterieurs" >
 
                                     <label>Diagnostique</label>
                                     <input type="text" class="form-control @error('diagnostique') is-invalid
@@ -115,20 +121,21 @@
                                 </div>
                                  <div class="col s4">
                                     <label>Antecedents Medicaux</label>
-                                    <textarea name="antecedant" id="" cols="2" rows="3" class="form-control"></textarea>
+                                    <textarea name="antecedant" id="" cols="2" rows="3" class="form-control antecedant"></textarea>
+
                                     @error('antecedant')
                                     <span  class="text-danger">{{ $message }}</span>
                                     @enderror
                                     <label>Antecedents Churirgicaux</label>
 
-                                    <textarea name="antecedant_churirgicaux" id="" cols="2" rows="2" class="form-control"></textarea>
+                                    <textarea name="antecedant_churirgicaux" id="" cols="2" rows="2" class="form-control antecedant_churirgicaux"></textarea>
                                     @error('antecedant')
                                     <span  class="text-danger">{{ $message }}</span>
 
                                 @enderror
                                 <label>Antecedents Familliaux</label>
 
-                                <textarea name="antecedant_familliale" id="" cols="3" rows="3" class="form-control"></textarea>
+                                <textarea name="antecedant_familliale" id="" cols="3" rows="3" class="form-control antecedant_familliale"></textarea>
                                 @error('antecedant')
                                 <span  class="text-danger">{{ $message }}</span>
 
@@ -147,8 +154,7 @@
                               <div class="row">
                               <div class="col-12">
                                 <label style="font-weight:bold;font-style:italic;color:black">Selectionnez Le Patient</label>
-                                <select class="form-control @error('patient_id') is-invalid
-                                @enderror" name="patient_id">
+                                <select class="form-control patient" name="patient_id" id="mySelect2">
                                     <option>Renseignez Le Patient En Consultation</option>
                                     @foreach ($patient as $patients)
 
@@ -235,7 +241,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('add.rdv') }}" method="post">
+                                        <form action="{{ route('add.rdv') }}" method="POST">
                                             @csrf
                                         <label for="date">Date RDV</label>
                                         <input type="datetime-local" name="date" id="date" class="form-control">
@@ -244,7 +250,7 @@
                                         <label for="motif">Motif</label>
                                         <input type="text" name="titre" class="form-control" placeholder="motif du Rdv...">
                                         <label for="responsable">Suivi Par</label>
-                                        <input type="text" value="" class="form-control" readonly name="user_id">
+                                        <input type="text" value="{{ $consultations->responsable}}" class="form-control" readonly name="user_id">
                                         <label for="code">Code Consultation</label>
                                         <input type="text" name="code" id="" class="form-control" value="{{ $consultations->id }}" readonly>
                                         <label for="code_patient">Code Patient</label>
@@ -359,7 +365,7 @@
         }
     }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
  @if(Session::has('message'))
@@ -378,4 +384,52 @@
 <script>
     new MultiSelectTag('dosage')  // id
 </script>
+
+
 @stop
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(document).on('change', '.patient', function() {
+            var prod = $(this).val();
+            var a = $(this).parent();
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=csrf-token]').attr('content') }
+    });
+
+
+            $.ajax({
+                type: "GET",
+                url: "{{ route('generate.consultation') }}",
+                "timeout": 5000,
+                data: {
+                    'id': prod
+                },
+                dataType: 'json',
+
+                success: function(data) {
+                  console.log(data);
+                  // console.log(data.telephone);
+                   //  a.find('.pu').val(data.pv)
+                   // query('.pu').html(data);
+                     $(".antecedant").val(data.antecedant);
+                    //  $(".antecedant_familliale").val(data.antecedant_familliale);
+                    //  $(".antecedant_chirurgicaux").val(data.antecedant_churirgicaux);
+                },
+                error: function() {
+                   // alert('none');
+
+                }
+            });
+        });
+    });
+    </script>
+<script>
+    //  $('#mySelect2').select2();
+    //  document.getElementById('mySelect2').select2();
+      $(document).ready(function () {
+    $('#mySelect2').select2();
+  });
+  </script>
