@@ -39,27 +39,47 @@ class SendReminderSms extends Command
      *
      * @return int
      */
+
+    /**
+     *
+     * cette fonction planifit les rendez-vous de la bd une journee avant le rendez-vous du patient
+     *
+     * cette fonction communique avec l'executeur de tache qui se trouve dans le fichier kernel.php
+     *
+     * qui se trouve dans app/console/kernel.php
+     */
     public function handle()
     {
 
-    // $appointments = Rdv::whereBetween('date', [now(), now()->addDay()])
-    //                            ->get();
+    $appointments = Rdv::whereBetween('date', [now(), now()->addDay()])
+                               ->get();
 
-    // foreach ($appointments as $appointment) {
-    //     $sid    = env('TWILIO_ACCOUNT_SID');
-    //     $token  = env('TWILIO_AUTH_TOKEN');
-    //     $twilio = new Client($sid, $token);
+    foreach ($appointments as $appointment) {
+        $sid    = env('TWILIO_ACCOUNT_SID');
+        $token  = env('TWILIO_AUTH_TOKEN');
+        $twilio = new Client($sid, $token);
 
-    //     $message = $twilio->messages
-    //                       ->create($appointment->telephone, // to
-    //                                array(
-    //                                    "from" => env('TWILIO_FROM'),
-    //                                    "body" => "Reminder: Your appointment is tomorrow at " . $appointment->time
-    //                                )
-    //                       );
-    // }
-
-   
+        $message = $twilio->messages
+                          ->create($appointment->telephone, // to
+                                   array(
+                                       "from" => env('TWILIO_FROM'),
+                                       "body" =>"VOUS AVEZ UN RENDEZ MEDICAL LE " . $appointment->date
+                                   )
+                          );
     }
+    }
+
+/***
+ *
+ *
+ *
+ *
+ * fin de la fonction
+ *
+ *
+ *
+ */
+
+
     }
 

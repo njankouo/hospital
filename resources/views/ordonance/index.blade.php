@@ -29,7 +29,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Liste Des Ordonances</h4>
-
+                        <a href="" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Prescription M&eacute;dicale</a>
                                        </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -112,6 +112,59 @@
                             </table>
                         </div>
                     </div>
+                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+                        <div class="modal-dialog modal-xl">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title">Liste Des Prescriptions</h5>
+                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                 </button>
+                              </div>
+                              <div class="modal-body">
+                                 <div class="row">
+                                     <div class="col s12">
+                                        <div class="table-responsive">
+                                        <table id="example" class="display table-hover " style="min-width: 845px; text-align:center">
+                                            <thead>
+                                                <tr>
+                                                    <th>Patient</th>
+
+                                                    <th>Prescrit Par:</th>
+
+                                                    <th>Examen Ou Dispositif Prescrit</th>
+
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($ordonance as $ordonances)
+                                                @if (isset($ordonances->examen))
+                                                    <tr>
+                                                        <td>{{ $ordonances->patient->nom }}</td>
+                                                        <td>{{ $ordonances->responsable }}</td>
+                                                        <td>{{ $ordonances->examen }}</td>
+                                                        <td>
+                                                      <a href="" class="btn btn-danger"><i class="fa fa-trash "></i></a>
+                                                      <a  href="{{ route('ordonance.pdf',$ordonances->id) }}" type="button" class="btn btn-primary"> <i class="fa fa-print"></i>
+                                                      </a>
+                                                    </td>
+                                                    </tr>
+                                                    @endif
+                                                    @endforeach
+                                            </tbody>
+
+                                        </table>
+                           </div>
+                                     </div>
+                              </div>
+                              <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+                              </div>
+                           </form>
+                           </div>
+                        </div>
+                     </div>
                 </div>
             </div>
 

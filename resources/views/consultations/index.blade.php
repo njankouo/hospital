@@ -69,7 +69,7 @@ referrerpolicy="no-referrer"
                                     @enderror
                                     <label>Taille (optionel)</label>
                                     <input type="text" class="form-control @error('taille') is-invalid
-                                       @enderror" placeholder="Taille" name="taille">
+                                       @enderror taille" placeholder="Taille" name="taille">
                                     @error('taille')
                                     <span  class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -321,11 +321,11 @@ referrerpolicy="no-referrer"
                                                 <b>Taille: {{ $consultations->taille }}  Cm</b>
                                             <br>
                                             <b>Tension: {{ $consultations->tension }}</b>
-                                            <br>
+                                            {{-- <br>
                                             <b>IMC(Indice De Masse Corporelle) : <?php $tailles= (float)$consultations->taille * (float) $consultations->taille
 
                                                 ?>
-                                                 {{ $consultations->poid/$tailles }}</b>
+                                                 {{ $consultations->poid/$tailles }}</b> --}}
                                         </div>
                                           </div>
                                           <div class="card"  style="border: white;background-color:rgb(118, 181, 184)">
@@ -415,8 +415,9 @@ referrerpolicy="no-referrer"
                    //  a.find('.pu').val(data.pv)
                    // query('.pu').html(data);
                      $(".antecedant").val(data.antecedant);
-                    //  $(".antecedant_familliale").val(data.antecedant_familliale);
-                    //  $(".antecedant_chirurgicaux").val(data.antecedant_churirgicaux);
+                     $(".antecedant_familliale").val(data.antecedant_familliale);
+                     $(".antecedant_churirgicaux").val(data.antecedant_churirgicaux);
+                     $(".taille").val(data.taille);
                 },
                 error: function() {
                    // alert('none');

@@ -59,29 +59,30 @@ class ConsultationController extends Controller
             'antecedant'=>$request->antecedant,
             'allergie'=>$request->allergie,
             'add_allergie'=>$request->add_allergie,
-            // 'antecedant'=>$request->antecedant,
-            // 'antecedant_churirgicaux'=>$request->antecedant_churirgicaux,
-            // 'antecedant_familliale'=>$request->antecedant_familliale,
-            // 'autre_antecedant'=>$request->autre_antecedant,
+
             'note'=>$request->note,
             'symptomes'=>$request->symptomes,
             'medicaments'=>$request->medicaments,
             'resultats'=>$request->resultats
            // 'resultat'=>$request->resultat,
         ]);
-        // foreach($patient as $patients){
-        //         if($patients->id==$request->input('patient_id')){
-        //             $patient->create([
-        //                 'antecedant'=>$request->antecedant,
-        //                 'antecedant_churirgicaux'=>$request->antecedant_churirgicaux,
-        //                 'antecedant_familliale'=>$request->antecedant_familliale,
-        //             ]);
-        //         }
-        // }
 
+        /**ce script fait un update pour un patient specifique en enregistrant en meme temps ses antecedants pour des consul
+         * tations futures
+         */
+        $patient = Patient::find($request->input('patient_id'));
+        $patient->antecedant = $request->input('antecedant');
+        $patient->antecedant_churirgicaux=$request->input('antecedant_churirgicaux');
+        $patient->antecedant_familliale=$request->input('antecedant_familliale');
+        $patient->taille=$request->input('taille');
+        $patient->save();
 
         return back()->with('message','consultation enregistre avec success');
     }
+
+/**
+ * fin de script il est necessaire de preciser que celci est possible si les deux tables ont une relation belongsTo-Hasmany
+ */
     public function update_consultation($id){
         $consultation=Consultation::find($id);
         $consultation->delete();
@@ -111,7 +112,7 @@ return back()->with('success','prochain rendez-vous etablit');
         return view('consultations.addprescription',compact('consultations','produit'));
     }
     public function gen(Request $request){
-        $req=Patient::select('antecedant','antecedant_churirgicaux','antecedant_familliale')->where('id',$request->id)->first();
+        $req=Patient::select('antecedant','antecedant_churirgicaux','antecedant_familliale','taille')->where('id',$request->id)->first();
         return response()->json($req);
     }
 }
