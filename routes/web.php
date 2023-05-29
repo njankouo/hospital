@@ -99,7 +99,9 @@ Route::get('rdv/restore/{id}',[RdvController::class,'restoration'])->name('resto
 Route::get('hospitalisation/finish',[HospitalisationController::class,'hospitFinish'])->name('hospit.finish');
 Route::get('soft/commande/{id}',[CommandeController::class,'softcommande'])->name('soft.commande');
 Route::get('commande/delete',[CommandeController::class,'restored'])->name('commande.restored');
-Route::get('facture/commande/{id}',[CommandeController::class,'facture'])->name('facture.commande');
+
+Route::get('proforma/{id}',[CommandeController::class,'preforma'])->name('facture.commande');
+
 Route::get('add/prescription/{id}',[ConsultationController::class,'addPrescription'])->name('addprescription');
 Route::get('delete/ordonance/{id}',[PrescriptionController::class,'deleteOrdonanace'])->name('delete.ordonance');
 Route::get('/dosseir',[DossierController::class,'index'])->name('dossier');
@@ -120,7 +122,8 @@ Route::POST('uses',[UserController::class,'addUsers'])->name('add.users');
 Route::post('familles',[FamilleController::class,'addFamille'])->name('add.famille');
 Route::post('conditionnements',[ConditionnementController::class,'addCondition'])->name('add.conditionnement');
 Route::Post('produits',[ProduitController::class,'addProduct'])->name('add.product');
-Route::POST('commandes',[CommandeController::class,'addCommande'])->name('add.commande');
+
+//Route::POST('commandes',[CommandeController::class,'addCommande'])->name('add.commande');
 
 Route::Post('patients/add',[PatientController::class,'addPatient'])->name('add.patients');
 
@@ -140,6 +143,8 @@ Route::POST('ventes/save',[VenteController::class,'save_vente'])->name('save.ven
 Route::POST('addVente',[VenteController::class,'addvente'])->name('addvente.produit');
 Route::POST('add/prescription/examen',[ExamenController::class,'addPprescription'])->name('prescrition.examen');
 ROUTE::POST('new/examen',[ExamenController::class,'addExams'])->name('new.examen');
+
+ROUTE::POST('commandes/article',[CommandeController::class,'ajouterCommande'])->name('add.commande');
 
 
 Route::PUT('add/examen/{patient}',[ExamenController::class,'save'])->name('add.examen');

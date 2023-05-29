@@ -27,8 +27,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Commandes Validés</h4>
-                        <button type="button" class="btn btn-rounded btn-primary"><span class="btn-icon-left text-primary"><i class="fa fa-shopping-cart"></i>
-                        </span>Bon De Commande</button>
+                        {{-- <button type="button" class="btn btn-rounded btn-primary"><span class="btn-icon-left text-primary"><i class="fa fa-shopping-cart"></i>
+                        </span>Bon De Commande</button> --}}
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

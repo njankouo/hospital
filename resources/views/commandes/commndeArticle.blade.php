@@ -1,4 +1,4 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 @extends('layouts.master')
 
 @section('title','validation de la commande')
@@ -25,8 +25,10 @@
         <h4>Commande Des Produits</h4>
         <div class="row">
         <div class="form-group col-md-4">
+            <form id="commande-form" >
+
             <label>Produit</label>
-            <select class="form-control" name="produit" id="produit">
+            <select class="form-control produit" name="produit_id" id="nom-produit">
                 <option>renseignez le Produit</option>
                 @foreach ($produit as $produits)
 
@@ -37,31 +39,34 @@
         </div>
         <div class="form-group col-md-2">
             <label>Conditionnement</label>
-            <select class="form-control" name="conditionnement_id">
+            <select class="form-control" name="conditionnement_id" id="conditionnement">
                 <option>conditionnement...</option>
                 @foreach ($conditionnement as $conditionnements)
 
 
-                <option value="{{ $conditionnements->id }}">{{ $conditionnements->libelle }}</option>
+                <option value="{{ $conditionnements->libelle }}">{{ $conditionnements->libelle }}</option>
                 @endforeach
             </select>
         </div>
         <div class="form-group col-md-2">
             <label> Quantite</label>
-            <input type="number" class="form-control" placeholder="quantite..." name="qteCommande">
+            <input type="number" class="form-control" placeholder="quantite..." name="qteCommande" id="quantite">
 
         </div>
         <div class="form-group col-md-2">
             <label> Prix Unitaire</label>
-            <input type="number" class="form-control pu" placeholder="prix Unitaire" name="pu" id="pu">
+            <input type="number" class="form-control pu" placeholder="prix Unitaire" name="pu" id="prix">
 
         </div>
         <div class="form-group col-md-2">
 
-            <button type="button" class="btn btn-rounded btn-info mt-4"><span class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
-            </span>Ajouter</button>
+            <button type="submit" class="btn btn-rounded btn-info mt-4">
+            Ajouter
+        </button>
         </div>
     </div>
+    <input type="text" class="form-control" name="code" id="code" value="{{ $commande->id }}" readonly>
+</form>
         <div class="card">
             <div class="card-header">
 
@@ -73,11 +78,11 @@
 
                         <div class="form-row">
                             <div class="table-responsive">
-                                <table class="table header-border table-responsive-sm text-center">
+                                <table class="table header-border table-responsive-sm text-center"  id="commande-table">
                                     <thead>
                                         <tr>
-                                            <th>Code Commande</th>
-                                            <th>Designation</th>
+
+                                            <th>Code Produit</th>
                                             <th>Quantite</th>
                                             <th>Conditionnement</th>
                                             <th>prix unitaire</th>
@@ -87,19 +92,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         <tr>
-                                            <td>
-                                                {{ $commande->id }}
-                                            </td>
-                                            <td></td>
-                                            <td>
-                                            </td>
-                                            <td></td>
-                                            <td>
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+
                                         </tr>
 
                                     </tbody>
@@ -111,35 +106,10 @@
                                     </tfoot>
                                 </table>
                             </div>
-                            {{-- <div class="form-group col-md-6">
-                                <label>Date Commande</label>
-                                <input type="text" class="form-control" placeholder="Date Commande" value="{{ $commande->dateCommande }}" name="dateCommande">
-                            </div> --}}
-                            {{-- <div class="form-group col-md-6">
-                                <label>Date Livraison</label>
-                                <input type="text" class="form-control" placeholder="Date Livraison" name="dateLivraison" value="{{ $commande->dateLivraison }}">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Fournisseur</label>
-                                <input type="text" class="form-control" placeholder="Fournisseur" name="Fournisseur" value="{{ $commande->fournisseur }}">
-                            </div> --}}
-                            {{-- <div class="form-group col-md-6">
-                                <label>Responsable Commande</label>
-                                <input type="text" class="form-control" value="{{ $commande->responsableCom }}">
-                            </div> --}}
-
-
-
-                            {{-- <div class="form-group col-md-12">
-                                <label>Code Commande</label>
-                                <input type="text" class="form-control" placeholder="Code Commande" name="code" value="{{ $commande->id }}" readonly />
-
-                            </div> --}}
 
                         </div>
 
                         <div style="float: right">
-                          <button type="submit" class="btn btn-rounded btn-outline-secondary">Creer Un Preforma</button>
                           <a href="{{ route('facture.commande',$commande->id) }}" class="btn btn-rounded btn-outline-primary">Etablir La Facture</a>
 
                     </div>
@@ -151,6 +121,7 @@
     </div>
 </div>
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         $(document).on('change', '.produit', function() {
@@ -203,5 +174,54 @@
         });
     });
     </script>
+
+<script>
+    $(document).ready(function() {
+        $('#commande-form').on('submit', function(e) {
+            e.preventDefault();
+            var nomProduit = $('#nom-produit').val();
+            var quantite = $('#quantite').val();
+            var prix = $('#prix').val();
+            var conditionnement = $('#conditionnement').val();
+            var code = $('#code').val();
+            $.ajax({
+                url: "{{ route('add.commande') }}",
+                method: 'POST',
+                data: {
+                    nomProduit: nomProduit,
+                    quantite: quantite,
+                    prix: prix,
+                    conditionnement:conditionnement,
+                    code:code,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(data) {
+                    var commande = {
+                        nomProduit: nomProduit,
+                        quantite: quantite,
+                        prix: prix,
+                        conditionnement:conditionnement,
+                        code:code,
+                    };
+                    $('#commande-table tbody').append('<tr><td>' + commande.nomProduit + '</td><td>' + commande.quantite + '</td><td>' + commande.conditionnement + '</td><td>' + commande.prix + '</td><td>' + commande.remise+ '</td><td>' + commande.prix + '</td></tr>');
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $.ajax({
+    url: '/proforma/' + id,
+    type: 'GET',
+    success: function(response) {
+        // Afficher le PDF dans une nouvelle fenêtre ou un nouvel onglet
+        window.open(response);
+    },
+    error: function(xhr) {
+        console.log(xhr.responseText);
+    }
+});
+</script>
 
 @stop

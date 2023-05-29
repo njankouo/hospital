@@ -9,6 +9,7 @@ use App\Models\Livraison;
 use App\Models\Produit;
 use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CommandeController extends Controller
 {
@@ -31,6 +32,7 @@ class CommandeController extends Controller
     public function valide($id){
         $produit=Produit::all();
         $commande=Commande::find($id);
+
         $conditionnement=Conditionnement::all();
         return view('commandes.commndeArticle',compact('commande','produit','conditionnement'));
     }
@@ -87,9 +89,37 @@ public function restored(){
     $commande=CommandeArticle::onlyTrashed()->get();
     return view('commandes.commandeSoft',compact('commande'));
 }
-public function facture($id){
-    $pdf=PDF::loadview('commandes.facture');
-    return $pdf->stream();
+// public function facture($id){
+//     $commandes=CommandeArticle::find($id);
+//     $pdf=PDF::loadview('commandes.facture',compact('commandes'));
+//     return $pdf->stream();
 
+// }
+public function preforma($id)
+{
+    if(isset($_GET['id'])){
+    $proforma = DB::select('select * from commande_articles where code = ?', [$_GET["id"]]);
+    $id = $_GET['id'];
+  
+    $pdf = PDF::loadView('commandes.facture', compact('proforma'));
+    return $pdf->stream();
 }
+}
+public function ajouterCommande(Request $request)
+{
+    $commande = new CommandeArticle();
+    $commande->produit_id = $request->input('nomProduit');
+    $commande->qte = $request->input('quantite');
+    $commande->pu = $request->input('prix');
+    $commande->conditionnement_id = $request->input('conditionnement');
+    $commande->code = $request->input('code');
+    $commande->save();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Commande ajoutée avec succès.',
+        'commande' => $commande
+    ]);
+}
+
 }

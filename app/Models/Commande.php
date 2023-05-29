@@ -13,4 +13,8 @@ class Commande extends Model
     protected $fillable=['dateLivraison','dateCommande','fournisseur','responsableCom'];
 protected $table='commandes';
 
+
+public function commandeArticle(){
+     return $this->hasMany(CommandeArticle::class,'code','id');
+}
 }

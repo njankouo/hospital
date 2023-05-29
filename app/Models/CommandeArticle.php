@@ -10,6 +10,7 @@ class CommandeArticle extends Model
 {
 
     use HasFactory,SoftDeletes;
+    protected $table='commande_articles';
     protected $fillable=['produit_id','qte','pu','dateCommande','dateLivraison','code','status','conditionnement_id' ];
     public function produit(){
         return $this->belongsTo(Produit::class,'produit_id','id');
