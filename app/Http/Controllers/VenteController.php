@@ -54,20 +54,35 @@ class VenteController extends Controller
         // {
         //     return back()->with('error','cette quantite ne peut sortie en stock');
         // }else{
-        Produit_Vente::create([
+        // Produit_Vente::create([
 
 
-        'produit_id'=>$request->designation,
-        'qte'=>$request->qte,
-        'pu'=>$request->pu,
-        'responsable'=>$request->responsable,
-        'date'=>$request->date_vente,
-        'code'=>$request->code,
-        'conditionnement'=>$request->conditionnement
+        // 'produit_id'=>$request->designation,
+        // 'qte'=>$request->qte,
+        // 'pu'=>$request->pu,
+        // 'responsable'=>$request->responsable,
+        // 'date'=>$request->date_vente,
+        // 'code'=>$request->code,
+        // 'conditionnement'=>$request->conditionnement
 
+        // ]);
+        // return back()->with('message','produit selectionne avec succes');
+        $commande = new Produit_Vente();
+        $commande->produit_id = $request->input('nomProduit');
+        $commande->qte = $request->input('quantite');
+        $commande->pu = $request->input('prix');
+        $commande->conditionnement_id = $request->input('conditionnement');
+        $commande->code = $request->input('code');
+        $commande->responsable = $request->input('responsable');
+        $commande->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Commande ajoutée avec succès.',
+            'commande' => $commande
         ]);
-        return back()->with('message','produit selectionne avec succes');
     }
+
 
 
     public function listeVente(){

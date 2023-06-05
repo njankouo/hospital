@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Caisse;
 use App\Models\Consultation;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class CaisseController extends Controller
@@ -10,27 +12,32 @@ class CaisseController extends Controller
     //
 
     public function index(){
-        $consultation=Consultation::all();
-        return view('caisses.index',compact('consultation'));
+        $caisse=Caisse::all();
+        $patient=Patient::all();
+        return view('caisses.index',compact('caisse','patient'));
     }
 
-    public function update_caisse(Request $request,Consultation $consultation){
-        if($_POST['versement']<$_POST['montant']){
-            return back()->with('error','le versement de la consultation est inferieur');
+    public function add_caisse(Request $request){
+        // if($_POST['versement']<$_POST['montant']){
+        //     return back()->with('error','le versement de la consultation est inferieur');
 
-        }
+        // }
 
-        else if($_POST['versement']>$_POST['montant']){
-            return back()->with('error','le versement de la consultation est superieur');
-        }
-        else{
-            $consultation->update([
+        // else if($_POST['versement']>$_POST['montant']){
+        //     return back()->with('error','le versement de la consultation est superieur');
+        // }
+        // else{
+           // dd($request->all());
+           $consultation=Consultation::all();
+            Caisse::create([
+
+                'patient_id'=>$request->patient_id,
                 'versement'=>$request->versement,
                 'montant'=>$request->montant,
-                'motifs_caisse'=>$request->motifs_caisse,
+                'motif'=>$request->motif,
             ]);
-            return back()->with('message','paiement realise avec success');
-        }
+
+           
         }
 
 }

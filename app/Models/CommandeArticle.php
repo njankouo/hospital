@@ -18,4 +18,7 @@ class CommandeArticle extends Model
     public function conditionnement(){
         return $this->belongsTo(Conditionnement::class,'conditionnement_id','id');
     }
+    public function commandeArticle(){
+        return $this->belongsTo(Commande::class);
+    }
 }

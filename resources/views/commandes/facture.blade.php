@@ -79,7 +79,12 @@ footer {
                 <th>Prix Unitaire</th>
             </thead>
             <tbody>
-                <tr>
+
+            <tr>
+                {{-- <?php  dd($proforma)?> --}}
+
+
+
                 <td>{{ $proforma->produit->designation }}</td>
                 <td>{{ $proforma->qte }}</td>
                 <td>{{ $proforma->conditionnement_id }}</td>

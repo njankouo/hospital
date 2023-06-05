@@ -100,7 +100,7 @@ Route::get('hospitalisation/finish',[HospitalisationController::class,'hospitFin
 Route::get('soft/commande/{id}',[CommandeController::class,'softcommande'])->name('soft.commande');
 Route::get('commande/delete',[CommandeController::class,'restored'])->name('commande.restored');
 
-Route::get('proforma/{id}',[CommandeController::class,'preforma'])->name('facture.commande');
+Route::get('/proforma/proform/{code}',[CommandeController::class,'preforma'])->name('facture.commande');
 
 Route::get('add/prescription/{id}',[ConsultationController::class,'addPrescription'])->name('addprescription');
 Route::get('delete/ordonance/{id}',[PrescriptionController::class,'deleteOrdonanace'])->name('delete.ordonance');
@@ -157,7 +157,9 @@ Route::put('hospit/{hospitalisation}',[HospitalisationController::class,'edit'])
 Route::PUT('edit/{user}',[UserController::class,'edition'])->name('updat.user');
 Route::PUT('ajouter/produits/{commande}',[CommandeController::class,'addLivraison'])->name('add.livraison');
 Route::get('consultations/{id}',[ConsultationController::class,'update_consultation'])->name('update.consultation');
-Route::put('caisses/{consultation}',[CaisseController::class,'update_caisse'])->name('update.consultations');
+
+Route::POST('caisses/add',[CaisseController::class,'add_caisse'])->name('add.paiement');
+
 Route::PUT('update/rdv/{rdv}',[RdvController::class,'updat_rdv'])->name('update.rdv');
 
 Route::PUT('rdvs/updat/{rdvs}',[RdvController::class,'updating'])->name('edit.rdv');

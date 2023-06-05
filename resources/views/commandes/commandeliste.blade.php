@@ -70,8 +70,8 @@
                             </button>
 
 
-                                            <button type="button" class="btn btn-rounded btn-info"><i class="fa fa-plus text-white"></i>
-                                            </button>
+                                            {{-- <button type="button" class="btn btn-rounded btn-info"><i class="fa fa-plus text-white"></i>
+                                            </button> --}}
 
                                             <a type="button" class="btn btn-rounded btn-danger" href="{{ route('soft.commande',$commandes->id) }}"><i class="fa fa-minus text-white"></i>
                                             </a>

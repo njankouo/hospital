@@ -33,8 +33,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Liste Des Paiements</h4>
-
+                        <h4 class="card-title" style="font-weight:bold">Liste Des Paiements</h4>
+                        <button class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-plus text-white"></i>Nouveau Paiement</button>
 
                     </div>
                     <div class="card-body">
@@ -42,39 +42,32 @@
                             <table id="example2" class="display table table-hover" style="min-width: 845px; text-align: center">
                                 <thead>
                                     <tr style="text-align: center">
-                                        <th></th>
+
                                         <th >Nom Patient</th>
                                         <th>Motifs Versements</th>
 
-                                        <th >Montant</th>
-                                        <th>Versement</th>
+                                        <th >Montant a Verser</th>
+                                        <th>Versement Versé</th>
 
                                         <th >Reste A payer</th>
                                         <th>Date De Paiement</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $montant=0?>
-                                    @foreach ($consultation as $consultations)
-                                    <?php $montant += $consultations->versement?>
-
+                                    @foreach ($caisse as $caisses)
                                     <tr>
-                                        <td>
-                                            @if ($consultations->montant==0)
 
-                                                <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{ $consultations->id }}"><i class="fa fa-pencil text-white"></i></button>
+                                        <td>{{ $caisses->patient->nom}} &nbsp;{{ $caisses->patient->prenom }}</td>
 
-                                                @else
-                                               <button class="btn btn-primary"><i class="fa fa-check text-white"></i></button>
-                                            @endif
-                                        </td>
-                                        <td>{{ $consultations->patient->nom }}&nbsp;{{ $consultations->patient->prenom }}</td>
-                                        <td>{{$consultations->motifs_caisse }}</td>
-                                        <td>{{ $consultations->montant }}</td>
-                                        <td>{{ $consultations->versement }}</td>
-                                        <td>{{ $consultations->montant - $consultations->versement}}</td>
-                                        <td>{{ $consultations->updated_at->diffForHumans() }}</td>
-                                        <div class="modal fade" id="exampleModalCenter{{ $consultations->id }}">
+                                        <td>{{$caisses->motif}}</td>
+                                        <td>{{ $caisses->montant }}</td>
+                                        <td>{{ $caisses->versement }}</td>
+                                        <td></td>
+
+                                        <td>{{ $caisses->updated_at->diffForHumans() }}</td>
+                                        
+                                        <div class="modal fade" id="exampleModalCenter">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -83,16 +76,26 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('update.consultations',['consultation'=>$consultations->id]) }}" method="post">
+                                                        <form action="{{ route('add.paiement')}}" method="post">
+
                                                             @csrf
-                                                            <input type="hidden" value="put" name="_method">
+                                                            <label for="patient">Patient</label>
+                                                            <select name="patient_id" id="nom" class="form-control">
+                                                                <option>selectinnez le patient</option>
+                                                                @foreach ($patient as $patients)
+
+                                                                <option value="{{ $patients->id }}">{{ $patients->nom }}</option>
+
+                                                                @endforeach
+                                                            </select>
+
                                                             <label for="versement">Versement</label>
                                                             <input type="number" style="text-align: right;" name="versement" class="form-control" placeholder="Versement">
 
                                                             <label for="versement">Montant</label>
                                                             <input type="number" style="text-align: right;" name="montant" class="form-control" placeholder="montant">
                                                             <label for="Motif">Motif Versement</label>
-                                                            <select name="motifs_caisse" id="" class="form-control">
+                                                            <select name="motif" id="" class="form-control">
 
                                                                <option value="examen medical">Examen Medical</option>
                                                                <option value="bilan medical">Bilan Medical</option>
@@ -111,7 +114,6 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
-                               <h5 style="float: right;font-style:italic;font-weight:bold"><?php echo 'Montant Total Consultation: '.$montant;?>fcfa</h5>
 
                             </table>
                         </div>

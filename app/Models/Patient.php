@@ -26,5 +26,8 @@ class Patient extends Model
      public function rdv(){
         return $this->hasMany(Rdv::class);
      }
+     public function caisse(){
+        return $this->hasMany(Caisse::class);
+     }
 
     }

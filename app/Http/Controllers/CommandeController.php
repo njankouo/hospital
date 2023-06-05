@@ -34,7 +34,8 @@ class CommandeController extends Controller
         $commande=Commande::find($id);
 
         $conditionnement=Conditionnement::all();
-        return view('commandes.commndeArticle',compact('commande','produit','conditionnement'));
+        $commandes=CommandeArticle::all();
+        return view('commandes.commndeArticle',compact('commande','produit','conditionnement','commandes'));
     }
     public function generatePrice(Request $request)
 {
@@ -95,16 +96,14 @@ public function restored(){
 //     return $pdf->stream();
 
 // }
-public function preforma($id)
+public function preforma($code)
 {
-    if(isset($_GET['id'])){
-    $proforma = DB::select('select * from commande_articles where code = ?', [$_GET["id"]]);
-    $id = $_GET['id'];
-  
+
+    $proforma=CommandeArticle::find($code);
     $pdf = PDF::loadView('commandes.facture', compact('proforma'));
     return $pdf->stream();
 }
-}
+
 public function ajouterCommande(Request $request)
 {
     $commande = new CommandeArticle();
