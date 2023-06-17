@@ -213,7 +213,7 @@ referrerpolicy="no-referrer"
 
                                </td>
                               <td>{{ $consultations->responsable }}</td>
-                              <td>{{ $consultations->patient->nom }}</td>
+                              <td>{{ $consultations->patient->nom }} {{$consultations->patient->prenom}}</td>
                               <td>{{ $consultations->diagnostique }}</td>
                               <td>{{ $consultations->created_at->diffForHumans() }}</td>
 

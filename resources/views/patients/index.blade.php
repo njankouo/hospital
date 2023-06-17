@@ -156,7 +156,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" class="display table table-hover" style="min-width: 845px">
+                            <table id="example" class="display table table-hover table-responsive table-bordered" style="min-width: 845px">
                                 <thead>
                                     <tr style="text-align: center">
                                         <th>Code Patient</th>
@@ -202,15 +202,15 @@
                                            <td>
 
                                             <span>
-                                                <a href="{{ route('update.patient',$patients->id) }}" class="mr-2 btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit" ><i class="fa fa-pencil text-light"></i> </a>
+                                                <a href="{{ route('update.patient',$patients->id) }}" class="mr-2 " data-toggle="tooltip" data-placement="top" title="Edit" ><i class="fa fa-pencil text-primary"></i> </a>
                                               </span>
 
-                                          <span> <a data-toggle="modal" data-target="#example-lg{{ $patients->id }}" data-item-id="1" class="mr-2 btn btn-success">
-                                            <i class="fa fa-eye text-light"></i>
+                                          <span> <a data-toggle="modal" data-target="#example-lg{{ $patients->id }}" data-item-id="1" class="mr-2 " href="">
+                                            <i class="fa fa-eye text-secondary"></i>
                                             </a>
                                         </span>
-                                            <a style ="margin:2%" href="{{ route('dossier.patient',$patients->id) }}"class="mr-2 btn btn-primary" >
-                                                <i class="fa fa-file text-light "></i>
+                                            <a style ="margin:2%" href="{{ route('dossier.patient',$patients->id) }}"class="mr-2" >
+                                                <i class="fa fa-file text-dark "></i>
                                             </a>
                                         </td>
                                     </tr>

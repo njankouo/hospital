@@ -107,7 +107,7 @@ footer {
                     <td>{{ $consultations->motif }}</td>
                     <td>{{ $consultations->symptomes }}</td>
                     <td>{{ $consultations->medicaments }}</td>
-                    <td>{{ $consultations->diagnotique }}</td>
+                    <td>{{ $consultations->diagnostique }}</td>
                     <td>{{ $consultations->note }}</td>
                     <td>{{ $consultations->responsable }}</td>
                 </tr>
@@ -130,11 +130,11 @@ footer {
                     <td>{{ $prescriptions->created_at }}</td>
                     <td>{{ $prescriptions->responsable}}</td>
                     <td>
-                        @if (!empty($prescriptions->dispositif))
+
                             {{ $prescriptions->dispositif }}
-                        @else
+
                             {{ $prescriptions->medicament }}
-                        @endif
+
                     </td>
                 </tr>
                 @endforeach

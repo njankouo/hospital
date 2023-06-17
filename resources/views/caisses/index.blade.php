@@ -39,7 +39,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example2" class="display table table-hover" style="min-width: 845px; text-align: center">
+                            <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr style="text-align: center">
 
@@ -66,7 +66,7 @@
                                         <td></td>
 
                                         <td>{{ $caisses->updated_at->diffForHumans() }}</td>
-                                        
+                                        <td></td>
                                         <div class="modal fade" id="exampleModalCenter">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
@@ -124,6 +124,8 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('js/datatable/js/dataTables.scroller.js') }}"></script>
+<script src="{{ asset('js/datatable/js/dataTables.scroller.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>

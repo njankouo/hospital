@@ -44,7 +44,7 @@
 
 
                                     <tr>
-                                        <td>{{ $patients->nom }}</td>
+                                        <td>{{ $patients->nom }} {{ $patients->prenom }}</td>
                                         <td>{{ $patients->age }}</td>
                                         <td>{{ $patients->created_at->DiffForHumans() }}</td>
                                         <td>

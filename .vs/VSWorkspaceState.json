@@ -1,8 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\routes"
+    "\\resources",
+    "\\resources\\views"
   ],
-  "SelectedNode": "\\routes\\web.php",
   "PreviewInSolutionExplorer": false
 }

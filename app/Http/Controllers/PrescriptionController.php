@@ -74,7 +74,7 @@ if($request->input('dosage')==''|| $request->input('medicament')=='' || $request
     }
 
     public function ordonance(){
-        $ordonance=Prescription::orderBy('id','desc')->get();
+        $ordonance=Prescription::all();
         $produit=Produit::all();
         return view('ordonance.index',compact('ordonance','produit'));
     }
