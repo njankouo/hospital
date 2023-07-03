@@ -59,9 +59,9 @@
         <div class="nav-header">
 
                 <a href="index.html" class="brand-logo">
-                    <img class="logo-abbr" src="{{ asset('images/logo.png') }}" alt="">
-                    <img class="logo-compact" src="{{ asset('images/logo-text.png') }}" alt="">
-                    <img class="brand-title" src="{{ asset('images/logo-text.png') }}" alt="">
+                   {{-- <img class="logo-abbr" src="{{ asset('images/focus.png') }}" alt="" width="100%"> --}}
+                   {{--   <img class="logo-compact" src="{{ asset('images/logo-text.png') }}" alt="">
+                    <img class="brand-title" src="{{ asset('images/logo-text.png') }}" alt=""> --}}
             </a>
 
             <div class="nav-control">

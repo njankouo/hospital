@@ -226,7 +226,7 @@ referrerpolicy="no-referrer"
                                  {{-- <a type="button" class="text-white btn btn-rounded btn-secondary" href="{{ route('add.prescription',$consultations->id) }}"><span class="btn-icon-left text-info"><i class="fa fa-pencil color-info"></i>
                                  </span>Prescrire</a> --}}
                                  <a  type="button"  class="btn btn-secondary" href="{{ route('addprescription',$consultations->id) }}"   data-toggle="tooltip" data-placement="top" title="Prescription medicale"><i class="fa fa-book text-white"></i> </a>
-                                 <a  class="btn btn-warning" href="{{ route('fichier.consultation',$consultations->id) }}"  data-toggle="tooltip" data-placement="top" title="fichier consultation"><i class="fa fa-file text-white"></i> </a>
+                                 {{-- <a  class="btn btn-warning" href="{{ route('fichier.consultation',$consultations->id) }}"  data-toggle="tooltip" data-placement="top" title="fichier consultation"><i class="fa fa-file text-white"></i> </a> --}}
 
                               </td>
 

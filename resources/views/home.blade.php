@@ -57,8 +57,8 @@
                                 <i class="ti-link text-danger border-danger"></i>
                             </div>
                             <div class="stat-content d-inline-block">
-                                <div class="stat-text">Produits phar..</div>
-                                <div class="stat-digit">{{ App\Models\Produit::count()}}</div>
+                                <div class="stat-text">Examens M&eacute;..</div>
+                                <div class="stat-digit">{{ App\Models\Examen::count()}}</div>
                             </div>
                         </div>
                     </div>

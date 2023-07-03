@@ -20,7 +20,7 @@ Table of Contents
     3.3. widget-timeline
     3.4. widget-social
 
-4. ICO 
+4. ICO
     4.1. ico-countdown
     4.2. ico-exchange
     4.3. ico-timeline
@@ -533,7 +533,7 @@ li {
   padding-top: 0;
   z-index: 99;
   background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(120, 130, 140, 0.13);
+  box-shadow: 0px 0px 10px rgba(8, 46, 83, 0.13);
   transition: all .2s ease; }
   .quixnav .quixnav-scroll {
     position: relative;
