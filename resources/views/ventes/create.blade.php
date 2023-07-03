@@ -197,7 +197,7 @@
                                 </div>
 
                                 <div style="float: right">
-                                  <a href="{{ route('facture.commande',$vente->id) }}" class="btn btn-rounded btn-outline-primary">Etablir La Facture</a>
+                                  <a href="{{ route('facture.vente',$vente->id) }}" class="btn btn-rounded btn-outline-primary">Etablir La Facture</a>
 
                             </div>
                                 </form>

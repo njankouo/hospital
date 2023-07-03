@@ -57,6 +57,7 @@ class SendReminderSms extends Command
     foreach ($appointments as $appointment) {
         $sid    = env('TWILIO_ACCOUNT_SID');
         $token  = env('TWILIO_AUTH_TOKEN');
+        $from = env('TWILIO_FROM');
         $twilio = new Client($sid, $token);
 
         $message = $twilio->messages

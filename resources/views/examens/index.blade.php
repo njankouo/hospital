@@ -35,7 +35,9 @@ referrerpolicy="no-referrer"
                 <div class="card-header">
                     <h4 class="card-title">Liste Des Examens M&eacute;dicaux</h4>
 
-                    <span><a  class="mr-4 btn btn-primary" data-toggle="modal" style="-webkit-animation: pulse 1s infinite"  data-target=".bd-example-modal-lg"><i class="fa fa-plus text-white"></i> </a>
+
+
+                   <a  class="mr-4 btn btn-primary" data-toggle="modal" style="-webkit-animation: pulse 1s infinite"  data-target=".bd-example-modal-lg">Nouvel Examen Médical</a>
 
 
                 </div>
@@ -66,7 +68,7 @@ referrerpolicy="no-referrer"
                                         </div> --}}
                                         <div class="col-12">
                                             <label for="code_prescription">Code prescription</label>
-                                            <select name="prescription_id" id="mySelect2" class="form-control code">
+                                            <select name="prescription_id" id="mySelect2" class="form-control code" required>
                                                 <option>Selectionnez le code De Prescription pour examen médical</option>
                                                 @foreach ($prescription as $prescriptions)
                                                     @if ($prescriptions->examen!=null)
@@ -82,7 +84,7 @@ referrerpolicy="no-referrer"
                                         <div class="form-row">
                                             <div class="col-sm-6">
                                                 <label for="Nom">Nom Patient</label>
-                                                <select name="patient_id" id="" class="form-control patient" name="patient_id">
+                                                <select name="patient_id" id="patient" class="form-control patient" name="patient_id" required>
                                                     <option>Renseignez Le Patient</option>
                                                     @foreach ($patients as $req)
                                                     <option value="{{ $req->id }}">{{ $req->nom }}</option>
@@ -92,12 +94,20 @@ referrerpolicy="no-referrer"
                                             </div>
                                             <div class="col-sm-6 mt-2 mt-sm-0">
                                                 <label for="examen">Examen Medical</label>
-                                                <input type="text" class="form-control examen" placeholder="Examen Medical..." name="examen">
+                                                <select name="examen" id="examen" class="form-control examen" required>
+                                                    <option> Selectionnez l'examen M&eacute;dical</option>
+                                                    <option value="Analyse médicale">Analyse Médicale</option>
+                                                    <option value="Radiographie">Radiographie</option>
+                                                    <option value="Echographie">Echographie</option>
+                                                    <option value="IRM">IRM</option>
+                                                </select>
+                                                {{-- <input type="text" class="form-control examen" placeholder="Examen Medical..." name="examen" id="examen" required>
+                                             --}}
                                             </div>
                                             <br>
                                             <div class="col-sm-12 mt-2 mt-sm-0">
                                                 <label for="adresse">Prescrit Par:</label>
-                                                <input type="text" class="form-control responsable" placeholder="prescrit par..." name="responsable">
+                                                <input type="text" class="form-control responsable" placeholder="prescrit par..." name="responsable" id="responsable" required>
                                             </div>
                                             {{-- <br>
                                             <div class="col-sm-6 mt-2 mt-sm-0">
@@ -107,7 +117,7 @@ referrerpolicy="no-referrer"
                                             <br> --}}
                                             <div class="col-sm-12 mt-2 mt-sm-0">
                                                 <label for="adresse">Date Examen</label>
-                                                <input type="text" class="form-control" placeholder="date examen..." name="date_examen" value="{{ Carbon\Carbon::now() }}">
+                                                <input type="text" class="form-control" placeholder="date examen..." name="date_examen" value="{{ Carbon\Carbon::now() }}" id="date" required>
                                             </div>
 
 
@@ -139,6 +149,7 @@ referrerpolicy="no-referrer"
                                     <th>Examen Prescit Par:</th>
                                     <th >Nom et Prenom</th>
                                     <th>Examen Prescrit</th>
+                                    <th>Status</th>
                                     <th >Action</th>
                                 </tr>
                             </thead>
@@ -157,21 +168,24 @@ referrerpolicy="no-referrer"
                                         {{ $examens->examen }}
                                     </span>
                                     </td>
-
+                                    <td>
+                                        @if ($examens->observation==null)
+                                            <span class="badge badge-danger">Résultat en Attente</span>
+                                            @else
+                                            <i class="fa fa-check-circle fa-2x text-success"></i>
+                                        @endif
+                                    </td>
                                        <td>
-
-                                      <a  href="{{ route('examen.info',$examens->id) }}" class="btn btn-primary"> <i class="fa fa-pencil text-light"></i></a>
-                                      <a  href="{{ route('examen.info',$examens->id) }}" class="btn btn-warning"> <i class="fa fa-clone text-light"></i></a>
-
+                                        @if ($examens->observation==null)
+                                        <a  href="{{ route('examen.info',$examens->id) }}" class="btn btn-danger"> <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a>
+                                     @endif
+                                        @if (isset($examens->observation))
+                                     <a  href="{{ route('examen.pdf',$examens->id) }}" class="btn btn-primary"> <i class="fa fa-download text-light fa-2x"></i></a>
+                                     @endif
                                     </td>
                                 </tr>
-
                                 @endforeach
-
-
-
                             </tbody>
-
                         </table>
                     </div>
                 </div>
@@ -225,7 +239,7 @@ referrerpolicy="no-referrer"
                    // query('.pu').html(data);
                    $(".responsable").val(data.responsable);
                     $(".patient").val(data.patient_id);
-                    $(".examen").val(data.examen);
+                    $("#examen").val(data.examen);
                 },
                 error: function() {
                    // alert('none');
@@ -242,3 +256,6 @@ referrerpolicy="no-referrer"
   $('#mySelect2').select2();
 });
 </script>
+
+
+

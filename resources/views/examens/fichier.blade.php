@@ -62,14 +62,19 @@
 
 <header>
     <div style="font-weight:bold" class="card">
-        <h6>Nom: {{ $patient->patient->nom }}&nbsp; {{ $patient->patient->prenom }}</h6>
-        <h6>Nom: {{ $patient->patient->adresse }}</h6>
-        <h6>Nom: {{ $patient->patient->telephone }}</h6>
+        <h6>Nom: {{$examen->patient->nom }}&nbsp; {{$examen->patient->prenom }}</h6>
+        <h6>Nom: {{$examen->patient->adresse }}</h6>
+        <h6>Nom: {{$examen->patient->telephone }}</h6>
+        <h6>Identification: {{$examen->patient->id }}</h6>
     </div>
 </header>
-<hr style="background-color: #009879; ">
+<hr style="background-color: rgba(0, 0, 255, 0.479); ">
+<h6 style="font-weight:bold;
+text-align: center;
+font-style: italic;
+margin-top: none;">Centre M&eacute;dico-chirurgical d'urologie</h6>
 <main>
-  <h5 style="text-align: center;font-weight:bold;text-decoration:underline">Informations Examens M&eacute;dical</h5>
+  <h5 style="text-align: center;font-weight:bold;text-decoration:underline">Résultat Examen M&eacute;dical</h5>
 
 <table  class="content-table" style="text-align: center">
     <thead>
@@ -79,9 +84,9 @@
     </thead>
     <tbody>
         <tr>
-            <td>{{ $patient->date_examen }}</td>
-            <td>{{ $patient->examen }}</td>
-            <td>{{ $patient->responsable }}</td>
+            <td>{{$examen->date_examen }}</td>
+            <td>{{$examen->examen }}</td>
+            <td>{{$examen->responsable }}</td>
         </tr>
     </tbody>
 </table>
@@ -94,7 +99,7 @@
     <tbody>
         <tr>
 
-            <td>{{ $patient->observation }}</td>
+            <td>{{$examen->observation }}</td>
         </tr>
     </tbody>
 </table>
@@ -107,10 +112,13 @@
     <tbody>
         <tr>
 
-            <td>{{ $patient->traitement }}</td>
+            <td>{{$examen->traitement }}</td>
         </tr>
     </tbody>
 </table>
+{{-- <img src="{{ asset('storage/' . $examen->file) }}" alt="Votre image"> --}}
+
+
 </main>
 
 <footer>

@@ -55,7 +55,7 @@ referrerpolicy="no-referrer"
                            <div class="modal-body">
                               <div class="row">
                                   <div class="col s6">
-                                    <form method="post" action="{{ route('add.consultations') }}" id="step-form-horizontal" class="step-form-horizontal">
+                                    <form method="post" action="{{ route('add.consultations') }}" id="step-form-horizontal" class="step-form-horizontal" enctype="multipart/form-data">
                                         @csrf
                                     <label>Suivi Par:</label>
                                     <input type="text" class="form-control" placeholder="responsable consultation" value="{{ auth()->user()->name??'' }}" name="responsable">
@@ -110,7 +110,7 @@ referrerpolicy="no-referrer"
                                     {{-- <label for="resultat">Resultat(s) Examen(s) Anterieur(s)</label>
                                     <textarea class="form-control" cols="2" rows="3" name="resultat"></textarea> --}}
                                     <label>Resulats D'examens Anterieurs</label>
-                                    <input type="file" name="temperature"  name="resultats" class="form-control" placeholder="resultats Examens Anterieurs" >
+                                    <input type="file" name="image"   class="form-control" placeholder="resultats Examens Anterieurs" >
 
                                     <label>Diagnostique</label>
                                     <input type="text" class="form-control @error('diagnostique') is-invalid

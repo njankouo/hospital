@@ -6,6 +6,7 @@ use App\Models\Conditionnement;
 use App\Models\Produit;
 use App\Models\Produit_Vente;
 use App\Models\Vente;
+use PDF;
 use Illuminate\Http\Request;
 
 class VenteController extends Controller
@@ -115,5 +116,10 @@ class VenteController extends Controller
         $vente=Produit_Vente::find($id);
         $vente->forcedelete();
         return back()->with('success','vente annulé avec succes');
+    }
+    public function vente_facture($id){
+        $vente=Vente::find($id);
+        $pdf=PDF::loadview('ventes.facture',compact('vente'));
+        return $pdf->stream();
     }
 }

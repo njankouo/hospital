@@ -57,7 +57,7 @@ class ExamenController extends Controller
                return redirect('/ordonance');
     }
 
-    public function save(Request $request,Examen $patient){
+    public function save(Request $request,$id){
         //dd($request->all());
         // $request->validate([
         //     'file'=>'required',
@@ -67,18 +67,32 @@ class ExamenController extends Controller
 
         // ]);
        // dd($request->all());
-        $patient->update([
-            'file'=>$request->file,
+       $fileModel = Examen::find($id);
+       if($request->file()) {
+           $fileName = time().'_'.$request->file->getClientOriginalName();
+           $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+           $fileModel->file = time().'_'.$request->file->getClientOriginalName();
+           $fileModel->file = '/storage/' . $filePath;
+           $fileModel->observation=$request->observation;
+           $fileModel->traitement=$request->traitement;
+          $fileModel->save();
+       }
+        // $patient->update([
+
+        //    'file'=>$request->file,
            // 'date_naissance'=>$request->date_naissance,
            // 'date_examen'=>$request->date_examen,
-            'observation'=>$request->observation,
+            // 'observation'=>$request->observation,
            // 'adresse'=>$request->adresse,
             //'patient_id'=>$request->patient_id,
 
-            'traitement'=>$request->traitement
-        ]);
-        return back()->with('success','examen finalisé avec success');
-    }
+        //     'traitement'=>$request->traitement
+
+        // ]);
+
+        return redirect('examen/vue')->with('success');
+
+}
 
     public function addExams(Request $request){
         Examen::create([
@@ -92,8 +106,8 @@ class ExamenController extends Controller
         return back()->with('success','examen initialisé avec success');
     }
     public function viewPdf($id){
-        $patient=Examen::find($id);
-        $pdf=PDF::Loadview('examens.fichier',compact('patient'));
+        $examen=Examen::find($id);
+        $pdf=PDF::Loadview('examens.fichier',compact('examen'));
         return $pdf->stream();
     }
     public function generation(Request $request){

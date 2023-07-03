@@ -26,8 +26,7 @@
             <h4 class="text-light">
              Patient: {{$patient->patient->nom}}&nbsp;{{$patient->patient->prenom}}
             </h4>
-            <a  href="{{ route('examen.pdf',$patient->id) }}" class="btn btn-primary"> <i class="fa fa-download text-light fa-2x"></i></a>
-
+           
         </div>
     </div>
         </div>
@@ -54,10 +53,10 @@
                   <input type="text" class="form-control" value="{{ $patient->id }}" name="consultation_id" readonly/>
 
                 </div>
+                <a type="button" class="btn btn-danger" href="{{ route('examen.index') }}">retour</a>
 
                 <button type="submit" class="btn btn-primary" style="float:right">Valider</button>
-
-        </div>
+                       </div>
     </div>
     <div class="card-footer bg-primary"></div>
 

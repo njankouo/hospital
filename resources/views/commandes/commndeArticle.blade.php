@@ -108,10 +108,10 @@
                             </div>
                         </div>
                      <div style="float: right">
-                        @foreach ($commandes as $commandess)
+                        @foreach ($commandes as $commandes)
 
                         @endforeach
-                          <a href="{{ route('facture.commande',$commandess->code) }}" class="btn btn-rounded btn-outline-primary">Etablir La Facture</a>
+                          <a href="{{ route('facture.commande',$commandes->id) }}" class="btn btn-rounded btn-outline-primary">Etablir La Facture</a>
                     </div>
                         </form>
                 </div>

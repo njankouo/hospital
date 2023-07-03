@@ -79,6 +79,17 @@ class ConsultationController extends Controller
 
         return back()->with('message','consultation enregistre avec success');
     }
+    public function upload(Request $request)
+{
+    $validatedData = $request->validate([
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    $file = $request->file('image');
+    $path = $file->store('images');
+
+    return 'Image uploaded successfully.';
+}
 
 /**
  * fin de script il est necessaire de preciser que celci est possible si les deux tables ont une relation belongsTo-Hasmany

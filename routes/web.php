@@ -100,7 +100,9 @@ Route::get('hospitalisation/finish',[HospitalisationController::class,'hospitFin
 Route::get('soft/commande/{id}',[CommandeController::class,'softcommande'])->name('soft.commande');
 Route::get('commande/delete',[CommandeController::class,'restored'])->name('commande.restored');
 
-Route::get('/proforma/proform/{code}',[CommandeController::class,'preforma'])->name('facture.commande');
+Route::get('/proforma/proform/{id}',[CommandeController::class,'preforma'])->name('facture.commande');
+Route::get('facture/vente/{id}',[VenteController::class,'vente_facture'])->name('facture.vente');
+
 
 Route::get('add/prescription/{id}',[ConsultationController::class,'addPrescription'])->name('addprescription');
 Route::get('delete/ordonance/{id}',[PrescriptionController::class,'deleteOrdonanace'])->name('delete.ordonance');
@@ -144,10 +146,10 @@ Route::POST('addVente',[VenteController::class,'addvente'])->name('addvente.prod
 Route::POST('add/prescription/examen',[ExamenController::class,'addPprescription'])->name('prescrition.examen');
 ROUTE::POST('new/examen',[ExamenController::class,'addExams'])->name('new.examen');
 
-ROUTE::POST('commandes/article',[CommandeController::class,'ajouterCommande'])->name('add.commande');
+ROUTE::POST('commandes/article',[CommandeController::class,'addCommande'])->name('add.commande');
 
 
-Route::PUT('add/examen/{patient}',[ExamenController::class,'save'])->name('add.examen');
+Route::PUT('add/examen/{id}',[ExamenController::class,'save'])->name('add.examen');
 
 Route::post('send-sms', [ RdvController::class, 'sendMessage' ])->name('send.sms');
 

@@ -64,9 +64,11 @@ footer {
         <h5>Prenom:&nbsp;{{ $patient->prenom }}</h5>
         <h5>Adresse:&nbsp;{{ $patient->adresse }}</h5>
         <h5>Telephone:&nbsp;{{ $patient->telephone }}</h5>
+
     </div>
 
 </header>
+<h5>Identification: {{ $patient->id }}</h5>
         <h4>Dossier M&eacute;dical</h4>
         <hr style="border:1px solid blue;">
         <h6>Centre M&eacute;dico-chirurgical d'urologie</h6>
@@ -78,14 +80,14 @@ footer {
                 <th>Ant&eacute;cedants M&eacute;dicaux</th>
             </thead>
             <tbody>
-                @foreach ($consultation as $consultations)
-                <tr>
-                    <td>{{ $consultations->antecedant_churirgicaux }}</td>
 
-                    <td>{{ $consultations->antecedant_familliale}}</td>
-                    <td>{{ $consultations->antecedant}}</td>
+                <tr>
+                    <td>{{ $patient->antecedant_churirgicaux }}</td>
+
+                    <td>{{ $patient->antecedant_familliale}}</td>
+                    <td>{{ $patient->antecedant}}</td>
                 </tr>
-                @endforeach
+
             </tbody>
         </table>
         <hr style="border:1px solid blue;">
@@ -133,9 +135,35 @@ footer {
 
                             {{ $prescriptions->dispositif }}
 
-                            {{ $prescriptions->medicament }}
+                            {!! html_entity_decode($prescriptions->medicament)  !!}
 
                     </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <hr style="border:1px solid blue;">
+        <h5 style="text-align: center; text-decoration:underline">Examens M&eacute;dicaux</h5>
+        <table  class="content-table" style="text-align: center">
+            <thead>
+                <th>Date Examen</th>
+                <th>Type D'examen:</th>
+                <th>Observations</th>
+                <th>Traitement Récommandé</th>
+                <th>Examen R&eacute;asilsé par:</th>
+
+            </thead>
+            <tbody>
+                @foreach ($examen as $examens)
+
+
+                <tr>
+                    <td>{{ $examens->date_examen }}</td>
+                    <td>{{ $examens->examen }}</td>
+                    <td> {{ $examens->observation }}</td>
+                    <td> {{ $examens->traitement }}</td>
+                    <td>{{ $examens->responsable }}</td>
+
                 </tr>
                 @endforeach
             </tbody>
@@ -157,9 +185,9 @@ footer {
                     <td>{{ $rdvs->user->name}}</td>
                     <td>
                         @if ($rdvs->status==1)
-                            rendez-vous honor&eacute;
+                            rendez-vous non honor&eacute;
                         @else
-                        rendez-vous non honor&eacute;
+                        rendez-vous honor&eacute;
                         @endif
                     </td>
                 </tr>

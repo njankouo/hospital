@@ -70,10 +70,10 @@
     </section> --}}
     <header>
 
-    <h6>Nom: {{ $ordonance->patient->nom }}</h6>
+    <h6>Nom Et Prénom: {{ $ordonance->patient->nom }} {{ $ordonance->patient->prenom }}</h6>
     <h6>Telephone: {{ $ordonance->patient->telephone }}</h6>
     <h6>Adresse: {{ $ordonance->patient->adresse }}</h6>
-
+    <h6>Identification: {{ $ordonance->patient->id }}</h6>
         @if (isset($ordonance->examen))
         <h4 style="text-align: center;text-decoration:underline">
             Examen M&eacute;dical

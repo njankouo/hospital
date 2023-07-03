@@ -96,10 +96,10 @@ public function restored(){
 //     return $pdf->stream();
 
 // }
-public function preforma($code)
+public function preforma($id)
 {
 
-    $proforma=CommandeArticle::find($code);
+    $proforma=CommandeArticle::find($id);
     $pdf = PDF::loadView('commandes.facture', compact('proforma'));
     return $pdf->stream();
 }

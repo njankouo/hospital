@@ -12,7 +12,7 @@
                         class="fa fa-users"></i><span class="nav-text">Utilisateurs</span></a>
 
             </li>
-            <li class="nav-label">Gestion De La pharmacie</li>
+            {{-- <li class="nav-label">Gestion De La pharmacie</li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="icon icon-chart-bar-33"></i><span class="nav-text">Produits En Stock</span></a>
                 <ul aria-expanded="false">
@@ -32,7 +32,7 @@
         <li><a href="{{ route('ventes.produits') }}">Details Des Ventes</a></li>
     </ul>
 </li>
-            <li class="nav-label">Patients</li>
+           --}} <li class="nav-label">Patients</li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="icon icon-world-2"></i><span class="nav-text">Gest. Patients</span></a>
                 <ul aria-expanded="false">
@@ -44,16 +44,7 @@
                 </ul>
             </li>
 
-            {{-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                class="icon icon-shopping_cart_checkout"></i><span class="nav-text">Ventes Produits</span></a> --}}
 
-            {{-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                        class="icon icon-plug"></i><span class="nav-text">Services</span></a>
-                <ul aria-expanded="false">
-                    <li><a href="./uc-select2.html">Liste Des Services</a></li>
-                    <li><a href="{{ route('chambres') }}">Liste Des Chambres</a></li>
-                </ul>
-            </li> --}}
 
 
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
@@ -78,6 +69,17 @@
             <li><a class="" href="{{ route('caisse') }}" aria-expanded="false"><i
                         class="icon icon-single-copy-06"></i><span class="nav-text">Facturation</span></a>
 
+            </li>
+
+        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                class="icon icon-shopping_cart_checkout"></i><span class="nav-text">Ventes Produits</span></a>
+
+           <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                        class="icon icon-plug"></i><span class="nav-text">Services</span></a>
+                <ul aria-expanded="false">
+                    <li><a href="./uc-select2.html">Liste Des Services</a></li>
+                    <li><a href="{{ route('chambres') }}">Liste Des Chambres</a></li>
+                </ul>
             </li>
 
 
