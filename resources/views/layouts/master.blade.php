@@ -59,9 +59,12 @@
         <div class="nav-header">
 
                 <a href="index.html" class="brand-logo">
-                   {{-- <img class="logo-abbr" src="{{ asset('images/focus.png') }}" alt="" width="100%"> --}}
+                {<img class="logo-abbr" src="{{ asset('images/focus.png') }}" alt="" >
+
+                <p style="margin: 10%" style=" font-family: serif">DISTRICT HOPITAL</p>
                    {{--   <img class="logo-compact" src="{{ asset('images/logo-text.png') }}" alt="">
                     <img class="brand-title" src="{{ asset('images/logo-text.png') }}" alt=""> --}}
+                    {{-- <h4>HOSPITAL</h4> --}}
             </a>
 
             <div class="nav-control">

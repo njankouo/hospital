@@ -156,7 +156,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" class="display table table-hover table-responsive table-bordered" style="min-width: 845px">
+                            <table id="example" class="display table table-hover table-responsive" style="min-width: 845px">
                                 <thead>
                                     <tr style="text-align: center">
                                         <th>Code Patient</th>
